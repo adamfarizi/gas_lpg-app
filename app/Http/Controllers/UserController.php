@@ -41,11 +41,12 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-       if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+       if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
         $request->session()->regenerate();
         return redirect()->intended('/');
        }
-        return back()->withErrors('password', 'Wrong email or password');
+        return back()->withErrors(['password'=> 'Wrong email or password']);
+       
     }
 
     public function password(){

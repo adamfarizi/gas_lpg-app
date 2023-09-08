@@ -43,9 +43,9 @@
                 <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password" value="{{ old('password') }}">
               </div>
               <div class="checkbox">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="remember">
                 <label class="form-check-label" for="flexCheckDefault">
-                  Remember your password
+                  {{ __('Remember Me') }}
                 </label>
               </div>
               
