@@ -34,8 +34,8 @@
                   <label for="name" class="form-label">Name</label>
                   <input type="name" class="form-control" id="name" placeholder="Enter your name" name="name" value="{{ old('name') }}">
                   
-                  <label for="username" class="form-label">Username</label>
-                  <input type="username" class="form-control" id="username" placeholder="Enter your username" name="username" value="{{ old('username') }}">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" value="{{ old('email') }}">
                   
                   <label for="password" class="form-label">Password</label>
                   <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password" value="{{ old('password') }}">

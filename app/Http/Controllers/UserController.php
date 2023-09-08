@@ -17,14 +17,14 @@ class UserController extends Controller
     public function register_action(Request $request){
         $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:tb_user',
+            'email' => 'required|unique:tb_user',
             'password' => 'required',
             'password_confrimation' => 'required|same:password',
         ]);
         $user = new User([
             'name' => $request->name,
-            'username' => $request->username,
-            'password' => Hash::make($request->username), 
+            'email' => $request->email,
+            'password' => Hash::make($request->password), 
         ]);
         $user->save();
         return redirect()->route('login')->with('success', 'Registration Success. Please Login!');
@@ -38,14 +38,14 @@ class UserController extends Controller
 
     public function login_action(Request $request){
         $request->validate([
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ]);
-       if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+       if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
         $request->session()->regenerate();
         return redirect()->intended('/');
        }
-        return back()->withErrors('password', 'Wrong username or password');
+        return back()->withErrors('password', 'Wrong email or password');
     }
 
     public function password(){
