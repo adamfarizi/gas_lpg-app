@@ -23,6 +23,4 @@ Route::get('password', [UserController::class, 'password'])->name('password');
 Route::post('password', [UserController::class, 'password_action'])->name('password.action');
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
 
-
 Route::get('about', function () { return view('about', ['title' => 'About']);})->name('about');
-Route::get('track', function () { return view('track', ['title' => 'Track']);})->name('track');
