@@ -31,10 +31,10 @@
                 <a class="nav-link active" aria-current="page" href="">Home</a>
               </li>
               <li class="nav-item mx-5">
-                <a class="nav-link" href="#">Track</a>
+                <a class="nav-link" href="{{ route('track') }}">Track</a>
               </li>
               <li class="nav-item mx-5">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="{{ route('about') }}">About</a>
               </li>
             </ul>
 
@@ -74,7 +74,7 @@
           <div class="row">
             <div class="col-12 text-center pt-5">
               <h4 class="fw-bold">Fueling efficiency and tracking precision <br>for your gas delivery</h4>
-              <img src="{{ asset('/storage/img/Line.png') }}" alt="">
+              <img src="{{ asset('/storage/img/Home/Line.png') }}" alt="">
             </div>
           </div>
         </div>
