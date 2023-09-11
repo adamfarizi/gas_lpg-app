@@ -8,12 +8,15 @@ use Illuminate\Support\Facades\Auth;
 class RoleController extends Controller
 {
     function admin(){
-        return view('role/admin');
+        $data['title'] = 'Admin';
+        return view('role/admin', $data);
     }
     function agen(){
-        return view('role/agen');
+        $data['title'] = 'Agen';
+        return view('role/agen', $data);
     }
     function kurir(){
-        return view('role/kurir');
+        $data['title'] = 'Kurir';
+        return view('role/kurir', $data);
     }
 }

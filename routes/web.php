@@ -51,6 +51,6 @@ Route::get('/home', function () {
         return redirect('kurir');
     }
     else{
-        return view('home');
+        return view('home', ['title' => 'Home']);
     }
 });
