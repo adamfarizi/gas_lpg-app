@@ -14,36 +14,36 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('/storage/css/style.css') }}">
 
-    <title>Logastics</title>
+    <title>Logastic | @yield('title', $title)</title>
   </head>
   <body>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-hitam" id="navMain">
-        <div class="container-fluid mx-5">
-          <a class="navbar-brand fw-bold mx-5 text-light" href="#">Lo<span class="kuning">gas</span>tics</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item mx-5">
-                <a class="nav-link" aria-current="page" href="">Home</a>
-              </li>
-              <li class="nav-item mx-5">
-                <a class="nav-link" href="#">Track</a>
-              </li>
-              <li class="nav-item mx-5">
-                <a class="nav-link active" href="#">About</a>
-              </li>
-            </ul>
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold mx-5" href="#">Lo<span class="kuning">gas</span>tics</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item mx-5">
+              <a class="nav-link" aria-current="page" href="{{ route('home') }}">Home</a>
+            </li>
+            <li class="nav-item mx-5">
+              <a class="nav-link" href="">Features</a>
+            </li>
+            <li class="nav-item mx-5">
+              <a class="nav-link active" href="{{ route('about') }}">About</a>
+            </li>
+          </ul>
 
-            <div>
-                @yield('user')
-                
-            </div>
+          <div class="navbar-nav ml-auto">
+            <a class="btn button-primary" href="{{ route('login') }}">Sign In</a>
+            <a class="btn button-secondary me-3 text-uppercase fw-bold" href="{{ route('register') }}">Sign Up Free</a>
           </div>
         </div>
+      </div>
     </nav>
 
       <!-- Header -->

@@ -1,48 +1,21 @@
-@extends('app')
-@section('content')
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top bg-hitam" id="navMain">
-  <div class="container">
-    <a class="navbar-brand fw-bold mx-5" href="{{ route('home') }}">Lo<span class="kuning">gas</span>tics</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <!-- Tombol toggle untuk menu seluler -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Menu di tengah -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item mx-5">
-          <a class="nav-link active" href="#">Home</a>
-        </li>
-        <li class="nav-item mx-5">
-          <a class="nav-link" href="#">Track</a>
-        </li>
-        <li class="nav-item mx-5">
-          <a class="nav-link" href="#">About</a>
-        </li>
-      </ul>
-      <div class="navbar-nav ml-auto">
-        @auth
-        <a class="nav-link active">{{ Auth::user()->name }}</a></p>
-        <a class="nav-link link-danger" href="{{ route('logout') }}">Logout</a>     
-        @endauth
-        @guest
-        <a class="btn button-primary" href="{{ route('login') }}">Sign In</a>
-        <a class="btn button-secondary me-3 text-uppercase fw-bold" href="{{ route('register') }}">Sign Up Free</a>
-        @endguest
-      </div>
-    </div>
-  </div>
-</nav>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('/storage/css/style.css') }}">
-
-    <title>Logastics</title>
-  </head>
-  <body>
-
+    <link rel="stylesheet" href="{{ asset('/storage/css/style.css') }}">    
+    
+    <title>Logastic | @yield('title', $title)</title>
+</head>
+<body>
     <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-transparent bg-hitam" id="navMain">
         <div class="container-fluid">
@@ -56,16 +29,16 @@
                 <a class="nav-link active" aria-current="page" href="">Home</a>
               </li>
               <li class="nav-item mx-5">
-                <a class="nav-link" href="{{ route('track') }}">Track</a>
+                <a class="nav-link" href="">Features</a>
               </li>
               <li class="nav-item mx-5">
                 <a class="nav-link" href="{{ route('about') }}">About</a>
               </li>
             </ul>
 
-            <div>
-              @yield('user')
-              
+            <div class="navbar-nav ml-auto">
+              <a class="btn button-primary" href="{{ route('login') }}">Sign In</a>
+              <a class="btn button-secondary me-3 text-uppercase fw-bold" href="{{ route('register') }}">Sign Up Free</a>
             </div>
           </div>
         </div>
@@ -80,10 +53,8 @@
               <div class="col-lg-7 d-flex flex-column justify-content-center pt-5" style="margin-top: 8%">
                 <h2 class="fw-bold">Quickest & <br>Safest Delivery</h2>
                 <p class='mt-3'>Fueling progress with smart, secure gas logistics, ensuring efficiency <br>in every mile of delivery for a brighter, sustainable tomorrow</p>
-                <div class="search-box mt-2 p-3 ps-4" style="border-radius: 5px; background: rgba(255, 255, 255, 0.15);backdrop-filter: blur(2px);">
-                  <p>Enter your tracking number</p>
-                  <input class="search-input ps-2" type="text" name="" placeholder="Tracking No.">
-                  <button class="search-button" href="#">TRACK YOUR SHIPMENT</button>
+                <div class="d-grid gap-2 col-4">
+                  <a class="btn button-secondary me-3 text-uppercase fw-bold" href="{{ route('login') }}">TRACK YOUR SHIPMENT</a>
                 </div>
               </div>
             </div>
@@ -233,4 +204,5 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 
-  @endsection
+</body>
+</html>

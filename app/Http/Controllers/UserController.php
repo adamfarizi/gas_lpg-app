@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function register(){
         $data['title'] = 'Register';
-        return view('register', $data);
+        return view('user/register', $data);
     }
 
     public function register_action(Request $request){
@@ -24,6 +24,7 @@ class UserController extends Controller
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role ?? 'agen',
             'password' => Hash::make($request->password), 
         ]);
         $user->save();
@@ -33,7 +34,7 @@ class UserController extends Controller
 
     public function login(){
         $data['title'] = 'Login';
-        return view('login', $data);
+        return view('user/login', $data);
     }
 
     public function login_action(Request $request){
@@ -41,12 +42,22 @@ class UserController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
-       if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-        $request->session()->regenerate();
-        return redirect()->intended('/');
-       }
-        return back()->withErrors(['password'=> 'Wrong email or password']);
-       
+        $infologin = [
+            'email'=>$request->email,
+            'password'=>$request->password,
+        ];
+
+        if (Auth::attempt($infologin)) {
+            if(Auth::user()->role=='admin'){
+                return redirect('admin');
+            }elseif (Auth::user()->role=='agen') {
+                return redirect('agen');
+            }else {
+                return redirect('kurir');
+            }
+        }else{
+            return redirect('login')->withErrors('The email and password entered do not match!')->withInput();
+        }
     }
 
     public function password(){
@@ -70,7 +81,7 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('login');
     }
 
 }

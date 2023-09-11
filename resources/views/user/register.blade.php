@@ -32,7 +32,7 @@
                 @csrf
                 <div class="Signup-form">
                   <label for="name" class="form-label">Name</label>
-                  <input type="name" class="form-control" id="name" placeholder="Enter your name" name="name" value="{{ old('name') }}">
+                  <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" value="{{ old('name') }}">
                   
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" value="{{ old('email') }}">
