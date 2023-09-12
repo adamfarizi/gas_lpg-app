@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function(){
 
     // Role admin
     Route::get('admin',[RoleController::class, 'admin'])->middleware('userAkses:admin');
-    Route::get('admin',[AdminController::class, 'index'])->middleware('userAkses:admin');
+    Route::get('admin',[AdminController::class, 'index_dashboard'])->middleware('userAkses:admin');
     
     // Role agen
     Route::get('agen',[RoleController::class, 'agen'])->middleware('userAkses:agen');

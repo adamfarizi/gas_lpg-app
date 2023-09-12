@@ -246,7 +246,7 @@
         <div class="col-12">
             <div class="card mt-3">
                 <div class="card-header pb-0">
-                    <h6>Users table</h6>
+                    <h6>Users Table</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -278,7 +278,7 @@
                                 <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
                             </td>
                             <td class="align-middle text-center text-sm">
-                                <span class="badge badge-sm bg-gradient-success">Online</span>
+                                <span class="badge badge-sm bg-gradient-success">Active</span>
                             </td>
                             <td class="align-middle">
                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">

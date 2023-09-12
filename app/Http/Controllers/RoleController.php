@@ -9,14 +9,14 @@ class RoleController extends Controller
 {
     function admin(){
         $data['title'] = 'Admin';
-        return view('role/admin', $data);
+        return view('role.admin.dashboard', $data);
     }
     function agen(){
         $data['title'] = 'Agen';
-        return view('role/agen', $data);
+        return view('role.agen.dashboard', $data);
     }
     function kurir(){
         $data['title'] = 'Kurir';
-        return view('role/kurir', $data);
+        return view('role.kurir.dashboard', $data);
     }
 }
