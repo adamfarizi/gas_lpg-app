@@ -38,11 +38,11 @@
                 </div>
                 <div class="card-body">
                   @if (session('success'))
-                    <div class="alert alert-success" role="alert">{{ session('success') }}</div>
+                    <div class="alert alert-success text-light" role="alert">{{ session('success') }}</div>
                   @endif
                   @if($errors->any())
                   @foreach ($errors->all() as $err)
-                    <div class="alert alert-danger" role="alert">{{ $err }}</div>
+                    <div class="alert alert-danger text-light" role="alert">{{ $err }}</div>
                   @endforeach
                   @endif
                   <form role="form" action="{{ route('login.action') }}" method="post">
