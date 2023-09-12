@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -29,6 +30,7 @@ Route::middleware(['auth'])->group(function(){
 
     // Role admin
     Route::get('admin',[RoleController::class, 'admin'])->middleware('userAkses:admin');
+    Route::get('admin',[AdminController::class, 'index'])->middleware('userAkses:admin');
     
     // Role agen
     Route::get('agen',[RoleController::class, 'agen'])->middleware('userAkses:agen');

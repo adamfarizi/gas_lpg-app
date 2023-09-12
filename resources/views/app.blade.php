@@ -22,7 +22,6 @@
     </head>
 
     <body class="g-sidenav-show  bg-gray-100">
-
         @yield('sidebar')
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
             @yield('navbar')
@@ -110,15 +109,12 @@
                 </footer>
             </div>
         </main>
-
         <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
         <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-
         @yield('js')
-
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
             if (win && document.querySelector('#sidenav-scrollbar')) {
