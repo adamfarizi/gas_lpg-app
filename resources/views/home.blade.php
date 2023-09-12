@@ -830,10 +830,12 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('js')
 <!--   Core JS Files   -->
 <script>
   var ctx = document.getElementById("chart-bars").getContext("2d");
-
   new Chart(ctx, {
     type: "bar",
     data: {
