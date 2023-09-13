@@ -111,7 +111,7 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Admin</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin') }}">Admin</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Dashboard</h6>
@@ -153,16 +153,26 @@
 
 @section('content')
     <div class="card-header pb-0 text-left">
-        <h3 class="font-weight-bolder text-info text-gradient">Edit User</h3>
+        <h3 class="font-weight-bolder text-primary text-gradient">Edit User</h3>
         <p class="mb-0">Silahkan lengkapi data diri user dengan benar</p>
         </div>
         <div class="card-body">
             @if (session('success'))
-                    <div class="alert alert-success text-light" role="alert">{{ session('success') }}</div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span class="alert-text text-white"><strong>Success!</strong> {{ session('success') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
             @endif
             @if($errors->any())
                 @foreach ($errors->all() as $err)
-                    <div class="alert alert-danger text-light" role="alert">{{ $err }}</div>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <span class="alert-text text-white"><strong>Alert!</strong> {{ session('success') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>                
                 @endforeach
             @endif
         <form role="form text-left" action="{{ url('admin', $users->user_id) }}" method="POST">    
@@ -177,7 +187,7 @@
                 <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $users->email }}">
             </div>
             <div class="text-center">
-                <input type="submit" name="submit"  class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0" values="Update">
+                <input type="submit" name="submit"  class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0" values="Update">
             </div>
         </form>
     </div>

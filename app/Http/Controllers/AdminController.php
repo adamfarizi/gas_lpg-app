@@ -27,10 +27,6 @@ class AdminController extends Controller
     {
         $data['title'] = 'Admin';
 
-        // $user = User::find($user_id);
-        // $user->update($request->except(['_token', 'role', 'submit']));
-        // return redirect('admin')->with(['users' => $user, 'data' => $data]);
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -38,12 +34,10 @@ class AdminController extends Controller
     
         $user = User::find($user_id);
         $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        // Update properti lain sesuai kebutuhan
-    
+        $user->email = $request->input('email');    
         $user->save();
 
-        return redirect('admin');
+        return redirect()->back()->with('success', 'Change successfuly !');
     }
 
     public function destroy($user_id){

@@ -38,9 +38,14 @@
                     </div>
                     <div class="card-body">
                     @if($errors->any())
-                    @foreach ($errors->all() as $err)
-                        <div class="alert alert-danger" role="alert">{{ $err }}</div>
-                    @endforeach
+                        @foreach ($errors->all() as $err)
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="alert-text text-white"><strong>Alert!</strong> {{ $err }}</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>                
+                        @endforeach
                     @endif
                     <form role="form" action="{{ route('register.action') }}" method="post">
                         @csrf

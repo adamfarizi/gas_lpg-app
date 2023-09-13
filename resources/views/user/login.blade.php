@@ -38,12 +38,22 @@
                 </div>
                 <div class="card-body">
                   @if (session('success'))
-                    <div class="alert alert-success text-light" role="alert">{{ session('success') }}</div>
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <span class="alert-text text-white"><strong>Success!</strong> {{ session('success') }}</span>
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
                   @endif
                   @if($errors->any())
-                  @foreach ($errors->all() as $err)
-                    <div class="alert alert-danger text-light" role="alert">{{ $err }}</div>
-                  @endforeach
+                      @foreach ($errors->all() as $err)
+                      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                          <span class="alert-text text-white"><strong>Alert!</strong> {{ $err }}</span>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>                
+                      @endforeach
                   @endif
                   <form role="form" action="{{ route('login.action') }}" method="post">
                     @csrf
