@@ -153,7 +153,7 @@
 
 @section('content')
     <div class="card-header pb-0 text-left">
-        <h3 class="font-weight-bolder text-primary text-gradient">Edit User</h3>
+        <h3 class="font-weight-bolder text-primary text-gradient">Add User</h3>
         <p class="mb-0">Silahkan lengkapi data diri user dengan benar</p>
         </div>
         <div class="card-body">
@@ -175,20 +175,38 @@
                 </div>                
                 @endforeach
             @endif
-        <form role="form text-left" action="{{ url('admin', $users->user_id) }}" method="POST">    
-            @csrf
-            @method('PUT')  
-            <label>Name</label>
-            <div class="input-group mb-3">
-                <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $users->name }}">
-            </div>
-            <label>Email</label>
-            <div class="input-group mb-3">
-                <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $users->email }}">
-            </div>
-            <div class="text-center">
-                <button type="submit" name="submit"  class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0" values="Update">Update</button>
-            </div>
-        </form>
+            <form role="form" action="{{ route('create.action') }}" method="post">
+                @csrf
+                <label>Name</label>
+                <div class="mb-3">
+                    <input type="test" class="form-control" placeholder="Enter your name" aria-label="Name" aria-describedby="name-addon" id="name" name="name" value="{{ old('name') }}">
+                </div>
+
+                <label>Email</label>
+                <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email" aria-describedby="email-addon" id="email" name="email" value="{{ old('email') }}">
+                </div>
+
+                <label>Role</label>
+                <select class="mb-3 form-control" id="role" name="role">
+                    <option value="admin">Admin</option>
+                    <option value="agen">Agen</option>
+                    <option value="kurir">Kurir</option>
+                </select>
+
+                <label>Password</label>
+                <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="password-addon" id="password" name="password" value="{{ old('password') }}">
+                </div>
+
+                <label>Confirm Password</label>
+                <div class="mb-3">
+                    <input type="password" class="form-control" placeholder="Confirm your password" aria-label="Password" aria-describedby="password-addon" id="password_confrimation" name="password_confrimation" value="{{ old('password') }}">
+                </div>
+
+                <div class="text-center">
+                <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0" href="{{ route('create.action') }}">Create</button>
+                </div>
+            </form>
     </div>
 @endsection
