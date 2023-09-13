@@ -19,12 +19,8 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/', function () {
-        return view('home', ['title' => 'Home']);
-    })->name('home');
-    Route::get('about', function () {
-        return view('about', ['title' => 'About']);
-    })->name('about');
+    Route::get('/', function () {return view('home', ['title' => 'Home']);})->name('home');
+    Route::get('about', function () {return view('about', ['title' => 'About']);})->name('about');
     Route::get('login', [UserController::class, 'login'])->name('login');
     Route::post('login', [UserController::class, 'login_action'])->name('login.action');
 });
@@ -37,10 +33,13 @@ Route::middleware(['auth'])->group(function () {
     // Role admin
     Route::get('admin', [RoleController::class, 'admin'])->middleware('userAkses:admin');
     Route::get('admin', [AdminController::class, 'index_dashboard'])->middleware('userAkses:admin');
+    Route::get('admin/create', [AdminController::class, 'create_dashboard'])->middleware('userAkses:admin');
+    Route::post('admin/create', [AdminController::class, 'create_dashboard_action'])->middleware('userAkses:admin')->name('create.action');
     Route::get('admin/{id}/edit', [AdminController::class, 'edit_dashboard'])->middleware('userAkses:admin');
-    Route::put('admin/{id}',[AdminController::class, 'update_dashboard'])->middleware('userAkses:admin');
-    Route::delete('admin/{id}', [AdminController::class, 'destroy'])->middleware('userAkses:admin');
-
+    Route::put('admin/{id}',[AdminController::class, 'edit_dashboard_action'])->middleware('userAkses:admin');
+    Route::delete('admin/{id}', [AdminController::class, 'destroy_dashboard'])->middleware('userAkses:admin');
+    Route::get('profile', [AdminController::class, 'edit_profile'])->middleware('userAkses:admin')->name('profile');
+    Route::put('profile',[AdminController::class, 'edit_profile_action'])->middleware('userAkses:admin');
 
     // Role agen
     Route::get('agen', [RoleController::class, 'agen'])->middleware('userAkses:agen');
