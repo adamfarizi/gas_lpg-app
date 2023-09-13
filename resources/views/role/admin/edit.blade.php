@@ -121,7 +121,7 @@
                     <ul class="navbar-nav justify-content-end me-5">
                         <div class="d-flex py-1">
                             <div class="my-auto">
-                                <img src="../assets/img/local/profil.png" class="avatar avatar-sm  me-3 mt-1">
+                                <img src="../../assets/img/local/profil.png" class="avatar avatar-sm  me-3 mt-1">
                             </div>
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="text-sm font-weight-normal mb-1">
@@ -152,151 +152,33 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        $53,000
-                        <span class="text-success text-sm font-weight-bolder">+55%</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        2,300
-                        <span class="text-success text-sm font-weight-bolder">+3%</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        +3,462
-                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-            <div class="card">
-                <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        $103,430
-                        <span class="text-success text-sm font-weight-bolder">+5%</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+    <div class="card-header pb-0 text-left">
+        <h3 class="font-weight-bolder text-info text-gradient">Edit User</h3>
+        <p class="mb-0">Silahkan lengkapi data diri user dengan benar</p>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card mt-3">
-                <div class="card-header pb-0">
-                    <h6>Users Table</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
-                    <thead>
-                        <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                        <th class="text-secondary opacity-7"></th>
-                        <th class="text-secondary opacity-7"></th>
-                        </tr>
-                    </thead>
-                    @foreach ($users as $user) 
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="d-flex px-2 py-1">
-                            <div>
-                                <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
-                            </div>
-                            <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
-                                <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
-                            </div>
-                        </div>
-                        </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
-                            </td>
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-sm bg-gradient-success">Active</span>
-                            </td>
-                            <td class="align-middle">
-                                <a href="admin/{{ $user->user_id }}/edit" class="text-dark font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Edit</a>
-                            </td>
-                            <td class="align-middle">
-                                <form action="{{ url('admin/' . $user->user_id) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn bg-gradient-danger">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                    @endforeach
-                    </table>
-                </div>
-                </div>
+        <div class="card-body">
+            @if (session('success'))
+                    <div class="alert alert-success text-light" role="alert">{{ session('success') }}</div>
+            @endif
+            @if($errors->any())
+                @foreach ($errors->all() as $err)
+                    <div class="alert alert-danger text-light" role="alert">{{ $err }}</div>
+                @endforeach
+            @endif
+        <form role="form text-left" action="{{ url('admin', $users->user_id) }}" method="POST">    
+            @csrf
+            @method('PUT')  
+            <label>Name</label>
+            <div class="input-group mb-3">
+                <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $users->name }}">
             </div>
-        </div>
+            <label>Email</label>
+            <div class="input-group mb-3">
+                <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $users->email }}">
+            </div>
+            <div class="text-center">
+                <input type="submit" name="submit"  class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0" values="Update">
+            </div>
+        </form>
     </div>
 @endsection
