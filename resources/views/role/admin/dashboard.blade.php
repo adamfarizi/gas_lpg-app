@@ -287,7 +287,7 @@
                                 <form action="{{ url('admin/' . $user->user_id) }}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn bg-gradient-danger">Delete</button>
+                                    <button type="submit" class="bg-gradient-danger text-light" style="border: none; border-radius: 5px;" data-toggle="tooltip" data-original-title="Delete user">Delete</button>
                                 </form>
                             </td>
                         </tr>
