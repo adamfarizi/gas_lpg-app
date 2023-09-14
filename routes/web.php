@@ -7,7 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgenController;
-
+use App\Http\Controllers\GuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +21,7 @@ use App\Http\Controllers\AgenController;
 */
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/', function () {return view('home', ['title' => 'Home']);})->name('home');
+    Route::get('/', [GuestController::class, 'index'])->name('home');
     Route::get('about', function () {return view('about', ['title' => 'About']);})->name('about');
     Route::get('login', [UserController::class, 'login'])->name('login');
     Route::post('login', [UserController::class, 'login_action'])->name('login.action');
@@ -70,6 +70,6 @@ Route::get('/home', function () {
         }
         return redirect('kurir');
     } else {
-        return view('home', ['title' => 'Home']);
+        return redirect('/');
     }
 });
