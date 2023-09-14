@@ -33,7 +33,7 @@ class AgenController extends Controller
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role ?? 'agen',
+            'role' => $request->role ?? 'kurir',
             'password' => Hash::make($request->password), 
         ]);
         $user->save();

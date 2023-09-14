@@ -187,11 +187,6 @@
                     <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email" aria-describedby="email-addon" id="email" name="email" value="{{ old('email') }}">
                 </div>
 
-                <label>Role <span class="text-danger">*</label>
-                <select class="mb-3 form-control" id="role" name="role">
-                    <option value="kurir">Kurir</option>
-                </select>
-
                 <label>Password <span class="text-danger">*</label>
                 <div class="mb-3">
                     <input type="password" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="password-addon" id="password" name="password" value="{{ old('password') }}">
