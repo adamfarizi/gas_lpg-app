@@ -49,22 +49,22 @@
                     @endif
                     <form role="form" action="{{ route('register.action') }}" method="post">
                         @csrf
-                        <label>Name</label>
+                        <label>Name <span class="text-danger">*</label>
                         <div class="mb-3">
                             <input type="test" class="form-control" placeholder="Enter your name" aria-label="Name" aria-describedby="name-addon" id="name" name="name" value="{{ old('name') }}">
                         </div>
 
-                        <label>Email</label>
+                        <label>Email <span class="text-danger">*</label>
                         <div class="mb-3">
                             <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email" aria-describedby="email-addon" id="email" name="email" value="{{ old('email') }}">
                         </div>
 
-                        <label>Password</label>
+                        <label>Password <span class="text-danger">*</label>
                         <div class="mb-3">
                             <input type="password" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="password-addon" id="password" name="password" value="{{ old('password') }}">
                         </div>
 
-                        <label>Confirm Password</label>
+                        <label>Confirm Password <span class="text-danger">*</label>
                         <div class="mb-3">
                             <input type="password" class="form-control" placeholder="Confirm your password" aria-label="Password" aria-describedby="password-addon" id="password_confrimation" name="password_confrimation" value="{{ old('password') }}">
                         </div>

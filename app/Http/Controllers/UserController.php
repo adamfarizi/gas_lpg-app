@@ -49,7 +49,7 @@ class UserController extends Controller
 
         if (Auth::attempt($infologin)) {
             if(Auth::user()->role=='admin'){
-                return redirect('admin');
+                return redirect('admin/dashboard');
             }elseif (Auth::user()->role=='agen') {
                 return redirect('agen');
             }else {
