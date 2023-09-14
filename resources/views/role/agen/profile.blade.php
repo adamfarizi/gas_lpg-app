@@ -321,13 +321,54 @@
                             <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $users->email }}">
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="submit"  class="btn btn-round bg-gradient-success btn-lg w-100 mt-4 mb-0" values="Update">Update</button>
+                            <button type="submit" name="submit"  class="btn btn bg-gradient-success w-100 mt-4 mb-0" values="Update">Update</button>
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="submit"  class="btn btn-round bg-gradient-danger btn-lg w-100 mt-4 mb-0" values="Update">Change Password</button>
+                            <button type="button" name="modal"  class="btn bg-gradient-primary w-100 mt-4 mb-0" data-bs-toggle="modal" data-bs-target="#exampleModalMessage">Change Password</button>                        
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New message to @CT</h5>
+                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('password.action') }}" method="post" role="form text-left">
+                            @csrf
+                            <label>Old Password <span class="text-danger">*</label>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" name="old_password" value="{{ old('password') }}">
+                            </div>
+
+                            <label>New Password <span class="text-danger">*</label>
+                            <div class="mb-3">
+                                <input type="password" class="form-control" name="new_password" value="{{ old('password') }}">
+                            </div>
+
+                            <label>Confirm New Password <span class="text-danger">*</label>
+                            <div class="mb-4">
+                                <input type="password" class="form-control" name="new_password_confirmation" value="{{ old('password') }}">
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" name="submit"  class="btn bg-gradient-success w-100 mt-4 mb-0">Change Password</button>
+                            </div>
+
+                            <div class="text-center">
+                                <a type="button" name="modal" data-bs-dismiss="modal" class="btn bg-gradient-primary w-100 mt-4 mb-0">Back</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+              </div>
             </div>
         </div>
     </div>
