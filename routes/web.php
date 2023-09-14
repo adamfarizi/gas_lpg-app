@@ -45,10 +45,12 @@ Route::middleware(['auth'])->group(function () {
 
     // Role agen
     Route::get('agen', [RoleController::class, 'agen'])->middleware('userAkses:agen');
-    Route::get('agen', [AgenController::class, 'index_agen'])->middleware('userAkses:agen');
-    Route::get('agen/{id}/edit', [AgenController::class, 'edit_agen'])->middleware('userAkses:agen');
-    Route::put('agen/{id}',[AgenController::class, 'update_agen'])->middleware('userAkses:agen');
-    Route::delete('agen/{id}', [AgenController::class, 'destroy'])->middleware('userAkses:agen');
+    Route::get('agen', [AgenController::class, 'index_agen_dashboard'])->middleware('userAkses:agen');
+    Route::get('agen/{id}/edit', [AgenController::class, 'edit_agen_dashboard'])->middleware('userAkses:agen');
+    Route::put('agen/{id}',[AgenController::class, 'update_agen_dashboard'])->middleware('userAkses:agen');
+    Route::delete('agen/{id}', [AgenController::class, 'destroy_agen_dashboard'])->middleware('userAkses:agen');
+    Route::get('profile', [AgenController::class, 'edit_agen_profile'])->middleware('userAkses:agen')->name('profile');
+    Route::put('profile',[AgenController::class, 'edit_agen_profile_action'])->middleware('userAkses:agen');
 
     // Role kurir
     Route::get('kurir', [RoleController::class, 'kurir'])->middleware('userAkses:kurir');
