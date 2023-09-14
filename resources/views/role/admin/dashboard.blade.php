@@ -299,7 +299,9 @@
                                         <form action="{{ url('admin/dashboard/'. $user->user_id ) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" value="Delete"> <i class="fa fa-solid fa-trash" style="color: #252f40;"></i></button>
+                                            <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                            </button>                                        
                                         </form>
                                     </td>
                                 </tr>
@@ -356,7 +358,9 @@
                                         <form action="{{ url('admin/dashboard/'. $user->user_id ) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" value="Delete"> <i class="fa fa-solid fa-trash" style="color: #252f40;"></i></button>
+                                            <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                            </button>                                         
                                         </form>
                                     </td>
                                 </tr>
@@ -415,7 +419,9 @@
                                         <form action="{{ url('admin/dashboard/'. $user->user_id ) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" value="Delete"> <i class="fa fa-solid fa-trash" style="color: #252f40;"></i></button>
+                                            <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                            </button>                                         
                                         </form>
                                     </td>
                                 </tr>

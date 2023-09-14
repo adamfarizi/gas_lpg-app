@@ -246,7 +246,7 @@
         <div class="col-12 mt-4">
             <div class="card pb-5" style="min-height: 350px">
                 <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Kurir Table</h6>
+                    <h4>Kurir Table</h4>
                     <a type="button" class="btn bg-gradient-primary" href="{{ url('agen/dashboard/create') }}">
                         <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
                         Add User
@@ -257,18 +257,20 @@
                 <ul class="list-group">
                     <li class="list-group-item border-0 d-flex p-3 mb-2 bg-gray-100 border-radius-lg">
                     <div class="d-flex flex-column">
-                        <h6 class="mb-3 text-sm">{{ $user->name }}</h6>
+                        <h6 class="mb-1 text-md">{{ $user->name }}</h6>
                         <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">{{ $user->email }}</span></span>
                         <span class="text-xs">Role: <span class="text-dark ms-sm-2 font-weight-bold">{{ $user->role }}</span></span>
                     </div>
-                    <div class="ms-auto text-end">
-                        <a href="{{ url('agen/dashboard/'. $user->user_id .'/edit') }}" class="text-dark me-3 font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
-                            <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
+                    <div class="ms-auto text-end d-flex align-items-center">
+                        <a href="{{ url('agen/dashboard/'. $user->user_id .'/edit') }}" class="text-dark me-5 font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                            <i class="fa fa-solid fa-pen" style="color: #252f40;"></i> Edit
                         </a>
                         <form action="{{ url('agen/dashboard/'. $user->user_id ) }}" method="POST">
                             @csrf
                             @method('delete')
-                            <button type="submit" value="Delete"> <i class="fa fa-solid fa-trash" style="color: #252f40;"></i></button>
+                            <button type="submit" name="Delete" class="text-danger font-weight-bold border-0 bg-transparent">
+                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i> Delete
+                            </button>                         
                         </form>
                     </div>
                     </li>
