@@ -33,15 +33,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
 
     // Role admin
-    Route::get('admin', [RoleController::class, 'admin'])->middleware('userAkses:admin');
-    Route::get('admin', [AdminController::class, 'index_dashboard'])->middleware('userAkses:admin');
-    Route::get('admin/create', [AdminController::class, 'create_dashboard'])->middleware('userAkses:admin');
-    Route::post('admin/create', [AdminController::class, 'create_dashboard_action'])->middleware('userAkses:admin')->name('create.action');
-    Route::get('admin/{id}/edit', [AdminController::class, 'edit_dashboard'])->middleware('userAkses:admin');
-    Route::put('admin/{id}',[AdminController::class, 'edit_dashboard_action'])->middleware('userAkses:admin');
-    Route::delete('admin/{id}', [AdminController::class, 'destroy_dashboard'])->middleware('userAkses:admin');
-    Route::get('profile', [AdminController::class, 'edit_profile'])->middleware('userAkses:admin')->name('profile');
-    Route::put('profile',[AdminController::class, 'edit_profile_action'])->middleware('userAkses:admin');
+    Route::get('admin/dashboard', [RoleController::class, 'admin'])->middleware('userAkses:admin');
+    Route::get('admin/dashboard', [AdminController::class, 'index_admin_dashboard'])->middleware('userAkses:admin');
+    Route::get('admin/dashboard/create', [AdminController::class, 'create_admin_dashboard'])->middleware('userAkses:admin');
+    Route::post('admin/dashboard/create', [AdminController::class, 'create_admin_dashboard_action'])->middleware('userAkses:admin')->name('create.action');
+    Route::get('admin/dashboard/{id}/edit', [AdminController::class, 'edit_admin_dashboard'])->middleware('userAkses:admin');
+    Route::put('admin/dashboard/{id}',[AdminController::class, 'edit_admin_dashboard_action'])->middleware('userAkses:admin');
+    Route::delete('admin/dashboard/{id}', [AdminController::class, 'destroy_admin_dashboard'])->middleware('userAkses:admin');
+    Route::get('admin/profile', [AdminController::class, 'edit_admin_profile'])->middleware('userAkses:admin')->name('admin_profile');
+    Route::put('admin/profile/{id}',[AdminController::class, 'edit_admin_profile_action'])->middleware('userAkses:admin');
 
     // Role agen
     Route::get('agen', [RoleController::class, 'agen'])->middleware('userAkses:agen');
@@ -60,7 +60,7 @@ Route::post('register', [UserController::class, 'register_action'])->name('regis
 Route::get('/home', function () {
     if (Auth::check()) {
         if (Auth::user()->role == 'admin') {
-            return redirect('admin');
+            return redirect('admin/dashboard');
         } elseif (Auth::user()->role == 'agen') {
             return redirect('agen');
         }

@@ -76,7 +76,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('profile') }}">
+                    <a class="nav-link  active" href="{{ route('admin_profile') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -111,7 +111,7 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin') }}">Admin</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin/dashboard') }}">Admin</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Profile</h6>
@@ -309,7 +309,7 @@
                     @endif
                 </div>
                 <div class="card-body p-3">
-                    <form role="form text-left" action="{{ url('admin', $users->user_id) }}" method="POST">    
+                    <form role="form text-left" action="{{ url('admin/profile', $users->user_id) }}" method="POST">    
                         @csrf
                         @method('PUT')  
                         <label>Name</label>

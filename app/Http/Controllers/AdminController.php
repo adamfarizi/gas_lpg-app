@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     // Dashboard
-    public function index_dashboard(){
+    public function index_admin_dashboard(){
         $data['title'] = 'Admin';
     
         // Mengambil semua pengguna kecuali yang sedang login
@@ -19,13 +19,13 @@ class AdminController extends Controller
         return view('role.admin.dashboard', ['users' => $users], $data);
     }
 
-    public function create_dashboard(){
+    public function create_admin_dashboard(){
         $data['title'] = 'Admin';
 
         return view('role.admin.create', $data);
     }
 
-    public function create_dashboard_action(Request $request){
+    public function create_admin_dashboard_action(Request $request){
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:tb_user',
@@ -39,10 +39,10 @@ class AdminController extends Controller
             'password' => Hash::make($request->password), 
         ]);
         $user->save();
-        return redirect()->route('admin')->with('success', 'Account has been created !');
+        return redirect()->route('home')->with('success', 'Account has been created !');
     }
 
-    public function edit_dashboard($user_id)
+    public function edit_admin_dashboard($user_id)
     {
         $data['title'] = 'Admin';
 
@@ -50,7 +50,7 @@ class AdminController extends Controller
         return view('role.admin.edit', ['users'=>$users], $data);   
     }
 
-    public function edit_dashboard_action($user_id, Request $request)
+    public function edit_admin_dashboard_action($user_id, Request $request)
     {
         $data['title'] = 'Admin';
 
@@ -67,22 +67,22 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Change successfuly !');
     }
 
-    public function destroy_dashboard($user_id){
+    public function destroy_admin_dashboard($user_id){
         $data['title'] = 'Admin';
 
         $users = User::find($user_id);
         $users->delete();
-        return redirect('admin'); 
+        return redirect('admin/dashboard'); 
     }
 
-    public function edit_profile()
+    public function edit_admin_profile()
     {
         $data['title'] = 'Profile';
         $user = USER::find(Auth::id());
         return view('role.admin.profile', ['users'=>$user], $data);   
     }
 
-    public function edit_profile_action($user_id, Request $request)
+    public function edit_admin_profile_action($user_id, Request $request)
     {
         $data['title'] = 'Profile';
 
