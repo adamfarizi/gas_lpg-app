@@ -156,88 +156,88 @@
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total User</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        {{ $total_user }}
-                        <span class="text-black text-sm font-weight-bolder">user</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="fa fa-solid fa-users opacity-10" style="color: #ffffff;" aria-hidden="true"></i>
-                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total User</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                {{ $total_user }}
+                                <span class="text-black text-sm font-weight-bolder">user</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-users opacity-10" style="color: #ffffff;" aria-hidden="true"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
             </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Admin</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        {{ $total_admin }}
-                        <span class="text-black text-sm font-weight-bolder">admin</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="fa fa-solid fa-headset opacity-10" style="color: #ffffff;"></i>
-                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Admin</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                {{ $total_admin }}
+                                <span class="text-black text-sm font-weight-bolder">admin</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-headset opacity-10" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
             </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Agen</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        {{ $total_agen }}
-                        <span class="text-black text-sm font-weight-bolder">agen</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="fa fa-solid fa-book opacity-10" style="color: #ffffff;"></i>
-                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Agen</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                {{ $total_agen }}
+                                <span class="text-black text-sm font-weight-bolder">agen</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-book opacity-10" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
             </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
+        </div>
+        <div class="col-xl-3 col-sm-6">
             <div class="card">
                 <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Totoal Kurir</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        {{ $total_kurir }}
-                        <span class="text-black text-sm font-weight-bolder">kurir</span>
-                        </h5>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Totoal Kurir</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                {{ $total_kurir }}
+                                <span class="text-black text-sm font-weight-bolder">kurir</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
-                    </div>
-                    </div>
-                </div>
                 </div>
             </div>
         </div>

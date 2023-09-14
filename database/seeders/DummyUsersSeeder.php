@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DummyUsersSeeder extends Seeder
 {
@@ -15,29 +16,19 @@ class DummyUsersSeeder extends Seeder
      */
     public function run()
     {
-        $userData = [
-            [
-                'name'=>'Saya Admin',
-                'email'=>'admin@gmail.com',
-                'role'=>'admin',
-                'password'=>bcrypt('admin123')
-            ],
-            [
-                'name'=>'Saya Agen',
-                'email'=>'agen@gmail.com',
-                'role'=>'agen',
-                'password'=>bcrypt('agen123')
-            ],
-            [
-                'name'=>'Saya Kurir',
-                'email'=>'kurir@gmail.com',
-                'role'=>'kurir',
-                'password'=>bcrypt('kurir123')
-            ]
-        ];
+        $roles = ['admin', 'agen', 'kurir'];
 
-        foreach ($userData as $key => $value) {
-            User::create($value);
+        foreach ($roles as $role) {
+            for ($i = 1; $i <= 5; $i++) {
+                $userData = [
+                    'name' => "Saya $role $i",
+                    'email' => "$role$i@gmail.com",
+                    'role' => $role,
+                    'password' => Hash::make("${role}123"),
+                ];
+
+                User::create($userData);
+            }
         }
     }
 }
