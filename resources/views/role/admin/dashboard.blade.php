@@ -297,7 +297,7 @@
                                     </td>
                                     <td class="align-middle">
                                         <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
-                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
+                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
                                         </a>
                                     </td>
                                 </tr>
