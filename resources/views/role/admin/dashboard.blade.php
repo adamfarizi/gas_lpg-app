@@ -296,9 +296,11 @@
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
-                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
-                                        </a>
+                                        <form action="{{ url('admin/dashboard/'. $user->user_id ) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" value="Delete"> <i class="fa fa-solid fa-trash" style="color: #252f40;"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -351,9 +353,11 @@
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
-                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
-                                        </a>
+                                        <form action="{{ url('admin/dashboard/'. $user->user_id ) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" value="Delete"> <i class="fa fa-solid fa-trash" style="color: #252f40;"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -408,9 +412,11 @@
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
-                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                        </a>
+                                        <form action="{{ url('admin/dashboard/'. $user->user_id ) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" value="Delete"> <i class="fa fa-solid fa-trash" style="color: #252f40;"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -421,37 +427,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    {{-- Modals PopUp --}}
-        <div class="col-md-4">
-            <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-notification">Your attention is required !</h6>
-                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="py-3 text-center">
-                                <i class="ni ni-bell-55 ni-3x" style="color: #ea0606;"></i>
-                                <h4 class="text-gradient text-danger mt-4">Are you sure want to delete this?</h4>
-                            </div>
-                        </div>
-                        
-                        <div class="modal-footer">
-                            <form action="{{ url('admin/dashboard/' . $user->user_id) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn bg-gradient-danger text-white" data-original-title="Delete user">Delete</button>
-                            </form>
-                            <button type="button" class="btn btn-link text-dark ml-auto" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>                  
-    
+    </div>        
 @endsection

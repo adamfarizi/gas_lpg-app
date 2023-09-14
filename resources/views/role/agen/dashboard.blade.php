@@ -243,8 +243,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-7 mt-4">
-            <div class="card">
+        <div class="col-12 mt-4">
+            <div class="card pb-5" style="min-height: 350px">
                 <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>Kurir Table</h6>
                     <a type="button" class="btn bg-gradient-primary" href="{{ url('agen/dashboard/create') }}">
@@ -252,7 +252,7 @@
                         Add User
                     </a>
                 </div>
-                <div class="card-body pt-4 p-3">
+                <div class="card-body" style="max-height: 360px; overflow-y: auto;">
                 @foreach ($users as $user) 
                 <ul class="list-group">
                     <li class="list-group-item border-0 d-flex p-3 mb-2 bg-gray-100 border-radius-lg">
@@ -265,45 +265,15 @@
                         <a href="{{ url('agen/dashboard/'. $user->user_id .'/edit') }}" class="text-dark me-3 font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                         </a>
-                        <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
-                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
-                        </a>
+                        <form action="{{ url('agen/dashboard/'. $user->user_id ) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" value="Delete"> <i class="fa fa-solid fa-trash" style="color: #252f40;"></i></button>
+                        </form>
                     </div>
                     </li>
                 </ul>
                 @endforeach
-                </div>
-
-                {{-- Modals PopUp --}}
-                <div class="col-md-4">
-                    <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h6 class="modal-title" id="modal-title-notification">Your attention is required !</h6>
-                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="py-3 text-center">
-                                <i class="ni ni-bell-55 ni-3x" style="color: #ea0606;"></i>
-                                <h4 class="text-gradient text-danger mt-4">Are you sure want to delete this?</h4>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <form action="{{ url('agen/dashboard' . $user->user_id) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn bg-gradient-danger text-white" data-original-title="Delete user">
-                                        Delete
-                                    </button>
-                                </form>
-                                <button type="button" class="btn btn-link text-dark ml-auto" data-bs-dismiss="modal">Close</button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
