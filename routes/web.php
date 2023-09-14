@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AgenController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Role agen
     Route::get('agen', [RoleController::class, 'agen'])->middleware('userAkses:agen');
+    Route::get('agen', [AgenController::class, 'index_agen'])->middleware('userAkses:agen');
+    Route::get('agen/{id}/edit', [AgenController::class, 'edit_agen'])->middleware('userAkses:agen');
+    Route::put('agen/{id}',[AgenController::class, 'update_agen'])->middleware('userAkses:agen');
+    Route::delete('agen/{id}', [AgenController::class, 'destroy'])->middleware('userAkses:agen');
 
     // Role kurir
     Route::get('kurir', [RoleController::class, 'kurir'])->middleware('userAkses:kurir');

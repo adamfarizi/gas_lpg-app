@@ -111,7 +111,7 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Agen</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin') }}">Agen</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Dashboard</h6>
@@ -121,7 +121,7 @@
                     <ul class="navbar-nav justify-content-end me-5">
                         <div class="d-flex py-1">
                             <div class="my-auto">
-                                <img src="../assets/img/local/profil.png" class="avatar avatar-sm  me-3 mt-1">
+                                <img src="../../assets/img/local/profil.png" class="avatar avatar-sm  me-3 mt-1">
                             </div>
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="text-sm font-weight-normal mb-1">
@@ -152,156 +152,43 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        $53,000
-                        <span class="text-success text-sm font-weight-bolder">+55%</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        2,300
-                        <span class="text-success text-sm font-weight-bolder">+3%</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        +3,462
-                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-            <div class="col-xl-3 col-sm-6">
-            <div class="card">
-                <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                    <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
-                        <h5 class="font-weight-bolder mb-0">
-                        $103,430
-                        <span class="text-success text-sm font-weight-bolder">+5%</span>
-                        </h5>
-                    </div>
-                    </div>
-                    <div class="col-4 text-end">
-                    <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+    <div class="card-header pb-0 text-left">
+        <h3 class="font-weight-bolder text-primary text-gradient">Edit User</h3>
+        <p class="mb-0">Silahkan lengkapi data diri user dengan benar</p>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-7 mt-4">
-            <div class="card">
-                <div class="card-header pb-0 px-3">
-                <h6 class="mb-0">Agent Information</h6>
+        <div class="card-body">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span class="alert-text text-white"><strong>Success!</strong> {{ session('success') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="card-body pt-4 p-3">
-                @foreach ($users as $user) 
-                <ul class="list-group">
-                    <li class="list-group-item border-0 d-flex p-3 mb-2 bg-gray-100 border-radius-lg">
-                    <div class="d-flex flex-column">
-                        <h6 class="mb-3 text-sm">{{ $user->name }}</h6>
-                        <span class="mb-2 text-xs">Email Address: <span class="text-dark ms-sm-2 font-weight-bold">{{ $user->email }}</span></span>
-                        <span class="text-xs">Role: <span class="text-dark ms-sm-2 font-weight-bold">{{ $user->role }}</span></span>
-                    </div>
-                    <div class="ms-auto text-end">
-                        <a href="agen/{{ $user->user_id }}/edit" class="text-dark me-3 font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
-                            <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
-                        </a>
-                        <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
-                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
-                        </a>
-                    </div>
-                    </li>
-                </ul>
+            @endif
+            @if($errors->any())
+                @foreach ($errors->all() as $err)
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <span class="alert-text text-white"><strong>Alert!</strong> {{ session('success') }}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>                
                 @endforeach
-                </div>
-
-                {{-- Modals PopUp --}}
-                <div class="col-md-4">
-                    <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                        <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h6 class="modal-title" id="modal-title-notification">Your attention is required !</h6>
-                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="py-3 text-center">
-                                <i class="ni ni-bell-55 ni-3x" style="color: #ea0606;"></i>
-                                <h4 class="text-gradient text-danger mt-4">Are you sure want to delete this?</h4>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <form action="{{ url('agen/' . $user->user_id) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn bg-gradient-danger text-white" data-original-title="Delete user">
-                                        Delete
-                                    </button>
-                                </form>
-                                <button type="button" class="btn btn-link text-dark ml-auto" data-bs-dismiss="modal">Close</button>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            @endif
+        <form role="form text-left" action="{{ url('agen', $users->user_id) }}" method="POST">    
+            @csrf
+            @method('PUT')  
+            <label>Name</label>
+            <div class="input-group mb-3">
+                <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $users->name }}">
             </div>
-        </div>
+            <label>Email</label>
+            <div class="input-group mb-3">
+                <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $users->email }}">
+            </div>
+            <div class="text-center">
+                <input type="submit" name="submit"  class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0" values="Update">
+            </div>
+        </form>
     </div>
 @endsection
