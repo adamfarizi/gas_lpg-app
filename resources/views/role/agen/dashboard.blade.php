@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="nav-link  active" href="{{ route('home') }}">
+                <a class="nav-link  active" href="{{ url('agen/dashboard') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>shop </title>
@@ -99,7 +99,7 @@
             </ul>
         </div>
         <div class="sidenav-footer mx-3">
-            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Log out</a>
+            <a class="btn bg-gradient-primary w-100 mt-4 mb-0" href="{{ route('logout') }}">Log out</a>
         </div>
     </aside>
     <!-- End Side Bar -->
@@ -245,8 +245,12 @@
     <div class="row">
         <div class="col-md-7 mt-4">
             <div class="card">
-                <div class="card-header pb-0 px-3">
-                <h6 class="mb-0">Agent Information</h6>
+                <div class="card-header pb-0 d-flex justify-content-between">
+                    <h6>Kurir Table</h6>
+                    <a type="button" class="btn bg-gradient-primary" href="{{ url('agen/dashboard/create') }}">
+                        <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
+                        Add User
+                    </a>
                 </div>
                 <div class="card-body pt-4 p-3">
                 @foreach ($users as $user) 

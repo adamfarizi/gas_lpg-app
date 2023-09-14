@@ -17,6 +17,29 @@ class AgenController extends Controller
         return view('role.agen.dashboard', ['users'=>$users], $data);
     }
 
+    public function create_agen_dashboard(){
+        $data['title'] = 'Agen';
+
+        return view('role.agen.create', $data);
+    }
+
+    public function create_agen_dashboard_action(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:tb_user',
+            'password' => 'required',
+            'password_confrimation' => 'required|same:password',
+        ]);
+        $user = new User([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role ?? 'agen',
+            'password' => Hash::make($request->password), 
+        ]);
+        $user->save();
+        return redirect()->route('home')->with('success', 'Account has been created !');
+    }
+
     public function edit_agen_dashboard($user_id)
     {
         $data['title'] = 'Agen';

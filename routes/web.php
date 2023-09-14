@@ -46,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     // Role agen
     Route::get('agen/dashboard', [RoleController::class, 'agen'])->middleware('userAkses:agen');
     Route::get('agen/dashboard', [AgenController::class, 'index_agen_dashboard'])->middleware('userAkses:agen');
+    Route::get('agen/dashboard/create', [AgenController::class, 'create_agen_dashboard'])->middleware('userAkses:agen');
+    Route::post('agen/dashboard/create', [AgenController::class, 'create_agen_dashboard_action'])->middleware('userAkses:agen')->name('create.agen');
     Route::get('agen/dashboard/{id}/edit', [AgenController::class, 'edit_agen_dashboard'])->middleware('userAkses:agen');
     Route::put('agen/dashboard/{id}',[AgenController::class, 'update_agen_dashboard'])->middleware('userAkses:agen');
     Route::delete('agen/dashboard/{id}', [AgenController::class, 'destroy_agen_dashboard'])->middleware('userAkses:agen');
