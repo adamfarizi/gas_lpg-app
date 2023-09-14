@@ -14,9 +14,19 @@ class AdminController extends Controller
         $data['title'] = 'Admin';
     
         // Mengambil semua pengguna kecuali yang sedang login
-        $users = User::where('user_id', '!=', auth()->user()->user_id)->get();
+        $admins = User::where('role', 'admin')
+            ->where('user_id', '!=', auth()->user()->user_id)
+            ->get();        
+        $agens = User::where('role', 'agen')
+            ->get();
+        $kurirs = User::where('role', 'kurir')
+            ->get();
     
-        return view('role.admin.dashboard', ['users' => $users], $data);
+        return view('role.admin.dashboard', [
+            'admins' => $admins,
+            'agens' => $agens,
+            'kurirs' => $kurirs,
+        ], $data);    
     }
 
     public function create_admin_dashboard(){

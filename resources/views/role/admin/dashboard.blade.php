@@ -242,97 +242,214 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card mt-3">
-                <div class="card-header pb-0 d-flex justify-content-between">
-                    <h6>Users Table</h6>
-                    <a type="button" class="btn bg-gradient-primary" href="{{ url('admin/dashboard/create') }}">
-                        <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                        Add User
-                    </a>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                        <thead>
-                            <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                            <th class="text-secondary opacity-7"></th>
-                            <th class="text-secondary opacity-7"></th>
-                            </tr>
-                        </thead>
-                        @foreach ($users as $user) 
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="d-flex px-2 py-1">
-                                <div>
-                                    <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
-                                </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
-                                    <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
-                                </div>
-                            </div>
-                            </td>
-                                <td>
-                                    <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success">Active</span>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="{{ url('admin/dashboard/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
-                                        <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
-                                    </a>
-                                </td>
-                                <td class="align-middle">
-                                    <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
-                                        <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                        @endforeach
-                        </table>
+    <div class="mt-3">
+        <div class="row">
+            <div class="col-12">
+                <a type="button" class="btn bg-gradient-primary mt-3 border-end" href="{{ url('admin/dashboard/create') }}">
+                    <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
+                    Add User
+                </a>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header pb-0 d-flex justify-content-between">
+                        <h6>Admin Table</h6>
                     </div>
-
-                    {{-- Modals PopUp --}}
-                    <div class="col-md-4">
-                        <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                            <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-notification">Your attention is required !</h6>
-                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="py-3 text-center">
-                                    <i class="ni ni-bell-55 ni-3x" style="color: #ea0606;"></i>
-                                    <h4 class="text-gradient text-danger mt-4">Are you sure want to delete this?</h4>
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                <th class="text-secondary opacity-7"></th>
+                                <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            @foreach ($admins as $user) 
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                        <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <form action="{{ url('admin/dashboard/' . $user->user_id) }}" method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn bg-gradient-danger text-white" data-original-title="Delete user">
-                                            Delete
-                                        </button>
-                                    </form>
-                                    <button type="button" class="btn btn-link text-dark ml-auto" data-bs-dismiss="modal">Close</button>
+                                </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-success">Active</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url('admin/dashboard/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                            <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
+                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header pb-0 d-flex justify-content-between">
+                        <h6>Agen Table</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                <th class="text-secondary opacity-7"></th>
+                                <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            @foreach ($agens as $user) 
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                        <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
+                                    </div>
                                 </div>
+                                </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-success">Active</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url('admin/dashboard/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                            <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
+                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mt-3">
+                    <div class="card-header pb-0 d-flex justify-content-between">
+                        <h6>Kurir Table</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                <th class="text-secondary opacity-7"></th>
+                                <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            @foreach ($kurirs as $user) 
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                    <div>
+                                        <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                        <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
+                                    </div>
                                 </div>
-                            </div>
+                                </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
+                                    </td>
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-success">Active</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ url('admin/dashboard/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                            <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
+                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- Modals PopUp --}}
+        <div class="col-md-4">
+            <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
+                <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-notification">Your attention is required !</h6>
+                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="py-3 text-center">
+                                <i class="ni ni-bell-55 ni-3x" style="color: #ea0606;"></i>
+                                <h4 class="text-gradient text-danger mt-4">Are you sure want to delete this?</h4>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ url('admin/dashboard/' . $user->user_id) }}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn bg-gradient-danger text-white" data-original-title="Delete user">Delete</button>
+                            </form>
+                            <button type="button" class="btn btn-link text-dark ml-auto" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                  
+    
 @endsection
