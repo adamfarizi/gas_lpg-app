@@ -287,7 +287,7 @@
             <div class="card h-100">
                 <div class="card-header pb-0 p-3 mt-3">
                     <div class="col-md-8 d-flex align-items-center">
-                        <h6 class="font-weight-bolder text-dark text-gradient">Edit Profile</h6>
+                        <h5 class="font-weight-bolder text-primary text-gradient">Edit Profile</h5>
                     </div>
                     @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -299,7 +299,7 @@
                     @endif
                     @if($errors->any())
                     @foreach ($errors->all() as $err)
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade-show" role="alert">
                         <span class="alert-text text-white"><strong>Alert!</strong> {{ $err }}</span>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -321,7 +321,10 @@
                             <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $users->email }}">
                         </div>
                         <div class="text-center">
-                            <button type="submit" name="submit"  class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0" values="Update">Update</button>
+                            <button type="submit" name="submit"  class="btn btn-round bg-gradient-success btn-lg w-100 mt-4 mb-0" values="Update">Update</button>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" name="submit"  class="btn btn-round bg-gradient-danger btn-lg w-100 mt-4 mb-0" values="Update">Change Password</button>
                         </div>
                     </form>
                 </div>
