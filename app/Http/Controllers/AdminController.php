@@ -13,7 +13,10 @@ class AdminController extends Controller
     public function index_admin_dashboard(){
         $data['title'] = 'Admin';
     
-        // Mengambil semua pengguna kecuali yang sedang login
+        $total_user = User::count();
+        $total_admin = User::where('role', 'admin')->count();
+        $total_agen = User::where('role', 'agen')->count();
+        $total_kurir = User::where('role', 'kurir')->count();
         $admins = User::where('role', 'admin')
             ->where('user_id', '!=', auth()->user()->user_id)
             ->get();        
@@ -23,6 +26,10 @@ class AdminController extends Controller
             ->get();
     
         return view('role.admin.dashboard', [
+            'total_user' => $total_user,
+            'total_admin' => $total_admin,
+            'total_agen' => $total_agen,
+            'total_kurir' => $total_kurir,
             'admins' => $admins,
             'agens' => $agens,
             'kurirs' => $kurirs,

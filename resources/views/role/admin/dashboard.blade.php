@@ -159,16 +159,16 @@
                 <div class="row">
                     <div class="col-8">
                     <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total User</p>
                         <h5 class="font-weight-bolder mb-0">
-                        $53,000
-                        <span class="text-success text-sm font-weight-bolder">+55%</span>
+                        {{ $total_user }}
+                        <span class="text-black text-sm font-weight-bolder">user</span>
                         </h5>
                     </div>
                     </div>
                     <div class="col-4 text-end">
                     <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                        <i class="fa fa-solid fa-users opacity-10" style="color: #ffffff;" aria-hidden="true"></i>
                     </div>
                     </div>
                 </div>
@@ -181,16 +181,16 @@
                 <div class="row">
                     <div class="col-8">
                     <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Admin</p>
                         <h5 class="font-weight-bolder mb-0">
-                        2,300
-                        <span class="text-success text-sm font-weight-bolder">+3%</span>
+                        {{ $total_admin }}
+                        <span class="text-black text-sm font-weight-bolder">admin</span>
                         </h5>
                     </div>
                     </div>
                     <div class="col-4 text-end">
                     <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                        <i class="fa fa-solid fa-headset opacity-10" style="color: #ffffff;"></i>
                     </div>
                     </div>
                 </div>
@@ -203,16 +203,16 @@
                 <div class="row">
                     <div class="col-8">
                     <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Agen</p>
                         <h5 class="font-weight-bolder mb-0">
-                        +3,462
-                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                        {{ $total_agen }}
+                        <span class="text-black text-sm font-weight-bolder">agen</span>
                         </h5>
                     </div>
                     </div>
                     <div class="col-4 text-end">
                     <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                        <i class="fa fa-solid fa-book opacity-10" style="color: #ffffff;"></i>
                     </div>
                     </div>
                 </div>
@@ -225,16 +225,16 @@
                 <div class="row">
                     <div class="col-8">
                     <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
+                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Totoal Kurir</p>
                         <h5 class="font-weight-bolder mb-0">
-                        $103,430
-                        <span class="text-success text-sm font-weight-bolder">+5%</span>
+                        {{ $total_kurir }}
+                        <span class="text-black text-sm font-weight-bolder">kurir</span>
                         </h5>
                     </div>
                     </div>
                     <div class="col-4 text-end">
                     <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                        <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                        <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
                     </div>
                     </div>
                 </div>
@@ -242,6 +242,7 @@
             </div>
         </div>
     </div>
+
     <div class="mt-3">
         <div class="row">
             <div class="col-12">
@@ -408,7 +409,7 @@
                                     </td>
                                     <td class="align-middle">
                                         <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
-                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>                                </td>
+                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -439,6 +440,7 @@
                                 <h4 class="text-gradient text-danger mt-4">Are you sure want to delete this?</h4>
                             </div>
                         </div>
+                        
                         <div class="modal-footer">
                             <form action="{{ url('admin/dashboard/' . $user->user_id) }}" method="POST">
                                 @csrf
