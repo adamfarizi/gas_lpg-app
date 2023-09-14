@@ -111,7 +111,7 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('agen') }}">Agen</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('agen/dashboard') }}">Agen</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Profile</h6>
@@ -309,7 +309,7 @@
                     @endif
                 </div>
                 <div class="card-body p-3">
-                    <form role="form text-left" action="{{ url('agen', $users->user_id) }}" method="POST">    
+                    <form role="form text-left" action="{{ url('admin', $users->user_id) }}" method="POST">    
                         @csrf
                         @method('PUT')  
                         <label>Name</label>

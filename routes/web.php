@@ -44,13 +44,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('admin/profile/{id}',[AdminController::class, 'edit_admin_profile_action'])->middleware('userAkses:admin');
 
     // Role agen
-    Route::get('agen', [RoleController::class, 'agen'])->middleware('userAkses:agen');
-    Route::get('agen', [AgenController::class, 'index_agen_dashboard'])->middleware('userAkses:agen');
-    Route::get('agen/{id}/edit', [AgenController::class, 'edit_agen_dashboard'])->middleware('userAkses:agen');
-    Route::put('agen/{id}',[AgenController::class, 'update_agen_dashboard'])->middleware('userAkses:agen');
-    Route::delete('agen/{id}', [AgenController::class, 'destroy_agen_dashboard'])->middleware('userAkses:agen');
-    Route::get('profile', [AgenController::class, 'edit_agen_profile'])->middleware('userAkses:agen')->name('profile');
-    Route::put('profile',[AgenController::class, 'edit_agen_profile_action'])->middleware('userAkses:agen');
+    Route::get('agen/dashboard', [RoleController::class, 'agen'])->middleware('userAkses:agen');
+    Route::get('agen/dashboard', [AgenController::class, 'index_agen_dashboard'])->middleware('userAkses:agen');
+    Route::get('agen/dashboard/{id}/edit', [AgenController::class, 'edit_agen_dashboard'])->middleware('userAkses:agen');
+    Route::put('agen/dashboard/{id}',[AgenController::class, 'update_agen_dashboard'])->middleware('userAkses:agen');
+    Route::delete('agen/dashboard/{id}', [AgenController::class, 'destroy_agen_dashboard'])->middleware('userAkses:agen');
+    Route::get('agen/profile', [AgenController::class, 'edit_agen_profile'])->middleware('userAkses:agen')->name('agen_profile');
+    Route::put('agen/profile/{id}',[AgenController::class, 'edit_agen_profile_action'])->middleware('userAkses:agen');
 
     // Role kurir
     Route::get('kurir', [RoleController::class, 'kurir'])->middleware('userAkses:kurir');
@@ -64,7 +64,7 @@ Route::get('/home', function () {
         if (Auth::user()->role == 'admin') {
             return redirect('admin/dashboard');
         } elseif (Auth::user()->role == 'agen') {
-            return redirect('agen');
+            return redirect('agen/dashboard');
         }
         return redirect('kurir');
     } else {

@@ -51,7 +51,7 @@ class UserController extends Controller
             if(Auth::user()->role=='admin'){
                 return redirect('admin');
             }elseif (Auth::user()->role=='agen') {
-                return redirect('agen');
+                return redirect('agen/dashboard');
             }else {
                 return redirect('kurir');
             }

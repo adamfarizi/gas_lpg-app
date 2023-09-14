@@ -76,7 +76,7 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/profile.html">
+                    <a class="nav-link  " href="{{ url('agen/profile') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -258,7 +258,7 @@
                         <span class="text-xs">Role: <span class="text-dark ms-sm-2 font-weight-bold">{{ $user->role }}</span></span>
                     </div>
                     <div class="ms-auto text-end">
-                        <a href="agen/{{ $user->user_id }}/edit" class="text-dark me-3 font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                        <a href="{{ url('agen/dashboard/'. $user->user_id .'/edit') }}" class="text-dark me-3 font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                         </a>
                         <a type="button" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#modal-notification">
@@ -288,7 +288,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <form action="{{ url('agen/' . $user->user_id) }}" method="POST">
+                                <form action="{{ url('agen/dashboard' . $user->user_id) }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn bg-gradient-danger text-white" data-original-title="Delete user">
