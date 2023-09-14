@@ -54,7 +54,7 @@ class AgenController extends Controller
     {
         $data['title'] = 'Profile';
         $user = USER::find(Auth::id());
-        return view('role.admin.profile', ['users'=>$user], $data);   
+        return view('role.agen.profile', ['users'=>$user], $data);   
     }
 
     public function edit_agen_profile_action($user_id, Request $request)
