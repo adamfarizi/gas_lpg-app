@@ -65,12 +65,12 @@ class AgenController extends Controller
         return redirect()->back()->with('success', 'Change successfuly !');
     }
 
-    public function destroy_dashboard($user_id){
+    public function destroy_agen_dashboard($user_id){
         $data['title'] = 'Agen';
 
         $users = User::find($user_id);
         $users->delete();
-        return redirect('agen'); 
+        return redirect('agen/dashboard'); 
     }
 
     public function edit_agen_profile()
