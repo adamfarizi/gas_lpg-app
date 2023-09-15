@@ -5,8 +5,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0 text-center" href="{{ route('home') }}">
-        {{-- <img src="{{ asset('assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100 me-3" alt="main_logo"> --}}
-        <h5 class="font-weight-bolder text-primary text-gradient">GasTrack</h5>
+        <img src="{{ asset('assets/img/local/logo5.png') }}" class="navbar-brand-img" alt="main_logo">
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -149,16 +148,16 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                  <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
                   <h5 class="font-weight-bolder mb-0">
-                    2,300
-                    <span class="text-success text-sm font-weight-bolder">+3%</span>
+                    +3,462
+                    <span class="text-success text-sm font-weight-bolder">+2%</span>
                   </h5>
                 </div>
               </div>
               <div class="col-4 text-end">
                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                  <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                  <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
                 </div>
               </div>
             </div>
@@ -171,17 +170,16 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+                  <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Truck</p>
                   <h5 class="font-weight-bolder mb-0">
-                    +3,462
-                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                    300
+                    <span class="text-success text-sm font-weight-bolder">+3%</span>
                   </h5>
                 </div>
               </div>
               <div class="col-4 text-end">
                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                  <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
-                </div>
+                  <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>                </div>
               </div>
             </div>
           </div>
@@ -211,7 +209,6 @@
       </div>
     </div>
 
-
     <div class="row mt-4">
       <div class="col-lg-7 mb-lg-0 mb-4">
         <div class="card">
@@ -219,9 +216,11 @@
             <div class="row">
               <div class="col-lg-6">
                 <div class="d-flex flex-column h-100">
-                  <p class="mb-1 pt-2 text-bold">Built by developers</p>
-                  <h5 class="font-weight-bolder">Soft UI Dashboard</h5>
-                  <p class="mb-5">From colors, cards, typography to complex elements, you will find the full documentation.</p>
+                  <h5 class="font-weight-bolder mb-2">GasTrack Monitoring App</h5>
+                  <p class="mb-3">
+                    GasTrack is an application designed to make it easier for users to monitor gas buying and selling transactions. 
+                    With its advanced features, GasTrack allows you to manage and track all aspects of your gas business.
+                  </p>
                   <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
                     Read More
                     <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
@@ -232,7 +231,7 @@
                 <div class="bg-gradient-primary border-radius-lg h-100">
                   <img src="{{ asset('assets/img/shapes/waves-white.svg') }}" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                   <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                    <img class="w-100 position-relative z-index-2 pt-4" src="{{ asset('assets/img/illustrations/rocket-white.png') }}" alt="rocket">
+                    <img class="w-30 position-relative z-index-2" src="{{ asset('assets/img/local/logo2.png') }}" alt="rocket">
                   </div>
                 </div>
               </div>
@@ -245,8 +244,8 @@
           <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../assets/img/ivancik.jpg');">
             <span class="mask bg-gradient-dark"></span>
             <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-              <h5 class="text-white font-weight-bolder mb-4 pt-2">Work with the rockets</h5>
-              <p class="text-white">Wealth creation is an evolutionarily recent positive-sum game. It is all about who take the opportunity first.</p>
+              <h5 class="text-white font-weight-bolder mb-4 pt-2">Work with the GasTrack</h5>
+              <p class="text-white">With an intuitive interface and advanced features, GasTrack is the perfect solution for your gas business."</p>
               <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
                 Read More
                 <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
@@ -256,6 +255,7 @@
         </div>
       </div>
     </div>
+
     <div class="row mt-4">
       <div class="col-lg-5 mb-lg-0 mb-4">
         <div class="card z-index-2">
@@ -295,7 +295,7 @@
                 </div>
                 <div class="col-3 py-3 ps-0">
                   <div class="d-flex mb-2">
-                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-info text-center me-2 d-flex align-items-center justify-content-center">
+                    <div class="icon icon-shape icon-xxs shadow border-radius-sm bg-gradient-primary text-center me-2 d-flex align-items-center justify-content-center">
                       <svg width="10px" height="10px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>spaceship</title>
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -398,7 +398,7 @@
               <div class="col-lg-6 col-7">
                 <h6>Projects</h6>
                 <p class="text-sm mb-0">
-                  <i class="fa fa-check text-info" aria-hidden="true"></i>
+                  <i class="fa fa-check text-primary" aria-hidden="true"></i>
                   <span class="font-weight-bold ms-1">30 done</span> this month
                 </p>
               </div>
@@ -460,13 +460,13 @@
                     </td>
                     <td class="align-middle">
                       <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
+                        <div class="progress-primary">
                           <div class="progress-percentage">
                             <span class="text-xs font-weight-bold">60%</span>
                           </div>
                         </div>
                         <div class="progress">
-                          <div class="progress-bar bg-gradient-info w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-gradient-primary w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                       </div>
                     </td>
@@ -497,13 +497,13 @@
                     </td>
                     <td class="align-middle">
                       <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
+                        <div class="progress-primary">
                           <div class="progress-percentage">
                             <span class="text-xs font-weight-bold">10%</span>
                           </div>
                         </div>
                         <div class="progress">
-                          <div class="progress-bar bg-gradient-info w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-gradient-primary w-10" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                       </div>
                     </td>
@@ -534,7 +534,7 @@
                     </td>
                     <td class="align-middle">
                       <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
+                        <div class="progress-primary">
                           <div class="progress-percentage">
                             <span class="text-xs font-weight-bold">100%</span>
                           </div>
@@ -577,7 +577,7 @@
                     </td>
                     <td class="align-middle">
                       <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
+                        <div class="progress-primary">
                           <div class="progress-percentage">
                             <span class="text-xs font-weight-bold">100%</span>
                           </div>
@@ -611,13 +611,13 @@
                     </td>
                     <td class="align-middle">
                       <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
+                        <div class="progress-primary">
                           <div class="progress-percentage">
                             <span class="text-xs font-weight-bold">25%</span>
                           </div>
                         </div>
                         <div class="progress">
-                          <div class="progress-bar bg-gradient-info w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="25"></div>
+                          <div class="progress-bar bg-gradient-primary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="25"></div>
                         </div>
                       </div>
                     </td>
@@ -648,13 +648,13 @@
                     </td>
                     <td class="align-middle">
                       <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
+                        <div class="progress-primary">
                           <div class="progress-percentage">
                             <span class="text-xs font-weight-bold">40%</span>
                           </div>
                         </div>
                         <div class="progress">
-                          <div class="progress-bar bg-gradient-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="40"></div>
+                          <div class="progress-bar bg-gradient-primary w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="40"></div>
                         </div>
                       </div>
                     </td>
@@ -696,7 +696,7 @@
               </div>
               <div class="timeline-block mb-3">
                 <span class="timeline-step">
-                  <i class="ni ni-cart text-info text-gradient"></i>
+                  <i class="ni ni-cart text-primary text-gradient"></i>
                 </span>
                 <div class="timeline-content">
                   <h6 class="text-dark text-sm font-weight-bold mb-0">Server payments for April</h6>
@@ -738,174 +738,174 @@
 @endsection
 
 @section('js')
-<!--   Core JS Files   -->
-<script>
-  var ctx = document.getElementById("chart-bars").getContext("2d");
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [{
-        label: "Sales",
-        tension: 0.4,
-        borderWidth: 0,
-        borderRadius: 4,
-        borderSkipped: false,
-        backgroundColor: "#fff",
-        data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-        maxBarThickness: 6
-      }, ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        }
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      scales: {
-        y: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-          },
-          ticks: {
-            suggestedMin: 0,
-            suggestedMax: 500,
-            beginAtZero: true,
-            padding: 15,
-            font: {
-              size: 14,
-              family: "Open Sans",
-              style: 'normal',
-              lineHeight: 2
-            },
-            color: "#fff"
-          },
-        },
-        x: {
-          grid: {
-            drawBorder: false,
-            display: false,
-            drawOnChartArea: false,
-            drawTicks: false
-          },
-          ticks: {
-            display: false
-          },
-        },
-      },
-    },
-  });
-
-
-  var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-  var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-  gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-  gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-  gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-  var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-  gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-  gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-  gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-  new Chart(ctx2, {
-    type: "line",
-    data: {
-      labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [{
-          label: "Mobile apps",
+  <!--   Core JS Files   -->
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Sales",
           tension: 0.4,
           borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#cb0c9f",
-          borderWidth: 3,
-          backgroundColor: gradientStroke1,
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+          borderRadius: 4,
+          borderSkipped: false,
+          backgroundColor: "#fff",
+          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
           maxBarThickness: 6
-
-        },
-        {
-          label: "Websites",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#3A416F",
-          borderWidth: 3,
-          backgroundColor: gradientStroke2,
-          fill: true,
-          data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-          maxBarThickness: 6
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false,
-        }
+        }, ],
       },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      scales: {
-        y: {
-          grid: {
-            drawBorder: false,
-            display: true,
-            drawOnChartArea: true,
-            drawTicks: false,
-            borderDash: [5, 5]
-          },
-          ticks: {
-            display: true,
-            padding: 10,
-            color: '#b2b9bf',
-            font: {
-              size: 11,
-              family: "Open Sans",
-              style: 'normal',
-              lineHeight: 2
-            },
-          }
-        },
-        x: {
-          grid: {
-            drawBorder: false,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
             display: false,
-            drawOnChartArea: false,
-            drawTicks: false,
-            borderDash: [5, 5]
-          },
-          ticks: {
-            display: true,
-            color: '#b2b9bf',
-            padding: 20,
-            font: {
-              size: 11,
-              family: "Open Sans",
-              style: 'normal',
-              lineHeight: 2
-            },
           }
         },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 15,
+              font: {
+                size: 14,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#fff"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false
+            },
+            ticks: {
+              display: false
+            },
+          },
+        },
       },
-    },
-  });
-</script>
+    });
+
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+            label: "Mobile apps",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            maxBarThickness: 6
+
+          },
+          {
+            label: "Websites",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#3A416F",
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,
+            fill: true,
+            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+            maxBarThickness: 6
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#b2b9bf',
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#b2b9bf',
+              padding: 20,
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  </script>
 @endsection
