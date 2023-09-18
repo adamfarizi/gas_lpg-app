@@ -161,6 +161,7 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
                                 <h5 class="font-weight-bolder mb-0">
                                 {{-- {{ $total_user }} --}}
+                                500 
                                 <span class="text-black text-sm font-weight-bolder">gas</span>
                                 </h5>
                             </div>
@@ -174,7 +175,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-sm-6">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">
                     <div class="row">
@@ -183,6 +184,7 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir Tersedia</p>
                                 <h5 class="font-weight-bolder mb-0">
                                 {{-- {{ $total_kurir }} --}}
+                                100 
                                 <span class="text-black text-sm font-weight-bolder">kurir</span>
                                 </h5>
                             </div>
@@ -205,7 +207,8 @@
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Masuk</p>
                                 <h5 class="font-weight-bolder mb-0">
                                 {{-- {{ $total_admin }} --}}
-                                <span class="text-black text-sm font-weight-bolder">belum diproses</span>
+                                5 
+                                <span class="text-black text-sm font-weight-bolder">pesanan</span>
                                 </h5>
                             </div>
                         </div>
@@ -224,10 +227,11 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Diproses</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Selesai</p>
                                 <h5 class="font-weight-bolder mb-0">
                                 {{-- {{ $total_agen }} --}}
-                                <span class="text-black text-sm font-weight-bolder">diproses</span>
+                                100 
+                                <span class="text-black text-sm font-weight-bolder">pesanan</span>
                                 </h5>
                             </div>
                         </div>
@@ -240,119 +244,145 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="container mt-5">
             <div class="card bg-white">
                 <div class="card-body">
                     <h4 class="card-title">Pesanan Baru</h4>
-                    <table class="table text-secondary fw-bold">
-                            <tr>
-                                <th>Pesanan</th>
-                                <th>Jumlah Pesanan</th>
-                                <th>Status</th>
-                                <th>Disetujui</th>
-                                <th>Hapus Pesanan</th>
-                            </tr>
-                        <tbody>
-                            <tr class="text-dark">
-                                <td>Sumanto Agen</td>
-                                <td>50</td>
-                                <td>Menunggu Persetujuan</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="setuju1">
-                                        <label class="form-check-label" for="setuju1">
-                                            Setuju
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr class="text-dark">
-                                <td>Agen Tus</td>
-                                <td>35</td>
-                                <td>Menunggu Persetujuan</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="setuju1">
-                                        <label class="form-check-label" for="setuju1">
-                                            Setuju
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr class="text-dark">
-                                <td>Jarwo Agen</td>
-                                <td>55</td>
-                                <td>Menunggu Persetujuan</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="setuju1">
-                                        <label class="form-check-label" for="setuju1">
-                                            Setuju
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Proses Pesanan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-dark">
+                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
+                                        <td class="align-middle text-sm text-center">20-10-2023</td>
+                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
+                                        <td class="align-middle text-sm text-center">50 Gas</td>
+                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
+                                        <td class="align-middle text-sm text-center">
+                                            <div class="form-check text-center">
+                                                <select class="mb-3 form-control" id="role" name="role">
+                                                    <option value="kurir 1">Kurir 1</option>
+                                                    <option value="kurir 2">Kurir 2</option>
+                                                    <option value="kurir 3">Kurir 3</option>
+                                                </select>
+                                            </div>
+                                        </td>                                        
+                                        <td class="align-middle text-sm text-center pb-4">
+                                            <span class="badge badge-sm bg-gradient-danger">Belum Proses</span>
+                                        </td>
+                                        <td class="align-middle text-center ">
+                                            <button class="btn bg-gradient-success btn-icon btn-sm ps-3">
+                                                <span> <i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
+                                                Proses
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="container mt-5">
             <div class="card bg-white">
                 <div class="card-body">
-                    <h4 class="card-title">Dalam Proses</h4>
-                    <table class="table text-secondary fw-bold">
-                            <tr>
-                                <th>Pesanan</th>
-                                <th>Jumlah Pesanan</th>
-                                <th>Status</th>
-                                <th>Disetujui</th>
-                                <th>Hapus Pesanan</th>
-                            </tr>
-                        <tbody>
-                            <tr class="text-dark">
-                                <td>Sukijan Agen</td>
-                                <td>45</td>
-                                <td>Dalam Proses</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="setuju2" checked disabled>
-                                        <label class="form-check-label" for="setuju2">
-                                            Setuju
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
-                                </td>
-                            </tr>
-                            <tr class="text-dark">
-                                <td>Seker Agen</td>
-                                <td>45</td>
-                                <td>Dalam Proses</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="setuju3" checked disabled>
-                                        <label class="form-check-label" for="setuju3">
-                                            Setuju
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger btn-sm">Hapus</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h4 class="card-title">Pesanan Diproses</h4>
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Cek Pesanan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-dark">
+                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
+                                        <td class="align-middle text-sm text-center">20-10-2023</td>
+                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
+                                        <td class="align-middle text-sm text-center">50 Gas</td>
+                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
+                                        <td class="align-middle text-sm text-center">Kurir 2</td>                                        
+                                        <td class="align-middle text-sm text-center pb-4">
+                                            <span class="badge badge-sm bg-gradient-info">Sedang Proses</span>
+                                        </td>
+                                        <td class="align-middle text-center ">
+                                            <button class="btn bg-gradient-warning btn-icon btn-sm ps-3">
+                                                <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
+                                                Cek Status
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="card bg-white">
+                <div class="card-body">
+                    <h4 class="card-title">Pesanan Selesai</h4>
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Riwayat Pesanan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-dark">
+                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
+                                        <td class="align-middle text-sm text-center">20-10-2023</td>
+                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
+                                        <td class="align-middle text-sm text-center">50 Gas</td>
+                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
+                                        <td class="align-middle text-sm text-center">Kurir 2</td>                                        
+                                        <td class="align-middle text-sm text-center pb-4">
+                                            <span class="badge badge-sm bg-gradient-success">Pesanan Selesai</span>
+                                        </td>
+                                        <td class="align-middle text-center ">
+                                            <button class="btn bg-gradient-warning btn-icon btn-sm ps-3">
+                                                <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
+                                                Cek Riwayat
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
