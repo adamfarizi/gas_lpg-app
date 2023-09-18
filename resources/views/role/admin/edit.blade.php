@@ -5,15 +5,14 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0 text-center" href="{{ route('home') }}">
-                {{-- <img src="{{ asset('assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100 me-3" alt="main_logo"> --}}
-                <h5 class="font-weight-bolder text-primary text-gradient">GasTrack</h5>
+                <img src="{{ asset('assets/img/local/logo5.png') }}" class="navbar-brand-img" alt="main_logo">
             </a>
             </div>
             <hr class="horizontal dark mt-0">
             <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="nav-link  active" href="{{ route('home') }}">
+                <a class="nav-link " href="{{ route('home') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>shop </title>
@@ -33,7 +32,7 @@
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link  " href="{{ asset('pages/tables.html') }}">
+                <a class="nav-link active " href="{{ url('admin/user') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>office</title>
@@ -49,7 +48,7 @@
                         </g>
                     </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Track</span>
+                    <span class="nav-link-text ms-1">User</span>
                 </a>
                 </li>
                 <li class="nav-item">
@@ -175,7 +174,7 @@
                 </div>                
                 @endforeach
             @endif
-        <form role="form text-left" action="{{ url('admin/dashboard/', $users->user_id) }}" method="POST">    
+        <form role="form text-left" action="{{ url('admin/user', $users->user_id) }}" method="POST">    
             @csrf
             @method('PUT')  
             <label>Name</label>

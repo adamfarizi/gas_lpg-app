@@ -34,12 +34,13 @@ Route::middleware(['auth'])->group(function () {
 
     // Role admin
     Route::get('admin/dashboard', [RoleController::class, 'admin'])->middleware('userAkses:admin');
-    Route::get('admin/dashboard', [AdminController::class, 'index_admin_dashboard'])->middleware('userAkses:admin');
-    Route::get('admin/dashboard/create', [AdminController::class, 'create_admin_dashboard'])->middleware('userAkses:admin');
-    Route::post('admin/dashboard/create', [AdminController::class, 'create_admin_dashboard_action'])->middleware('userAkses:admin')->name('create.action');
-    Route::get('admin/dashboard/{id}/edit', [AdminController::class, 'edit_admin_dashboard'])->middleware('userAkses:admin');
-    Route::put('admin/dashboard/{id}',[AdminController::class, 'edit_admin_dashboard_action'])->middleware('userAkses:admin');
-    Route::delete('admin/dashboard/{id}', [AdminController::class, 'destroy_admin_dashboard'])->middleware('userAkses:admin');
+    
+    Route::get('admin/user', [AdminController::class, 'index_admin_user'])->middleware('userAkses:admin')->name('admin_user');
+    Route::get('admin/user/create', [AdminController::class, 'create_admin_user'])->middleware('userAkses:admin');
+    Route::post('admin/user/create', [AdminController::class, 'create_admin_user_action'])->middleware('userAkses:admin')->name('create.action');
+    Route::get('admin/user/{id}/edit', [AdminController::class, 'edit_admin_user'])->middleware('userAkses:admin');
+    Route::put('admin/user/{id}',[AdminController::class, 'edit_admin_user_action'])->middleware('userAkses:admin');
+    Route::delete('admin/user/{id}', [AdminController::class, 'destroy_admin_user'])->middleware('userAkses:admin');
     Route::get('admin/profile', [AdminController::class, 'edit_admin_profile'])->middleware('userAkses:admin')->name('admin_profile');
     Route::put('admin/profile/{id}',[AdminController::class, 'edit_admin_profile_action'])->middleware('userAkses:admin');
 

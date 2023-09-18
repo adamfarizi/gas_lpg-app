@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    // Dashboard
-    public function index_admin_dashboard(){
+    // user
+    public function index_admin_user(){
         $data['title'] = 'Admin';
     
         $total_user = User::count();
@@ -25,7 +25,7 @@ class AdminController extends Controller
         $kurirs = User::where('role', 'kurir')
             ->get();
     
-        return view('role.admin.dashboard', [
+        return view('role.admin.user', [
             'total_user' => $total_user,
             'total_admin' => $total_admin,
             'total_agen' => $total_agen,
@@ -36,13 +36,13 @@ class AdminController extends Controller
         ], $data);    
     }
 
-    public function create_admin_dashboard(){
+    public function create_admin_user(){
         $data['title'] = 'Admin';
 
         return view('role.admin.create', $data);
     }
 
-    public function create_admin_dashboard_action(Request $request){
+    public function create_admin_user_action(Request $request){
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:tb_user',
@@ -56,10 +56,10 @@ class AdminController extends Controller
             'password' => Hash::make($request->password), 
         ]);
         $user->save();
-        return redirect()->route('home')->with('success', 'Account has been created !');
+        return redirect()->route('admin_user')->with('success', 'Account has been created !');
     }
 
-    public function edit_admin_dashboard($user_id)
+    public function edit_admin_user($user_id)
     {
         $data['title'] = 'Admin';
 
@@ -67,7 +67,7 @@ class AdminController extends Controller
         return view('role.admin.edit', ['users'=>$users], $data);   
     }
 
-    public function edit_admin_dashboard_action($user_id, Request $request)
+    public function edit_admin_user_action($user_id, Request $request)
     {
         $data['title'] = 'Admin';
 
@@ -84,12 +84,12 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Change successfuly !');
     }
 
-    public function destroy_admin_dashboard($user_id){
+    public function destroy_admin_user($user_id){
         $data['title'] = 'Admin';
 
         $users = User::find($user_id);
         $users->delete();
-        return redirect('admin/dashboard'); 
+        return redirect('admin/user'); 
     }
 
     public function edit_admin_profile()
