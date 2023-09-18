@@ -151,5 +151,94 @@
 @endsection
 
 @section('content')
-          
+    <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                {{-- {{ $total_user }} --}}
+                                <span class="text-black text-sm font-weight-bolder">gas</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-fire opacity-10" style="color: #ffffff;"></i>                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir Tersedia</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                {{-- {{ $total_kurir }} --}}
+                                <span class="text-black text-sm font-weight-bolder">kurir</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Masuk</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                {{-- {{ $total_admin }} --}}
+                                <span class="text-black text-sm font-weight-bolder">belum diproses</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-clipboard-list opacity-10" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Diproses</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                {{-- {{ $total_agen }} --}}
+                                <span class="text-black text-sm font-weight-bolder">diproses</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-clipboard-check opacity-10" style="color: #ffffff;"></i>                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>     
 @endsection
