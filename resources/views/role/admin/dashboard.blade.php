@@ -240,5 +240,121 @@
                 </div>
             </div>
         </div>
+        <div class="container mt-5">
+            <div class="card bg-white">
+                <div class="card-body">
+                    <h4 class="card-title">Pesanan Baru</h4>
+                    <table class="table text-secondary fw-bold">
+                            <tr>
+                                <th>Pesanan</th>
+                                <th>Jumlah Pesanan</th>
+                                <th>Status</th>
+                                <th>Disetujui</th>
+                                <th>Hapus Pesanan</th>
+                            </tr>
+                        <tbody>
+                            <tr class="text-dark">
+                                <td>Sumanto Agen</td>
+                                <td>50</td>
+                                <td>Menunggu Persetujuan</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="setuju1">
+                                        <label class="form-check-label" for="setuju1">
+                                            Setuju
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr class="text-dark">
+                                <td>Agen Tus</td>
+                                <td>35</td>
+                                <td>Menunggu Persetujuan</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="setuju1">
+                                        <label class="form-check-label" for="setuju1">
+                                            Setuju
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr class="text-dark">
+                                <td>Jarwo Agen</td>
+                                <td>55</td>
+                                <td>Menunggu Persetujuan</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="setuju1">
+                                        <label class="form-check-label" for="setuju1">
+                                            Setuju
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="card bg-white">
+                <div class="card-body">
+                    <h4 class="card-title">Dalam Proses</h4>
+                    <table class="table text-secondary fw-bold">
+                            <tr>
+                                <th>Pesanan</th>
+                                <th>Jumlah Pesanan</th>
+                                <th>Status</th>
+                                <th>Disetujui</th>
+                                <th>Hapus Pesanan</th>
+                            </tr>
+                        <tbody>
+                            <tr class="text-dark">
+                                <td>Sukijan Agen</td>
+                                <td>45</td>
+                                <td>Dalam Proses</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="setuju2" checked disabled>
+                                        <label class="form-check-label" for="setuju2">
+                                            Setuju
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr class="text-dark">
+                                <td>Seker Agen</td>
+                                <td>45</td>
+                                <td>Dalam Proses</td>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="setuju3" checked disabled>
+                                        <label class="form-check-label" for="setuju3">
+                                            Setuju
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm">Hapus</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>     
 @endsection
