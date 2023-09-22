@@ -152,7 +152,7 @@
 
 @section('content')
     <div class="card-header pb-0 text-left">
-        <h3 class="font-weight-bolder text-primary text-gradient">Edit User</h3>
+        <h3 class="font-weight-bolder text-primary text-gradient">Edit Admin</h3>
         <p class="mb-0">Silahkan lengkapi data diri user dengan benar</p>
     </div>
     <div class="card-body">

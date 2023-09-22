@@ -12,7 +12,7 @@ class KurirController extends Controller
         $data['title'] = 'Kurir';
         
         $kurirs = Kurir::find($id_kurir);
-        return view('role.admin.edit.kurir_edit', ['kurirs'=>$kurirs], $data);   
+        return view('auth.user.edit.kurir_edit', ['kurirs'=>$kurirs], $data);   
     }
 
     public function edit_kurir_user_action($id_kurir, Request $request)
@@ -22,11 +22,13 @@ class KurirController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'no_hp' => 'required|string|max:15',
         ]);
     
         $kurir = Kurir::find($id_kurir);
         $kurir->name = $request->input('name');
         $kurir->email = $request->input('email');    
+        $kurir->no_hp = $request->input('no_hp');    
         $kurir->save();
 
         return redirect()->back()->with('success', 'Change successfuly !');

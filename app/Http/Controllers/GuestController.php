@@ -20,10 +20,7 @@ class GuestController extends Controller
 
         $totalUser = $adminCount + $agenCount + $kurirCount;
 
-        return view('home',[
-            'total_user' => $totalUser,
-        ], $data);
-
+        return view('home',['total_user' => $totalUser,], $data);
     }
 
     public function register(){

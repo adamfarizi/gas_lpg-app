@@ -15,7 +15,7 @@ class AdminController extends Controller
         $data['title'] = 'Admin';
         
         $admins = User::find($id_admin);
-        return view('role.admin.edit.admin_edit', ['admins'=>$admins], $data);   
+        return view('auth.user.edit.admin_edit', ['admins'=>$admins], $data);   
     }
 
     public function edit_admin_user_action($admin_id, Request $request)
@@ -47,7 +47,7 @@ class AdminController extends Controller
     {
         $data['title'] = 'Profile';
         $admin = User::find(Auth::id());
-        return view('role.admin.profile', ['admins'=>$admin], $data);   
+        return view('auth.profile.profile', ['admins'=>$admin], $data);   
     }
 
     public function edit_admin_profile_action($id_admin, Request $request)

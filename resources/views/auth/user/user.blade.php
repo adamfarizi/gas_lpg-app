@@ -314,67 +314,6 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
-                        <h6>Agen Table</h6>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
-                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                                <th class="text-secondary opacity-7"></th>
-                                <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            @foreach ($agens as $user) 
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex px-2 py-1">
-                                    <div>
-                                        <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
-                                    </div>
-                                    <div class="d-flex flex-column justify-content-center">
-                                        <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
-                                        <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
-                                    </div>
-                                </div>
-                                </td>
-                                    <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
-                                    </td>
-                                    <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-success">Active</span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <a href="user/agen/{{ $user->id_agen }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
-                                            <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
-                                        </a>
-                                    </td>
-                                    <td class="align-middle">
-                                        <form action="{{ url('admin/user/agen/'. $user->id_agen ) }}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
-                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                            </button>                                         
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            @endforeach
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="card mt-3">
-                    <div class="card-header pb-0 d-flex justify-content-between">
                         <h6>Kurir Table</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
@@ -384,6 +323,7 @@
                                 <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3.5">No Hp</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                 <th class="text-secondary opacity-7"></th>
                                 <th class="text-secondary opacity-7"></th>
@@ -405,6 +345,9 @@
                                 </td>
                                     <td>
                                         <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $user->no_hp }}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
@@ -432,6 +375,69 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card mt-3">
+                    <div class="card-header pb-0 d-flex justify-content-between">
+                        <h6>Agen Table</h6>
+                    </div>
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                            <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-8">Alamat</th>
+                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                <th class="text-secondary opacity-7"></th>
+                                <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            @foreach ($agens as $user) 
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
+                                    </td>
+                                    <td style="max-width: 100px; white-space: pre-wrap; word-wrap: break-word;"><p class="text-xs font-weight-bold mb-0">{{ $user->alamat }}</p></td>                               
+                                    <td class="align-middle text-center text-sm">
+                                        <span class="badge badge-sm bg-gradient-success">Active</span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="user/agen/{{ $user->id_agen }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                            <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <form action="{{ url('admin/user/agen/'. $user->id_agen ) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                            </button>                                         
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    @include('role.admin.modal.create')
+    @include('auth.user.create.create')
 @endsection
