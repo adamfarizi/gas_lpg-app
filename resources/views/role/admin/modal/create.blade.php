@@ -1,0 +1,50 @@
+<form action="{{ route('create.action') }}" method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <div class="modal fade text-left" id="addUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ __('Create New User') }}</h4>
+                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>                   
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="{{ route('create.action') }}" method="post">
+                        @csrf
+                        <label>Name <span class="text-danger">*</label>
+                        <div class="mb-3">
+                            <input type="test" class="form-control" placeholder="Enter your name" aria-label="Name" aria-describedby="name-addon" id="name" name="name" value="{{ old('name') }}">
+                        </div>
+        
+                        <label>Email <span class="text-danger">*</label>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Enter your email" aria-label="Email" aria-describedby="email-addon" id="email" name="email" value="{{ old('email') }}">
+                        </div>
+        
+                        <label>Role <span class="text-danger">*</label>
+                        <select class="mb-3 form-control" id="role" name="role">
+                            <option value="admin">Admin</option>
+                            <option value="agen">Agen</option>
+                            <option value="kurir">Kurir</option>
+                        </select>
+        
+                        <label>Password <span class="text-danger">*</label>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="password-addon" id="password" name="password" value="{{ old('password') }}">
+                        </div>
+        
+                        <label>Confirm Password <span class="text-danger">*</label>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Confirm your password" aria-label="Password" aria-describedby="password-addon" id="password_confrimation" name="password_confrimation" value="{{ old('password') }}">
+                        </div>
+        
+                        <div class="text-center">
+                        <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0" href="{{ route('create.action') }}">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
