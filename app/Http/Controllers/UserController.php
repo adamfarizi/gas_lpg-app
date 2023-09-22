@@ -27,7 +27,7 @@ class UserController extends Controller
 
         $total_user = $total_admin + $total_agen + $total_kurir;
         
-        return view('role.admin.user', [
+        return view('auth.user.user', [
             'total_user' => $total_user,
             'total_admin' => $total_admin,
             'total_agen' => $total_agen,
@@ -36,12 +36,6 @@ class UserController extends Controller
             'agens' => $agens,
             'kurirs' => $kurirs,
         ], $data); 
-    }
-
-    public function create_admin_user(){
-        $data['title'] = 'Admin';
-
-        return view('role.admin.create', $data);
     }
 
     public function create_admin_user_action(Request $request){

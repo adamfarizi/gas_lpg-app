@@ -152,7 +152,7 @@
 
 @section('content')
     <div class="card-header pb-0 text-left">
-        <h3 class="font-weight-bolder text-primary text-gradient">Edit User</h3>
+        <h3 class="font-weight-bolder text-primary text-gradient">Edit Agen</h3>
         <p class="mb-0">Silahkan lengkapi data diri user dengan benar</p>
     </div>
     <div class="card-body">
@@ -174,16 +174,20 @@
             </div>                
             @endforeach
         @endif
-        <form role="form text-left" action="{{ url('admin/user/kurir', $kurirs->id_kurir) }}" method="POST">    
+        <form role="form text-left" action="{{ url('admin/user/agen', $agens->id_agen) }}" method="POST">    
             @csrf
             @method('PUT')  
             <label>Name</label>
             <div class="input-group mb-3">
-                <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $kurirs->name }}">
+                <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $agens->name }}">
             </div>
             <label>Email</label>
             <div class="input-group mb-3">
-                <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $kurirs->email }}">
+                <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $agens->email }}">
+            </div>
+            <label>Alamat</label>
+            <div class="input-group mb-3">
+                <input name="alamat" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $agens->alamat }}">
             </div>
             <div class="text-center">
                 <button type="submit" name="submit"  class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0" values="Update">Update</button>

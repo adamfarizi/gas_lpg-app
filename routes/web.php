@@ -36,7 +36,6 @@ Route::middleware(['auth'])->group(function () {
     //Controller user
     Route::get('admin/dashboard', [RoleController::class, 'admin']);
     Route::get('admin/user', [UserController::class, 'index_admin_user'])->name('admin_user');
-    Route::get('admin/user/create', [UserController::class, 'create_admin_user']);
     Route::post('admin/user/create', [UserController::class, 'create_admin_user_action'])->name('create.action');
     
     // Controller admin

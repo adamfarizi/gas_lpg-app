@@ -13,7 +13,7 @@ class AgenController extends Controller
         $data['title'] = 'Agen';
         
         $agens = Agen::find($id_agen);
-        return view('role.admin.edit.agen_edit', ['agens'=>$agens], $data);   
+        return view('auth.user.edit.agen_edit', ['agens'=>$agens], $data);   
     }
 
     public function edit_agen_user_action($id_agen, Request $request)
@@ -23,11 +23,13 @@ class AgenController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'alamat' => 'required|string|max:255',
         ]);
     
         $agen = Agen::find($id_agen);
         $agen->name = $request->input('name');
         $agen->email = $request->input('email');    
+        $agen->alamat = $request->input('alamat');
         $agen->save();
 
         return redirect()->back()->with('success', 'Change successfuly !');
