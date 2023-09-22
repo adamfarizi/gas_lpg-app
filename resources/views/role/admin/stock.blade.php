@@ -12,7 +12,7 @@
             <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="nav-link  active" href="{{ route('home') }}">
+                <a class="nav-link" href="{{ route('home') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>shop </title>
@@ -52,7 +52,7 @@
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="{{url('admin/stock')}}">
+                <a class="nav-link  " href="{{ asset('pages/billing.html') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>credit-card</title>
@@ -68,14 +68,14 @@
                         </g>
                     </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Stock</span>
+                    <span class="nav-link-text ms-1">About</span>
                 </a>
                 </li>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="{{ url('admin/profile') }}">
+                    <a class="nav-link  active" href="{{ route('admin_profile') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -111,9 +111,9 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin/dashboard') }}">Admin</a></li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+            <h6 class="font-weight-bolder mb-0">Profile</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -242,209 +242,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="container mt-5">
-            <div class="card bg-white">
-                <div class="card-body">
-                    <h4 class="card-title">Pesanan Baru</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Proses Pesanan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
-                                        <td class="align-middle text-sm text-center">20-10-2023</td>
-                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
-                                        <td class="align-middle text-sm text-center">50 Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
-                                        <td class="align-middle text-sm text-center">
-                                            <div class="form-check text-center">
-                                                <select class="mb-3 form-control" id="role" name="role">
-                                                    <option value="kurir 1">Kurir 1</option>
-                                                    <option value="kurir 2">Kurir 2</option>
-                                                    <option value="kurir 3">Kurir 3</option>
-                                                </select>
-                                            </div>
-                                        </td>                                        
-                                        <td class="align-middle text-sm text-center pb-4">
-                                            <span class="badge badge-sm bg-gradient-danger">Belum Proses</span>
-                                        </td>
-                                        <td class="align-middle text-center ">
-                                            <button class="btn bg-gradient-success btn-icon btn-sm ps-3">
-                                                <span> <i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
-                                                Proses
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container mt-5">
-            <div class="card bg-white">
-                <div class="card-body">
-                    <h4 class="card-title">Pesanan Diproses</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Cek Pesanan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
-                                        <td class="align-middle text-sm text-center">20-10-2023</td>
-                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
-                                        <td class="align-middle text-sm text-center">50 Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
-                                        <td class="align-middle text-sm text-center">Kurir 2</td>                                        
-                                        <td class="align-middle text-sm text-center pb-4">
-                                            <span class="badge badge-sm bg-gradient-info">Sedang Proses</span>
-                                        </td>
-                                        <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-status">
-                                                <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
-                                                Cek Status
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container mt-5">
-            <div class="card bg-white">
-                <div class="card-body">
-                    <h4 class="card-title">Pesanan Selesai</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Riwayat Pesanan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
-                                        <td class="align-middle text-sm text-center">20-10-2023</td>
-                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
-                                        <td class="align-middle text-sm text-center">50 Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
-                                        <td class="align-middle text-sm text-center">Kurir 2</td>                                        
-                                        <td class="align-middle text-sm text-center pb-4">
-                                            <span class="badge badge-sm bg-gradient-success">Pesanan Selesai</span>
-                                        </td>
-                                        <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-riwayat">
-                                                <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
-                                                Cek Riwayat
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!--Modal Status-->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="modal fade" id="cek-status" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h6 class="modal-title text-uppercase" id="modal-title-default">Status</h6>
-                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <li class="text-dark mb-3">Kurir melanjutkan perjalan
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                        <li class="text-dark mb-3">Kurir sedang ngopi
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                        <li class="text-dark mb-3">Gas sedang di pick up
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                    </div>
-                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal Riwayat-->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="modal fade" id="cek-riwayat" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat</h6>
-                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <li class="mb-3 text-dark">Gas sudah sampai di lokasi anda  
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang dalam perjalan menuju lokasi anda 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang transit di Madiun 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sudah sampai di Jalan 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang di pick up 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 16-09-2023</span></li>
-                    </div>
-                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
             </div>
         </div>
     </div>
