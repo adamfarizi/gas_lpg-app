@@ -12,7 +12,7 @@ class KurirController extends Controller
         $data['title'] = 'Kurir';
         
         $kurirs = Kurir::find($id_kurir);
-        return view('role.admin.user', ['kurirs'=>$kurirs], $data);   
+        return view('role.admin.edit.kurir_edit', ['kurirs'=>$kurirs], $data);   
     }
 
     public function edit_kurir_user_action($id_kurir, Request $request)

@@ -13,7 +13,7 @@ class AgenController extends Controller
         $data['title'] = 'Agen';
         
         $agens = Agen::find($id_agen);
-        return view('role.admin.user', ['agens'=>$agens], $data);   
+        return view('role.admin.edit.agen_edit', ['agens'=>$agens], $data);   
     }
 
     public function edit_agen_user_action($id_agen, Request $request)

@@ -110,7 +110,7 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin') }}">Admin</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin/dashboard') }}">Admin</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Dashboard</h6>
@@ -391,59 +391,61 @@
     <!--Modal Status-->
     <div class="row">
         <div class="col-md-4">
-          <div class="modal fade" id="cek-status" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h6 class="modal-title text-uppercase" id="modal-title-default">Status</h6>
-                  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
+            <div class="modal fade" id="cek-status" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h6 class="modal-title text-uppercase" id="modal-title-default">Status</h6>
+                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <li class="text-dark mb-3">Kurir melanjutkan perjalan
+                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
+                        </li>
+                        <li class="text-dark mb-3">Kurir sedang ngopi
+                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
+                        </li>
+                        <li class="text-dark mb-3">Gas sedang di pick up
+                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
+                        </li>
+                    </div>
+                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
                 </div>
-                <div class="modal-body">
-                    <li class="text-dark mb-3">Kurir melanjutkan perjalan
-                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                    </li>
-                    <li class="text-dark mb-3">Kurir sedang ngopi
-                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                    </li>
-                    <li class="text-dark mb-3">Gas sedang di pick up
-                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                    </li>
                 </div>
-                  <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-              </div>
             </div>
-          </div>
         </div>
+    </div>
 
     <!--Modal Riwayat-->
     <div class="row">
         <div class="col-md-4">
-          <div class="modal fade" id="cek-riwayat" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat</h6>
-                  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
+            <div class="modal fade" id="cek-riwayat" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat</h6>
+                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <li class="mb-3 text-dark">Gas sudah sampai di lokasi anda  
+                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span></li>
+                        <li class="mb-3 text-dark">Gas sedang dalam perjalan menuju lokasi anda 
+                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
+                        <li class="mb-3 text-dark">Gas sedang transit di Madiun 
+                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
+                        <li class="mb-3 text-dark">Gas sudah sampai di Jalan 
+                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
+                        <li class="mb-3 text-dark">Gas sedang di pick up 
+                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 16-09-2023</span></li>
+                    </div>
+                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
                 </div>
-                <div class="modal-body">
-                    <li class="mb-3 text-dark">Gas sudah sampai di lokasi anda  
-                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span></li>
-                    <li class="mb-3 text-dark">Gas sedang dalam perjalan menuju lokasi anda 
-                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                    <li class="mb-3 text-dark">Gas sedang transit di Madiun 
-                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                    <li class="mb-3 text-dark">Gas sudah sampai di Jalan 
-                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                    <li class="mb-3 text-dark">Gas sedang di pick up 
-                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 16-09-2023</span></li>
-                </div>
-                  <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-              </div>
             </div>
-          </div>
+            </div>
         </div>
+    </div>
 @endsection

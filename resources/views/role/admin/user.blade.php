@@ -110,7 +110,7 @@
         <div class="container-fluid py-1 px-3">
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin') }}">Admin</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin/dashboard') }}">Admin</a></li>
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">User</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">User</h6>
@@ -349,7 +349,7 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="agen/{{ $user->user_id }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="user/agen/{{ $user->id_agen }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
@@ -410,7 +410,7 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="kurir/{{ $user->user_id }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="user/kurir/{{ $user->id_kurir }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
@@ -433,4 +433,5 @@
             </div>
         </div>
     </div>
+    @include('role.admin.modal.create')
 @endsection
