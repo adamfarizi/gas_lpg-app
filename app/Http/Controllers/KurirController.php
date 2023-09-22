@@ -6,16 +6,16 @@ use App\Models\Kurir;
 use Illuminate\Http\Request;
 
 class KurirController extends Controller
-{
+{   
     public function edit_kurir_user($id_kurir)
     {
         $data['title'] = 'Kurir';
         
         $kurirs = Kurir::find($id_kurir);
-        return view('role.admin.edit', ['kurirs'=>$kurirs], $data);   
+        return view('role.admin.user', ['kurirs'=>$kurirs], $data);   
     }
 
-    public function edit_kurir_user_action($kurir_id, Request $request)
+    public function edit_kurir_user_action($id_kurir, Request $request)
     {
         $data['title'] = 'Kurir';
 
@@ -24,7 +24,7 @@ class KurirController extends Controller
             'email' => 'required|email|max:255',
         ]);
     
-        $kurir = Kurir::find($kurir_id);
+        $kurir = Kurir::find($id_kurir);
         $kurir->name = $request->input('name');
         $kurir->email = $request->input('email');    
         $kurir->save();
@@ -37,7 +37,7 @@ class KurirController extends Controller
 
         $kurirs = Kurir::find($kurir_id);
         $kurirs->delete();
-        return redirect('kurir/kurir'); 
+        return back(); 
     }
 
 }

@@ -160,7 +160,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total User</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                {{ $total_user }}
+                                {{-- {{ $total_user }} --}}
                                 <span class="text-black text-sm font-weight-bolder">user</span>
                                 </h5>
                             </div>
@@ -290,13 +290,13 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="#" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->user_id }}">
+                                        <a href="{{ url('admin/user/admin/'. $user->id_admin .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
-                                    @include('role.admin.modal.edit')
+                                    @include('role.admin.modal.admin_edit')
                                     <td class="align-middle">
-                                        <form action="{{ url('admin/user/'. $user->id_admin ) }}" method="POST">
+                                        <form action="{{ url('admin/user/admin/'. $user->id_admin ) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
@@ -354,9 +354,9 @@
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
-                                    @include('role.admin.modal.edit')
+                                    @include('role.admin.modal.agen_edit')
                                     <td class="align-middle">
-                                        <form action="{{ url('admin/user/'. $user->id_agen ) }}" method="POST">
+                                        <form action="{{ url('admin/user/agen/'. $user->id_agen ) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
@@ -412,13 +412,13 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="{{ url('admin/user/kurir/'. $user->id_kurir .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
-                                    @include('role.admin.modal.edit')
+                                    @include('role.admin.modal.kurir_edit')
                                     <td class="align-middle">
-                                        <form action="{{ url('admin/user/'. $user->id_kurir ) }}" method="POST">
+                                        <form action="{{ url('admin/user/kurir/'. $user->id_kurir ) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">

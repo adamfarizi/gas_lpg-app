@@ -83,21 +83,9 @@ class UserController extends Controller
         
         $userModel->save();
         
-        return redirect()->back()->with('success', 'Account has been created!');
+        return redirect('admin/user')->with('success', 'Account has been created!');
         
     }
     
-
-    public function password_action(Request $request){
-        $request->validate([
-            'old_password' => 'required|current_password',
-            'new_password' => 'required|confirmed',
-        ]);
-        $admin = User::find(Auth::id());
-        $admin->password = Hash::make($request->new_password);
-        $admin->save();
-        $request->session()->regenerate();
-        return back()->with('success', 'Password change success!');
-    }
 
 }

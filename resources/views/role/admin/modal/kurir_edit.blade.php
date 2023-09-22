@@ -1,5 +1,5 @@
 @foreach ($kurirs as $user)
-    <form action="{{ url('kurir/user', $user->id_kurir) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ url('kurir/user/kurir', $user->id_kurir) }}" method="post" enctype="multipart/form-data">
         {{ method_field('put') }}
         {{ csrf_field() }}
         <div class="modal fade text-left" id="editUserModal{{ $user->id_kurir }}" tabindex="-1" role="dialog" aria-hidden="true">

@@ -6,16 +6,17 @@ use App\Models\Agen;
 use Illuminate\Http\Request;
 
 class AgenController extends Controller
-{
+{   
+    
     public function edit_agen_user($id_agen)
     {
         $data['title'] = 'Agen';
         
         $agens = Agen::find($id_agen);
-        return view('role.admin.edit', ['agens'=>$agens], $data);   
+        return view('role.admin.user', ['agens'=>$agens], $data);   
     }
 
-    public function edit_agen_user_action($agen_id, Request $request)
+    public function edit_agen_user_action($id_agen, Request $request)
     {
         $data['title'] = 'Agen';
 
@@ -24,7 +25,7 @@ class AgenController extends Controller
             'email' => 'required|email|max:255',
         ]);
     
-        $agen = Agen::find($agen_id);
+        $agen = Agen::find($id_agen);
         $agen->name = $request->input('name');
         $agen->email = $request->input('email');    
         $agen->save();
@@ -37,7 +38,7 @@ class AgenController extends Controller
 
         $agens = Agen::find($agen_id);
         $agens->delete();
-        return redirect('agen/agen'); 
+        return back(); 
     }
 
 }

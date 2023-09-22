@@ -5,15 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
-{
+{   
+    
     public function edit_admin_user($id_admin)
     {
         $data['title'] = 'Admin';
         
         $admins = User::find($id_admin);
-        return view('role.admin.edit', ['admins'=>$admins], $data);   
+        return view('role.admin.user', ['admins'=>$admins], $data);   
     }
 
     public function edit_admin_user_action($admin_id, Request $request)
@@ -38,7 +40,7 @@ class AdminController extends Controller
 
         $admins = User::find($admin_id);
         $admins->delete();
-        return redirect('admin/admin'); 
+        return back(); 
     }
 
     public function edit_admin_profile()
@@ -48,7 +50,7 @@ class AdminController extends Controller
         return view('role.admin.profile', ['admins'=>$admin], $data);   
     }
 
-    public function edit_admin_profile_action($admin_id, Request $request)
+    public function edit_admin_profile_action($id_admin, Request $request)
     {
         $data['title'] = 'Profile';
 
@@ -57,11 +59,23 @@ class AdminController extends Controller
             'email' => 'required|email|max:255',
         ]);
     
-        $admin = User::find($admin_id);
+        $admin = User::find($id_admin);
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');    
         $admin->save();
 
         return redirect()->back()->with('success', 'Change successfuly !');
+    }
+    
+    public function password_action(Request $request){
+        $request->validate([
+            'old_password' => 'required|current_password',
+            'new_password' => 'required|confirmed',
+        ]);
+        $admin = User::find(Auth::id());
+        $admin->password = Hash::make($request->new_password);
+        $admin->save();
+        $request->session()->regenerate();
+        return back()->with('success', 'Password change success!');
     }
 }
