@@ -123,6 +123,8 @@
                 }
                 Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
             }
+            
+            $('#successNotification').fadeIn().delay(3000).fadeOut(); 
         </script>
         <!-- Github buttons -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>

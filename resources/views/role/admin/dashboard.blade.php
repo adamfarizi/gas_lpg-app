@@ -329,7 +329,7 @@
                                             <span class="badge badge-sm bg-gradient-info">Sedang Proses</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            <button class="btn bg-gradient-warning btn-icon btn-sm ps-3">
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-status">
                                                 <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
                                                 Cek Status
                                             </button>
@@ -373,7 +373,7 @@
                                             <span class="badge badge-sm bg-gradient-success">Pesanan Selesai</span>
                                         </td>
                                         <td class="align-middle text-center ">
-                                            <button class="btn bg-gradient-warning btn-icon btn-sm ps-3">
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-riwayat">
                                                 <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
                                                 Cek Riwayat
                                             </button>
@@ -386,5 +386,64 @@
                 </div>
             </div>
         </div>
-    </div>     
+    </div>
+    
+    <!--Modal Status-->
+    <div class="row">
+        <div class="col-md-4">
+          <div class="modal fade" id="cek-status" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title text-uppercase" id="modal-title-default">Status</h6>
+                  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <li class="text-dark mb-3">Kurir melanjutkan perjalan
+                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
+                    </li>
+                    <li class="text-dark mb-3">Kurir sedang ngopi
+                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
+                    </li>
+                    <li class="text-dark mb-3">Gas sedang di pick up
+                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
+                    </li>
+                </div>
+                  <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <!--Modal Riwayat-->
+    <div class="row">
+        <div class="col-md-4">
+          <div class="modal fade" id="cek-riwayat" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat</h6>
+                  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <li class="mb-3 text-dark">Gas sudah sampai di lokasi anda  
+                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span></li>
+                    <li class="mb-3 text-dark">Gas sedang dalam perjalan menuju lokasi anda 
+                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
+                    <li class="mb-3 text-dark">Gas sedang transit di Madiun 
+                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
+                    <li class="mb-3 text-dark">Gas sudah sampai di Jalan 
+                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
+                    <li class="mb-3 text-dark">Gas sedang di pick up 
+                        <br><span class="text-secondary ms-4 text-xs">Tanggal: 16-09-2023</span></li>
+                </div>
+                  <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
 @endsection

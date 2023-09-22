@@ -245,7 +245,7 @@
     <div class="mt-3">
         <div class="row">
             <div class="col-12">
-                <a type="button" class="btn bg-gradient-primary mt-3 border-end" href="{{ url('admin/user/create') }}">
+                <a type="button" class="btn bg-gradient-primary mt-3 border-end" data-bs-toggle="modal" data-bs-target="#addUserModal">
                     <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
                     Add User
                 </a>
@@ -290,10 +290,11 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/'. $user->id_admin .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="#" class="text-dark font-weight-bold" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->user_id }}">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
+                                    @include('role.admin.modal.edit')
                                     <td class="align-middle">
                                         <form action="{{ url('admin/user/'. $user->id_admin ) }}" method="POST">
                                             @csrf
@@ -349,10 +350,11 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/'. $user->id_agen .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="{{ url('admin/user/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
+                                    @include('role.admin.modal.edit')
                                     <td class="align-middle">
                                         <form action="{{ url('admin/user/'. $user->id_agen ) }}" method="POST">
                                             @csrf
@@ -410,10 +412,11 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/'. $user->id_kurir .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="{{ url('admin/user/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
+                                    @include('role.admin.modal.edit')
                                     <td class="align-middle">
                                         <form action="{{ url('admin/user/'. $user->id_kurir ) }}" method="POST">
                                             @csrf
@@ -432,5 +435,6 @@
                 </div>
             </div>
         </div>
-    </div>        
+    </div>
+    @include('role.admin.modal.create')
 @endsection
