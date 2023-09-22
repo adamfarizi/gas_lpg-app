@@ -23,44 +23,41 @@ use App\Http\Controllers\GuestController;
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [GuestController::class, 'index'])->name('home');
     Route::get('about', function () {return view('about', ['title' => 'About']);})->name('about');
-    Route::get('login', [UserController::class, 'login'])->name('login');
-    Route::post('login', [UserController::class, 'login_action'])->name('login.action');
+    Route::get('login', [GuestController::class, 'login'])->name('login');
+    Route::post('login', [GuestController::class, 'login_action'])->name('login.action');
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('logout', [GuestController::class, 'logout'])->name('logout');
+
+    //Controller user
+    Route::get('admin/dashboard', [RoleController::class, 'admin'])->middleware('userAkses:admin');
+    Route::get('admin/user', [UserController::class, 'index_admin_user'])->middleware('userAkses:admin')->name('admin_user');
+    Route::get('admin/user/create', [UserController::class, 'create_admin_user'])->middleware('userAkses:admin');
+    Route::post('admin/user/create', [UserController::class, 'create_admin_user_action'])->middleware('userAkses:admin')->name('create.action');
     Route::get('password', [UserController::class, 'password'])->name('password');
     Route::post('password', [UserController::class, 'password_action'])->name('password.action');
-    Route::get('logout', [UserController::class, 'logout'])->name('logout');
 
-    // Role admin
-    Route::get('admin/dashboard', [RoleController::class, 'admin'])->middleware('userAkses:admin');
-    
-    Route::get('admin/user', [AdminController::class, 'index_admin_user'])->middleware('userAkses:admin')->name('admin_user');
-    Route::get('admin/user/create', [AdminController::class, 'create_admin_user'])->middleware('userAkses:admin');
-    Route::post('admin/user/create', [AdminController::class, 'create_admin_user_action'])->middleware('userAkses:admin')->name('create.action');
-    Route::get('admin/user/{id}/edit', [AdminController::class, 'edit_admin_user'])->middleware('userAkses:admin');
-    Route::put('admin/user/{id}',[AdminController::class, 'edit_admin_user_action'])->middleware('userAkses:admin');
-    Route::delete('admin/user/{id}', [AdminController::class, 'destroy_admin_user'])->middleware('userAkses:admin');
+    // Controller admin
+    Route::get('admin/user/admin/{id}/edit', [AdminController::class, 'edit_admin_user'])->middleware('userAkses:admin');
+    Route::put('admin/user/admin/{id}',[AdminController::class, 'edit_admin_user_action'])->middleware('userAkses:admin');
+    Route::delete('admin/user/admin/{id}', [AdminController::class, 'destroy_admin_user'])->middleware('userAkses:admin');
     Route::get('admin/profile', [AdminController::class, 'edit_admin_profile'])->middleware('userAkses:admin')->name('admin_profile');
     Route::put('admin/profile/{id}',[AdminController::class, 'edit_admin_profile_action'])->middleware('userAkses:admin');
 
-    // Role agen
-    Route::get('agen/dashboard', [RoleController::class, 'agen'])->middleware('userAkses:agen');
-    Route::get('agen/dashboard', [AgenController::class, 'index_agen_dashboard'])->middleware('userAkses:agen');
-    Route::get('agen/dashboard/create', [AgenController::class, 'create_agen_dashboard'])->middleware('userAkses:agen');
-    Route::post('agen/dashboard/create', [AgenController::class, 'create_agen_dashboard_action'])->middleware('userAkses:agen')->name('create.agen');
-    Route::get('agen/dashboard/{id}/edit', [AgenController::class, 'edit_agen_dashboard'])->middleware('userAkses:agen');
-    Route::put('agen/dashboard/{id}',[AgenController::class, 'update_agen_dashboard'])->middleware('userAkses:agen');
-    Route::delete('agen/dashboard/{id}', [AgenController::class, 'destroy_agen_dashboard'])->middleware('userAkses:agen');
-    Route::get('agen/profile', [AgenController::class, 'edit_agen_profile'])->middleware('userAkses:agen')->name('agen_profile');
-    Route::put('agen/profile/{id}',[AgenController::class, 'edit_agen_profile_action'])->middleware('userAkses:agen');
+    // Controller agen
+    Route::get('admin/user/agen/{id}/edit', [AgenController::class, 'edit_agen_user'])->middleware('userAkses:admin');
+    Route::put('admin/user/agen/{id}',[AgenController::class, 'edit_agen_user_action'])->middleware('userAkses:admin');
+    Route::delete('admin/user/agen/{id}', [AgenController::class, 'destroy_agen_user'])->middleware('userAkses:admin');
 
-    // Role kurir
-    Route::get('kurir', [RoleController::class, 'kurir'])->middleware('userAkses:kurir');
+    // Controller kurir
+    Route::get('admin/user/kurir/{id}/edit', [KurirController::class, 'edit_kurir_user'])->middleware('userAkses:admin');
+    Route::put('admin/user/kurir/{id}',[KurirController::class, 'edit_kurir_user_action'])->middleware('userAkses:admin');
+    Route::delete('admin/user/kurir/{id}', [KurirController::class, 'destroy_kurir_user'])->middleware('userAkses:admin');
 });
 
-Route::get('register', [UserController::class, 'register'])->name('register');
-Route::post('register', [UserController::class, 'register_action'])->name('register.action');
+Route::get('register', [GuestController::class, 'register'])->name('register');
+Route::post('register', [GuestController::class, 'register_action'])->name('register.action');
 
 Route::get('/home', function () {
     if (Auth::check()) {

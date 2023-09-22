@@ -6,65 +6,87 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Agen;
+use App\Models\Kurir;
 
 class UserController extends Controller
 {
-    public function register(){
-        $data['title'] = 'Register';
-        return view('user/register', $data);
+    public function index_admin_user(){
+        $data['title'] = 'Admin';
+
+        $total_admin = User::count(); // Menghitung jumlah admin
+        $admins = User::where('role', 'admin')
+            ->where('id_admin', '!=', auth()->user()->id_admin)
+            ->get(); // Mengambil semua data admin dengan role 'admin'
+        
+        $total_agen = Agen::count();
+        $agens = Agen::all();
+        
+        $total_kurir = Kurir::count();
+        $kurirs = Kurir::all();
+
+        $total_user = $total_admin + $total_agen + $total_kurir;
+        
+        return view('role.admin.user', [
+            'total_user' => $total_user,
+            'total_admin' => $total_admin,
+            'total_agen' => $total_agen,
+            'total_kurir' => $total_kurir,
+            'admins' => $admins,
+            'agens' => $agens,
+            'kurirs' => $kurirs,
+        ], $data); 
     }
 
-    public function register_action(Request $request){
+    public function create_admin_user(){
+        $data['title'] = 'Admin';
+
+        return view('role.admin.create', $data);
+    }
+
+    public function create_admin_user_action(Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:admin',
+            'email' => 'required|unique:admin|unique:agen|unique:kurir', // Periksa di semua tabel yang sesuai
+            'role' => 'required|in:admin,agen,kurir', // Pastikan role hanya salah satu dari admin, agen, atau kurir
             'password' => 'required',
-            'password_confrimation' => 'required|same:password',
+            'password_confirmation' => 'required|same:password',
         ]);
-        $admin = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role ?? 'agen',
-            'password' => Hash::make($request->password), 
-        ]);
-        $admin->save();
-        return redirect('admin')->with('success', 'Registration Success. Please Login!');
-    }
-
-
-    public function login(){
-        $data['title'] = 'Login';
-        return view('user/login', $data);
-    }
-
-    public function login_action(Request $request)
-    {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-        $infologin = [
-            'email'=>$request->email,
-            'password'=>$request->password,
-        ];
-
-        if (Auth::attempt($infologin)) {
-            if(Auth::user()->role=='admin'){
-                return redirect('admin/dashboard');
-            }elseif (Auth::user()->role=='agen') {
-                return redirect('agen/dashboard');
-            }else {
-                return redirect('kurir');
-            }
-        }else{
-            return redirect('login')->withErrors('The email and password entered do not match!')->withInput();
+    
+        if ($request->role === 'admin') {
+            $userModel = new User([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role' => $request->role ?? 'admin',
+                'password' => Hash::make($request->password), 
+            ]);
+        } elseif ($request->role === 'agen') {
+            $userModel = new Agen([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role' => $request->role ?? 'agen',
+                'password' => Hash::make($request->password), 
+                'alamat' => 'none', 
+            ]);
+        } elseif ($request->role === 'kurir') {
+            $userModel = new Kurir([
+                'name' => $request->name,
+                'email' => $request->email,
+                'role' => $request->role ?? 'kurir',
+                'password' => Hash::make($request->password), 
+                'no_hp' => 'none', 
+            ]);
+        } else {
+            // Handle jika role tidak valid
+            return redirect()->back()->with('error', 'Invalid role selected.');
         }
+        
+        $userModel->save();
+        
+        return redirect()->back()->with('success', 'Account has been created!');
+        
     }
-
-    public function password(){
-        $data['title'] = 'Change Password';
-        return view('password', $data);
-    }
+    
 
     public function password_action(Request $request){
         $request->validate([
@@ -76,13 +98,6 @@ class UserController extends Controller
         $admin->save();
         $request->session()->regenerate();
         return back()->with('success', 'Password change success!');
-    }
-
-    public function logout(Request $request) {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('home');
     }
 
 }
