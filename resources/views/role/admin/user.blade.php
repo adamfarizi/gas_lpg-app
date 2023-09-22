@@ -294,7 +294,6 @@
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
-                                    @include('role.admin.modal.admin_edit')
                                     <td class="align-middle">
                                         <form action="{{ url('admin/user/admin/'. $user->id_admin ) }}" method="POST">
                                             @csrf
@@ -350,11 +349,10 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/agen/'. $user->id_agen .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="agen/{{ $user->user_id }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
-                                    @include('role.admin.modal.agen_edit')
                                     <td class="align-middle">
                                         <form action="{{ url('admin/user/agen/'. $user->id_agen ) }}" method="POST">
                                             @csrf
@@ -412,11 +410,10 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/kurir/'. $user->id_kurir .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="kurir/{{ $user->user_id }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
-                                    @include('role.admin.modal.kurir_edit')
                                     <td class="align-middle">
                                         <form action="{{ url('admin/user/kurir/'. $user->id_kurir ) }}" method="POST">
                                             @csrf
@@ -436,5 +433,4 @@
             </div>
         </div>
     </div>
-    @include('role.admin.modal.create')
 @endsection
