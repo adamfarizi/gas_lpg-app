@@ -17,17 +17,17 @@ class UserController extends Controller
     public function register_action(Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:tb_user',
+            'email' => 'required|unique:admin',
             'password' => 'required',
             'password_confrimation' => 'required|same:password',
         ]);
-        $user = new User([
+        $admin = new User([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role ?? 'agen',
             'password' => Hash::make($request->password), 
         ]);
-        $user->save();
+        $admin->save();
         return redirect('admin')->with('success', 'Registration Success. Please Login!');
     }
 
@@ -37,7 +37,8 @@ class UserController extends Controller
         return view('user/login', $data);
     }
 
-    public function login_action(Request $request){
+    public function login_action(Request $request)
+    {
         $request->validate([
             'email' => 'required',
             'password' => 'required',
@@ -70,9 +71,9 @@ class UserController extends Controller
             'old_password' => 'required|current_password',
             'new_password' => 'required|confirmed',
         ]);
-        $user = USER::find(Auth::id());
-        $user->password = Hash::make($request->new_password);
-        $user->save();
+        $admin = User::find(Auth::id());
+        $admin->password = Hash::make($request->new_password);
+        $admin->save();
         $request->session()->regenerate();
         return back()->with('success', 'Password change success!');
     }

@@ -308,16 +308,16 @@
                         @endif
                     </div>
                     <div class="card-body p-3">
-                        <form role="form text-left" action="{{ url('admin/profile', $users->user_id) }}" method="POST">    
+                        <form role="form text-left" action="{{ url('admin/profile', $admins->id_admin) }}" method="POST">    
                             @csrf
                             @method('PUT')  
                             <label>Name</label>
                             <div class="input-group mb-3">
-                                <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $users->name }}">
+                                <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $admins->name }}">
                             </div>
                             <label>Email</label>
                             <div class="input-group mb-3">
-                                <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $users->email }}">
+                                <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $admins->email }}">
                             </div>
                             <div class="text-center">
                                 <button type="submit" name="submit"  class="btn bg-gradient-success w-100 mt-4 mb-0" values="Update">Update</button>

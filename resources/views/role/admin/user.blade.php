@@ -290,12 +290,12 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="{{ url('admin/user/'. $user->id_admin .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <form action="{{ url('admin/user/'. $user->user_id ) }}" method="POST">
+                                        <form action="{{ url('admin/user/'. $user->id_admin ) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
@@ -349,12 +349,12 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="{{ url('admin/user/'. $user->id_agen .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <form action="{{ url('admin/user/'. $user->user_id ) }}" method="POST">
+                                        <form action="{{ url('admin/user/'. $user->id_agen ) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
@@ -410,12 +410,12 @@
                                         <span class="badge badge-sm bg-gradient-success">Active</span>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="{{ url('admin/user/'. $user->user_id .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                        <a href="{{ url('admin/user/'. $user->id_kurir .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                             <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <form action="{{ url('admin/user/'. $user->user_id ) }}" method="POST">
+                                        <form action="{{ url('admin/user/'. $user->id_kurir ) }}" method="POST">
                                             @csrf
                                             @method('delete')
                                             <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">

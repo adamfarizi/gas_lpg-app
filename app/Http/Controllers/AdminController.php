@@ -3,28 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Agen;
+use App\Models\Kurir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    // user
+    // admin
     public function index_admin_user(){
         $data['title'] = 'Admin';
-    
-        $total_user = User::count();
-        $total_admin = User::where('role', 'admin')->count();
-        $total_agen = User::where('role', 'agen')->count();
-        $total_kurir = User::where('role', 'kurir')->count();
+
+        $total_admin = User::count(); // Menghitung jumlah admin
         $admins = User::where('role', 'admin')
-            ->where('user_id', '!=', auth()->user()->user_id)
-            ->get();        
-        $agens = User::where('role', 'agen')
-            ->get();
-        $kurirs = User::where('role', 'kurir')
-            ->get();
-    
+            ->where('id_admin', '!=', auth()->user()->id_admin)
+            ->get(); // Mengambil semua data admin dengan role 'admin'
+        
+        $total_agen = Agen::count();
+        $agens = Agen::all();
+        
+        $total_kurir = Kurir::count();
+        $kurirs = Kurir::all();
+
+        $total_user = $total_admin + $total_agen + $total_kurir;
+        
         return view('role.admin.user', [
             'total_user' => $total_user,
             'total_admin' => $total_admin,
@@ -33,7 +36,7 @@ class AdminController extends Controller
             'admins' => $admins,
             'agens' => $agens,
             'kurirs' => $kurirs,
-        ], $data);    
+        ], $data); 
     }
 
     public function create_admin_user(){
@@ -45,29 +48,29 @@ class AdminController extends Controller
     public function create_admin_user_action(Request $request){
         $request->validate([
             'name' => 'required',
-            'email' => 'required|unique:tb_user',
+            'email' => 'required|unique:tb_admin',
             'password' => 'required',
             'password_confrimation' => 'required|same:password',
         ]);
-        $user = new User([
+        $admin = new User([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role ?? 'agen',
             'password' => Hash::make($request->password), 
         ]);
-        $user->save();
-        return redirect()->route('admin_user')->with('success', 'Account has been created !');
+        $admin->save();
+        return redirect()->route('admin_admin')->with('success', 'Account has been created !');
     }
 
-    public function edit_admin_user($user_id)
+    public function edit_admin_user($admin_id)
     {
         $data['title'] = 'Admin';
 
-        $users = User::find($user_id);
-        return view('role.admin.edit', ['users'=>$users], $data);   
+        $admins = User::find($admin_id);
+        return view('role.admin.edit', ['admins'=>$admins], $data);   
     }
 
-    public function edit_admin_user_action($user_id, Request $request)
+    public function edit_admin_user_action($admin_id, Request $request)
     {
         $data['title'] = 'Admin';
 
@@ -76,30 +79,30 @@ class AdminController extends Controller
             'email' => 'required|email|max:255',
         ]);
     
-        $user = User::find($user_id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');    
-        $user->save();
+        $admin = User::find($admin_id);
+        $admin->name = $request->input('name');
+        $admin->email = $request->input('email');    
+        $admin->save();
 
         return redirect()->back()->with('success', 'Change successfuly !');
     }
 
-    public function destroy_admin_user($user_id){
+    public function destroy_admin_user($admin_id){
         $data['title'] = 'Admin';
 
-        $users = User::find($user_id);
-        $users->delete();
-        return redirect('admin/user'); 
+        $admins = User::find($admin_id);
+        $admins->delete();
+        return redirect('admin/admin'); 
     }
 
     public function edit_admin_profile()
     {
         $data['title'] = 'Profile';
-        $user = USER::find(Auth::id());
-        return view('role.admin.profile', ['users'=>$user], $data);   
+        $admin = User::find(Auth::id());
+        return view('role.admin.profile', ['admins'=>$admin], $data);   
     }
 
-    public function edit_admin_profile_action($user_id, Request $request)
+    public function edit_admin_profile_action($admin_id, Request $request)
     {
         $data['title'] = 'Profile';
 
@@ -108,10 +111,10 @@ class AdminController extends Controller
             'email' => 'required|email|max:255',
         ]);
     
-        $user = User::find($user_id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');    
-        $user->save();
+        $admin = User::find($admin_id);
+        $admin->name = $request->input('name');
+        $admin->email = $request->input('email');    
+        $admin->save();
 
         return redirect()->back()->with('success', 'Change successfuly !');
     }
