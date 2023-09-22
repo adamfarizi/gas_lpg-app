@@ -14,6 +14,7 @@ class KurirSeeder extends Seeder
             'email' => 'kurir1@example.com',
             'role' => 'kurir',
             'password' => bcrypt('password1'),
+            'status' => 'tersedia',
             'no_hp' => '08666611111',
         ]);
 

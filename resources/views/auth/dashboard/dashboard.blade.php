@@ -183,8 +183,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir Tersedia</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                {{-- {{ $total_kurir }} --}}
-                                100 
+                                {{ $kurir_tersedia }}
                                 <span class="text-black text-sm font-weight-bolder">kurir</span>
                                 </h5>
                             </div>
@@ -245,11 +244,12 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="container mt-5">
             <div class="card bg-white">
                 <div class="card-body">
-                    <h4 class="card-title">Pesanan Baru</h4>
+                    <h4 class="card-title">Konfirmasi Pembayaran</h4>
                     <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
@@ -260,8 +260,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
+\                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Proses Pesanan</th>
                                     </tr>
                                 </thead>
@@ -271,18 +270,9 @@
                                         <td class="align-middle text-sm text-center">20-10-2023</td>
                                         <td class="align-middle text-sm text-center">Sumanto Agen</td>
                                         <td class="align-middle text-sm text-center">50 Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
-                                        <td class="align-middle text-sm text-center">
-                                            <div class="form-check text-center">
-                                                <select class="mb-3 form-control" id="role" name="role">
-                                                    <option value="kurir 1">Kurir 1</option>
-                                                    <option value="kurir 2">Kurir 2</option>
-                                                    <option value="kurir 3">Kurir 3</option>
-                                                </select>
-                                            </div>
-                                        </td>                                        
+                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>                                       
                                         <td class="align-middle text-sm text-center pb-4">
-                                            <span class="badge badge-sm bg-gradient-danger">Belum Proses</span>
+                                            <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>
                                         </td>
                                         <td class="align-middle text-center ">
                                             <button class="btn bg-gradient-success btn-icon btn-sm ps-3">
