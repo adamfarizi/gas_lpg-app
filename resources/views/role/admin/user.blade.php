@@ -160,7 +160,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total User</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                {{-- {{ $total_user }} --}}
+                                {{ $total_user }}
                                 <span class="text-black text-sm font-weight-bolder">user</span>
                                 </h5>
                             </div>
