@@ -1,8 +1,8 @@
-@foreach ($admins as $user)
-    <form action="{{ url('admin/user/agen', $user->id_admin) }}" method="post" enctype="multipart/form-data">
+@foreach ($kurirs as $user)
+    <form action="{{ url('kurir/user', $user->id_kurir) }}" method="post" enctype="multipart/form-data">
         {{ method_field('put') }}
         {{ csrf_field() }}
-        <div class="modal fade text-left" id="editUserModal{{ $user->id_admin }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal fade text-left" id="editUserModal{{ $user->id_kurir }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -15,7 +15,7 @@
                         <div class="alert alert-success" id="successNotification" style="display: none;">
                             User updated successfully!
                         </div>
-                        
+
                         <label>Name</label>
                         <div class="input-group mb-3">
                             <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $user->name }}">
