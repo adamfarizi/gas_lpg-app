@@ -14,7 +14,7 @@ class AgenSeeder extends Seeder
             'email' => 'agen1@example.com',
             'role' => 'agen',
             'password' => bcrypt('password1'),
-            'alamat' => 'Jl. Agen 1',
+            'alamat' => 'Jl. Merdeka No. 123, Kelurahan Bahagia, Kecamatan Sentosa, Kota Fiktif A',
         ]);
 
         // Tambahkan lebih banyak data admin jika diperlukan

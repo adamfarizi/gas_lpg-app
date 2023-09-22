@@ -13,6 +13,7 @@ class CreateKurirTable extends Migration
             $table->string('email')->unique();
             $table->string('role')->default('kurir');
             $table->string('password');
+            $table->enum('status',['tersedia', 'tidak_tersedia'])->default('tersedia');
             $table->string('no_hp');
             $table->timestamps();
         });

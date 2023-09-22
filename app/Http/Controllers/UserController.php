@@ -11,7 +11,7 @@ use App\Models\Kurir;
 
 class UserController extends Controller
 {
-    public function index_admin_user(){
+    public function index_user(){
         $data['title'] = 'Admin';
 
         $total_admin = User::count(); // Menghitung jumlah admin
@@ -38,7 +38,7 @@ class UserController extends Controller
         ], $data); 
     }
 
-    public function create_admin_user_action(Request $request){
+    public function create_user_action(Request $request){
         $request->validate([
             'name' => 'required',
             'email' => 'required|unique:admin|unique:agen|unique:kurir', // Periksa di semua tabel yang sesuai

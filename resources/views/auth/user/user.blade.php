@@ -224,7 +224,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Totoal Kurir</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir</p>
                                 <h5 class="font-weight-bolder mb-0">
                                 {{ $total_kurir }}
                                 <span class="text-black text-sm font-weight-bolder">kurir</span>
@@ -350,7 +350,12 @@
                                         <p class="text-xs font-weight-bold mb-0">{{ $user->no_hp }}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
-                                        <span class="badge badge-sm bg-gradient-success">Active</span>
+                                        @if ($user->status === 'tersedia')
+                                            <span class="badge badge-sm bg-gradient-success">Tersedia</span>
+                                            @endif
+                                        @if ($user->status === 'tidak_tersedia')
+                                            <span class="badge badge-sm bg-gradient-danger">Tidak Tersedia</span>    
+                                        @endif
                                     </td>
                                     <td class="align-middle">
                                         <a href="user/kurir/{{ $user->id_kurir }}/edit" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">

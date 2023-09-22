@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgenController;
 use App\Http\Controllers\KurirController;
@@ -31,10 +31,12 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('logout', [GuestController::class, 'logout'])->name('logout');
 
-    //Controller user
-    Route::get('admin/dashboard', [RoleController::class, 'admin']);
-    Route::get('admin/user', [UserController::class, 'index_admin_user'])->name('admin_user');
-    Route::post('admin/user/create', [UserController::class, 'create_admin_user_action'])->name('create.action');
+    // Controller dashboard
+    Route::get('admin/dashboard', [DashboardController::class, 'index']);
+
+    // Controller user
+    Route::get('admin/user', [UserController::class, 'index_user'])->name('admin_user');
+    Route::post('admin/user/create', [UserController::class, 'create_user_action'])->name('create.action');
     
     // Controller admin
     Route::get('admin/user/admin/{id}/edit', [AdminController::class, 'edit_admin_user']);
@@ -55,6 +57,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('admin/user/kurir/{id}', [KurirController::class, 'destroy_kurir_user']);
 });
 
-Route::get('/home', function () {return redirect('admin/dashboard');});
+Route::get('/home', function () {return redirect('home');});
 Route::get('register', [GuestController::class, 'register'])->name('register');
 Route::post('register', [GuestController::class, 'register_action'])->name('register.action');

@@ -20,12 +20,12 @@ class GuestController extends Controller
 
         $totalUser = $adminCount + $agenCount + $kurirCount;
 
-        return view('home',['total_user' => $totalUser,], $data);
+        return view('guest.home',['total_user' => $totalUser,], $data);
     }
 
     public function register(){
         $data['title'] = 'Register';
-        return view('user/register', $data);
+        return view('guest.user.register', $data);
     }
 
     public function register_action(Request $request){
@@ -48,7 +48,7 @@ class GuestController extends Controller
 
     public function login(){
         $data['title'] = 'Login';
-        return view('user/login', $data);
+        return view('guest.user.login', $data);
     }
 
     public function login_action(Request $request)
