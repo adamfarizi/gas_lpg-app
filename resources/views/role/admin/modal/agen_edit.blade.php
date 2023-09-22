@@ -1,7 +1,8 @@
-<form action="{{ url('admin/user', $user->user_id) }}" method="post" enctype="multipart/form-data">
+@foreach ($agens as $user)
+<form action="{{ url('agen/user', $user->id_agen) }}" method="post" enctype="multipart/form-data">
     {{ method_field('put') }}
     {{ csrf_field() }}
-    <div class="modal fade text-left" id="editUserModal{{ $user->user_id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal fade text-left" id="editUserModal{{ $user->id_agen }}" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -31,3 +32,4 @@
         </div>
     </div>
 </form>
+@endforeach
