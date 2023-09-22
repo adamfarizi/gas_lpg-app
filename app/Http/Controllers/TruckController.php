@@ -9,8 +9,10 @@ class TruckController extends Controller
 {
     public function index()
     {
+        $data['title'] = 'Stock';
+        
         $trucks = Truck::all();
-        return view('trucks.index', compact('trucks'));
+        return view('auth.stock.stock', ['trucks'=>$trucks], $data);
     }
 
     public function create()

@@ -52,7 +52,7 @@
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link  " href="{{ asset('pages/billing.html') }}">
+                <a class="nav-link active" href="{{ url('admin/stock') }}">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <title>credit-card</title>
@@ -68,14 +68,14 @@
                         </g>
                     </svg>
                     </div>
-                    <span class="nav-link-text ms-1">About</span>
+                    <span class="nav-link-text ms-1">Stock</span>
                 </a>
                 </li>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  active" href="{{ route('admin_profile') }}">
+                    <a class="nav-link" href="{{ route('admin_profile') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>customer-support</title>
@@ -151,93 +151,215 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                {{-- {{ $total_user }} --}}
-                                500 
-                                <span class="text-black text-sm font-weight-bolder">gas</span>
-                                </h5>
+        <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                    {{-- {{ $total_user }} --}}
+                                    500 
+                                    <span class="text-black text-sm font-weight-bolder">gas</span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fa fa-solid fa-fire opacity-10" style="color: #ffffff;"></i>                            
+                                </div>
                             </div>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fa fa-solid fa-fire opacity-10" style="color: #ffffff;"></i>                            
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir Tersedia</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                    {{-- {{ $total_kurir }} --}}
+                                    100 
+                                    <span class="text-black text-sm font-weight-bolder">kurir</span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Masuk</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                    {{-- {{ $total_admin }} --}}
+                                    5 
+                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fa fa-solid fa-clipboard-list opacity-10" style="color: #ffffff;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+                <div class="card">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Selesai</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                    {{-- {{ $total_agen }} --}}
+                                    100 
+                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fa fa-solid fa-clipboard-check opacity-10" style="color: #ffffff;"></i>                            
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir Tersedia</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                {{-- {{ $total_kurir }} --}}
-                                100 
-                                <span class="text-black text-sm font-weight-bolder">kurir</span>
-                                </h5>
-                            </div>
+        <div class="mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <a type="button" class="btn bg-gradient-primary mt-3 border-end" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                        <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
+                        Add Stock
+                    </a>
+                </div>            
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header pb-0 d-flex justify-content-between">
+                            <h6>Gas Table</h6>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
+                        <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                            <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                                <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jenis Gas</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Stock Gas</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Gas</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                    <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                </thead>
+                                @foreach ($gasItems as $gas)
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $gas->jenis_gas }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $gas->stock_gas }}</p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $gas->harga_gas }}</p>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="#" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                                <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <form action="#" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                    <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                                </button>                                        
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Masuk</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                {{-- {{ $total_admin }} --}}
-                                5 
-                                <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                </h5>
-                            </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header pb-0 d-flex justify-content-between">
+                            <h6>Truck Table</h6>
                         </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fa fa-solid fa-clipboard-list opacity-10" style="color: #ffffff;"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Selesai</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                {{-- {{ $total_agen }} --}}
-                                100 
-                                <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fa fa-solid fa-clipboard-check opacity-10" style="color: #ffffff;"></i>                            
+                        <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                            <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                                <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plat</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Maksimal Beban Truck</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                    <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                </thead>
+                                @foreach ($trucks as $truck)
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $trucks->plat_truck }}</h6>
+                                                    <p class="text-xs text-secondary mb-0">{{ $trucks->maksimal_beban_truck }}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="#" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                                <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <form action="#" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                    <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                                </button>                                        
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

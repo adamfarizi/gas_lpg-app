@@ -8,9 +8,10 @@ use App\Models\Gas;
 class GasController extends Controller
 {
     public function index()
-    {
+    {   
+        $data['title'] = 'Stock';
         $gasItems = Gas::all();
-        return view('gas.index', compact('gasItems'));
+        return view('auth.stock.stock', ['gasItems'=>$gasItems], $data);
     }
 
     public function create()
@@ -21,7 +22,6 @@ class GasController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
             'jenis_gas' => 'required',
             'stock_gas' => 'required',
             'harga_gas' => 'required|numeric',

@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('admin/user/kurir/{id}', [KurirController::class, 'destroy_kurir_user']);
 
     //Controller stock
-    Route::get('admin/stock', [GasController::class, 'gas']);
+    Route::get('admin/stock', [GasController::class, 'index']);
 
     //Controller truck
     Route::get('truck', [TruckController::class, 'truck']);
