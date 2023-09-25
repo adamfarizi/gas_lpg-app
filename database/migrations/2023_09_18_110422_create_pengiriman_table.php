@@ -9,8 +9,8 @@ class CreatePengirimanTable extends Migration
     {
         Schema::create('pengiriman', function (Blueprint $table) {
             $table->id('id_pengiriman');
-            $table->unsignedBigInteger('id_kurir');
-            $table->unsignedBigInteger('id_truck');
+            $table->unsignedBigInteger('id_kurir')->nullable();
+            $table->unsignedBigInteger('id_truck')->nullable();
             $table->timestamps();
 
             

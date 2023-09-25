@@ -11,6 +11,7 @@ class CreateTruckTable extends Migration
             $table->id('id_truck');
             $table->string('plat_truck');
             $table->string('maksimal_beban_truck');
+            $table->enum('status',['tersedia', 'tidak tersedia'])->default('tersedia');
             $table->timestamps();
         });
     }

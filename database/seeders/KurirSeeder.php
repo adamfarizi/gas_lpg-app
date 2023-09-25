@@ -16,7 +16,16 @@ class KurirSeeder extends Seeder
             'password' => bcrypt('password1'),
             'status' => 'tersedia',
             'no_hp' => '08666611111',
-        ]);
+        ],[
+            'name' => 'Kurir 2',
+            'email' => 'kurir2@example.com',
+            'role' => 'kurir',
+            'password' => bcrypt('password1'),
+            'status' => 'tidak tersedia',
+            'no_hp' => '08666611111',
+        ]
+
+        );
 
         // Tambahkan lebih banyak data admin jika diperlukan
     }
