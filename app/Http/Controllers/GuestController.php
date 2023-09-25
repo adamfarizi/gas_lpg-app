@@ -11,18 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class GuestController extends Controller
 {
-    public function index() {
-        $data['title'] = 'Home';
-        
-        $adminCount = User::count();
-        $agenCount = Agen::count();
-        $kurirCount = Kurir::count();
-
-        $totalUser = $adminCount + $agenCount + $kurirCount;
-
-        return view('guest.home',['total_user' => $totalUser,], $data);
-    }
-
     public function register(){
         $data['title'] = 'Register';
         return view('guest.user.register', $data);
@@ -80,6 +68,6 @@ class GuestController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('home');
+        return redirect('login');
     }
 }

@@ -26,10 +26,12 @@ use App\Models\Gas;
 */
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/', [GuestController::class, 'index'])->name('home');
-    Route::get('stock', function () {return view('stock', ['title' => 'stock']);})->name('stock');
+    Route::get('/', [GuestController::class, 'login']);
+    Route::get('/home', function () {return redirect('login');});
     Route::get('login', [GuestController::class, 'login'])->name('login');
     Route::post('login', [GuestController::class, 'login_action'])->name('login.action');
+    Route::get('register', [GuestController::class, 'register'])->name('register');
+    Route::post('register', [GuestController::class, 'register_action'])->name('register.action');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -70,7 +72,3 @@ Route::middleware(['auth'])->group(function () {
     Route::post('admin/stock/truck/create', [GasController::class, 'create_truck_action'])->name('create.truck.action');
     Route::delete('admin/stock/gas/{id}', [GasController::class, 'destroy_stock_gas']);
 });
-
-Route::get('/home', function () {return redirect('home');});
-Route::get('register', [GuestController::class, 'register'])->name('register');
-Route::post('register', [GuestController::class, 'register_action'])->name('register.action');
