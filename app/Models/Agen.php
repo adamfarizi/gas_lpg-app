@@ -16,6 +16,7 @@ class Agen extends Model
         'role',
         'password',
         'alamat',
+        'no_hp',
     ];
     
     public function transaksis()

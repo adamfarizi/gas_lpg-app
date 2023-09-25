@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgenController;
 use App\Http\Controllers\KurirController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\ProsesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('logout', [GuestController::class, 'logout'])->name('logout');
 
     // Controller dashboard
-    Route::get('admin/dashboard', [DashboardController::class, 'index']);
+    Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('home');
+
+    // Controller proses
+    Route::get('admin/proses', [ProsesController::class, 'index'])->name('admin_proses');
+    Route::put('admin/proses/update_pembayaran/{id}',[ProsesController::class, 'update_pembayaran'])->name('update_pembayaran');
+    Route::put('admin/proses/update_dikirim/{id}',[ProsesController::class, 'update_dikirim'])->name('update_dikirim');
 
     // Controller user
     Route::get('admin/user', [UserController::class, 'index_user'])->name('admin_user');

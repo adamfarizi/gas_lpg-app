@@ -22,6 +22,12 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             AgenSeeder::class,
             KurirSeeder::class,
+            GasSeeder::class,
+            TruckSeeder::class,
+            PembayaranSeeder::class,
+            PengirimanSeeder::class,
+            LokasiSeeder::class,
+            TransaksiSeeder::class,
         ]);
     }
 }

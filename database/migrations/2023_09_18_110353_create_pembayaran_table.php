@@ -9,9 +9,9 @@ class CreatePembayaranTable extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id('id_pembayaran');
-            $table->string('status_pembayaran');
-            $table->date('tanggal_pembayaran');
-            $table->string('bukti_pembayaran');
+            $table->enum('status_pembayaran',['Sudah Bayar', 'Belum Bayar'])->default('Belum Bayar');
+            $table->date('tanggal_pembayaran')->nullable();
+            $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
 
         });

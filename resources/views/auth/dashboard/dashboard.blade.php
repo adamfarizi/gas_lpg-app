@@ -12,64 +12,84 @@
             <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="nav-link  active" href="{{ route('home') }}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>shop </title>
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                            <g transform="translate(1716.000000, 291.000000)">
-                            <g transform="translate(0.000000, 148.000000)">
-                                <path class="color-background opacity-6" d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"></path>
-                                <path class="color-background" d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
+                    <a class="nav-link  active" href="{{ route('home') }}">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>shop </title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(1716.000000, 291.000000)">
+                                <g transform="translate(0.000000, 148.000000)">
+                                    <path class="color-background opacity-6" d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"></path>
+                                    <path class="color-background" d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
+                                </g>
+                                </g>
                             </g>
                             </g>
-                        </g>
-                        </g>
-                    </svg>
-                    </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
-                </a>
+                        </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link  " href="{{ url('admin/user') }}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>office</title>
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                            <g transform="translate(1716.000000, 291.000000)">
-                            <g id="office" transform="translate(153.000000, 2.000000)">
-                                <path class="color-background opacity-6" d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"></path>
-                                <path class="color-background" d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z"></path>
+                    <a class="nav-link  " href="{{ route('admin_proses') }}">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>document</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1870.000000, -591.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(1716.000000, 291.000000)">
+                                    <g transform="translate(154.000000, 300.000000)">
+                                    <path class="color-background opacity-6" d="M40,40 L36.3636364,40 L36.3636364,3.63636364 L5.45454545,3.63636364 L5.45454545,0 L38.1818182,0 C39.1854545,0 40,0.814545455 40,1.81818182 L40,40 Z"></path>
+                                    <path class="color-background" d="M30.9090909,7.27272727 L1.81818182,7.27272727 C0.814545455,7.27272727 0,8.08727273 0,9.09090909 L0,41.8181818 C0,42.8218182 0.814545455,43.6363636 1.81818182,43.6363636 L30.9090909,43.6363636 C31.9127273,43.6363636 32.7272727,42.8218182 32.7272727,41.8181818 L32.7272727,9.09090909 C32.7272727,8.08727273 31.9127273,7.27272727 30.9090909,7.27272727 Z M18.1818182,34.5454545 L7.27272727,34.5454545 L7.27272727,30.9090909 L18.1818182,30.9090909 L18.1818182,34.5454545 Z M25.4545455,27.2727273 L7.27272727,27.2727273 L7.27272727,23.6363636 L25.4545455,23.6363636 L25.4545455,27.2727273 Z M25.4545455,20 L7.27272727,20 L7.27272727,16.3636364 L25.4545455,16.3636364 L25.4545455,20 Z"></path>
+                                    </g>
+                                </g>
+                                </g>
                             </g>
-                            </g>
-                        </g>
-                        </g>
-                    </svg>
-                    </div>
-                    <span class="nav-link-text ms-1">User</span>
-                </a>
+                            </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">Proses</span>
+                    </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link  " href="{{ asset('pages/billing.html') }}">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>credit-card</title>
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                            <g transform="translate(1716.000000, 291.000000)">
-                            <g transform="translate(453.000000, 454.000000)">
-                                <path class="color-background opacity-6" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
-                                <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                    <a class="nav-link  " href="{{ url('admin/user') }}">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>office</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(1716.000000, 291.000000)">
+                                <g id="office" transform="translate(153.000000, 2.000000)">
+                                    <path class="color-background opacity-6" d="M12.25,17.5 L8.75,17.5 L8.75,1.75 C8.75,0.78225 9.53225,0 10.5,0 L31.5,0 C32.46775,0 33.25,0.78225 33.25,1.75 L33.25,12.25 L29.75,12.25 L29.75,3.5 L12.25,3.5 L12.25,17.5 Z"></path>
+                                    <path class="color-background" d="M40.25,14 L24.5,14 C23.53225,14 22.75,14.78225 22.75,15.75 L22.75,38.5 L19.25,38.5 L19.25,22.75 C19.25,21.78225 18.46775,21 17.5,21 L1.75,21 C0.78225,21 0,21.78225 0,22.75 L0,40.25 C0,41.21775 0.78225,42 1.75,42 L40.25,42 C41.21775,42 42,41.21775 42,40.25 L42,15.75 C42,14.78225 41.21775,14 40.25,14 Z M12.25,36.75 L7,36.75 L7,33.25 L12.25,33.25 L12.25,36.75 Z M12.25,29.75 L7,29.75 L7,26.25 L12.25,26.25 L12.25,29.75 Z M35,36.75 L29.75,36.75 L29.75,33.25 L35,33.25 L35,36.75 Z M35,29.75 L29.75,29.75 L29.75,26.25 L35,26.25 L35,29.75 Z M35,22.75 L29.75,22.75 L29.75,19.25 L35,19.25 L35,22.75 Z"></path>
+                                </g>
+                                </g>
                             </g>
                             </g>
-                        </g>
-                        </g>
-                    </svg>
-                    </div>
-                    <span class="nav-link-text ms-1">About</span>
-                </a>
+                        </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">User</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  " href="{{ asset('pages/billing.html') }}">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>credit-card</title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(1716.000000, 291.000000)">
+                                <g transform="translate(453.000000, 454.000000)">
+                                    <path class="color-background opacity-6" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
+                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                </g>
+                                </g>
+                            </g>
+                            </g>
+                        </svg>
+                        </div>
+                        <span class="nav-link-text ms-1">About</span>
+                    </a>
                 </li>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
@@ -245,197 +265,5 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="container mt-5">
-            <div class="card bg-white">
-                <div class="card-body">
-                    <h4 class="card-title">Konfirmasi Pembayaran</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-\                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Proses Pesanan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
-                                        <td class="align-middle text-sm text-center">20-10-2023</td>
-                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
-                                        <td class="align-middle text-sm text-center">50 Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>                                       
-                                        <td class="align-middle text-sm text-center pb-4">
-                                            <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>
-                                        </td>
-                                        <td class="align-middle text-center ">
-                                            <button class="btn bg-gradient-success btn-icon btn-sm ps-3">
-                                                <span> <i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
-                                                Proses
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container mt-5">
-            <div class="card bg-white">
-                <div class="card-body">
-                    <h4 class="card-title">Pesanan Diproses</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Cek Pesanan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
-                                        <td class="align-middle text-sm text-center">20-10-2023</td>
-                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
-                                        <td class="align-middle text-sm text-center">50 Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
-                                        <td class="align-middle text-sm text-center">Kurir 2</td>                                        
-                                        <td class="align-middle text-sm text-center pb-4">
-                                            <span class="badge badge-sm bg-gradient-info">Sedang Proses</span>
-                                        </td>
-                                        <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-status">
-                                                <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
-                                                Cek Status
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container mt-5">
-            <div class="card bg-white">
-                <div class="card-body">
-                    <h4 class="card-title">Pesanan Selesai</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Riwayat Pesanan</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
-                                        <td class="align-middle text-sm text-center">20-10-2023</td>
-                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
-                                        <td class="align-middle text-sm text-center">50 Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
-                                        <td class="align-middle text-sm text-center">Kurir 2</td>                                        
-                                        <td class="align-middle text-sm text-center pb-4">
-                                            <span class="badge badge-sm bg-gradient-success">Pesanan Selesai</span>
-                                        </td>
-                                        <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-riwayat">
-                                                <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
-                                                Cek Riwayat
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
-    <!--Modal Status-->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="modal fade" id="cek-status" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h6 class="modal-title text-uppercase" id="modal-title-default">Status</h6>
-                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <li class="text-dark mb-3">Kurir melanjutkan perjalan
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                        <li class="text-dark mb-3">Kurir sedang ngopi
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                        <li class="text-dark mb-3">Gas sedang di pick up
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                    </div>
-                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal Riwayat-->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="modal fade" id="cek-riwayat" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat</h6>
-                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    </div>
-                    <div class="modal-body">
-                        <li class="mb-3 text-dark">Gas sudah sampai di lokasi anda  
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang dalam perjalan menuju lokasi anda 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang transit di Madiun 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sudah sampai di Jalan 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang di pick up 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 16-09-2023</span></li>
-                    </div>
-                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div>
 @endsection

@@ -14,7 +14,6 @@ class Pembayaran extends Model
         'status_pembayaran',
         'tanggal_pembayaran',
         'bukti_pembayaran',
-        'id_admin',
     ];
     
     public function transaksis()

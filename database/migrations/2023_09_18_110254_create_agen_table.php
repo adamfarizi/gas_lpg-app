@@ -13,7 +13,8 @@ class CreateAgenTable extends Migration
             $table->string('email')->unique();
             $table->string('role')->default('agen');
             $table->string('password');
-            $table->string('alamat');
+            $table->string('alamat')->nullable();
+            $table->string('no_hp')->nullable();
             $table->timestamps();
         });
     }

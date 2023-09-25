@@ -11,7 +11,7 @@ class CreateLokasiTable extends Migration
             $table->id('id_lokasi');
             $table->string('koordinat_lokasi');
             $table->string('alamat_lokasi_tujuan');
-            $table->string('status_pengiriman');
+            $table->enum('status_pengiriman',['Belum Dikirim','Dikirim', 'Diterima']);
             $table->unsignedBigInteger('id_pengiriman');
             $table->timestamps();
 
