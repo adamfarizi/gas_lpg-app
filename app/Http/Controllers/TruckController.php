@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Truck; // Sesuaikan dengan model yang sesuai
+use App\Models\Truck;
 
 class TruckController extends Controller
 {
-    public function index()
-    {
+    public function index_stock()
+    {   
         $data['title'] = 'Stock';
         
         $trucks = Truck::all();
@@ -17,7 +17,7 @@ class TruckController extends Controller
 
     public function create()
     {
-        return view('trucks.create');
+        return view('truck.create');
     }
 
     public function store(Request $request)
@@ -29,18 +29,18 @@ class TruckController extends Controller
 
         Truck::create($validatedData);
 
-        return redirect()->route('trucks.index')
-            ->with('success', 'Truck berhasil ditambahkan.');
+        return redirect()->route('truck.index')
+            ->with('success', 'Data truck berhasil ditambahkan.');
     }
 
     public function show(Truck $truck)
     {
-        return view('trucks.show', compact('truck'));
+        return view('truck.show', compact('truck'));
     }
 
     public function edit(Truck $truck)
     {
-        return view('trucks.edit', compact('truck'));
+        return view('truck.edit', compact('truck'));
     }
 
     public function update(Request $request, Truck $truck)
@@ -52,15 +52,15 @@ class TruckController extends Controller
 
         $truck->update($validatedData);
 
-        return redirect()->route('trucks.index')
-            ->with('success', 'Truck berhasil diperbarui.');
+        return back()
+            ->with('success', 'Data truck berhasil diperbarui.');
     }
 
     public function destroy(Truck $truck)
     {
         $truck->delete();
 
-        return redirect()->route('trucks.index')
-            ->with('success', 'Truck berhasil dihapus.');
+        return back()
+            ->with('success', 'Data truck berhasil dihapus.');
     }
 }

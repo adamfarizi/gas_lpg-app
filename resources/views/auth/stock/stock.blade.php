@@ -247,18 +247,14 @@
         </div>
         <div class="mt-3">
             <div class="row">
-                <div class="col-12">
-                    <a type="button" class="btn bg-gradient-primary mt-3 border-end" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                        <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                        Add Stock
-                    </a>
-                </div>            
-            </div>
-            <div class="row">
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header pb-0 d-flex justify-content-between">
                             <h6>Gas Table</h6>
+                            <a type="button" class="btn bg-gradient-primary border-end" data-bs-toggle="modal" data-bs-target="#addStockModal">
+                                <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
+                                Add Stock
+                            </a>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
                             <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
@@ -267,7 +263,7 @@
                                     <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jenis Gas</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Stock Gas</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Harga Gas</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Harga Gas</th>
                                     <th class="text-secondary opacity-7"></th>
                                     <th class="text-secondary opacity-7"></th>
                                     </tr>
@@ -278,7 +274,7 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
+                                                    <img src="../assets/img/local/gas.png" class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $gas->jenis_gas }}</h6>
@@ -317,6 +313,10 @@
                     <div class="card">
                         <div class="card-header pb-0 d-flex justify-content-between">
                             <h6>Truck Table</h6>
+                            <a type="button" class="btn bg-gradient-primary border-end" data-bs-toggle="modal" data-bs-target="#addTrcukModal">
+                                <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
+                                Add Truck
+                            </a>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
                             <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
@@ -335,12 +335,14 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/local/profil.png" class="avatar avatar-sm me-3" alt="user1">
+                                                    <img src="../assets/img/local/truck.png" class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $trucks->plat_truck }}</h6>
-                                                    <p class="text-xs text-secondary mb-0">{{ $trucks->maksimal_beban_truck }}</p>
+                                                    <h6 class="mb-0 text-sm">{{ $truck->plat_truck }}</h6>
                                                 </div>
+                                                <td>
+                                                    <p class="text-xs text-secondary mb-0">{{ $truck->maksimal_beban_truck}}</p>
+                                                </td>
                                             </div>
                                         </td>
                                         <td class="align-middle">
@@ -359,6 +361,7 @@
                                         </td>
                                     </tr>
                                 </tbody>
+                                @endforeach
                                 </table>
                             </div>
                         </div>
@@ -367,4 +370,6 @@
             </div>
         </div>
     </div>
+    @include('auth.stock.create.create_stock')
+    @include('auth.stock.create.create_truck')
 @endsection

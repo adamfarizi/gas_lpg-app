@@ -11,6 +11,7 @@ use App\Http\Controllers\KurirController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\GasController;
 use App\Http\Controllers\TruckController;
+use App\Models\Gas;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,10 +59,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('admin/user/kurir/{id}', [KurirController::class, 'destroy_kurir_user']);
 
     //Controller stock
-    Route::get('admin/stock', [GasController::class, 'index']);
-
-    //Controller truck
-    Route::get('truck', [TruckController::class, 'truck']);
+    Route::get('admin/stock', [GasController::class, 'index_stock']);
+    Route::post('admin/stock/gas/create', [GasController::class, 'create_stock_gas_action'])->name('create.gas.action');
+    Route::post('admin/stock/truck/create', [GasController::class, 'create_truck_action'])->name('create.truck.action');
+    Route::delete('admin/stock/gas/{id}', [GasController::class, 'destroy_stock_gas']);
 });
 
 Route::get('/home', function () {return redirect('home');});
