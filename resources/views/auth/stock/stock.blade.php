@@ -131,9 +131,9 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin/dashboard') }}">Admin</a></li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Profile</li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Stock</li>
             </ol>
-            <h6 class="font-weight-bolder mb-0">Profile</h6>
+            <h6 class="font-weight-bolder mb-0">Stock</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -172,7 +172,7 @@
 
 @section('content')
         <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
@@ -180,8 +180,7 @@
                                 <div class="numbers">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                    {{-- {{ $total_user }} --}}
-                                    500 
+                                    {{ $total_gas }}
                                     <span class="text-black text-sm font-weight-bolder">gas</span>
                                     </h5>
                                 </div>
@@ -195,69 +194,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
                 <div class="card">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir Tersedia</p>
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Truck</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                    {{-- {{ $total_kurir }} --}}
-                                    100 
-                                    <span class="text-black text-sm font-weight-bolder">kurir</span>
+                                    {{ $total_truck }}
+                                    <span class="text-black text-sm font-weight-bolder">truck</span>
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
                                     <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Masuk</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                    {{-- {{ $total_admin }} --}}
-                                    5 
-                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="fa fa-solid fa-clipboard-list opacity-10" style="color: #ffffff;"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                <div class="card">
-                    <div class="card-body p-3">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="numbers">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Selesai</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                    {{-- {{ $total_agen }} --}}
-                                    100 
-                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                    <i class="fa fa-solid fa-clipboard-check opacity-10" style="color: #ffffff;"></i>                            
                                 </div>
                             </div>
                         </div>
@@ -273,7 +225,7 @@
                             <h6>Gas Table</h6>
                             <a type="button" class="btn bg-gradient-primary border-end" data-bs-toggle="modal" data-bs-target="#addStockModal">
                                 <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                                Add Stock
+                                Add Gas
                             </a>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
@@ -294,18 +246,18 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/local/gas.png" class="avatar avatar-sm me-3" alt="user1">
+                                                    <img src="../assets/img/local/gas1.png" class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $gas->jenis_gas }}</h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $gas->stock_gas }}</p>
+                                        <td class="text-center">
+                                            <p class="text-xs font-weight-bold mb-0 me-6">{{ $gas->stock_gas }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">{{ $gas->harga_gas }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ $gas->harga_gas }}</p>
                                         </td>
                                         <td class="align-middle">
                                             <a href="#" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
@@ -313,7 +265,7 @@
                                             </a>
                                         </td>
                                         <td class="align-middle">
-                                            <form action="#" method="POST">
+                                            <form action="{{ url('admin/stock/gas/'. $gas->id_gas) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
@@ -343,8 +295,8 @@
                                 <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plat</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Maksimal Beban Truck</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4">Plat Kendaraan</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">Maksimal Beban</th>
                                     <th class="text-secondary opacity-7"></th>
                                     <th class="text-secondary opacity-7"></th>
                                     </tr>
@@ -355,13 +307,13 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../assets/img/local/truck.png" class="avatar avatar-sm me-3" alt="user1">
+                                                    <img src="../assets/img/local/truck1.png" class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $truck->plat_truck }}</h6>
                                                 </div>
-                                                <td>
-                                                    <p class="text-xs text-secondary mb-0">{{ $truck->maksimal_beban_truck}}</p>
+                                                <td class="text-center">
+                                                    <p class="text-xs font-weight-bold mb-0 me-7">{{ $truck->maksimal_beban_truck}} Gas</p>
                                                 </td>
                                             </div>
                                         </td>
@@ -371,7 +323,7 @@
                                             </a>
                                         </td>
                                         <td class="align-middle">
-                                            <form action="#" method="POST">
+                                            <form action="{{ url('admin/stock/truck/'. $truck->id_truck) }}" method="POST">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
