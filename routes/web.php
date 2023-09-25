@@ -10,6 +10,7 @@ use App\Http\Controllers\AgenController;
 use App\Http\Controllers\KurirController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\GasController;
+use App\Http\Controllers\ProsesController;
 use App\Http\Controllers\TruckController;
 use App\Models\Gas;
 
