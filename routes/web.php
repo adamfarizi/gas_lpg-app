@@ -9,13 +9,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgenController;
 use App\Http\Controllers\KurirController;
 use App\Http\Controllers\GuestController;
-<<<<<<< HEAD
 use App\Http\Controllers\GasController;
 use App\Http\Controllers\TruckController;
 use App\Models\Gas;
-=======
-use App\Http\Controllers\ProsesController;
->>>>>>> 607b06575dac27fba86cb915d5204e84dbf3c9f1
 
 /*
 |--------------------------------------------------------------------------
