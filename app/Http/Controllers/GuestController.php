@@ -26,7 +26,7 @@ class GuestController extends Controller
         $admin = new User([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role ?? 'agen',
+            'role' => $request->role ?? 'admin',
             'password' => Hash::make($request->password), 
         ]);
         $admin->save();

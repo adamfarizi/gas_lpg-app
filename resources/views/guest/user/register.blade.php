@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-                        <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/local/bg_login.png')"></div>
+                        <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/local/bg_login2.png')"></div>
                             <div class="oblique-image position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-color: rgba(0, 0, 0, 0.5);">
                                 <div class="d-flex justify-content-center align-items-center h-100">
                                     <img src="{{ asset('assets/img/local/logo6.png') }}" class="me-10" alt="main_logo" style="max-width: 20%; max-height: 20%;">
