@@ -260,7 +260,7 @@
                                             <p class="text-xs font-weight-bold mb-0">Rp. {{ $gas->harga_gas }}</p>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="#" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                            <a href="{{ url('admin/stock/gas/'. $gas->id_gas .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                                 <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                             </a>
                                         </td>
@@ -318,7 +318,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="#" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                            <a href="{{ url('admin/stock/truck/'. $truck->id_truck .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
                                                 <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
                                             </a>
                                         </td>

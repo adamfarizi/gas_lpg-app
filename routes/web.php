@@ -69,7 +69,11 @@ Route::middleware(['auth'])->group(function () {
     //Controller stock
     Route::get('admin/stock', [StockController::class, 'index_stock']);
     Route::post('admin/stock/gas/create', [StockController::class, 'create_gas_action'])->name('create.gas.action');
+    Route::get('admin/stock/gas/{id}/edit',[StockController::class, 'edit_stock_gas']);
+    Route::put('admin/stock/gas/{id}',[StockController::class, 'edit_stock_gas_action']);
     Route::delete('admin/stock/gas/{id}', [StockController::class, 'destroy_stock_gas']);
     Route::post('admin/stock/truck/create', [StockController::class, 'create_truck_action'])->name('create.truck.action');
+    Route::get('admin/stock/truck/{id}/edit',[StockController::class, 'edit_stock_truck']);
+    Route::put('admin/stock/truck/{id}',[StockController::class, 'edit_stock_truck_action']);
     Route::delete('admin/stock/truck/{id}', [StockController::class, 'destroy_stock_truck']);
 });

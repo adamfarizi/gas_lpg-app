@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active " href="{{ url('admin/user') }}">
+                    <a class="nav-link" href="{{ url('admin/user') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('admin/stock') }}">
+                    <a class="nav-link active" href="{{ url('admin/stock') }}">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>credit-card</title>
@@ -131,7 +131,7 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                 <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{ url('admin/dashboard') }}">Admin</a></li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">User</li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Stock</li>
             </ol>
             <h6 class="font-weight-bolder mb-0">Edit</h6>
             </nav>
@@ -172,8 +172,8 @@
 
 @section('content')
     <div class="card-header pb-0 text-left">
-        <h3 class="font-weight-bolder text-primary text-gradient">Edit Admin</h3>
-        <p class="mb-0">Silahkan lengkapi data diri user dengan benar</p>
+        <h3 class="font-weight-bolder text-primary text-gradient">Edit Stock Gas</h3>
+        <p class="mb-0">Silahkan lengkapi data untuk gas</p>
     </div>
     <div class="card-body">
         @if (session('success'))
@@ -194,16 +194,20 @@
             </div>                
             @endforeach
         @endif
-        <form role="form text-left" action="{{ url('admin/user/admin', $admins->id_admin) }}" method="POST">    
+        <form role="form text-left" action="{{ url('admin/stock/gas/'. $gas->id_gas) }}" method="POST">    
             @csrf
             @method('PUT')  
-            <label>Name</label>
+            <label>Jenis Gas</label>
             <div class="input-group mb-3">
-                <input name="name" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $admins->name }}">
+                <input type="text" class="form-control" placeholder="Enter your gas" aria-label="Gas" aria-describedby="name-addon" id="jenis_gas" name="jenis_gas" value="{{ $gas->jenis_gas }}">
             </div>
-            <label>Email</label>
+            <label>Stock Gas</label>
             <div class="input-group mb-3">
-                <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $admins->email }}">
+                <input type="text" class="form-control" placeholder="Enter your stock" aria-label="Stock" aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ $gas->stock_gas }}">
+            </div>
+            <label>Harga Gas</label>
+            <div class="input-group mb-3">
+                <input type="number" class="form-control" placeholder="Enter your price" aria-label="Harga" aria-describedby="name-addon" id="harga_gas" name="harga_gas" value="{{ $gas->harga_gas }}">
             </div>
             <div class="text-center">
                 <button type="submit" name="submit"  class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0" values="Update">Update</button>
