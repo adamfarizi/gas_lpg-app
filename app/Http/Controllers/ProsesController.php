@@ -52,12 +52,14 @@ class ProsesController extends Controller
         $trucks = Truck::where('status', 'tersedia')->pluck('plat_truck');
         
         // Tabel pesanan dikirim
-        $dikirim = Transaksi::whereHas('pengiriman', function ($query) {
+        $lokasi_dikirim = Lokasi::where('status_pengiriman', 'Dikirim')->pluck('id_pengiriman');
+        $dikirim = Transaksi::whereIn('id_pengiriman', $lokasi_dikirim)->get();
+        $alamat_dikirim = Transaksi::whereHas('pengiriman', function ($query) {
             $query->whereNotNull('id_truck')->whereNotNull('id_kurir');
         })->get();
         $id_pengiriman_dikirim = [];
         $lokasi_dikirim = [];
-        foreach ($dikirim as $transaksi) {
+        foreach ($alamat_dikirim as $transaksi) {
             $id_pengiriman_dikirim[] = $transaksi->id_pengiriman;
         }
         foreach ($id_pengiriman_dikirim as $id) {
@@ -68,9 +70,8 @@ class ProsesController extends Controller
         }
 
         // Tabel pesanan diterima
-        // $diterima = Transaksi::whereHas('pengiriman.lokasis', function ($query) {
-        //     $query->where('status_pengiriman', 'Diterima');
-        // })->get();
+        $lokasi_selesai = Lokasi::where('status_pengiriman', 'Diterima')->pluck('id_pengiriman');
+        $diterima = Transaksi::whereIn('id_pengiriman', $lokasi_selesai)->get();
 
         return view('auth.proses.proses',[
             // Nav item
@@ -89,7 +90,7 @@ class ProsesController extends Controller
             'dikirim' => $dikirim,
             'lokasi_dikirim' => $lokasi_dikirim,
             // Tabel pesanan diterima
-            // 'diterima' => $diterima
+            'diterima' => $diterima
         ], $data);
     }
 

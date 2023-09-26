@@ -261,13 +261,28 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
-        @foreach ($pembayaran as $transaksi)  
+        {{-- Tabel konfirmasi pembayaran --}}
         <div class="container mt-5">
             <div class="card bg-white">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-title">Konfirmasi Pembayaran</h4>
+                        </div>
+                        <div class="col-9 pt-1">
+                            <span class="card-title">
+                                <i type="button" id="arrowIcon" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('konfirmasiPembayaran')"></i>
+                                    {{-- @if ($adaDataBaru)
+                                        <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
+                                    @endif --}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title">Konfirmasi Pembayaran</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -282,10 +297,11 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Konfirmasi</th>
                                     </tr>
                                 </thead>
+                                @foreach ($pembayaran as $transaksi)  
                                 <form action="{{ route('update_pembayaran', $transaksi->id_transaksi) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <tbody>
+                                    <tbody id="konfirmasiPembayaran" style="display: none;">
                                         <tr class="text-dark">
                                             <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
                                             <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
@@ -319,6 +335,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    @endforeach
                                 </form>
                             </table>
                         </div>
@@ -326,13 +343,26 @@
                 </div>
             </div>
         </div>
-        @endforeach
-        @foreach ($proses as $transaksi)
+        {{-- Tabel proses pesanan --}}
         <div class="container mt-5">
             <div class="card bg-white">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-title">Pesanan Diproses</h4>
+                        </div>
+                        <div class="col-9 pt-1 me-6">
+                            <span class="card-title">
+                                <i type="button" id="arrowIcon" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDiproses')"></i>
+                                {{-- @if ($adaDataBaru)
+                                    <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
+                                @endif --}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title">Pesanan Diproses</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -347,10 +377,11 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kirim Pesanan</th>
                                     </tr>
                                 </thead>
+                                @foreach ($proses as $transaksi)
                                 <form action="{{ route('update_dikirim', $transaksi->id_transaksi) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <tbody>
+                                    <tbody id="pesananDiproses" style="display: none;">
                                         <tr class="text-dark">
                                             <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
                                             <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
@@ -391,6 +422,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    @endforeach
                                 </form>
                             </table>
                         </div>
@@ -398,13 +430,26 @@
                 </div>
             </div>
         </div>
-        @endforeach
-        @foreach ($dikirim as $transaksi)
+        {{-- Tabel dikirim --}}
         <div class="container mt-5">
             <div class="card bg-white">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-title">Pesanan Dikirim</h4>
+                        </div>
+                        <div class="col-9 pt-1 me-6">
+                            <span class="card-title">
+                                <i type="button" id="arrowIcon" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDikirim')"></i>
+                                {{-- @if ($adaDataBaru)
+                                    <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
+                                @endif --}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title">Pesanan Dikirim</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -419,7 +464,8 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Cek Pesanan</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                @foreach ($dikirim as $transaksi)
+                                <tbody id="pesananDikirim" style="display: none;">
                                     <tr class="text-dark">
                                         <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
                                         <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
@@ -438,18 +484,33 @@
                                         </td>
                                     </tr>
                                 </tbody>
+                                @endforeach
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>     
-        @endforeach
+        </div>
+        {{-- Tabel selesai --}}
         <div class="container mt-5">
             <div class="card bg-white">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="card-title">Pesanan Selesai</h4>
+                        </div>
+                        <div class="col-9 pt-1 me-6">
+                            <span class="card-title">
+                                <i type="button" id="arrowIcon" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananSelesai')"></i>
+                                {{-- @if ($adaDataBaru)
+                                    <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
+                                @endif --}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title">Pesanan Selesai</h4>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 0px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -460,29 +521,31 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Riwayat Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Truck</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Cek Pesanan</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                @foreach ($diterima as $transaksi)
+                                <tbody id="pesananSelesai" style="display: none;">
                                     <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">GTK-0000001</td>
-                                        <td class="align-middle text-sm text-center">20-10-2023</td>
-                                        <td class="align-middle text-sm text-center">Sumanto Agen</td>
-                                        <td class="align-middle text-sm text-center">50 Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">Jl. Singosari 2/2, Patihan, Manguharjo, Kota Madiun yang sangat panjang sehingga akan dibungkus ke bawah jika kontennya melebihi lebar elemen ini.</td>
-                                        <td class="align-middle text-sm text-center">Kurir 2</td>                                        
-                                        <td class="align-middle text-sm text-center pb-4">
-                                            <span class="badge badge-sm bg-gradient-success">Pesanan Selesai</span>
-                                        </td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
+                                        <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
+                                        @foreach ($lokasi_dikirim as $lokasi)
+                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
+                                        @endforeach
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>                                        
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->truck->plat_truck }}</td>                                        
                                         <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-riwayat">
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-status">
                                                 <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
-                                                Cek Riwayat
+                                                Cek Status
                                             </button>
                                         </td>
                                     </tr>
                                 </tbody>
+                                @endforeach
                             </table>
                         </div>
                     </div>
@@ -551,4 +614,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function toggleTable(tableId) {
+            var table = document.getElementById(tableId);
+            var arrowIcon = document.getElementById('arrowIcon');
+            
+            if (table && arrowIcon) {
+                if (table.style.display === 'none') {
+                    table.style.display = 'table-row-group';
+                    if (arrowIcon.classList) {
+                        arrowIcon.classList.remove('fa-angle-down');
+                        arrowIcon.classList.add('fa-angle-up');
+                    }
+                    // Simpan status terbuka ke localStorage
+                    localStorage.setItem(tableId + '_status', 'open');
+                } else {
+                    table.style.display = 'none';
+                    if (arrowIcon.classList) {
+                        arrowIcon.classList.remove('fa-angle-up');
+                        arrowIcon.classList.add('fa-angle-down');
+                    }
+                    // Simpan status tertutup ke localStorage
+                    localStorage.setItem(tableId + '_status', 'closed');
+                }
+            }
+        };
+    </script>
+    
+    
+    
 @endsection
