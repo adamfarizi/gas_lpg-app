@@ -24,6 +24,14 @@ class ProsesController extends Controller
         $pesanan_masuk = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Belum Bayar');
         })->count();
+        $pesanan_diproses = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->where('status_pembayaran', 'Sudah Bayar');
+        })->whereHas('pengiriman', function ($query) {
+            $query->whereNull('id_kurir')->whereNull('id_truck');
+        })->count();
+        $pesanan_dikirim = Transaksi::whereHas('pengiriman', function ($query) {
+            $query->whereNotNull('id_truck')->whereNotNull('id_kurir');
+        })->count();
         $pesanan_selesai = Lokasi::where('status_pengiriman', 'Diterima')->count();
         
         // Tabel konfirmasi Pembayaran
@@ -78,6 +86,8 @@ class ProsesController extends Controller
             'kurir_tersedia' => $kurir_tersedia,
             'total_gas' => $total_gas,
             'pesanan_masuk' => $pesanan_masuk,
+            'pesanan_diproses' => $pesanan_diproses,
+            'pesanan_dikirim' => $pesanan_dikirim,
             'pesanan_selesai' => $pesanan_selesai,
             // Tabel konfirmasi pembayaran
             'pembayaran' => $pembayaran,

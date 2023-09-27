@@ -273,6 +273,7 @@
                         </div>
                         <div class="col-9 pt-1">
                             <span class="card-title">
+                                <a class="me-3">( {{ $pesanan_masuk }} )</a>
                                 <i type="button" id="icon_konfirmasiPembayaran" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('konfirmasiPembayaran')"></i>
                                     {{-- @if ($adaDataBaru)
                                         <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
@@ -335,11 +336,6 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    <tbody id="tabelKosong" style="display: none;">
-                                        <tr>
-                                            <td colspan="8" class="text-center">Tidak ada data yang tersedia.</td>
-                                        </tr>
-                                    </tbody>
                                     @endforeach
                                 </form>
                             </table>
@@ -358,6 +354,7 @@
                         </div>
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
+                                <a class="me-3">( {{ $pesanan_diproses }} )</a>
                                 <i type="button" id="icon_pesananDiproses" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDiproses')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
@@ -427,11 +424,6 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    <tbody id="tabelKosong" style="display: none;">
-                                        <tr>
-                                            <td colspan="8" class="text-center">Tidak ada data yang tersedia.</td>
-                                        </tr>
-                                    </tbody>
                                     @endforeach
                                 </form>
                             </table>
@@ -450,6 +442,7 @@
                         </div>
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
+                                <a class="me-3">( {{ $pesanan_dikirim }} )</a>
                                 <i type="button" id="icon_pesananDikirim" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDikirim')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
@@ -494,11 +487,6 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                                <tbody id="tabelKosong" style="display: none;">
-                                    <tr>
-                                        <td colspan="8" class="text-center">Tidak ada data yang tersedia.</td>
-                                    </tr>
-                                </tbody>
                                 @endforeach
                             </table>
                         </div>
@@ -516,6 +504,7 @@
                         </div>
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
+                                <a class="me-3">( {{ $pesanan_selesai }} )</a>
                                 <i type="button" id="icon_pesananSelesai" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananSelesai')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
@@ -558,11 +547,6 @@
                                                 Cek Status
                                             </button>
                                         </td>
-                                    </tr>
-                                </tbody>
-                                <tbody id="tabelKosong" style="display: none;">
-                                    <tr>
-                                        <td colspan="8" class="text-center">Tidak ada data yang tersedia.</td>
                                     </tr>
                                 </tbody>
                                 @endforeach
