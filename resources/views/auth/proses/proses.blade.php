@@ -273,7 +273,7 @@
                         </div>
                         <div class="col-9 pt-1">
                             <span class="card-title">
-                                <i type="button" id="arrowIcon" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('konfirmasiPembayaran')"></i>
+                                <i type="button" id="icon_konfirmasiPembayaran" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('konfirmasiPembayaran')"></i>
                                     {{-- @if ($adaDataBaru)
                                         <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
                                     @endif --}}
@@ -335,6 +335,11 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tbody id="tabelKosong" style="display: none;">
+                                        <tr>
+                                            <td colspan="8" class="text-center">Tidak ada data yang tersedia.</td>
+                                        </tr>
+                                    </tbody>
                                     @endforeach
                                 </form>
                             </table>
@@ -353,7 +358,7 @@
                         </div>
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
-                                <i type="button" id="arrowIcon" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDiproses')"></i>
+                                <i type="button" id="icon_pesananDiproses" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDiproses')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
                                 @endif --}}
@@ -422,6 +427,11 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tbody id="tabelKosong" style="display: none;">
+                                        <tr>
+                                            <td colspan="8" class="text-center">Tidak ada data yang tersedia.</td>
+                                        </tr>
+                                    </tbody>
                                     @endforeach
                                 </form>
                             </table>
@@ -440,7 +450,7 @@
                         </div>
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
-                                <i type="button" id="arrowIcon" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDikirim')"></i>
+                                <i type="button" id="icon_pesananDikirim" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDikirim')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
                                 @endif --}}
@@ -484,6 +494,11 @@
                                         </td>
                                     </tr>
                                 </tbody>
+                                <tbody id="tabelKosong" style="display: none;">
+                                    <tr>
+                                        <td colspan="8" class="text-center">Tidak ada data yang tersedia.</td>
+                                    </tr>
+                                </tbody>
                                 @endforeach
                             </table>
                         </div>
@@ -501,7 +516,7 @@
                         </div>
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
-                                <i type="button" id="arrowIcon" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananSelesai')"></i>
+                                <i type="button" id="icon_pesananSelesai" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananSelesai')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
                                 @endif --}}
@@ -543,6 +558,11 @@
                                                 Cek Status
                                             </button>
                                         </td>
+                                    </tr>
+                                </tbody>
+                                <tbody id="tabelKosong" style="display: none;">
+                                    <tr>
+                                        <td colspan="8" class="text-center">Tidak ada data yang tersedia.</td>
                                     </tr>
                                 </tbody>
                                 @endforeach
@@ -615,33 +635,60 @@
         </div>
     </div>
 
+    {{-- Script show hide table --}}
     <script>
+        // Fungsi untuk mengubah status tampilan tabel
         function toggleTable(tableId) {
             var table = document.getElementById(tableId);
-            var arrowIcon = document.getElementById('arrowIcon');
-            
-            if (table && arrowIcon) {
+            var iconId = 'icon_' + tableId; // Membuat ID ikon yang sesuai
+
+            var icon = document.getElementById(iconId); // Mengambil elemen ikon berdasarkan ID ikon yang sesuai
+
+            if (table && icon) {
                 if (table.style.display === 'none') {
                     table.style.display = 'table-row-group';
-                    if (arrowIcon.classList) {
-                        arrowIcon.classList.remove('fa-angle-down');
-                        arrowIcon.classList.add('fa-angle-up');
+                    if (icon.classList) {
+                        icon.classList.remove('fa-angle-down');
+                        icon.classList.add('fa-angle-up');
                     }
                     // Simpan status terbuka ke localStorage
                     localStorage.setItem(tableId + '_status', 'open');
                 } else {
                     table.style.display = 'none';
-                    if (arrowIcon.classList) {
-                        arrowIcon.classList.remove('fa-angle-up');
-                        arrowIcon.classList.add('fa-angle-down');
+                    if (icon.classList) {
+                        icon.classList.remove('fa-angle-up');
+                        icon.classList.add('fa-angle-down');
                     }
                     // Simpan status tertutup ke localStorage
                     localStorage.setItem(tableId + '_status', 'closed');
                 }
             }
-        };
+        }
+
+        // Fungsi ini akan dipanggil saat halaman dimuat
+        window.onload = function () {
+            // Loop melalui semua tabel yang ingin Anda pertahankan statusnya
+            var tablesToPersist = ['konfirmasiPembayaran', 'pesananDiproses', 'pesananDikirim', 'pesananSelesai']; // Gantilah dengan ID tabel yang sesuai
+            for (var i = 0; i < tablesToPersist.length; i++) {
+                var tableId = tablesToPersist[i];
+                var tableStatus = localStorage.getItem(tableId + '_status');
+                var table = document.getElementById(tableId);
+                var iconId = 'icon_' + tableId; // Membuat ID ikon yang sesuai
+                var icon = document.getElementById(iconId); // Mengambil elemen ikon berdasarkan ID ikon yang sesuai
+
+                if (tableStatus === 'open') {
+                    if (table && icon) {
+                        table.style.display = 'table-row-group';
+                        if (icon.classList) {
+                            icon.classList.remove('fa-angle-down');
+                            icon.classList.add('fa-angle-up');
+                        }
+                    }
+                }
+            }
+        }
+
     </script>
     
-    
-    
+
 @endsection
