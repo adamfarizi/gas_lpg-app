@@ -398,9 +398,7 @@
                                             <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
                                             <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
                                             <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
-                                            @foreach ($lokasi_proses as $lokasi)
                                             <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                            @endforeach
                                             <td class="align-middle text-sm text-center">
                                                 <select class="mb-3 form-control" id="name" name="name">
                                                     <option value="Belum Memilih" {{ is_null($transaksi->pengiriman->id_kurir) ? 'selected' : '' }}>
