@@ -16,6 +16,7 @@ class Transaksi extends Model
         'jumlah_transaksi',
         'total_transaksi',
         'id_agen',
+        'id_admin',
         'id_gas',
         'id_pengiriman',
         'id_pembayaran',

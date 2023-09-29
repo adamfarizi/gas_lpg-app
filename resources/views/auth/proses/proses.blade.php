@@ -261,7 +261,15 @@
             </div>
         </div>
     </div>
-    
+    <div class="row mt-5 pb-0">
+        <form action="{{ route('buy') }}" method="GET">
+            @csrf
+            <button type="submit" class="btn btn-primary">
+                <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
+                Tumbas
+            </button>
+        </form>
+    </div>
     <div class="row">
         {{-- Tabel konfirmasi pembayaran --}}
         <div class="container mt-5">
@@ -310,14 +318,14 @@
                                             <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
                                             <td class="align-middle text-sm text-center">
                                                 @if ($transaksi->pembayaran->tanggal_pembayaran === null)
-                                                    Belum Dibayar
+                                                    <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>    
                                                 @else
                                                     {{ $transaksi->pembayaran->tanggal_pembayaran }}
                                                 @endif
                                             </td>
                                             <td class="align-middle text-sm text-center">
                                                 @if ($transaksi->pembayaran->bukti_pembayaran === null)
-                                                    Belum Dibayar
+                                                    <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>    
                                                 @else
                                                     {{ $transaksi->pembayaran->bukti_pembayaran }}
                                                 @endif
@@ -336,8 +344,8 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    @endforeach
                                 </form>
+                                @endforeach
                             </table>
                         </div>
                     </div>
@@ -424,8 +432,8 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    @endforeach
                                 </form>
+                                @endforeach
                             </table>
                         </div>
                     </div>
@@ -495,7 +503,7 @@
             </div>
         </div>
         {{-- Tabel selesai --}}
-        <div class="container mt-5">
+        <div class="container mt-5 mb-5">
             <div class="card bg-white">
                 <div class="card-header pb-0">
                     <div class="row">
@@ -625,9 +633,8 @@
         function toggleTable(tableId) {
             var table = document.getElementById(tableId);
             var iconId = 'icon_' + tableId; // Membuat ID ikon yang sesuai
-
             var icon = document.getElementById(iconId); // Mengambil elemen ikon berdasarkan ID ikon yang sesuai
-
+    
             if (table && icon) {
                 if (table.style.display === 'none') {
                     table.style.display = 'table-row-group';
@@ -648,31 +655,29 @@
                 }
             }
         }
-
+    
         // Fungsi ini akan dipanggil saat halaman dimuat
         window.onload = function () {
             // Loop melalui semua tabel yang ingin Anda pertahankan statusnya
             var tablesToPersist = ['konfirmasiPembayaran', 'pesananDiproses', 'pesananDikirim', 'pesananSelesai']; // Gantilah dengan ID tabel yang sesuai
             for (var i = 0; i < tablesToPersist.length; i++) {
                 var tableId = tablesToPersist[i];
-                var tableStatus = localStorage.getItem(tableId + '_status');
                 var table = document.getElementById(tableId);
                 var iconId = 'icon_' + tableId; // Membuat ID ikon yang sesuai
                 var icon = document.getElementById(iconId); // Mengambil elemen ikon berdasarkan ID ikon yang sesuai
-
-                if (tableStatus === 'open') {
-                    if (table && icon) {
-                        table.style.display = 'table-row-group';
-                        if (icon.classList) {
-                            icon.classList.remove('fa-angle-down');
-                            icon.classList.add('fa-angle-up');
-                        }
+    
+                // Mengubah tampilan semua tabel menjadi tampil
+                if (table && icon) {
+                    table.style.display = 'table-row-group';
+                    if (icon.classList) {
+                        icon.classList.remove('fa-angle-down');
+                        icon.classList.add('fa-angle-up');
                     }
                 }
             }
         }
-
     </script>
+    
     
 
 @endsection

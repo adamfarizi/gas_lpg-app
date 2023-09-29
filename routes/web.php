@@ -11,7 +11,7 @@ use App\Http\Controllers\KurirController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProsesController;
-use App\Models\Gas;
+use App\Http\Controllers\CreateBuyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/proses', [ProsesController::class, 'index'])->name('admin_proses');
     Route::put('admin/proses/update_pembayaran/{id}',[ProsesController::class, 'update_pembayaran'])->name('update_pembayaran');
     Route::put('admin/proses/update_dikirim/{id}',[ProsesController::class, 'update_dikirim'])->name('update_dikirim');
+
+    Route::get('admin/proses/buy', [CreateBuyController::class, 'createData'])->name('buy');
 
     // Controller user
     Route::get('admin/user', [UserController::class, 'index_user'])->name('admin_user');

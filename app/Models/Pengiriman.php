@@ -12,8 +12,7 @@ class Pengiriman extends Model
     
     protected $fillable = [
         'id_truck',
-        'id_transaksi',
-        'id_lokasi',
+        'id_kurir',
     ];
     
     public function lokasis()

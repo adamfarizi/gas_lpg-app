@@ -12,7 +12,7 @@ class TransaksiSeeder extends Seeder
         // Data contoh untuk model Transaksi
         $data = [
             'tanggal_transaksi' => now(), // Tanggal transaksi sesuai kebutuhan Anda
-            'resi_transaksi' => 'GTX-000001', // Nomor resi transaksi sesuai kebutuhan Anda
+            'resi_transaksi' => 'GTK-000001', // Nomor resi transaksi sesuai kebutuhan Anda
             'jumlah_transaksi' => 5, // Jumlah gas yang dibeli sesuai kebutuhan Anda
             'total_transaksi' => 150000, // Total harga transaksi sesuai kebutuhan Anda
             'id_agen' => 1, // ID agen sesuai kebutuhan Anda
