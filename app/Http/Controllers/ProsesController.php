@@ -29,9 +29,7 @@ class ProsesController extends Controller
         })->whereHas('pengiriman', function ($query) {
             $query->whereNull('id_kurir')->whereNull('id_truck');
         })->count();
-        $pesanan_dikirim = Transaksi::whereHas('pengiriman', function ($query) {
-            $query->whereNotNull('id_truck')->whereNotNull('id_kurir');
-        })->count();
+        $pesanan_dikirim = Lokasi::where('status_pengiriman', 'Dikirim')->count();
         $pesanan_selesai = Lokasi::where('status_pengiriman', 'Diterima')->count();
         
         // Tabel konfirmasi Pembayaran
@@ -71,7 +69,7 @@ class ProsesController extends Controller
             $id_pengiriman_dikirim[] = $transaksi->id_pengiriman;
         }
         foreach ($id_pengiriman_dikirim as $id) {
-            $lokasi = Lokasi::where('id_pengiriman', $id)->first();
+            $lokasi = Lokasi::where('id_pengiriman', $id)->pluck('id_pengiriman');
             if ($lokasi) {
                 $lokasi_dikirim[] = $lokasi;
             }
@@ -114,6 +112,9 @@ class ProsesController extends Controller
         $transaksi->pembayaran->status_pembayaran = $status_pembayaran;
         $transaksi->pembayaran->save();
 
+        $transaksi->id_admin = Auth::user()->id_admin;
+        $transaksi->save();
+
         $id_gas = $transaksi->id_gas;
         $gas = Gas::find($id_gas);
         $gas_dibeli = $transaksi->jumlah_transaksi;
@@ -125,6 +126,9 @@ class ProsesController extends Controller
     public function update_dikirim(Request $request, $id_transaksi){
 
         $transaksi = Transaksi::find($id_transaksi);
+        
+        $transaksi->id_admin = Auth::user()->id_admin;
+        $transaksi->save();
         
         $name_kurir = $request->input('name');
         $kurir = Kurir::where('name', $name_kurir)->first();

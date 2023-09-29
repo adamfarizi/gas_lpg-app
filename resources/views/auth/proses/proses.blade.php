@@ -282,8 +282,8 @@
                         <div class="col-9 pt-1">
                             <span class="card-title">
                                 <a class="me-3">( {{ $pesanan_masuk }} )</a>
-                                <i type="button" id="icon_konfirmasiPembayaran" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('konfirmasiPembayaran')"></i>
-                                    {{-- @if ($adaDataBaru)
+                                <i type="button" id="icon_toggleAllTables_konfirmasiPembayaran" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('konfirmasiPembayaran')"></i>
+                                {{-- @if ($adaDataBaru)
                                         <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
                                     @endif --}}
                             </span>
@@ -310,7 +310,7 @@
                                 <form action="{{ route('update_pembayaran', $transaksi->id_transaksi) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <tbody id="konfirmasiPembayaran" style="display: none;">
+                                    <tbody id="konfirmasiPembayaran_{{ $transaksi->id_transaksi }}" style="display: none;">
                                         <tr class="text-dark">
                                             <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
                                             <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
@@ -363,7 +363,7 @@
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
                                 <a class="me-3">( {{ $pesanan_diproses }} )</a>
-                                <i type="button" id="icon_pesananDiproses" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDiproses')"></i>
+                                <i type="button" id="icon_toggleAllTables_pesananDiproses" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananDiproses')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
                                 @endif --}}
@@ -391,7 +391,7 @@
                                 <form action="{{ route('update_dikirim', $transaksi->id_transaksi) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <tbody id="pesananDiproses" style="display: none;">
+                                    <tbody id="pesananDiproses_{{ $transaksi->id_transaksi }}" style="display: none;">
                                         <tr class="text-dark">
                                             <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
                                             <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
@@ -451,7 +451,7 @@
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
                                 <a class="me-3">( {{ $pesanan_dikirim }} )</a>
-                                <i type="button" id="icon_pesananDikirim" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananDikirim')"></i>
+                                <i type="button" id="icon_toggleAllTables_pesananDikirim" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananDikirim')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
                                 @endif --}}
@@ -476,15 +476,13 @@
                                     </tr>
                                 </thead>
                                 @foreach ($dikirim as $transaksi)
-                                <tbody id="pesananDikirim" style="display: none;">
+                                <tbody id="pesananDikirim_{{ $transaksi->id_transaksi }}" style="display: none;">
                                     <tr class="text-dark">
                                         <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
                                         <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
                                         <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
                                         <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
-                                        @foreach ($lokasi_dikirim as $lokasi)
                                         <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                        @endforeach
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>                                        
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->truck->plat_truck }}</td>                                        
                                         <td class="align-middle text-center ">
@@ -513,7 +511,7 @@
                         <div class="col-9 pt-1 me-6">
                             <span class="card-title">
                                 <a class="me-3">( {{ $pesanan_selesai }} )</a>
-                                <i type="button" id="icon_pesananSelesai" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleTable('pesananSelesai')"></i>
+                                <i type="button" id="icon_toggleAllTables_pesananSelesai" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananSelesai')"></i>
                                 {{-- @if ($adaDataBaru)
                                     <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
                                 @endif --}}
@@ -538,15 +536,13 @@
                                     </tr>
                                 </thead>
                                 @foreach ($diterima as $transaksi)
-                                <tbody id="pesananSelesai" style="display: none;">
+                                <tbody id="pesananSelesai_{{ $transaksi->id_transaksi }}" style="display: none;">
                                     <tr class="text-dark">
                                         <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
                                         <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
                                         <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
                                         <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
-                                        @foreach ($lokasi_dikirim as $lokasi)
                                         <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                        @endforeach
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>                                        
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->truck->plat_truck }}</td>                                        
                                         <td class="align-middle text-center ">
@@ -629,54 +625,57 @@
 
     {{-- Script show hide table --}}
     <script>
-        // Fungsi untuk mengubah status tampilan tabel
-        function toggleTable(tableId) {
-            var table = document.getElementById(tableId);
-            var iconId = 'icon_' + tableId; // Membuat ID ikon yang sesuai
-            var icon = document.getElementById(iconId); // Mengambil elemen ikon berdasarkan ID ikon yang sesuai
-    
-            if (table && icon) {
-                if (table.style.display === 'none') {
-                    table.style.display = 'table-row-group';
-                    if (icon.classList) {
-                        icon.classList.remove('fa-angle-down');
-                        icon.classList.add('fa-angle-up');
+        // Fungsi untuk mengubah status tampilan semua tabel berdasarkan jenis tabel
+        function toggleAllTables(tableType) {
+            var icon = document.getElementById(`icon_toggleAllTables_${tableType}`);
+            var tables = document.querySelectorAll(`[id^="${tableType}_"]`);
+            var allTablesStatus = localStorage.getItem(`allTablesStatus_${tableType}`);
+
+
+            if (tables) {
+                if (icon.classList.contains('fa-angle-down')) {
+                    // Buka semua tabel
+                    for (var i = 0; i < tables.length; i++) {
+                        tables[i].style.display = 'table-row-group';
                     }
-                    // Simpan status terbuka ke localStorage
-                    localStorage.setItem(tableId + '_status', 'open');
+                    icon.classList.remove('fa-angle-down');
+                    icon.classList.add('fa-angle-up');
+                    // Simpan status terbuka ke localStorage (jika perlu)
+                    localStorage.setItem(`allTablesStatus_${tableType}`, 'open');
                 } else {
-                    table.style.display = 'none';
-                    if (icon.classList) {
-                        icon.classList.remove('fa-angle-up');
-                        icon.classList.add('fa-angle-down');
+                    // Tutup semua tabel
+                    for (var i = 0; i < tables.length; i++) {
+                        tables[i].style.display = 'none';
                     }
-                    // Simpan status tertutup ke localStorage
-                    localStorage.setItem(tableId + '_status', 'closed');
+                    icon.classList.remove('fa-angle-up');
+                    icon.classList.add('fa-angle-down');
+                    // Simpan status tertutup ke localStorage (jika perlu)
+                    localStorage.setItem(`allTablesStatus_${tableType}`, 'closed');
                 }
             }
         }
-    
+
         // Fungsi ini akan dipanggil saat halaman dimuat
         window.onload = function () {
-            // Loop melalui semua tabel yang ingin Anda pertahankan statusnya
-            var tablesToPersist = ['konfirmasiPembayaran', 'pesananDiproses', 'pesananDikirim', 'pesananSelesai']; // Gantilah dengan ID tabel yang sesuai
-            for (var i = 0; i < tablesToPersist.length; i++) {
-                var tableId = tablesToPersist[i];
-                var table = document.getElementById(tableId);
-                var iconId = 'icon_' + tableId; // Membuat ID ikon yang sesuai
-                var icon = document.getElementById(iconId); // Mengambil elemen ikon berdasarkan ID ikon yang sesuai
-    
-                // Mengubah tampilan semua tabel menjadi tampil
-                if (table && icon) {
-                    table.style.display = 'table-row-group';
-                    if (icon.classList) {
-                        icon.classList.remove('fa-angle-down');
-                        icon.classList.add('fa-angle-up');
+            var icon = document.getElementById(`icon_toggleAllTables_${tableType}`);
+            if (icon) {
+                var tableType = icon.getAttribute('data-table-type');
+                var allTablesStatus = localStorage.getItem(`allTablesStatus_${tableType}`);
+                var tables = document.querySelectorAll(`[id^="${tableType}_"]`);
+
+                if (allTablesStatus === 'open') {
+                    // Buka semua tabel saat halaman dimuat jika status terakhir adalah terbuka
+                    for (var i = 0; i < tables.length; i++) {
+                        tables[i].style.display = 'table-row-group';
                     }
+                    icon.classList.remove('fa-angle-down');
+                    icon.classList.add('fa-angle-up');
                 }
             }
         }
     </script>
+    
+   
     
     
 
