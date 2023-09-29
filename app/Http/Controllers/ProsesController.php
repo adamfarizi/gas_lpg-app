@@ -60,21 +60,15 @@ class ProsesController extends Controller
         $trucks = Truck::where('status', 'tersedia')->pluck('plat_truck');
         
         // Tabel pesanan dikirim
-        $lokasi_dikirim = Lokasi::where('status_pengiriman', 'Dikirim')->pluck('id_pengiriman');
-        $dikirim = Transaksi::whereIn('id_pengiriman', $lokasi_dikirim)->get();
+        $id_dikirim = Lokasi::where('status_pengiriman', 'Dikirim')->pluck('id_pengiriman');
+        $dikirim = Transaksi::whereIn('id_pengiriman', $id_dikirim)->get();
         $alamat_dikirim = Transaksi::whereHas('pengiriman', function ($query) {
             $query->whereNotNull('id_truck')->whereNotNull('id_kurir');
         })->get();
         $id_pengiriman_dikirim = [];
-        $lokasi_dikirim = [];
+        $lokasi_dikirim = Lokasi::where('id_pengiriman', $id)->get();
         foreach ($alamat_dikirim as $transaksi) {
             $id_pengiriman_dikirim[] = $transaksi->id_pengiriman;
-        }
-        foreach ($id_pengiriman_dikirim as $id) {
-            $lokasi = Lokasi::where('id_pengiriman', $id)->pluck('id_pengiriman');
-            if ($lokasi) {
-                $lokasi_dikirim[] = $lokasi;
-            }
         }
 
         // Tabel pesanan diterima
@@ -101,7 +95,7 @@ class ProsesController extends Controller
             'lokasi_dikirim' => $lokasi_dikirim,
             // Tabel pesanan diterima
             'diterima' => $diterima,
-            
+
             'transaksis' => $transaksis
         ], $data);
     }

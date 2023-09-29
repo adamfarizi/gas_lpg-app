@@ -485,7 +485,7 @@
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>                                        
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->truck->plat_truck }}</td>                                        
                                         <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-status">
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-status_{{ $transaksi->pengiriman->id_pengiriman }}" id="modalButton">
                                                 <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
                                                 Cek Status
                                             </button>
@@ -562,35 +562,37 @@
     </div>
 
     <!--Modal Status-->
+    @foreach ($dikirim as $transaksi) 
     <div class="row">
         <div class="col-md-4">
-            <div class="modal fade" id="cek-status" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal fade" id="cek-status_{{ $transaksi->pengiriman->id_pengiriman }}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h6 class="modal-title text-uppercase" id="modal-title-default">Status</h6>
-                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h6 class="modal-title text-uppercase" id="modal-title-default">Status</h6>
+                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        @use App\Models\Lokasi
+                        @php
+                            $lokasi_dikirim = Lokasi::where('id_pengiriman', $id)->get();
+                        @endphp
+                        @foreach ($lokasi_dikirim=Lokasi::where('id_pengiriman', $id)->get() as $lokasi)  
+                        <div class="modal-body">
+                            <li class="text-dark mb-3">{{ $lokasi->alamat_lokasi_tujuan }}
+                                <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
+                            </li>
+                        </div>
+                        @endforeach
+                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
                     </div>
-                    <div class="modal-body">
-                        <li class="text-dark mb-3">Kurir melanjutkan perjalan
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                        <li class="text-dark mb-3">Kurir sedang ngopi
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                        <li class="text-dark mb-3">Gas sedang di pick up
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                        </li>
-                    </div>
-                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
-                </div>
                 </div>
             </div>
         </div>
     </div>
-
+    @endforeach
+    
     <!--Modal Riwayat-->
     <div class="row">
         <div class="col-md-4">
