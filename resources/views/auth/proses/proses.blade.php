@@ -269,6 +269,7 @@
                 Tumbas
             </button>
         </form>
+        
     </div>
     <div class="row">
         {{-- Tabel konfirmasi pembayaran --}}
@@ -622,61 +623,59 @@
             </div>
         </div>
     </div>
-
+    
     {{-- Script show hide table --}}
     <script>
         // Fungsi untuk mengubah status tampilan semua tabel berdasarkan jenis tabel
-        function toggleAllTables(tableType) {
-            var icon = document.getElementById(`icon_toggleAllTables_${tableType}`);
-            var tables = document.querySelectorAll(`[id^="${tableType}_"]`);
-            var allTablesStatus = localStorage.getItem(`allTablesStatus_${tableType}`);
-
-
-            if (tables) {
-                if (icon.classList.contains('fa-angle-down')) {
-                    // Buka semua tabel
-                    for (var i = 0; i < tables.length; i++) {
-                        tables[i].style.display = 'table-row-group';
-                    }
-                    icon.classList.remove('fa-angle-down');
-                    icon.classList.add('fa-angle-up');
-                    // Simpan status terbuka ke localStorage (jika perlu)
-                    localStorage.setItem(`allTablesStatus_${tableType}`, 'open');
-                } else {
-                    // Tutup semua tabel
-                    for (var i = 0; i < tables.length; i++) {
-                        tables[i].style.display = 'none';
-                    }
-                    icon.classList.remove('fa-angle-up');
-                    icon.classList.add('fa-angle-down');
-                    // Simpan status tertutup ke localStorage (jika perlu)
-                    localStorage.setItem(`allTablesStatus_${tableType}`, 'closed');
-                }
-            }
-        }
-
-        // Fungsi ini akan dipanggil saat halaman dimuat
-        window.onload = function () {
-            var icon = document.getElementById(`icon_toggleAllTables_${tableType}`);
-            if (icon) {
-                var tableType = icon.getAttribute('data-table-type');
+        function toggleAllTables(tableTypes) {
+            var tableTypeArray = tableTypes.split(','); // Membagi jenis tabel menjadi array
+            for (var i = 0; i < tableTypeArray.length; i++) {
+                var tableType = tableTypeArray[i].trim();
+                var icon = document.getElementById(`icon_toggleAllTables_${tableType}`);
                 var allTablesStatus = localStorage.getItem(`allTablesStatus_${tableType}`);
-                var tables = document.querySelectorAll(`[id^="${tableType}_"]`);
 
-                if (allTablesStatus === 'open') {
-                    // Buka semua tabel saat halaman dimuat jika status terakhir adalah terbuka
-                    for (var i = 0; i < tables.length; i++) {
-                        tables[i].style.display = 'table-row-group';
+                // Fungsi untuk mengatur tampilan tabel berdasarkan status
+                function setTableVisibility(isOpen) {
+                    var tables = document.querySelectorAll(`[id^="${tableType}_"]`);
+                    for (var j = 0; j < tables.length; j++) {
+                        tables[j].style.display = isOpen ? 'table-row-group' : 'none';
                     }
-                    icon.classList.remove('fa-angle-down');
-                    icon.classList.add('fa-angle-up');
+                }
+
+                if (icon) {
+                    if (icon.classList.contains('fa-angle-down')) {
+                        // Buka semua tabel
+                        setTableVisibility(true);
+                        icon.classList.remove('fa-angle-down');
+                        icon.classList.add('fa-angle-up');
+                        // Simpan status terbuka ke localStorage
+                        localStorage.setItem(`allTablesStatus_${tableType}`, 'open');
+                    } else {
+                        // Tutup semua tabel
+                        setTableVisibility(false);
+                        icon.classList.remove('fa-angle-up');
+                        icon.classList.add('fa-angle-down');
+                        // Simpan status tertutup ke localStorage
+                        localStorage.setItem(`allTablesStatus_${tableType}`, 'closed');
+                    }
                 }
             }
         }
+
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            var tableTypes = 'konfirmasiPembayaran, pesananDiproses, pesananDikirim, pesananSelesai'; // Jenis tabel dipisahkan dengan koma
+            var tableTypeArray = tableTypes.split(',');
+            for (var i = 0; i < tableTypeArray.length; i++) {
+                var tableType = tableTypeArray[i].trim();
+                var allTablesStatus = localStorage.getItem(`allTablesStatus_${tableType}`);
+                if (allTablesStatus === 'open') {
+                    // Jika status terbuka, buka tabel
+                    toggleAllTables(tableType);
+                }
+            }
+        });
+
     </script>
-    
-   
-    
-    
 
 @endsection

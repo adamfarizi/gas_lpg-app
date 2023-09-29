@@ -277,7 +277,7 @@
                     <div class="card-header pb-0 d-flex justify-content-between">
                         <h6>Admin Table</h6>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 320px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                             <thead>
@@ -336,7 +336,7 @@
                     <div class="card-header pb-0 d-flex justify-content-between">
                         <h6>Kurir Table</h6>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 320px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                             <thead>
@@ -406,7 +406,7 @@
                     <div class="card-header pb-0 d-flex justify-content-between">
                         <h6>Agen Table</h6>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 320px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                             <thead>

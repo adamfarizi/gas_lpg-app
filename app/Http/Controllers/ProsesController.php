@@ -17,6 +17,8 @@ class ProsesController extends Controller
 {
     public function index() {
         $data['title'] = 'Proses';
+
+        $transaksis = Transaksi::all();
         
         // Nav items
         $total_gas = Gas::sum('stock_gas');
@@ -98,7 +100,9 @@ class ProsesController extends Controller
             'dikirim' => $dikirim,
             'lokasi_dikirim' => $lokasi_dikirim,
             // Tabel pesanan diterima
-            'diterima' => $diterima
+            'diterima' => $diterima,
+            
+            'transaksis' => $transaksis
         ], $data);
     }
 
@@ -123,10 +127,11 @@ class ProsesController extends Controller
 
         return redirect()->back()->with('success', 'Status pembayaran berhasil diubah.');
     }
+
     public function update_dikirim(Request $request, $id_transaksi){
 
         $transaksi = Transaksi::find($id_transaksi);
-        
+
         $transaksi->id_admin = Auth::user()->id_admin;
         $transaksi->save();
         
