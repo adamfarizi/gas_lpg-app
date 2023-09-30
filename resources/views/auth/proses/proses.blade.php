@@ -553,7 +553,7 @@
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>                                        
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->truck->plat_truck }}</td>                                        
                                         <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-status">
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-id="{{ $transaksi->pengiriman->id_pengiriman }}" data-bs-toggle="modal" data-bs-target="#cek-riwayat{{ $transaksi->pengiriman->id_pengiriman }}">
                                                 <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
                                                 Cek Status
                                             </button>
@@ -604,35 +604,34 @@
     @endforeach
 
     <!--Modal Riwayat-->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="modal fade" id="cek-riwayat" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat</h6>
-                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+    @foreach ($lokasis as $lokasi)
+        <div class="row">
+            <div class="col-md-4">
+                <div class="modal fade" id="cek-riwayat{{ $lokasi->pengiriman->id_pengiriman }}" tabindex="-1" role="dialog" aria-labelledby="modal-default{{ $lokasi->pengiriman->id_pengiriman }}" aria-hidden="true">
+                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat</h6>
+                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            @foreach ($lokasis->where('pengiriman.id_pengiriman', $lokasi->pengiriman->id_pengiriman) as $lokasiDetail)
+                            <li class="mb-3">
+                                {{ $lokasiDetail->alamat_lokasi_tujuan }}
+                                <br><span class="text-secondary text-xs">Tanggal : {{ $lokasiDetail->created_at->format('d-m-Y') }}</span>
+                                <br><span class="text-secondary text-xs">Pukul : {{ $lokasiDetail->created_at->format('H:i') }}</span>
+                            </li>
+                        @endforeach
+                        </div>
+                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
                     </div>
-                    <div class="modal-body">
-                        <li class="mb-3 text-dark">Gas sudah sampai di lokasi anda  
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang dalam perjalan menuju lokasi anda 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang transit di Madiun 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sudah sampai di Jalan 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 17-09-2023</span></li>
-                        <li class="mb-3 text-dark">Gas sedang di pick up 
-                            <br><span class="text-secondary ms-4 text-xs">Tanggal: 16-09-2023</span></li>
-                    </div>
-                    <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                </div>
                 </div>
             </div>
-            </div>
         </div>
-    </div>
+    @endforeach
 
     <!--Modal Lokasi-->
     <form action="{{ route('lokasi') }}" method="POST">
