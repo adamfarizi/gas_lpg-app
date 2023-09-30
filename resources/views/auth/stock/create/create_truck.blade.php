@@ -17,7 +17,7 @@
 
                     <label>Maksimal Beban Truck<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Enter max load truck" aria-label="Max" aria-describedby="name-addon" id="maksimal_beban_truck" name="maksimal_beban_truck" value="{{ old('maksimal_beban_truck') }}">
+                        <input type="number" class="form-control" placeholder="Enter max load truck" aria-label="Max" aria-describedby="name-addon" id="maksimal_beban_truck" name="maksimal_beban_truck" value="{{ old('maksimal_beban_truck') }}">
                     </div>
 
                     <div class="text-center">

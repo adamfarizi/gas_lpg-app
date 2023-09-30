@@ -17,7 +17,7 @@
 
                     <label>Stock Gas<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Enter your stock" aria-label="Stock" aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ old('stock_gas') }}">
+                        <input type="number" class="form-control" placeholder="Enter your stock" aria-label="Stock" aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ old('stock_gas') }}">
                     </div>
 
                     <label>Harga Gas<span class="text-danger">*</span></label>

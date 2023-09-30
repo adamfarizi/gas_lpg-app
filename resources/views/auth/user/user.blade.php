@@ -344,7 +344,6 @@
                             <thead>
                                 <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3.5">No Hp</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                 <th class="text-secondary opacity-7"></th>
@@ -366,17 +365,14 @@
                                 </div>
                                 </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
-                                    </td>
-                                    <td>
                                         <p class="text-xs font-weight-bold mb-0">{{ $user->no_hp }}</p>
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                         @if ($user->status === 'tersedia')
                                             <span class="badge badge-sm bg-gradient-success">Tersedia</span>
                                             @endif
-                                        @if ($user->status === 'tidak_tersedia')
-                                            <span class="badge badge-sm bg-gradient-danger">Tidak Tersedia</span>    
+                                        @if ($user->status === 'tidak tersedia')
+                                            <span class="badge badge-sm bg-gradient-danger">Tdk Tersedia</span>    
                                         @endif
                                     </td>
                                     <td class="align-middle">
@@ -415,7 +411,7 @@
                             <thead>
                                 <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Role</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4">No HP</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-8">Alamat</th>
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                                 <th class="text-secondary opacity-7"></th>
@@ -437,7 +433,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ $user->role }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ $user->no_hp }}</p>
                                     </td>
                                     <td style="max-width: 100px; white-space: pre-wrap; word-wrap: break-word;"><p class="text-xs font-weight-bold mb-0">{{ $user->alamat }}</p></td>                               
                                     <td class="align-middle text-center text-sm">

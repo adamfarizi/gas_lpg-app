@@ -23,12 +23,14 @@ class AgenController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
+            'no_hp' => 'required|string|max:15',
             'alamat' => 'required|string|max:255',
         ]);
     
         $agen = Agen::find($id_agen);
         $agen->name = $request->input('name');
-        $agen->email = $request->input('email');    
+        $agen->email = $request->input('email');
+        $agen->no_hp = $request->input('no_hp');        
         $agen->alamat = $request->input('alamat');
         $agen->save();
 

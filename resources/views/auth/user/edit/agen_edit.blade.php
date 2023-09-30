@@ -205,6 +205,10 @@
             <div class="input-group mb-3">
                 <input name="email" type="text" class="form-control" placeholder="Input your email" aria-label="email" value="{{ $agens->email }}">
             </div>
+            <label>No Hp</label>
+            <div class="input-group mb-3">
+                <input name="no_hp" type="number" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $agens->no_hp }}">
+            </div>
             <label>Alamat</label>
             <div class="input-group mb-3">
                 <input name="alamat" type="text" class="form-control" placeholder="Input your name" aria-label="name" value="{{ $agens->alamat }}">

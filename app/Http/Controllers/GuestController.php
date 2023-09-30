@@ -30,7 +30,7 @@ class GuestController extends Controller
             'password' => Hash::make($request->password), 
         ]);
         $admin->save();
-        return redirect('admin')->with('success', 'Registration Success. Please Login!');
+        return redirect('login')->with('success', 'Registration Success. Please Login!');
     }
 
 
