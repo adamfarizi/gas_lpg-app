@@ -12,6 +12,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProsesController;
 use App\Http\Controllers\CreateBuyController;
+use App\Http\Controllers\CreateLokasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,8 +45,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('admin/proses/update_pembayaran/{id}',[ProsesController::class, 'update_pembayaran'])->name('update_pembayaran');
     Route::put('admin/proses/update_dikirim/{id}',[ProsesController::class, 'update_dikirim'])->name('update_dikirim');
 
-    Route::get('admin/proses/buy', [CreateBuyController::class, 'createData'])->name('buy');
-
+    Route::post('admin/proses/buy', [CreateBuyController::class, 'createData'])->name('buy');
+    Route::post('admin/proses/lokasi', [CreateLokasiController::class, 'createLocation'])->name('lokasi');
+    
     // Controller user
     Route::get('admin/user', [UserController::class, 'index_user'])->name('admin_user');
     Route::post('admin/user/create', [UserController::class, 'create_user_action'])->name('create.action');

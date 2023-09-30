@@ -272,6 +272,7 @@
             </div>            
         </div>
         <div class="row">
+            {{-- Tabel admin --}}
             <div class="col-6">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
@@ -331,6 +332,7 @@
                     </div>
                 </div>
             </div>
+            {{-- Tabel kurir --}}
             <div class="col-6">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
@@ -400,6 +402,7 @@
                 </div>
             </div>
         </div>
+        {{-- Tabel agen --}}
         <div class="row">
             <div class="col-12">
                 <div class="card mt-3">

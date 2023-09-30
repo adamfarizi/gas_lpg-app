@@ -261,15 +261,23 @@
             </div>
         </div>
     </div>
-    <div class="row mt-5 pb-0">
-        <form action="{{ route('buy') }}" method="GET">
-            @csrf
-            <button type="submit" class="btn btn-primary">
+    {{-- Create Button --}}
+    <div class="row mt-3 pb-0">
+        <div class="col-auto">
+            <form action="{{ route('buy') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn bg-gradient-primary">
+                    <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
+                    Transaksi
+                </button>
+            </form>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#make-lokasi">
                 <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                Tumbas
+                Lokasi
             </button>
-        </form>
-        
+        </div>
     </div>
     <div class="row">
         {{-- Tabel konfirmasi pembayaran --}}
@@ -485,10 +493,10 @@
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>                                        
                                         <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->truck->plat_truck }}</td>                                        
                                         <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-bs-toggle="modal" data-bs-target="#cek-status_{{ $transaksi->pengiriman->id_pengiriman }}" id="modalButton">
-                                                <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-id="{{ $transaksi->pengiriman->id_pengiriman }}" data-bs-toggle="modal" data-bs-target="#cek-status{{ $transaksi->pengiriman->id_pengiriman }}" id="modalButton">
+                                                <span><i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
                                                 Cek Status
-                                            </button>
+                                            </button>                                         
                                         </td>
                                     </tr>
                                 </tbody>
@@ -562,37 +570,39 @@
     </div>
 
     <!--Modal Status-->
-    @foreach ($dikirim as $transaksi) 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="modal fade" id="cek-status_{{ $transaksi->pengiriman->id_pengiriman }}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title text-uppercase" id="modal-title-default">Status</h6>
-                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
+    @foreach ($lokasis as $lokasi)
+        <div class="row">
+            <div class="col-md-4">
+                <div class="modal fade" id="cek-status{{ $lokasi->pengiriman->id_pengiriman }}" tabindex="-1" role="dialog" aria-labelledby="modal-default{{ $lokasi->pengiriman->id_pengiriman }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title text-uppercase" id="modal-title-default">Update Lokasi</h6>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="max-height:350px; overflow-y: auto;">
+                                <ul class="mb-3 text-dark" class="tracking-list">
+                                    @foreach ($lokasis->where('pengiriman.id_pengiriman', $lokasi->pengiriman->id_pengiriman) as $lokasiDetail)
+                                        <li class="mb-3">
+                                            {{ $lokasiDetail->alamat_lokasi_tujuan }}
+                                            <br><span class="text-secondary text-xs">Tanggal : {{ $lokasiDetail->created_at->format('d-m-Y') }}</span>
+                                            <br><span class="text-secondary text-xs">Pukul : {{ $lokasiDetail->created_at->format('H:i') }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        @use App\Models\Lokasi
-                        @php
-                            $lokasi_dikirim = Lokasi::where('id_pengiriman', $id)->get();
-                        @endphp
-                        @foreach ($lokasi_dikirim=Lokasi::where('id_pengiriman', $id)->get() as $lokasi)  
-                        <div class="modal-body">
-                            <li class="text-dark mb-3">{{ $lokasi->alamat_lokasi_tujuan }}
-                                <br><span class="text-secondary ms-4 text-xs">Tanggal: 18-09-2023</span>
-                            </li>
-                        </div>
-                        @endforeach
-                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     @endforeach
-    
+
     <!--Modal Riwayat-->
     <div class="row">
         <div class="col-md-4">
@@ -623,7 +633,48 @@
             </div>
         </div>
     </div>
+
+    <!--Modal Lokasi-->
+    <form action="{{ route('lokasi') }}" method="POST">
+        @csrf
+        <div class="row">
+            <div class="col-md-4">
+                <div class="modal fade" id="make-lokasi" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h6 class="modal-title text-uppercase" id="modal-title-default">Tambah Lokasi</h6>
+                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <label>Lokasi <span class="text-danger">*</span></label>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Enter your Lokasi" aria-label="Lokasi" aria-describedby="lokasi-addon" id="alamat_lokasi_tujuan" name="alamat_lokasi_tujuan" value="{{ old('alamat_lokasi_tujuan') }}">
+                            </div>
+                            <label>ID Pengiriman <span class="text-danger">*</span></label>
+                            <select class="mb-3 form-control" id="id_pengiriman" name="id_pengiriman">
+                                @foreach ($dikirim as $transaksi)
+                                <option value="{{ $transaksi->pengiriman->id_pengiriman }}">{{ $transaksi->pengiriman->id_pengiriman }}</option>
+                                @endforeach
+                            </select>
+                            <div class="text-center">
+                                <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0">Create</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
     
+
+@endsection
+
+@section('js')    
     {{-- Script show hide table --}}
     <script>
         // Fungsi untuk mengubah status tampilan semua tabel berdasarkan jenis tabel
@@ -677,5 +728,5 @@
         });
 
     </script>
-
+    
 @endsection

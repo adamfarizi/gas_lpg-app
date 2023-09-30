@@ -13,8 +13,7 @@ use App\Models\Transaksi;
 
 class CreateBuyController extends Controller
 {
-    public function createData(Request $request)
-    {
+    public function createData(Request $request){
         $id_pengiriman_new = Pengiriman::max('id_pengiriman') + 1;
 
         $id_transaksi_new = Transaksi::max('id_transaksi') + 1;

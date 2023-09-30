@@ -17,8 +17,6 @@ class ProsesController extends Controller
 {
     public function index() {
         $data['title'] = 'Proses';
-
-        $transaksis = Transaksi::all();
         
         // Nav items
         $total_gas = Gas::sum('stock_gas');
@@ -66,7 +64,7 @@ class ProsesController extends Controller
             $query->whereNotNull('id_truck')->whereNotNull('id_kurir');
         })->get();
         $id_pengiriman_dikirim = [];
-        $lokasi_dikirim = Lokasi::where('id_pengiriman', $id)->get();
+        $lokasi_dikirim = Lokasi::where('id_pengiriman', $id_pengiriman_dikirim)->get();
         foreach ($alamat_dikirim as $transaksi) {
             $id_pengiriman_dikirim[] = $transaksi->id_pengiriman;
         }
@@ -74,6 +72,8 @@ class ProsesController extends Controller
         // Tabel pesanan diterima
         $lokasi_selesai = Lokasi::where('status_pengiriman', 'Diterima')->pluck('id_pengiriman');
         $diterima = Transaksi::whereIn('id_pengiriman', $lokasi_selesai)->get();
+
+        $lokasis = Lokasi::all();
 
         return view('auth.proses.proses',[
             // Nav item
@@ -96,7 +96,7 @@ class ProsesController extends Controller
             // Tabel pesanan diterima
             'diterima' => $diterima,
 
-            'transaksis' => $transaksis
+            'lokasis' => $lokasis
         ], $data);
     }
 
