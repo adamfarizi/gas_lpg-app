@@ -288,7 +288,7 @@
                         <div class="col">
                             <h4 class="card-title">Konfirmasi Pembayaran</h4>
                         </div>
-                        <div class="col-9 pt-1">
+                        <div class="col-7 pt-1">
                             <span class="card-title">
                                 <a class="me-3">( {{ $pesanan_masuk }} )</a>
                                 <i type="button" id="icon_toggleAllTables_konfirmasiPembayaran" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('konfirmasiPembayaran')"></i>
@@ -297,12 +297,21 @@
                                     @endif --}}
                             </span>
                         </div>
+                        <div class="col-2 ml-auto">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="searchInput_konfirmasiPembayaran" placeholder="Cari Pesanan ...">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
+                            <div class="text-center" id="noResultsMessage_konfirmasiPembayaran" style="display: none;">
+                                Pesanan tidak ditemukan.
+                            </div>                            
+                            <table id="table_konfirmasiPembayaran" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
@@ -369,7 +378,7 @@
                         <div class="col">
                             <h4 class="card-title">Pesanan Diproses</h4>
                         </div>
-                        <div class="col-9 pt-1 me-6">
+                        <div class="col-7 pt-1 me-6">
                             <span class="card-title">
                                 <a class="me-3">( {{ $pesanan_diproses }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananDiproses" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananDiproses')"></i>
@@ -378,12 +387,21 @@
                                 @endif --}}
                             </span>
                         </div>
+                        <div class="col-2 ml-auto">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="searchInput_pesananDiproses" placeholder="Cari Pesanan ...">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
+                            <div class="text-center" id="noResultsMessage_pesananDiproses" style="display: none;">
+                                Pesanan tidak ditemukan.
+                            </div>
+                            <table id="table_pesananDiproses" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
@@ -455,7 +473,7 @@
                         <div class="col">
                             <h4 class="card-title">Pesanan Dikirim</h4>
                         </div>
-                        <div class="col-9 pt-1 me-6">
+                        <div class="col-7 pt-1 me-6">
                             <span class="card-title">
                                 <a class="me-3">( {{ $pesanan_dikirim }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananDikirim" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananDikirim')"></i>
@@ -464,12 +482,21 @@
                                 @endif --}}
                             </span>
                         </div>
+                        <div class="col-2 ml-auto">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="searchInput_pesananDikirim" placeholder="Cari Pesanan ...">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
+                            <div class="text-center" id="noResultsMessage_pesananDikirim" style="display: none;">
+                                Pesanan tidak ditemukan.
+                            </div>
+                            <table id="table_pesananDikirim" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
@@ -515,7 +542,7 @@
                         <div class="col">
                             <h4 class="card-title">Pesanan Selesai</h4>
                         </div>
-                        <div class="col-9 pt-1 me-6">
+                        <div class="col-7 pt-1 me-6">
                             <span class="card-title">
                                 <a class="me-3">( {{ $pesanan_selesai }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananSelesai" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananSelesai')"></i>
@@ -524,12 +551,21 @@
                                 @endif --}}
                             </span>
                         </div>
+                        <div class="col-2 ml-auto">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="searchInput_pesananSelesai" placeholder="Cari Pesanan ...">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="card-body px-0 pt-0 pb-2" style="min-height: 0px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <table class="table align-items-center mb-0">
+                            <div class="text-center" id="noResultsMessage_pesananSelesai" style="display: none;">
+                                Pesanan tidak ditemukan.
+                            </div>
+                            <table id="table_pesananSelesai" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
@@ -726,6 +762,66 @@
             }
         });
 
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#searchInput_konfirmasiPembayaran").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_konfirmasiPembayaran tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+
+                var noResultsMessage = $("#noResultsMessage_konfirmasiPembayaran");
+                if ($("#table_konfirmasiPembayaran tr:visible").length === 0) {
+                    noResultsMessage.show();
+                } else {
+                    noResultsMessage.hide();
+                }
+            });
+    
+            $("#searchInput_pesananDiproses").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_pesananDiproses tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+                                
+                var noResultsMessage = $("#noResultsMessage_pesananDiproses");
+                if ($("#table_pesananDiproses tr:visible").length === 0) {
+                    noResultsMessage.show();
+                } else {
+                    noResultsMessage.hide();
+                }
+            });
+
+            $("#searchInput_pesananDikirim").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_pesananDikirim tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+                                
+                var noResultsMessage = $("#noResultsMessage_pesananDikirim");
+                if ($("#table_pesananDikirim tr:visible").length === 0) {
+                    noResultsMessage.show();
+                } else {
+                    noResultsMessage.hide();
+                }
+            });
+
+            $("#searchInput_pesananSelesai").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table_pesananSelesai tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+                                
+                var noResultsMessage = $("#noResultsMessage_pesananSelesai");
+                if ($("#table_pesananSelesai tr:visible").length === 0) {
+                    noResultsMessage.show();
+                } else {
+                    noResultsMessage.hide();
+                }
+            });
+        });
     </script>
     
 @endsection
