@@ -29,19 +29,19 @@ class CreateBuyController extends Controller
             'bukti_pembayaran' => null,
         ]);
 
-        // Tambahkan data ke tabel pengiriman
-        Pengiriman::create([
-            'id_truck' => null,
-            'id_transaksi' => null,
-        ]);
+        // // Tambahkan data ke tabel pengiriman
+        // Pengiriman::create([
+        //     'id_truck' => null,
+        //     'id_transaksi' => null,
+        // ]);
 
-        // Tambahkan data ke tabel lokasi
-        Lokasi::create([
-            'koordinat_lokasi' => 'xxxxx',
-            'alamat_lokasi_tujuan' => 'Jl. Contoh',
-            'status_pengiriman' => 'Belum Dikirim',
-            'id_pengiriman' => $id_pengiriman_new,
-        ]);
+        // // Tambahkan data ke tabel lokasi
+        // Lokasi::create([
+        //     'koordinat_lokasi' => 'xxxxx',
+        //     'alamat_lokasi_tujuan' => 'Jl. Contoh',
+        //     'status_pengiriman' => 'Belum Dikirim',
+        //     'id_pengiriman' => $id_pengiriman_new,
+        // ]);
 
         // Tambahkan data ke tabel transaksi
         Transaksi::create([

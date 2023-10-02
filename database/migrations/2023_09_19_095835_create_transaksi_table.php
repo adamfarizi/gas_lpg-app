@@ -13,11 +13,12 @@ class CreateTransaksiTable extends Migration
             $table->string('resi_transaksi');
             $table->integer('jumlah_transaksi');
             $table->decimal('total_transaksi', 50, 2);
+            $table->enum('status_pengiriman',['Belum Dikirim','Dikirim', 'Diterima']);
             $table->unsignedBigInteger('id_agen');
             $table->unsignedBigInteger('id_gas');
             $table->unsignedBigInteger('id_pembayaran');
             $table->unsignedBigInteger('id_admin');
-            $table->unsignedBigInteger('id_pengiriman');
+            $table->unsignedBigInteger('id_pengiriman')->nullable();
             $table->timestamps();
 
             $table->foreign('id_agen')->references('id_agen')->on('agen');

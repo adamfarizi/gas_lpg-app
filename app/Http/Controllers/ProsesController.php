@@ -21,18 +21,14 @@ class ProsesController extends Controller
         // Nav items
         $total_gas = Gas::sum('stock_gas');
         $kurir_tersedia = Kurir::where('status', 'tersedia')->count();
-        $pesanan_masuk = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->where('status_pembayaran', 'Belum Bayar');
-        })->count();
+        $pesanan_masuk = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
         $pesanan_diproses = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Sudah Bayar');
         })->whereHas('pengiriman', function ($query) {
             $query->whereNull('id_kurir')->whereNull('id_truck');
         })->count();
-        $id_dikirim = Lokasi::where('status_pengiriman', 'Dikirim')->pluck('id_pengiriman');
-        $pesanan_dikirim = Transaksi::whereIn('id_pengiriman', $id_dikirim)->count();
-        $lokasi_selesai = Lokasi::where('status_pengiriman', 'Diterima')->pluck('id_pengiriman');
-        $pesanan_selesai = Transaksi::whereIn('id_pengiriman', $lokasi_selesai)->count();
+        $pesanan_dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->count();
+        $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
         
         // Tabel konfirmasi Pembayaran
         $pembayaran = Transaksi::whereHas('pembayaran', function ($query) {
@@ -40,40 +36,15 @@ class ProsesController extends Controller
         })->get();
         
         // Tabel pesanan di proses
-        $proses = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->where('status_pembayaran', 'Sudah Bayar');
-        })->whereHas('pengiriman', function ($query) {
-            $query->whereNull('id_kurir')->whereNull('id_truck');
-        })->get();
-        $id_pengiriman_proses = [];
-        $lokasi_proses = [];
-        foreach ($proses as $transaksi) {
-            $id_pengiriman_proses[] = $transaksi->id_pengiriman;
-        }        
-        foreach ($id_pengiriman_proses as $id) {
-            $lokasi = Lokasi::where('id_pengiriman', $id)->first();
-            if ($lokasi) {
-                $lokasi_proses[] = $lokasi;
-            }
-        }
+        $proses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->get();
         $kurirs = Kurir::where('status', 'tersedia')->pluck('name');
         $trucks = Truck::where('status', 'tersedia')->pluck('plat_truck');
         
         // Tabel pesanan dikirim
-        $id_dikirim = Lokasi::where('status_pengiriman', 'Dikirim')->pluck('id_pengiriman');
-        $dikirim = Transaksi::whereIn('id_pengiriman', $id_dikirim)->get();
-        $alamat_dikirim = Transaksi::whereHas('pengiriman', function ($query) {
-            $query->whereNotNull('id_truck')->whereNotNull('id_kurir');
-        })->get();
-        $id_pengiriman_dikirim = [];
-        $lokasi_dikirim = Lokasi::where('id_pengiriman', $id_pengiriman_dikirim)->get();
-        foreach ($alamat_dikirim as $transaksi) {
-            $id_pengiriman_dikirim[] = $transaksi->id_pengiriman;
-        }
+        $dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->get();
 
         // Tabel pesanan diterima
-        $lokasi_selesai = Lokasi::where('status_pengiriman', 'Diterima')->pluck('id_pengiriman');
-        $diterima = Transaksi::whereIn('id_pengiriman', $lokasi_selesai)->get();
+        $diterima = Transaksi::where('status_pengiriman', 'Diterima')->get();
 
         $lokasis = Lokasi::all();
 
@@ -89,12 +60,10 @@ class ProsesController extends Controller
             'pembayaran' => $pembayaran,
             // Tabel pesanan diproses
             'proses' => $proses,
-            'lokasi_proses' => $lokasi_proses,
             'kurirs' => $kurirs,
             'trucks' => $trucks,
             // tabel pesanan dikirim
             'dikirim' => $dikirim,
-            'lokasi_dikirim' => $lokasi_dikirim,
             // Tabel pesanan diterima
             'diterima' => $diterima,
 
@@ -124,7 +93,7 @@ class ProsesController extends Controller
         return redirect()->back()->with('success', 'Status pembayaran berhasil diubah.');
     }
 
-    public function update_dikirim(Request $request, $id_transaksi){
+    public function update_dikirim(Request $request, $id_transaksi,){
 
         $transaksi = Transaksi::find($id_transaksi);
 

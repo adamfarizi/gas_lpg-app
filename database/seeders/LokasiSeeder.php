@@ -14,7 +14,6 @@ class LokasiSeeder extends Seeder
             [
                 'koordinat_lokasi' => '123.456,789.012',
                 'alamat_lokasi_tujuan' => 'Jl. Contoh 123, Kota Contoh',
-                'status_pengiriman' => 'Belum Dikirim',
                 'id_pengiriman' => 1, // id_pengiriman null
             ],
             // Tambahkan data lainnya sesuai kebutuhan

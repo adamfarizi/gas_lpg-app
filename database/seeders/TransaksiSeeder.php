@@ -15,6 +15,7 @@ class TransaksiSeeder extends Seeder
             'resi_transaksi' => 'GTK-000001', // Nomor resi transaksi sesuai kebutuhan Anda
             'jumlah_transaksi' => 5, // Jumlah gas yang dibeli sesuai kebutuhan Anda
             'total_transaksi' => 150000, // Total harga transaksi sesuai kebutuhan Anda
+            'status_pengiriman' => 'Belum Dikirim',
             'id_agen' => 1, // ID agen sesuai kebutuhan Anda
             'id_gas' => 1, // ID gas sesuai kebutuhan Anda
             'id_pembayaran' => 1, // ID pembayaran sesuai kebutuhan Anda
