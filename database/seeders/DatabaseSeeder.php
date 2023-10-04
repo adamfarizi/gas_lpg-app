@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             TruckSeeder::class,
             PembayaranSeeder::class,
             // PengirimanSeeder::class,
-            // LokasiSeeder::class,
             TransaksiSeeder::class,
+            LokasiSeeder::class,
         ]);
     }
 }

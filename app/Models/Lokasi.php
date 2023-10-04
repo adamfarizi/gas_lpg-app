@@ -13,14 +13,11 @@ class Lokasi extends Model
     protected $fillable = [
         'koordinat_lokasi',
         'alamat_lokasi_tujuan',
-        'status_pengiriman',
-        'id_kurir',
-        'id_pengiriman',
-        'id_truck',
+        'id_transaksi',
     ];
     
-    public function pengiriman()
+    public function transaksi()
     {
-        return $this->belongsTo(Pengiriman::class, 'id_pengiriman');
+        return $this->belongsTo(Transaksi::class, 'id_transaksi');
     }
 }

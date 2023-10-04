@@ -305,8 +305,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
+                <div class="card-body pb-0">
+                    <div class="card-body px-0 pt-0 pb-0" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <div class="text-center" id="noResultsMessage_konfirmasiPembayaran" style="display: none;">
                                 Pesanan tidak ditemukan.
@@ -333,7 +333,7 @@
                                                 @if ($transaksi->pembayaran->status_pembayaran === 'Proses')
                                                 <div class="d-flex ps-3">
                                                     <div class="form-check pe-2">
-                                                        <input class="form-check-input" type="checkbox" name="id_transaksi[]" value="{{ $transaksi->id_transaksi }}">
+                                                        <input class="form-check-input" type="checkbox" name="id_transaksi[]" value="{{ $transaksi->id_transaksi }}" id="checkbox_{{ $transaksi->id_transaksi }}" data-jumlah-gas="{{ $transaksi->jumlah_transaksi }}">
                                                     </div>
                                                     <div style="height: 100%; line-height: 25px;">
                                                         {{ $transaksi->resi_transaksi }}
@@ -349,7 +349,7 @@
                                             </td> 
                                             <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
                                             <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
-                                            <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
+                                            <td class="align-middle text-sm text-center" data-jumlah-gas="{{ $transaksi->jumlah_transaksi }}">{{ $transaksi->jumlah_transaksi }} Gas</td>
                                             <td class="align-middle text-sm text-center">
                                                 @if ($transaksi->pembayaran->tanggal_pembayaran === null)
                                                     Belum Bayar    
@@ -383,13 +383,13 @@
                 <div class="card-footer pt-0">
                     <hr class="border border-dark opacity-75">
                         <div class="row">
-                            <div class="col-10">
-                                <h5 class="ms-5 mt-2">Proses Pesanan</h5>
+                            <div class="col ms-3 mt-3">
+                                <div id="totalGasSelected">Total Gas : 0 Gas</div>
                             </div>
-                            <div class="col">
-                                <button type="submit" class="btn bg-gradient-success btn-icon btn-sm ps-3 mt-1" id="btnKirimSemua" disabled>
+                            <div class="col text-end">
+                                <button type="submit" class="btn bg-gradient-success btn-icon mt-1 me-3" id="btnKirimSemua" disabled>
                                     <span><i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
-                                    Kirim
+                                    Proses Pesanan
                                 </button>
                             </div>                            
                         </div>
@@ -431,35 +431,75 @@
                             <table id="table_pesananDiproses" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pengiriman</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 pe-5">Alamat Pesanan</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Informasi</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Truck</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
                                     </tr>
                                 </thead>
-                                @foreach ($proses as $transaksi)
-                                <form action="{{ route('update_dikirim', $transaksi->id_transaksi) }}" method="POST">
+                                @foreach ($proses as $pengiriman)
+                                <form action="{{ route('update_dikirim', $pengiriman->id_pengiriman) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <tbody id="pesananDiproses_{{ $transaksi->id_transaksi }}" style="display: none;">
+                                    <tbody id="pesananDiproses_{{ $pengiriman->id_pengiriman }}" style="display: none;">
                                         <tr class="text-dark">                                                                                                                            
-                                            <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
-                                            <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
-                                            <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
-                                            <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
-                                            <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                            <td class="align-middle text-sm text-center"><span class="badge badge-sm bg-gradient-success">Siap Dikirim</span></td>
+                                            <td class="align-middle text-sm text-center">{{ $pengiriman->resi_pengiriman }}</td>
+                                            <td class="align-middle text-sm text-center pt-4">
+                                                <ul style="list-style: none;">
+                                                    @foreach ($transaksi_proses as $transaksi)
+                                                        @if ($transaksi->id_pengiriman === $pengiriman->id_pengiriman)
+                                                            <li class="me-4">
+                                                                {{ $transaksi->resi_transaksi }}
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td class="align-middle text-sm text-center">
+                                                <a href="#" type="button">
+                                                    <span class="badge badge-sm bg-gradient-info"><i class="fa fa-solid fa-info me-2" style="color: #ffffff;"></i>More Info</span>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle text-sm text-center pt-4">
+                                                <select class="mb-3 form-control" id="name_kurir" name="name_kurir">
+                                                    <option value="Belum Memilih" {{ is_null($pengiriman->id_kurir) ? 'selected' : '' }}>
+                                                        Belum Memilih
+                                                    </option>
+                                                    @foreach ($kurirs as $kurir)
+                                                        <option value="{{ $kurir }}" {{ $transaksi->pengiriman->id_kurir == $kurir ? 'selected' : '' }}>
+                                                            {{ $kurir }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>    
+                                            </td>
+                                            <td class="align-middle text-sm text-center pt-4">
+                                                <select class="mb-3 form-control" id="plat_truck" name="plat_truck">
+                                                    <option value="Belum Memilih" {{ is_null($pengiriman->id_truck) ? 'selected' : '' }}>
+                                                        Belum Memilih
+                                                    </option>
+                                                    @foreach ($trucks as $truck)
+                                                        <option value="{{ $truck }}" {{ $transaksi->pengiriman->id_truck == $truck ? 'selected' : '' }}>
+                                                            {{ $truck }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>  
+                                            </td>
+                                            <td class="align-middle text-sm text-center pt-4">
+                                                <button type="submit" class="btn bg-gradient-success btn-icon btn-sm ps-3 mt-1">
+                                                    <span><i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
+                                                    Kirim
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
-                                </form>
+                                </form>                                
                                 @endforeach
                             </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         {{-- Tabel dikirim --}}
@@ -501,8 +541,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Truck</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pengiriman</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Cek Pesanan</th>
                                     </tr>
                                 </thead>
@@ -514,10 +553,9 @@
                                         <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
                                         <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
                                         <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>                                        
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->truck->plat_truck }}</td>                                        
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->resi_pengiriman }}</td>                                        
                                         <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-id="{{ $transaksi->pengiriman->id_pengiriman }}" data-bs-toggle="modal" data-bs-target="#cek-status{{ $transaksi->pengiriman->id_pengiriman }}" id="modalButton">
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-id="{{ $transaksi->id_transaksi }}" data-bs-toggle="modal" data-bs-target="#cek-status{{ $transaksi->id_transaksi }}" id="modalButton">
                                                 <span><i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
                                                 Cek Status
                                             </button>                                         
@@ -570,8 +608,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Pemesanan</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Jumlah Gas</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Alamat Pesanan</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Kurir</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Truck</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Id Pengiriman</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Cek Pesanan</th>
                                     </tr>
                                 </thead>
@@ -583,12 +620,11 @@
                                         <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
                                         <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
                                         <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>                                        
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->truck->plat_truck }}</td>                                        
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->resi_pengiriman }}</td>                                                                               
                                         <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-id="{{ $transaksi->pengiriman->id_pengiriman }}" data-bs-toggle="modal" data-bs-target="#cek-riwayat{{ $transaksi->pengiriman->id_pengiriman }}">
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-id="{{ $transaksi->id_transaksi }}" data-bs-toggle="modal" data-bs-target="#cek-riwayat{{ $transaksi->id_transaksi }}">
                                                 <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
-                                                Cek Status
+                                                Cek Riwayat
                                             </button>
                                         </td>
                                     </tr>
@@ -603,26 +639,28 @@
     </div>
 
     <!--Modal Status-->
-    @foreach ($lokasis as $lokasi)
+    @foreach ($lokasis as $lokasi_all)
         <div class="row">
             <div class="col-md-4">
-                <div class="modal fade" id="cek-status{{ $lokasi->pengiriman->id_pengiriman }}" tabindex="-1" role="dialog" aria-labelledby="modal-default{{ $lokasi->pengiriman->id_pengiriman }}" aria-hidden="true">
+                <div class="modal fade" id="cek-riwayat{{ $lokasi_all->id_transaksi }}" tabindex="-1" role="dialog" aria-labelledby="modal-default{{ $lokasi_all->id_transaksi }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h6 class="modal-title text-uppercase" id="modal-title-default">Update Lokasi</h6>
+                                <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat Lokasi</h6>
                                 <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
                             <div class="modal-body" style="max-height:350px; overflow-y: auto;">
                                 <ul class="mb-3 text-dark" class="tracking-list">
-                                    @foreach ($lokasis->where('pengiriman.id_pengiriman', $lokasi->pengiriman->id_pengiriman) as $lokasiDetail)
+                                    @foreach ($lokasis as $lokasi)
+                                    @if ($lokasi_all->id_transaksi == $lokasi->id_transaksi)
                                         <li class="mb-3">
-                                            {{ $lokasiDetail->alamat_lokasi_tujuan }}
-                                            <br><span class="text-secondary text-xs">Tanggal : {{ $lokasiDetail->created_at->format('d-m-Y') }}</span>
-                                            <br><span class="text-secondary text-xs">Pukul : {{ $lokasiDetail->created_at->format('H:i') }}</span>
+                                            {{ $lokasi->alamat_lokasi_tujuan }}
+                                            <br><span class="text-secondary text-xs">Tanggal : {{ $lokasi->created_at->format('d-m-Y') }}</span>
+                                            <br><span class="text-secondary text-xs">Pukul : {{ $lokasi->created_at->format('H:i') }}</span>
                                         </li>
+                                    @endif
                                     @endforeach
                                 </ul>
                             </div>
@@ -637,33 +675,39 @@
     @endforeach
 
     <!--Modal Riwayat-->
-    @foreach ($lokasis as $lokasi)
-        <div class="row">
-            <div class="col-md-4">
-                <div class="modal fade" id="cek-riwayat{{ $lokasi->pengiriman->id_pengiriman }}" tabindex="-1" role="dialog" aria-labelledby="modal-default{{ $lokasi->pengiriman->id_pengiriman }}" aria-hidden="true">
-                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+    @foreach ($lokasis as $lokasi_all)
+    <div class="row">
+        <div class="col-md-4">
+            <div class="modal fade" id="cek-status{{ $lokasi_all->id_transaksi }}" tabindex="-1" role="dialog" aria-labelledby="modal-default{{ $lokasi_all->id_transaksi }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat</h6>
-                        <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+                            <h6 class="modal-title text-uppercase" id="modal-title-default">Update Lokasi</h6>
+                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
                         </div>
-                        <div class="modal-body">
-                            @foreach ($lokasis->where('pengiriman.id_pengiriman', $lokasi->pengiriman->id_pengiriman) as $lokasiDetail)
-                            <li class="mb-3">
-                                {{ $lokasiDetail->alamat_lokasi_tujuan }}
-                                <br><span class="text-secondary text-xs">Tanggal : {{ $lokasiDetail->created_at->format('d-m-Y') }}</span>
-                                <br><span class="text-secondary text-xs">Pukul : {{ $lokasiDetail->created_at->format('H:i') }}</span>
-                            </li>
-                        @endforeach
+                        <div class="modal-body" style="max-height:350px; overflow-y: auto;">
+                            <ul class="mb-3 text-dark" class="tracking-list">
+                                @foreach ($lokasis as $lokasi)
+                                @if ($lokasi_all->id_transaksi == $lokasi->id_transaksi)
+                                    <li class="mb-3">
+                                        {{ $lokasi->alamat_lokasi_tujuan }}
+                                        <br><span class="text-secondary text-xs">Tanggal : {{ $lokasi->created_at->format('d-m-Y') }}</span>
+                                        <br><span class="text-secondary text-xs">Pukul : {{ $lokasi->created_at->format('H:i') }}</span>
+                                    </li>
+                                @endif
+                                @endforeach
+                            </ul>
                         </div>
-                        <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Close</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
+    </div>
     @endforeach
 
     <!--Modal Lokasi-->
@@ -685,10 +729,10 @@
                             <div class="mb-3">
                                 <input type="text" class="form-control" placeholder="Enter your Lokasi" aria-label="Lokasi" aria-describedby="lokasi-addon" id="alamat_lokasi_tujuan" name="alamat_lokasi_tujuan" value="{{ old('alamat_lokasi_tujuan') }}">
                             </div>
-                            <label>ID Pengiriman <span class="text-danger">*</span></label>
-                            <select class="mb-3 form-control" id="id_pengiriman" name="id_pengiriman">
+                            <label>ID Transaksi <span class="text-danger">*</span></label>
+                            <select class="mb-3 form-control" id="id_transaksi" name="id_transaksi">
                                 @foreach ($dikirim as $transaksi)
-                                <option value="{{ $transaksi->pengiriman->id_pengiriman }}">{{ $transaksi->pengiriman->id_pengiriman }}</option>
+                                <option value="{{ $transaksi->id_transaksi }}">{{ $transaksi->id_transaksi }}</option>
                                 @endforeach
                             </select>
                             <div class="text-center">
@@ -703,10 +747,9 @@
         </div>
     </form>
 
-    
 @endsection
 
-@section('js')    
+@section('js')
     <script>
         $(document).ready(function () {
             // Mengaktifkan/menonaktifkan tombol "Kirim" berdasarkan status checkbox
@@ -837,6 +880,32 @@
                     noResultsMessage.hide();
                 }
             });
+        });
+    </script>
+    
+    <script>
+        // Fungsi untuk menghitung jumlah gas yang dipilih
+        function hitungTotalGas() {
+            // Ambil semua checkbox yang dipilih
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            let totalGas = 0;
+    
+            // Loop melalui checkbox yang dipilih dan tambahkan jumlah gasnya
+            checkboxes.forEach(checkbox => {
+                const jumlahGas = parseInt(checkbox.getAttribute('data-jumlah-gas')); // Ambil jumlah gas dari atribut data
+                if (!isNaN(jumlahGas)) {
+                    totalGas += jumlahGas;
+                }
+            });
+    
+            // Tampilkan total gas yang dipilih
+            document.getElementById('totalGasSelected').textContent = `Total Gas : ${totalGas} Gas`;
+        }
+    
+        // Tambahkan event listener ke semua checkbox
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', hitungTotalGas);
         });
     </script>
     

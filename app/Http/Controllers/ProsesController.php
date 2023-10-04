@@ -21,11 +21,7 @@ class ProsesController extends Controller
         $total_gas = Gas::sum('stock_gas');
         $kurir_tersedia = Kurir::where('status', 'tersedia')->count();
         $pesanan_masuk = Transaksi::where('id_pengiriman', null)->count();
-        $pesanan_diproses = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->where('status_pembayaran', 'Sudah Bayar');
-        })->whereHas('pengiriman', function ($query) {
-            $query->whereNull('id_kurir')->whereNull('id_truck');
-        })->count();
+        $pesanan_diproses = Pengiriman::whereNull('id_kurir')->whereNull('id_truck')->count();
         $pesanan_dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->count();
         $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
         
@@ -36,16 +32,19 @@ class ProsesController extends Controller
         })->get();
         
         // Tabel pesanan di proses
-        $pengiriman = Pengiriman::all();
-        if ($pengiriman->isNotEmpty()) {
-            $id_pengiriman = $pengiriman->pluck('id_pengiriman');
-            $transaksi_pengiriman = Transaksi::where('id_pengiriman', $id_pengiriman )->pluck('id_pengiriman');
-            $proses = Transaksi::whereIn('id_pengiriman', $transaksi_pengiriman)->get();
+        $pengirimans = Pengiriman::all();
+        if ($pengirimans->isNotEmpty()) {
+            foreach ($pengirimans as $pengiriman) {
+                $id_pengiriman = $pengiriman->id_pengiriman;
+                $transaksi_proses = Transaksi::where('id_pengiriman', $id_pengiriman)->get();            
+                $proses = Pengiriman::whereNull('id_kurir')->whereNull('id_truck')->get();
+            }
         }
         else{
             $proses = Transaksi::whereHas('pembayaran', function ($query) {
                 $query->where('status_pembayaran', 'Sudah Bayar');
             })->get();
+            $transaksi_proses = null;
         }
         $kurirs = Kurir::where('status', 'tersedia')->pluck('name');
         $trucks = Truck::where('status', 'tersedia')->pluck('plat_truck');
@@ -55,7 +54,6 @@ class ProsesController extends Controller
 
         // Tabel pesanan diterima
         $diterima = Transaksi::where('status_pengiriman', 'Diterima')->get();
-
         $lokasis = Lokasi::all();
 
         return view('auth.proses.proses',[
@@ -70,6 +68,7 @@ class ProsesController extends Controller
             'pembayaran' => $pembayaran,
             // Tabel pesanan diproses
             'proses' => $proses,
+            'transaksi_proses' => $transaksi_proses,
             'kurirs' => $kurirs,
             'trucks' => $trucks,
             // tabel pesanan dikirim
@@ -130,14 +129,22 @@ class ProsesController extends Controller
         return redirect()->back()->with('success', 'Status pembayaran berhasil diubah.');
     }
 
-    public function update_dikirim(Request $request, $id_transaksi,){
+    public function update_dikirim(Request $request, $id_pengiriman,){
+        $transaksi = Transaksi::find($id_pengiriman);
 
-        $transaksi = Transaksi::find($id_transaksi);
-
-        $transaksi->id_admin = Auth::user()->id_admin;
-        $transaksi->save();
+        $transaksi_dikirim = Transaksi::where('id_pengiriman', $id_pengiriman)->get();
+        foreach ($transaksi_dikirim as $transaksi) {
+            $transaksi->id_admin = Auth::user()->id_admin;
+            $transaksi->status_pengiriman = 'Dikirim';
+            $transaksi->save();
+        }
         
-        $name_kurir = $request->input('name');
+        $request->validate([
+            'name_kurir' => 'required|string',
+            'plat_truck' => 'required|string',
+        ]);
+
+        $name_kurir = $request->input('name_kurir');
         $kurir = Kurir::where('name', $name_kurir)->first();
         $kurir->status = 'tidak tersedia';
         $kurir->save();
@@ -154,11 +161,7 @@ class ProsesController extends Controller
         $pengiriman->id_kurir = $id_kurir;
         $pengiriman->id_truck = $id_truck;
         $pengiriman->save();
-        
-        $id_pengiriman = $transaksi->pengiriman->id_pengiriman;
-        $lokasi = Lokasi::where('id_pengiriman', $id_pengiriman)->first();
-        $lokasi->status_pengiriman = 'Dikirim';
-        $lokasi->save();
+
     
         return redirect()->back()->with('success', 'Pesanan telah dikirim');
     }

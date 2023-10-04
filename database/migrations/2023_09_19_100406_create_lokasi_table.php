@@ -11,10 +11,10 @@ class CreateLokasiTable extends Migration
             $table->id('id_lokasi');
             $table->string('koordinat_lokasi');
             $table->string('alamat_lokasi_tujuan');
-            $table->unsignedBigInteger('id_pengiriman');
+            $table->unsignedBigInteger('id_transaksi');
             $table->timestamps();
 
-            $table->foreign('id_pengiriman')->references('id_pengiriman')->on('pengiriman');
+            $table->foreign('id_transaksi')->references('id_transaksi')->on('transaksi');
         });
     }
 

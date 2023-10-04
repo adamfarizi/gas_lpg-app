@@ -15,6 +15,7 @@ class AgenSeeder extends Seeder
             'role' => 'agen',
             'password' => bcrypt('password1'),
             'alamat' => 'Jl. Merdeka No. 123, Kelurahan Bahagia, Kecamatan Sentosa, Kota Fiktif A',
+            'no_hp' => '088111222',
         ]);
 
         // Tambahkan lebih banyak data admin jika diperlukan

@@ -12,19 +12,18 @@ class CreateLokasiController extends Controller
         // Validasi input sesuai kebutuhan Anda
         $request->validate([
             'alamat_lokasi_tujuan' => 'required',
-            'id_pengiriman' => 'required',
+            'id_transaksi' => 'required',
         ]);
 
         // Ambil data dari request
         $alamat_lokasi_tujuan = $request->alamat_lokasi_tujuan;
-        $id_pengiriman = $request->id_pengiriman;
+        $id_transaksi = $request->id_transaksi;
 
         // Tambahkan data ke tabel lokasi
         Lokasi::create([
-            'koordinat_lokasi' => 'xxxxx', // Isi sesuai dengan data yang sesuai
+            'koordinat_lokasi' => '123.456,789.012',
             'alamat_lokasi_tujuan' => $alamat_lokasi_tujuan,
-            'status_pengiriman' => 'Dikirim', // Isi sesuai dengan data yang sesuai
-            'id_pengiriman' => $id_pengiriman,
+            'id_transaksi' => $id_transaksi,
         ]);
 
         // Redirect atau lakukan sesuatu yang sesuai dengan kebutuhan Anda
