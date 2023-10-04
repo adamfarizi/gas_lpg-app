@@ -52,8 +52,8 @@ class CreateBuyController extends Controller
             'id_agen' => 1,
             'id_admin' => 1,
             'id_gas' => 1,
-            'id_pengiriman' => $id_pengiriman_new,
             'id_pembayaran' => $id_pembayaran_new,
+            'id_pengiriman' => null,
         ]);
 
         return back();

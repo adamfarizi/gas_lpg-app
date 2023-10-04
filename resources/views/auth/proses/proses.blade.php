@@ -321,57 +321,60 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Tgl. Pembayaran</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Bukti Pembayaran</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Status</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Konfirmasi</th>
                                     </tr>
                                 </thead>
                                 @foreach ($pembayaran as $transaksi)  
-                                <form action="{{ route('update_pembayaran', $transaksi->id_transaksi) }}" method="POST" id="formUpdateDikirim">
+                                <form action="{{ route('update_pembayaran', $transaksi->id_transaksi) }}" method="POST" id="formUpdatePembayaran_{{ $transaksi->id_transaksi }}">
                                     @csrf
                                     @method('PUT')
                                     <tbody id="konfirmasiPembayaran_{{ $transaksi->id_transaksi }}" style="display: none;">
                                         <tr class="text-dark">
                                             <td class="align-middle text-sm text-center">
+                                                @if ($transaksi->pembayaran->status_pembayaran === 'Proses')
                                                 <div class="d-flex ps-3">
                                                     <div class="form-check pe-2">
-                                                        <input class="form-check-input" type="checkbox" value="" id="fcustomCheck1">
+                                                        <input class="form-check-input" type="checkbox" name="id_transaksi[]" value="{{ $transaksi->id_transaksi }}">
                                                     </div>
                                                     <div style="height: 100%; line-height: 25px;">
                                                         {{ $transaksi->resi_transaksi }}
                                                     </div>
                                                 </div>
+                                                @else
+                                                <div class="d-flex ps-3">
+                                                    <div style="height: 100%; line-height: 25px;">
+                                                        {{ $transaksi->resi_transaksi }}
+                                                    </div>
+                                                </div>
+                                                @endif
                                             </td> 
                                             <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
                                             <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
                                             <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
                                             <td class="align-middle text-sm text-center">
                                                 @if ($transaksi->pembayaran->tanggal_pembayaran === null)
-                                                    <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>    
+                                                    Belum Bayar    
                                                 @else
                                                     {{ $transaksi->pembayaran->tanggal_pembayaran }}
                                                 @endif
                                             </td>
                                             <td class="align-middle text-sm text-center">
                                                 @if ($transaksi->pembayaran->bukti_pembayaran === null)
-                                                    <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>    
+                                                    Belum Bayar    
                                                 @else
                                                     {{ $transaksi->pembayaran->bukti_pembayaran }}
                                                 @endif
                                             </td>
                                             <td class="align-middle text-sm text-center">
-                                                <select class="mb-3 form-control" id="status_pembayaran" name="status_pembayaran">
-                                                    <option value="Belum Bayar" {{ $transaksi->pembayaran->status_pembayaran === 'Belum Bayar' ? 'selected' : '' }}>Belum Bayar</option>
-                                                    <option value="Sudah Bayar" {{ $transaksi->pembayaran->status_pembayaran === 'Sudah Bayar' ? 'selected' : '' }}>Sudah Bayar</option>
-                                                </select>
-                                            </td>  
-                                            <td class="align-middle text-center ">
-                                                <button class="btn bg-gradient-success btn-icon btn-sm ps-3">
-                                                    <span> <i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
-                                                    Konfirmasi
-                                                </button>
+                                                @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
+                                                    <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>
+                                                @elseif ($transaksi->pembayaran->status_pembayaran === 'Proses')
+                                                    <span class="badge badge-sm bg-gradient-info">Konfirmasi</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-success">Dibayar</span>
+                                                @endif                                            
                                             </td>
                                         </tr>
                                     </tbody>
-                                </form>
                                 @endforeach
                             </table>
                         </div>
@@ -379,41 +382,12 @@
                 </div>
                 <div class="card-footer pt-0">
                     <hr class="border border-dark opacity-75">
-                    <form action="">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-10">
                                 <h5 class="ms-5 mt-2">Proses Pesanan</h5>
                             </div>
-                            <div class="col-2">
-                                <div class="align-middle text-sm text-center">
-                                    <select class="mb-3 form-control" id="name" name="name">
-                                        <option value="Belum Memilih" {{ is_null($transaksi->pengiriman->id_kurir) ? 'selected' : '' }}>
-                                            Belum Memilih
-                                        </option>
-                                        @foreach ($kurirs as $kurir)
-                                            <option value="{{ $kurir }}" {{ $transaksi->pengiriman->id_kurir == $kurir ? 'selected' : '' }}>
-                                                {{ $kurir }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>   
-                            </div>
-                            <div class="col-2">                                                                         
-                                <div class="align-middle text-sm text-center">
-                                    <select class="mb-3 form-control" id="plat_truck" name="plat_truck">
-                                        <option value="Belum Memilih" {{ is_null($transaksi->pengiriman->id_truck) ? 'selected' : '' }}>
-                                            Belum Memilih
-                                        </option>
-                                        @foreach ($trucks as $truck)
-                                            <option value="{{ $truck }}" {{ $transaksi->pengiriman->id_truck == $truck ? 'selected' : '' }}>
-                                                {{ $truck }}
-                                            </option>
-                                        @endforeach
-                                    </select>                                               
-                                </div>
-                            </div>
                             <div class="col">
-                                <button type="button" class="btn bg-gradient-success btn-icon btn-sm ps-3 mt-1" id="btnKirimSemua" disabled>
+                                <button type="submit" class="btn bg-gradient-success btn-icon btn-sm ps-3 mt-1" id="btnKirimSemua" disabled>
                                     <span><i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
                                     Kirim
                                 </button>
@@ -476,7 +450,7 @@
                                             <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
                                             <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
                                             <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                            <td class="align-middle text-sm text-center"><span class="badge badge-sm bg-gradient-success">Sudah Dibayar</span></td>
+                                            <td class="align-middle text-sm text-center"><span class="badge badge-sm bg-gradient-success">Siap Dikirim</span></td>
                                         </tr>
                                     </tbody>
                                 </form>
@@ -737,13 +711,17 @@
         $(document).ready(function () {
             // Mengaktifkan/menonaktifkan tombol "Kirim" berdasarkan status checkbox
             $('input[type="checkbox"]').change(function () {
-            var adaCheckboxDicentang = $('input[type="checkbox"]:checked').length > 0;
-            $('#btnKirimSemua').prop('disabled', !adaCheckboxDicentang);
-        });
+                var adaCheckboxDicentang = $('input[type="checkbox"]:checked').length > 0;
+                $('#btnKirimSemua').prop('disabled', !adaCheckboxDicentang);
+            });
 
             // Menangani pengiriman formulir ketika tombol "Kirim" ditekan
             $('#btnKirimSemua').click(function () {
-                $('#formUpdateDikirim').submit();
+                // Menggunakan $.each untuk mengirim formulir dengan ID yang sesuai
+                $.each($('input[type="checkbox"]:checked'), function () {
+                    var id_transaksi = $(this).val();
+                    $('#formUpdatePembayaran_' + id_transaksi).submit();
+                });
             });
         });
     </script>

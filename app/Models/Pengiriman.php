@@ -11,6 +11,7 @@ class Pengiriman extends Model
     protected $primaryKey = 'id_pengiriman';
     
     protected $fillable = [
+        'resi_pengiriman',
         'id_truck',
         'id_kurir',
     ];

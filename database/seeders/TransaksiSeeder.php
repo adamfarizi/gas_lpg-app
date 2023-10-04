@@ -20,7 +20,7 @@ class TransaksiSeeder extends Seeder
             'id_gas' => 1, // ID gas sesuai kebutuhan Anda
             'id_pembayaran' => 1, // ID pembayaran sesuai kebutuhan Anda
             'id_admin' => 1, // ID admin sesuai kebutuhan Anda
-            'id_pengiriman' => 1, // ID pengiriman sesuai kebutuhan Anda
+            'id_pengiriman' => null, // ID pengiriman sesuai kebutuhan Anda
         ];
 
         // Menambahkan data ke dalam tabel

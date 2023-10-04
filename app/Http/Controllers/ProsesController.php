@@ -17,11 +17,10 @@ class ProsesController extends Controller
 {
     public function index() {
         $data['title'] = 'Proses';
-        
         // Nav items
         $total_gas = Gas::sum('stock_gas');
         $kurir_tersedia = Kurir::where('status', 'tersedia')->count();
-        $pesanan_masuk = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
+        $pesanan_masuk = Transaksi::where('id_pengiriman', null)->count();
         $pesanan_diproses = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Sudah Bayar');
         })->whereHas('pengiriman', function ($query) {
@@ -32,11 +31,22 @@ class ProsesController extends Controller
         
         // Tabel konfirmasi Pembayaran
         $pembayaran = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->where('status_pembayaran', 'Belum Bayar');
+            $query->where('status_pembayaran', 'Belum Bayar')
+            ->orWhere('status_pembayaran', 'Proses');        
         })->get();
         
         // Tabel pesanan di proses
-        $proses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->get();
+        $pengiriman = Pengiriman::all();
+        if ($pengiriman->isNotEmpty()) {
+            $id_pengiriman = $pengiriman->pluck('id_pengiriman');
+            $transaksi_pengiriman = Transaksi::where('id_pengiriman', $id_pengiriman )->pluck('id_pengiriman');
+            $proses = Transaksi::whereIn('id_pengiriman', $transaksi_pengiriman)->get();
+        }
+        else{
+            $proses = Transaksi::whereHas('pembayaran', function ($query) {
+                $query->where('status_pembayaran', 'Sudah Bayar');
+            })->get();
+        }
         $kurirs = Kurir::where('status', 'tersedia')->pluck('name');
         $trucks = Truck::where('status', 'tersedia')->pluck('plat_truck');
         
@@ -71,25 +81,52 @@ class ProsesController extends Controller
         ], $data);
     }
 
-    public function update_pembayaran(Request $request, $id){
-        $transaksi = Transaksi::find($id);
-        if (!$transaksi) {
-            return redirect()->route('home')->with('error', 'Transaksi tidak ditemukan.');
+    public function update_pembayaran(Request $request){ 
+        $selectedIds = $request->input('id_transaksi');
+        // Cari transaksi berdasarkan ID
+        $transaksis = Transaksi::find($selectedIds);
+        // Tambahkan data ke tabel pengiriman
+        $id_pengiriman_new = Pengiriman::max('id_pengiriman') + 1;
+        $format_resi = str_pad($id_pengiriman_new, 6, '0', STR_PAD_LEFT);
+        $resi_pengiriman = 'SHIP(GTK)-' . $format_resi;
+        Pengiriman::create([
+            'id_pengiriman' => $id_pengiriman_new,
+            'resi_pengiriman' => $resi_pengiriman,
+            'id_truck' => null,
+            'id_transaksi' => null,
+        ]);
+
+        foreach ($transaksis as $transaksi) {
+            // Periksa apakah transaksi ditemukan
+            if (!$transaksi) {
+                return redirect()->route('home')->with('error', 'Transaksi tidak ditemukan.');
+            }
+
+            // Periksa apakah pembayaran ada sebelum mengaksesnya
+            if ($transaksi->pembayaran) {
+                // Periksa apakah status_pembayaran yang diterima adalah salah satu yang valid
+                $status_pembayaran = 'Sudah Bayar'; // Ubah sesuai kebutuhan Anda
+                $transaksi->pembayaran->status_pembayaran = $status_pembayaran;
+                $transaksi->pembayaran->save();
+                
+                // Lanjutkan dengan pembaruan lainnya jika diperlukan
+                $transaksi->id_admin = Auth::user()->id_admin;
+                $transaksi->save();
+
+                $id_gas = $transaksi->id_gas;
+                $gas = Gas::find($id_gas);
+                $gas_dibeli = $transaksi->jumlah_transaksi;
+                $gas->stock_gas -= $gas_dibeli;
+                $gas->save();
+            } else {
+                return redirect()->back()->with('error', 'Pembayaran tidak ditemukan.');
+            }
+            // Cek apakah nilai id_pengiriman_new valid
+            if ($id_pengiriman_new) {
+                $transaksi->id_pengiriman = $id_pengiriman_new;
+                $transaksi->save();
+            } 
         }
-
-        $status_pembayaran = $request->input('status_pembayaran');
-        $transaksi->pembayaran->status_pembayaran = $status_pembayaran;
-        $transaksi->pembayaran->save();
-
-        $transaksi->id_admin = Auth::user()->id_admin;
-        $transaksi->save();
-
-        $id_gas = $transaksi->id_gas;
-        $gas = Gas::find($id_gas);
-        $gas_dibeli = $transaksi->jumlah_transaksi;
-        $gas->stock_gas -= $gas_dibeli;
-        $gas->save();
-
         return redirect()->back()->with('success', 'Status pembayaran berhasil diubah.');
     }
 
