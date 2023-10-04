@@ -384,7 +384,7 @@
                     <hr class="border border-dark opacity-75">
                         <div class="row">
                             <div class="col ms-3 mt-3">
-                                <div id="totalGasSelected">Total Gas : 0 Gas</div>
+                                <div id="totalGasSelected">Total Gas : Max 1000 Gas</div>
                             </div>
                             <div class="col text-end">
                                 <button type="submit" class="btn bg-gradient-success btn-icon mt-1 me-3" id="btnKirimSemua" disabled>
