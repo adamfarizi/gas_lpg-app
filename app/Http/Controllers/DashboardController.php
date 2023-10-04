@@ -17,7 +17,7 @@ class DashboardController extends Controller
         
         $kurir_tersedia = Kurir::where('status', 'tersedia')->count();
 
-        $lokasi_selesai = Lokasi::where('status_pengiriman', 'Diterima')->pluck('id_pengiriman');
+        $lokasi_selesai = Transaksi::where('status_pengiriman', 'Diterima')->pluck('id_pengiriman');
         $diterima = Transaksi::whereIn('id_pengiriman', $lokasi_selesai)->get();
 
         return view('auth.dashboard.dashboard',[
