@@ -257,7 +257,7 @@
                                             <p class="text-xs font-weight-bold mb-0 me-6">{{ $gas->stock_gas }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ $gas->harga_gas }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($gas->harga_gas, 0, ',', ',') }}</p>
                                         </td>
                                         <td class="align-middle">
                                             <a href="{{ url('admin/stock/gas/'. $gas->id_gas .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">

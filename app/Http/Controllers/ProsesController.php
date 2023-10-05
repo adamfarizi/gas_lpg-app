@@ -48,6 +48,7 @@ class ProsesController extends Controller
         }
         $kurirs = Kurir::where('status', 'tersedia')->pluck('name');
         $trucks = Truck::where('status', 'tersedia')->pluck('plat_truck');
+
         
         // Tabel pesanan dikirim
         $dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->get();
@@ -162,7 +163,6 @@ class ProsesController extends Controller
         $pengiriman->id_truck = $id_truck;
         $pengiriman->save();
 
-    
         return redirect()->back()->with('success', 'Pesanan telah dikirim');
     }
     
