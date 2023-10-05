@@ -327,13 +327,11 @@
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col d-flex">
-                            <h4 class="card-title">Konfirmasi Pembayaran</h4>
+                            <h4 class="card-title text-truncate d-sm-none">Pembayaran</h4>
+                            <h4 class="card-title text-truncate d-none d-sm-block">Konfirmasi Pembayaran</h4>
                             <span class="mt-1 ms-3">
                                 <a class="me-3">( {{ $pesanan_masuk }} )</a>
                                 <i type="button" id="icon_toggleAllTables_konfirmasiPembayaran" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('konfirmasiPembayaran')"></i>
-                                {{-- @if ($adaDataBaru)
-                                        <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
-                                    @endif --}}
                             </span>
                         </div>
                         <div class="col-md-2 col-sm-6 ml-auto">
@@ -447,7 +445,7 @@
                     </div>
                 </div>
                 <div class="card-footer pt-0">
-                    <hr class="border border-dark opacity-75">
+                    <hr class="border border-sm-dark opacity-75">
                         <div class="row">
                             <div class="col ms-3 mt-3">
                                 <div id="totalGasSelected">Total Gas : Max 1000 Gas</div>
@@ -587,9 +585,6 @@
                             <span class="mt-1 ms-3">
                                 <a class="me-3">( {{ $pesanan_dikirim }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananDikirim" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananDikirim')"></i>
-                                {{-- @if ($adaDataBaru)
-                                    <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
-                                @endif --}}
                             </span>
                         </div>
                         <div class="col-md-2 col-sm-6 ml-auto">
@@ -668,9 +663,6 @@
                             <span class="mt-1 ms-3">
                                 <a class="me-3">( {{ $pesanan_selesai }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananSelesai" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananSelesai')"></i>
-                                {{-- @if ($adaDataBaru)
-                                    <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
-                                @endif --}}
                             </span>
                         </div>
                         <div class="col-md-2 col-sm-6 ml-auto">
@@ -686,7 +678,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 0px;">
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <div class="text-center" id="noResultsMessage_pesananSelesai" style="display: none;">
                                 Pesanan tidak ditemukan.
@@ -771,32 +763,34 @@
                                 </button>
                             </div>
                             <div class="modal-body" style="max-height:350px; overflow-y: auto;">
-                                <ul class="mb-3 text-dark" class="tracking-list">
-                                    <h5>{{ $pengiriman->resi_pengiriman }}</h5>
-                                </ul>
-                                <ul class="mb-3 text-dark" class="tracking-list">
-                                    <h6>Total Muatan:</h6>
-                                    <p>{{ $totalJumlahTransaksi }} Gas</p>
-                                </ul>
-                                <ul class="mb-3 text-dark" class="tracking-list">
-                                    <h6>Total Harga:</h6>
-                                    <p>Rp {{ number_format($totalHargaTransaksi, 0, ',', ',') }}</p>
-                                </ul>
-                                <ul class="mb-3 text-dark" class="tracking-list">
-                                    <h6>Rincian:</h6>
-                                    @foreach ($transaksi_proses as $transaksi)
-                                        @if ($pengiriman->id_pengiriman == $transaksi->id_pengiriman)
-                                            <ul>
-                                                <li class="mb-2">
-                                                    {{ $transaksi->agen->name }}
-                                                    <br><span class="text-secondary text-xs">Jumlah Gas :
-                                                        {{ $transaksi->jumlah_transaksi }}</span>
-                                                    <br><span class="text-secondary text-xs">Alamat :
-                                                        {{ $transaksi->agen->alamat }}</span>
-                                                </li>
-                                            </ul>
-                                        @endif
-                                    @endforeach
+                                <ul class="mb-3 text-dark" class="tracking-list" type="disc">
+                                    <h5 class="pb-3">{{ $pengiriman->resi_pengiriman }}</h5>
+                                    <li class="ms-3 mb-0 text-dark" class="tracking-list">
+                                        <h6 class="d-flex mb-0 pb-0">Total Muatan :
+                                            <span class="ms-2"><p>{{ $totalJumlahTransaksi }} Gas</p></span>
+                                        </h6>
+                                    </li>
+                                    <li class="ms-3 mb-0 text-dark" class="tracking-list">
+                                        <h6 class="d-flex mb-0 pb-0">Total Harga :
+                                            <span class="ms-2"><p>Rp {{ number_format($totalHargaTransaksi, 0, ',', ',') }}</p></span>
+                                        </h6>
+                                    </li>
+                                    <li class="ms-3 mb-3 text-dark" class="tracking-list">
+                                        <h6>Rincian :</h6>
+                                        @foreach ($transaksi_proses as $transaksi)
+                                            @if ($pengiriman->id_pengiriman == $transaksi->id_pengiriman)
+                                                <ul>
+                                                    <li class="mb-2">
+                                                        {{ $transaksi->agen->name }}
+                                                        <br><span class="text-secondary text-xs">Jumlah Gas :
+                                                            {{ $transaksi->jumlah_transaksi }}</span>
+                                                        <br><span class="text-secondary text-xs">Alamat :
+                                                            {{ $transaksi->agen->alamat }}</span>
+                                                    </li>
+                                                </ul>
+                                            @endif
+                                        @endforeach
+                                    </li>
                                 </ul>
                             </div>
                             <div class="modal-footer">
