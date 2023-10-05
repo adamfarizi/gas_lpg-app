@@ -473,9 +473,6 @@
                             <span class="mt-1 ms-3">
                                 <a class="me-3">( {{ $pesanan_diproses }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananDiproses" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananDiproses')"></i>
-                                {{-- @if ($adaDataBaru)
-                                    <i class="fa fa-solid fa-circle" style="color: #ea0606;"></i>
-                                @endif --}}
                             </span>
                         </div>
                         <div class="col-md-2 col-sm-6 ml-auto">
@@ -536,7 +533,7 @@
                                                 </ul>
                                             </td>
                                             <td class="align-middle text-sm text-center">
-                                                <a href="#" type="button" data-id="#" data-bs-toggle="modal" data-bs-target="#more-info">
+                                                <a href="#" type="button" data-id="{{ $pengiriman->id_pengiriman }}" data-bs-toggle="modal" data-bs-target="#more-info{{ $pengiriman->id_pengiriman }}">
                                                     <span class="badge badge-sm bg-gradient-info"><i class="fa fa-solid fa-info me-2" style="color: #ffffff;"></i>More Info</span>
                                                 </a>
                                             </td>
@@ -748,39 +745,69 @@
 
 
     <!--Modal More Info-->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="modal fade" id="more-info" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h6 class="modal-title text-uppercase" id="modal-title-default">Rincian Pesanan</h6>
-                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" style="max-height:350px; overflow-y: auto;">
-                            <ul class="mb-3 text-dark" class="tracking-list">
-                                <h6>Jumlah Gas:</h6>
-                                <p>20 Gas</p>
-                            </ul>
-                            <ul class="mb-3 text-dark" class="tracking-list">
-                                <h6>Jumlah Harga:</h6>
-                                <p>Rp 380.000</p>
-                            </ul>
-                            <ul class="mb-3 text-dark" class="tracking-list">
-                                <h6>Tujuan:</h6>
-                                <p>	Jl. Merdeka No. 123, Kelurahan Bahagia, Kecamatan Sentosa, Kota Fiktif A</p>
-                            </ul>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Close</button>
+    @foreach ($proses as $pengiriman)
+        @php
+            $totalJumlahTransaksi = 0;
+            $totalHargaTransaksi = 0;
+        @endphp
+
+        @foreach ($transaksi_proses as $transaksi)
+            @if ($pengiriman->id_pengiriman == $transaksi->id_pengiriman)
+                @php
+                    $totalJumlahTransaksi += $transaksi->jumlah_transaksi;
+                    $totalHargaTransaksi = $totalJumlahTransaksi * $transaksi->gas->harga_gas;
+                @endphp
+            @endif
+        @endforeach
+        <div class="row">
+            <div class="col-md-4">
+                <div class="modal fade" id="more-info{{ $pengiriman->id_pengiriman }}" tabindex="-1" role="dialog" aria-labelledby="modal-default{{ $pengiriman->id_pengiriman }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title text-uppercase" id="modal-title-default">Rincian Pesanan</h6>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="max-height:350px; overflow-y: auto;">
+                                <ul class="mb-3 text-dark" class="tracking-list">
+                                    <h5>{{ $pengiriman->resi_pengiriman }}</h5>
+                                </ul>
+                                <ul class="mb-3 text-dark" class="tracking-list">
+                                    <h6>Total Muatan:</h6>
+                                    <p>{{ $totalJumlahTransaksi }} Gas</p>
+                                </ul>
+                                <ul class="mb-3 text-dark" class="tracking-list">
+                                    <h6>Total Harga:</h6>
+                                    <p>Rp {{ number_format($totalHargaTransaksi, 0, ',', ',') }}</p>
+                                </ul>
+                                <ul class="mb-3 text-dark" class="tracking-list">
+                                    <h6>Rincian:</h6>
+                                    @foreach ($transaksi_proses as $transaksi)
+                                        @if ($pengiriman->id_pengiriman == $transaksi->id_pengiriman)
+                                            <ul>
+                                                <li class="mb-2">
+                                                    {{ $transaksi->agen->name }}
+                                                    <br><span class="text-secondary text-xs">Jumlah Gas :
+                                                        {{ $transaksi->jumlah_transaksi }}</span>
+                                                    <br><span class="text-secondary text-xs">Alamat :
+                                                        {{ $transaksi->agen->alamat }}</span>
+                                                </li>
+                                            </ul>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>    
+        </div>    
+    @endforeach
 
     <!--Modal Status-->
     @foreach ($lokasis as $lokasi_all)
@@ -982,6 +1009,7 @@
         });
     </script>
     
+    {{-- Script search --}}
     <script>
         $(document).ready(function() {
             $("#searchInput_konfirmasiPembayaran").on("keyup", function() {
@@ -1042,6 +1070,7 @@
         });
     </script>
     
+    {{-- Script hitung gas --}}
     <script>
         // Fungsi untuk menghitung jumlah gas yang dipilih
         function hitungTotalGas() {
