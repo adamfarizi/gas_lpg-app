@@ -11,6 +11,7 @@ use App\Http\Controllers\KurirController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProsesController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\CreateBuyController;
 use App\Http\Controllers\CreateLokasiController;
 
@@ -80,4 +81,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/stock/truck/{id}/edit',[StockController::class, 'edit_stock_truck']);
     Route::put('admin/stock/truck/{id}',[StockController::class, 'edit_stock_truck_action']);
     Route::delete('admin/stock/truck/{id}', [StockController::class, 'destroy_stock_truck']);
+
+    //Controller pesanan
+    Route::get('admin/pesanan', [PesananController::class, 'index_pesanan']); 
 });
