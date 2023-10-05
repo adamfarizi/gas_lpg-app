@@ -429,8 +429,7 @@
                                                 </td>
                                                 <td class="align-middle text-sm text-center">
                                                     @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
-                                                        <span class="badge badge-sm bg-gradient-danger">Belum
-                                                            Dibayar</span>
+                                                        <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>
                                                     @elseif ($transaksi->pembayaran->status_pembayaran === 'Proses')
                                                         <span class="badge badge-sm bg-gradient-info">Konfirmasi</span>
                                                     @else
@@ -532,7 +531,7 @@
                                             </td>
                                             <td class="align-middle text-sm text-center">
                                                 <a href="#" type="button" data-id="{{ $pengiriman->id_pengiriman }}" data-bs-toggle="modal" data-bs-target="#more-info{{ $pengiriman->id_pengiriman }}">
-                                                    <span class="badge badge-sm bg-gradient-info"><i class="fa fa-solid fa-info me-2" style="color: #ffffff;"></i>More Info</span>
+                                                    <p class="pt-3" style="text-decoration: underline;">More Info</p>
                                                 </a>
                                             </td>
                                             <td class="align-middle text-sm text-center pt-4">
