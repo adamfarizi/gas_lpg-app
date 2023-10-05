@@ -686,7 +686,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 0px;">
+                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <div class="text-center" id="noResultsMessage_pesananSelesai" style="display: none;">
                                 Pesanan tidak ditemukan.

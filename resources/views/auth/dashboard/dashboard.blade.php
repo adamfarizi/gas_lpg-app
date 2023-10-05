@@ -484,11 +484,16 @@
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="row">
-                        <div class="col-lg-6 col-7">
-                            <h6>Pesanan Selesai</h6>
+                        <div class="col d-flex">
+                            <h4 class="card-tittle">Pesanan Selesai</h4>
+                        </div>
+                        <div class="col-md-2 col-sm-6 ml-auto">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="searchInput_pesananSelesai" placeholder="Cari Pesanan ...">
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive">
                         <table id="table_pesananSelesai" class="table align-items-center mb-0">
@@ -521,20 +526,12 @@
                                 <tbody id="pesananSelesai_{{ $transaksi->id_transaksi }}">
                                     <tr class="text-dark">
                                         <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}
-                                        </td>
-                                        <td class="align-middle text-sm text-center"
-                                            style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">
-                                            {{ $transaksi->agen->name }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }}
-                                            Gas</td>
-                                        <td class="align-middle text-sm "
-                                            style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">
-                                            {{ $transaksi->agen->alamat }}</td>
-                                        <td class="align-middle text-sm text-center">
-                                            {{ $transaksi->pengiriman->kurir->name }}</td>
-                                        <td class="align-middle text-sm text-center">
-                                            {{ $transaksi->pengiriman->truck->plat_truck }}</td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
+                                        <td class="align-middle text-sm text-center"style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
+                                        <td class="align-middle text-sm "style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>
+                                        <td class="align-middle text-sm text-center"> {{ $transaksi->pengiriman->truck->plat_truck }}</td>
                                     </tr>
                                 </tbody>
                             @endforeach
@@ -547,6 +544,26 @@
 @endsection
 
 @section('js')
+    
+    {{-- Script search --}}
+    <script>
+        $(document).ready(function() {
+            $("#searchInput_pesananSelesai").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#table_pesananSelesai tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+
+                var noResultsMessage = $("#noResultsMessage_pesananSelesai");
+                if ($("#table_pesananSelesai tr:visible").length === 0) {
+                    noResultsMessage.show();
+                } else {
+                    noResultsMessage.hide();
+                }
+            });
+        });
+    </script>
+
     <!--   Core JS Files   -->
     <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");

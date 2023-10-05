@@ -258,12 +258,12 @@
             </div>
         </div>
     </div>
+    {{-- Tabel gas --}}
     <div class="mt-3">
         <div class="row">
-            {{-- Tabel gas --}}
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-header pb-0 d-flex justify-content-between">
+            <div class="col-12 col-md-6 mb-3">
+                <div class="card text-truncate">
+                    <div class="card-header pb-2 d-flex justify-content-between">
                         <h6>Gas Table</h6>
                         <a type="button" class="btn bg-gradient-primary border-end" data-bs-toggle="modal"
                             data-bs-target="#addStockModal">
@@ -271,7 +271,7 @@
                             Add Gas
                         </a>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 320px;" style="min-height: 320px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -336,9 +336,9 @@
                 </div>
             </div>
             {{-- Tabel truck --}}
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-header pb-0 d-flex justify-content-between">
+            <div class="col-12 col-md-6 mb-3">
+                <div class="card text-truncate">
+                    <div class="card-header pb-2 d-flex justify-content-between">
                         <h6>Truck Table</h6>
                         <a type="button" class="btn bg-gradient-primary border-end" data-bs-toggle="modal"
                             data-bs-target="#addTrcukModal">
@@ -346,7 +346,7 @@
                             Add Truck
                         </a>
                     </div>
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
+                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 320px;" style="min-height: 320px;">
                         <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -364,46 +364,46 @@
                                 @foreach ($trucks as $truck)
                                     <tbody>
                                         <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="../assets/img/local/truck1.png"
-                                                            class="avatar avatar-sm me-3" alt="user1">
-                                                    </div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $truck->plat_truck }}</h6>
-                                                    </div>
-                                            <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0 me-7">
-                                                    {{ $truck->maksimal_beban_truck }} Gas</p>
-                                            </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="../assets/img/local/truck1.png"
+                                                        class="avatar avatar-sm me-3" alt="user1">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">{{ $truck->plat_truck }}</h6>
+                                                </div>
+                                                <td class="text-center">
+                                                    <p class="text-xs font-weight-bold mb-0 me-7">
+                                                        {{ $truck->maksimal_beban_truck }} Gas</p>
+                                                </td>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="{{ url('admin/stock/truck/' . $truck->id_truck . '/edit') }}"
+                                                class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
+                                                <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            <form action="{{ url('admin/stock/truck/' . $truck->id_truck) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" name="Delete"
+                                                    class="text-dark font-weight-bold border-0 bg-transparent">
+                                                    <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                @endforeach
+                            </table>
                         </div>
-                        </td>
-                        <td class="align-middle">
-                            <a href="{{ url('admin/stock/truck/' . $truck->id_truck . '/edit') }}"
-                                class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
-                                <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
-                            </a>
-                        </td>
-                        <td class="align-middle">
-                            <form action="{{ url('admin/stock/truck/' . $truck->id_truck) }}" method="POST">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" name="Delete"
-                                    class="text-dark font-weight-bold border-0 bg-transparent">
-                                    <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                </button>
-                            </form>
-                        </td>
-                        </tr>
-                        </tbody>
-                        @endforeach
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     </div>
     @include('auth.stock.create.create_stock')
