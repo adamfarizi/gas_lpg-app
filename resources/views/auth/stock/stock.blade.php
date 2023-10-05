@@ -235,66 +235,17 @@
                 </div>
             </div>
         </div>
-        <div class="mt-3">
-            <div class="row">
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-header pb-0 d-flex justify-content-between">
-                            <h6>Gas Table</h6>
-                            <a type="button" class="btn bg-gradient-primary border-end" data-bs-toggle="modal" data-bs-target="#addStockModal">
-                                <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                                Add Gas
-                            </a>
-                        </div>
-                        <div class="card-body px-0 pt-0 pb-2" style="min-height: 320px;">
-                            <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                                <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jenis Gas</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Stock Gas</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Harga Gas</th>
-                                    <th class="text-secondary opacity-7"></th>
-                                    <th class="text-secondary opacity-7"></th>
-                                    </tr>
-                                </thead>
-                                @foreach ($gasItems as $gas)
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
-                                                <div>
-                                                    <img src="../assets/img/local/gas1.png" class="avatar avatar-sm me-3" alt="user1">
-                                                </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $gas->jenis_gas }}</h6>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0 me-6">{{ $gas->stock_gas }}</p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($gas->harga_gas, 0, ',', ',') }}</p>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="{{ url('admin/stock/gas/'. $gas->id_gas .'/edit') }}" class="text-dark font-weight-bold" data-toggle="tooltip" data-original-title="Edit user">
-                                                <i class="fa fa-solid fa-pen" style="color: #252f40;"></i>
-                                            </a>
-                                        </td>
-                                        <td class="align-middle">
-                                            <form action="{{ url('admin/stock/gas/'. $gas->id_gas) }}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
-                                                    <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                                </button>                                        
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                @endforeach
-                                </table>
+        <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Truck</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    {{ $total_truck }}
+                                    <span class="text-black text-sm font-weight-bolder">Truck</span>
+                                </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -309,6 +260,7 @@
     </div>
     <div class="mt-3">
         <div class="row">
+            {{-- Tabel gas --}}
             <div class="col-6">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
@@ -354,7 +306,8 @@
                                                 <p class="text-xs font-weight-bold mb-0 me-6">{{ $gas->stock_gas }}</p>
                                             </td>
                                             <td>
-                                                <p class="text-xs font-weight-bold mb-0">Rp. {{ $gas->harga_gas }}</p>
+                                                <p class="text-xs font-weight-bold mb-0">Rp.
+                                                    {{ number_format($gas->harga_gas, 0, ',', ',') }}</p>
                                             </td>
                                             <td class="align-middle">
                                                 <a href="{{ url('admin/stock/gas/' . $gas->id_gas . '/edit') }}"
@@ -382,6 +335,7 @@
                     </div>
                 </div>
             </div>
+            {{-- Tabel truck --}}
             <div class="col-6">
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
