@@ -113,6 +113,7 @@ class ProsesController extends Controller
                 $transaksi->id_admin = Auth::user()->id_admin;
                 $transaksi->save();
 
+                // Mengurai stock gas
                 $id_gas = $transaksi->id_gas;
                 $gas = Gas::find($id_gas);
                 $gas_dibeli = $transaksi->jumlah_transaksi;

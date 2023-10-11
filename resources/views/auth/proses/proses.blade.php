@@ -667,9 +667,7 @@
                                                 {{ $transaksi->agen->name }}</td>
                                             <td class="align-middle text-sm text-center">
                                                 {{ $transaksi->jumlah_transaksi }} Gas</td>
-                                            <td class="align-middle text-sm "
-                                                style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">
-                                                {{ $transaksi->agen->alamat }}</td>
+                                            <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
                                             <td class="align-middle text-sm text-center">
                                                 {{ $transaksi->pengiriman->resi_pengiriman }}</td>
                                             <td class="align-middle text-center ">
@@ -761,9 +759,7 @@
                                             {{ $transaksi->agen->name }}</td>
                                         <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }}
                                             Gas</td>
-                                        <td class="align-middle text-sm "
-                                            style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">
-                                            {{ $transaksi->agen->alamat }}</td>
+                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;"> {{ $transaksi->agen->alamat }}</td>
                                         <td class="align-middle text-sm text-center">
                                             {{ $transaksi->pengiriman->resi_pengiriman }}</td>
                                         <td class="align-middle text-center ">
