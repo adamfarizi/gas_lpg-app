@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Models\Agen;
+use App\Models\Gas;
 use App\Models\Kurir;
 use App\Models\Lokasi;
 use App\Models\Transaksi;
@@ -15,13 +18,26 @@ class DashboardController extends Controller
     public function index() {
         $data['title'] = 'Dashboard';
         
-        $kurir_tersedia = Kurir::where('status', 'tersedia')->count();
+        $total_gas = Gas::sum('stock_gas');
+        $pesanan_diproses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
+        $pesanan_dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->count();
+        $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
 
-        $diterima = Transaksi::where('status_pengiriman', 'Diterima')->get();
+        $transaksis = Transaksi::all();
+
+        $dataTransaksi = Transaksi::selectRaw('SUM(jumlah_transaksi) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%b %Y") as bulan')
+        ->groupBy('bulan')
+        ->orderBy('bulan')
+        ->get();
 
         return view('auth.dashboard.dashboard',[
-            'kurir_tersedia' => $kurir_tersedia,
-            'diterima' => $diterima,
+            'total_gas' => $total_gas,
+            'pesanan_diproses' => $pesanan_diproses,
+            'pesanan_dikirim' => $pesanan_dikirim,
+            'pesanan_selesai' => $pesanan_selesai,
+            'transaksis' => $transaksis,
+            'dataTransaksi' => $dataTransaksi,
+            
         ], $data);
     }
 }

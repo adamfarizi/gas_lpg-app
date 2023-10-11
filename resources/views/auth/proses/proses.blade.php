@@ -97,8 +97,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none"
-                                    fill-rule="evenodd">
+                                <g id="Basic-Elements" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <g id="Rounded-Icons" transform="translate(-2319.000000, -291.000000)" fill="#FFFFFF"
                                         fill-rule="nonzero">
                                         <g id="Icons-with-opacity" transform="translate(1716.000000, 291.000000)">
@@ -250,7 +249,16 @@
                         </div>
                         <div class="col-4 text-end">
                             <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
+                                <svg class="mt-3" xmlns="http://www.w3.org/2000/svg" height="1em"
+                                    viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <style>
+                                        svg {
+                                            fill: #ffffff
+                                        }
+                                    </style>
+                                    <path
+                                        d="M80 48a48 48 0 1 1 96 0A48 48 0 1 1 80 48zm64 193.7v65.1l51 51c7.1 7.1 11.8 16.2 13.4 26.1l15.2 90.9c2.9 17.4-8.9 33.9-26.3 36.8s-33.9-8.9-36.8-26.3l-14.3-85.9L66.8 320C54.8 308 48 291.7 48 274.7V186.6c0-32.4 26.2-58.6 58.6-58.6c24.1 0 46.5 12 59.9 32l47.4 71.1 10.1 5V160c0-17.7 14.3-32 32-32H384c17.7 0 32 14.3 32 32v76.2l10.1-5L473.5 160c13.3-20 35.8-32 59.9-32c32.4 0 58.6 26.2 58.6 58.6v88.1c0 17-6.7 33.3-18.7 45.3l-79.4 79.4-14.3 85.9c-2.9 17.4-19.4 29.2-36.8 26.3s-29.2-19.4-26.3-36.8l15.2-90.9c1.6-9.9 6.3-19 13.4-26.1l51-51V241.7l-19 28.5c-4.6 7-11 12.6-18.5 16.3l-59.6 29.8c-2.4 1.3-4.9 2.2-7.6 2.8c-2.6 .6-5.3 .9-7.9 .8H256.7c-2.5 .1-5-.2-7.5-.7c-2.9-.6-5.6-1.6-8.1-3l-59.5-29.8c-7.5-3.7-13.8-9.4-18.5-16.3l-19-28.5zM2.3 468.1L50.1 348.6l49.2 49.2-37.6 94c-6.6 16.4-25.2 24.4-41.6 17.8S-4.3 484.5 2.3 468.1zM512 0a48 48 0 1 1 0 96 48 48 0 1 1 0-96zm77.9 348.6l47.8 119.5c6.6 16.4-1.4 35-17.8 41.6s-35-1.4-41.6-17.8l-37.6-94 49.2-49.2z" />
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -331,7 +339,9 @@
                             <h4 class="card-title text-truncate d-none d-sm-block">Konfirmasi Pembayaran</h4>
                             <span class="mt-1 ms-3">
                                 <a class="me-3">( {{ $pesanan_masuk }} )</a>
-                                <i type="button" id="icon_toggleAllTables_konfirmasiPembayaran" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('konfirmasiPembayaran')"></i>
+                                <i type="button" id="icon_toggleAllTables_konfirmasiPembayaran"
+                                    class="fa fa-solid fa-angle-down" style="color: #252f40;"
+                                    onclick="toggleAllTables('konfirmasiPembayaran')"></i>
                             </span>
                         </div>
                         <div class="col-md-2 col-sm-6 ml-auto">
@@ -429,7 +439,8 @@
                                                 </td>
                                                 <td class="align-middle text-sm text-center">
                                                     @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
-                                                        <span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>
+                                                        <span class="badge badge-sm bg-gradient-danger">Belum
+                                                            Dibayar</span>
                                                     @elseif ($transaksi->pembayaran->status_pembayaran === 'Proses')
                                                         <span class="badge badge-sm bg-gradient-info">Konfirmasi</span>
                                                     @else
@@ -445,17 +456,18 @@
                 </div>
                 <div class="card-footer pt-0">
                     <hr class="border border-sm-dark opacity-75">
-                        <div class="row">
-                            <div class="col ms-3 mt-3">
-                                <div id="totalGasSelected">Total Gas : Max 1000 Gas</div>
-                            </div>
-                            <div class="col text-end">
-                                <button type="submit" class="btn bg-gradient-success btn-icon mt-1 me-3" id="btnKirimSemua" disabled>
-                                    <span><i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
-                                    Proses Pesanan
-                                </button>
-                            </div>                            
+                    <div class="row">
+                        <div class="col ms-3 mt-3">
+                            <div id="totalGasSelected">Total Gas : Max 1000 Gas</div>
                         </div>
+                        <div class="col text-end">
+                            <button type="submit" class="btn bg-gradient-success btn-icon mt-1 me-3" id="btnKirimSemua"
+                                disabled>
+                                <span><i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
+                                Proses Pesanan
+                            </button>
+                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -469,7 +481,9 @@
                             <h4 class="card-title">Pesanan Diproses</h4>
                             <span class="mt-1 ms-3">
                                 <a class="me-3">( {{ $pesanan_diproses }} )</a>
-                                <i type="button" id="icon_toggleAllTables_pesananDiproses" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananDiproses')"></i>
+                                <i type="button" id="icon_toggleAllTables_pesananDiproses"
+                                    class="fa fa-solid fa-angle-down" style="color: #252f40;"
+                                    onclick="toggleAllTables('pesananDiproses')"></i>
                             </span>
                         </div>
                         <div class="col-md-2 col-sm-6 ml-auto">
@@ -512,61 +526,73 @@
                                     </tr>
                                 </thead>
                                 @foreach ($proses as $pengiriman)
-                                <form action="{{ route('update_dikirim', $pengiriman->id_pengiriman) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <tbody id="pesananDiproses_{{ $pengiriman->id_pengiriman }}" style="display: none;">
-                                        <tr class="text-dark">                                                                                                                            
-                                            <td class="align-middle text-sm text-center">{{ $pengiriman->resi_pengiriman }}</td>
-                                            <td class="align-middle text-sm text-center pt-4">
-                                                <ul style="list-style: none;">
-                                                    @foreach ($transaksi_proses as $transaksi)
-                                                        @if ($transaksi->id_pengiriman === $pengiriman->id_pengiriman)
-                                                            <li class="me-4">
-                                                                {{ $transaksi->resi_transaksi }}
-                                                            </li>
-                                                        @endif
-                                                    @endforeach
-                                                </ul>
-                                            </td>
-                                            <td class="align-middle text-sm text-center">
-                                                <a href="#" type="button" data-id="{{ $pengiriman->id_pengiriman }}" data-bs-toggle="modal" data-bs-target="#more-info{{ $pengiriman->id_pengiriman }}">
-                                                    <p class="pt-3" style="text-decoration: underline;">More Info</p>
-                                                </a>
-                                            </td>
-                                            <td class="align-middle text-sm text-center pt-4">
-                                                <select class="mb-3 form-control" id="name_kurir" name="name_kurir">
-                                                    <option value="Belum Memilih" {{ is_null($pengiriman->id_kurir) ? 'selected' : '' }}>
-                                                        Belum Memilih
-                                                    </option>
-                                                    @foreach ($kurirs as $kurir)
-                                                        <option value="{{ $kurir }}" {{ $transaksi->pengiriman->id_kurir == $kurir ? 'selected' : '' }}>
-                                                            {{ $kurir }}
+                                    <form action="{{ route('update_dikirim', $pengiriman->id_pengiriman) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <tbody id="pesananDiproses_{{ $pengiriman->id_pengiriman }}"
+                                            style="display: none;">
+                                            <tr class="text-dark">
+                                                <td class="align-middle text-sm text-center">
+                                                    {{ $pengiriman->resi_pengiriman }}</td>
+                                                <td class="align-middle text-sm text-center pt-4">
+                                                    <ul style="list-style: none;">
+                                                        @foreach ($transaksi_proses as $transaksi)
+                                                            @if ($transaksi->id_pengiriman === $pengiriman->id_pengiriman)
+                                                                <li class="me-4">
+                                                                    {{ $transaksi->resi_transaksi }}
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
+                                                <td class="align-middle text-sm text-center">
+                                                    <a href="#" type="button"
+                                                        data-id="{{ $pengiriman->id_pengiriman }}" data-bs-toggle="modal"
+                                                        data-bs-target="#more-info{{ $pengiriman->id_pengiriman }}">
+                                                        <p class="pt-3" style="text-decoration: underline;">More Info
+                                                        </p>
+                                                    </a>
+                                                </td>
+                                                <td class="align-middle text-sm text-center pt-4">
+                                                    <select class="mb-3 form-control" id="name_kurir" name="name_kurir">
+                                                        <option value="Belum Memilih"
+                                                            {{ is_null($pengiriman->id_kurir) ? 'selected' : '' }}>
+                                                            Belum Memilih
                                                         </option>
-                                                    @endforeach
-                                                </select>    
-                                            </td>
-                                            <td class="align-middle text-sm text-center pt-4">
-                                                <select class="mb-3 form-control" id="plat_truck" name="plat_truck">
-                                                    <option value="Belum Memilih" {{ is_null($pengiriman->id_truck) ? 'selected' : '' }}>
-                                                        Belum Memilih
-                                                    </option>
-                                                    @foreach ($trucks as $truck)
-                                                        <option value="{{ $truck }}" {{ $transaksi->pengiriman->id_truck == $truck ? 'selected' : '' }}>
-                                                            {{ $truck }}
+                                                        @foreach ($kurirs as $kurir)
+                                                            <option value="{{ $kurir }}"
+                                                                {{ $transaksi->pengiriman->id_kurir == $kurir ? 'selected' : '' }}>
+                                                                {{ $kurir }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class="align-middle text-sm text-center pt-4">
+                                                    <select class="mb-3 form-control" id="plat_truck" name="plat_truck">
+                                                        <option value="Belum Memilih"
+                                                            {{ is_null($pengiriman->id_truck) ? 'selected' : '' }}>
+                                                            Belum Memilih
                                                         </option>
-                                                    @endforeach
-                                                </select>  
-                                            </td>
-                                            <td class="align-middle text-sm text-center pt-4">
-                                                <button type="submit" class="btn bg-gradient-success btn-icon btn-sm ps-3 mt-1">
-                                                    <span><i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
-                                                    Kirim
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </form>                                
+                                                        @foreach ($trucks as $truck)
+                                                            <option value="{{ $truck }}"
+                                                                {{ $transaksi->pengiriman->id_truck == $truck ? 'selected' : '' }}>
+                                                                {{ $truck }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                                <td class="align-middle text-sm text-center pt-4">
+                                                    <button type="submit"
+                                                        class="btn bg-gradient-success btn-icon btn-sm ps-3 mt-1">
+                                                        <span><i class="fa fa-solid fa-paper-plane me-3"
+                                                                style="color: #ffffff;"></i></span>
+                                                        Kirim
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </form>
                                 @endforeach
                             </table>
                         </div>
@@ -583,7 +609,9 @@
                             <h4 class="card-title">Pesanan Dikirim</h4>
                             <span class="mt-1 ms-3">
                                 <a class="me-3">( {{ $pesanan_dikirim }} )</a>
-                                <i type="button" id="icon_toggleAllTables_pesananDikirim" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananDikirim')"></i>
+                                <i type="button" id="icon_toggleAllTables_pesananDikirim"
+                                    class="fa fa-solid fa-angle-down" style="color: #252f40;"
+                                    onclick="toggleAllTables('pesananDikirim')"></i>
                             </span>
                         </div>
                         <div class="col-md-2 col-sm-6 ml-auto">
@@ -629,22 +657,34 @@
                                     </tr>
                                 </thead>
                                 @foreach ($dikirim as $transaksi)
-                                <tbody id="pesananDikirim_{{ $transaksi->id_transaksi }}" style="display: none;">
-                                    <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
-                                        <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->resi_pengiriman }}</td>                                        
-                                        <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-id="{{ $transaksi->id_transaksi }}" data-bs-toggle="modal" data-bs-target="#cek-status{{ $transaksi->id_transaksi }}" id="modalButton">
-                                                <span><i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
-                                                Cek Status
-                                            </button>                                         
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                    <tbody id="pesananDikirim_{{ $transaksi->id_transaksi }}" style="display: none;">
+                                        <tr class="text-dark">
+                                            <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}
+                                            </td>
+                                            <td class="align-middle text-sm text-center">
+                                                {{ $transaksi->tanggal_transaksi }}</td>
+                                            <td class="align-middle text-sm text-center">
+                                                {{ $transaksi->agen->name }}</td>
+                                            <td class="align-middle text-sm text-center">
+                                                {{ $transaksi->jumlah_transaksi }} Gas</td>
+                                            <td class="align-middle text-sm "
+                                                style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">
+                                                {{ $transaksi->agen->alamat }}</td>
+                                            <td class="align-middle text-sm text-center">
+                                                {{ $transaksi->pengiriman->resi_pengiriman }}</td>
+                                            <td class="align-middle text-center ">
+                                                <button type="button"
+                                                    class="btn bg-gradient-warning btn-icon btn-sm ps-3"
+                                                    data-id="{{ $transaksi->id_transaksi }}" data-bs-toggle="modal"
+                                                    data-bs-target="#cek-status{{ $transaksi->id_transaksi }}"
+                                                    id="modalButton">
+                                                    <span><i class="fa fa-solid fa-info me-3"
+                                                            style="color: #ffffff;"></i></span>
+                                                    Cek Status
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
                                 @endforeach
                             </table>
                         </div>
@@ -661,77 +701,89 @@
                             <h4 class="card-tittle">Pesanan Selesai</h4>
                             <span class="mt-1 ms-3">
                                 <a class="me-3">( {{ $pesanan_selesai }} )</a>
-                                <i type="button" id="icon_toggleAllTables_pesananSelesai" class="fa fa-solid fa-angle-down" style="color: #252f40;" onclick="toggleAllTables('pesananSelesai')"></i>
+                                <i type="button" id="icon_toggleAllTables_pesananSelesai"
+                                    class="fa fa-solid fa-angle-down" style="color: #252f40;"
+                                    onclick="toggleAllTables('pesananSelesai')"></i>
                             </span>
                         </div>
                         <div class="col-md-2 col-sm-6 ml-auto">
                             <div class="class="d-flex flex-column-reverse>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text text-body"><i class="fas fa-search"
-                                            aria-hidden="true"></i></span>
-                                    <input type="text" class="form-control" id="searchInput_pesananSelesai"
-                                        placeholder="Cari Pesanan ...">
-                                </div>
+                                <div class="input-group
+                                mb-3">
+                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" id="searchInput_pesananSelesai"
+                                    placeholder="Cari Pesanan ...">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
-                            <div class="text-center" id="noResultsMessage_pesananSelesai" style="display: none;">
-                                Pesanan tidak ditemukan.
-                            </div>
-                            <table id="table_pesananSelesai" class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Id Pesanan</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Tgl. Pesanan</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Pemesanan</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Jumlah Gas</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Alamat Pesanan</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Id Pengiriman</th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Cek Pesanan</th>
-                                    </tr>
-                                </thead>
-                                @foreach ($diterima as $transaksi)
+            </div>
+            <div class="card-body">
+                <div class="card-body px-0 pt-0 pb-2" style="min-height: 50px;">
+                    <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                        <div class="text-center" id="noResultsMessage_pesananSelesai" style="display: none;">
+                            Pesanan tidak ditemukan.
+                        </div>
+                        <table id="table_pesananSelesai" class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Id Pesanan</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Tgl. Pesanan</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Pemesanan</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Jumlah Gas</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Alamat Pesanan</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Id Pengiriman</th>
+                                    <th
+                                        class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                        Cek Pesanan</th>
+                                </tr>
+                            </thead>
+                            @foreach ($diterima as $transaksi)
                                 <tbody id="pesananSelesai_{{ $transaksi->id_transaksi }}" style="display: none;">
                                     <tr class="text-dark">
                                         <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
-                                        <td class="align-middle text-sm text-center" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
-                                        <td class="align-middle text-sm " style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->resi_pengiriman }}</td>                                                                               
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}
+                                        </td>
+                                        <td class="align-middle text-sm text-center">
+                                            {{ $transaksi->agen->name }}</td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }}
+                                            Gas</td>
+                                        <td class="align-middle text-sm "
+                                            style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">
+                                            {{ $transaksi->agen->alamat }}</td>
+                                        <td class="align-middle text-sm text-center">
+                                            {{ $transaksi->pengiriman->resi_pengiriman }}</td>
                                         <td class="align-middle text-center ">
-                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3" data-id="{{ $transaksi->id_transaksi }}" data-bs-toggle="modal" data-bs-target="#cek-riwayat{{ $transaksi->id_transaksi }}">
-                                                <span> <i class="fa fa-solid fa-info me-3" style="color: #ffffff;"></i></span>
+                                            <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3"
+                                                data-id="{{ $transaksi->id_transaksi }}" data-bs-toggle="modal"
+                                                data-bs-target="#cek-riwayat{{ $transaksi->id_transaksi }}">
+                                                <span> <i class="fa fa-solid fa-info me-3"
+                                                        style="color: #ffffff;"></i></span>
                                                 Cek Riwayat
                                             </button>
                                         </td>
                                     </tr>
                                 </tbody>
-                                @endforeach
-                            </table>
-                        </div>
+                            @endforeach
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -752,12 +804,14 @@
         @endforeach
         <div class="row">
             <div class="col-md-4">
-                <div class="modal fade" id="more-info{{ $pengiriman->id_pengiriman }}" tabindex="-1" role="dialog" aria-labelledby="modal-default{{ $pengiriman->id_pengiriman }}" aria-hidden="true">
+                <div class="modal fade" id="more-info{{ $pengiriman->id_pengiriman }}" tabindex="-1" role="dialog"
+                    aria-labelledby="modal-default{{ $pengiriman->id_pengiriman }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h6 class="modal-title text-uppercase" id="modal-title-default">Rincian Pesanan</h6>
-                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                    aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
@@ -766,12 +820,16 @@
                                     <h5 class="pb-3">{{ $pengiriman->resi_pengiriman }}</h5>
                                     <li class="ms-3 mb-0 text-dark" class="tracking-list">
                                         <h6 class="d-flex mb-0 pb-0">Total Muatan :
-                                            <span class="ms-2"><p>{{ $totalJumlahTransaksi }} Gas</p></span>
+                                            <span class="ms-2">
+                                                <p>{{ $totalJumlahTransaksi }} Gas</p>
+                                            </span>
                                         </h6>
                                     </li>
                                     <li class="ms-3 mb-0 text-dark" class="tracking-list">
                                         <h6 class="d-flex mb-0 pb-0">Total Harga :
-                                            <span class="ms-2"><p>Rp {{ number_format($totalHargaTransaksi, 0, ',', ',') }}</p></span>
+                                            <span class="ms-2">
+                                                <p>Rp {{ number_format($totalHargaTransaksi, 0, ',', ',') }}</p>
+                                            </span>
                                         </h6>
                                     </li>
                                     <li class="ms-3 mb-3 text-dark" class="tracking-list">
@@ -793,13 +851,14 @@
                                 </ul>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-link ml-auto"
+                                    data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>
     @endforeach
 
     <!--Modal Status-->
@@ -1001,7 +1060,7 @@
             }
         });
     </script>
-    
+
     {{-- Script search --}}
     <script>
         $(document).ready(function() {
@@ -1062,7 +1121,7 @@
             });
         });
     </script>
-    
+
     {{-- Script hitung gas --}}
     <script>
         // Fungsi untuk menghitung jumlah gas yang dipilih

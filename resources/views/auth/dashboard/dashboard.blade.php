@@ -212,6 +212,7 @@
 @endsection
 
 @section('content')
+    {{-- Nav Content --}}
     <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
@@ -221,8 +222,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{-- {{ $total_user }} --}}
-                                    500
+                                    {{ $total_gas }}
                                     <span class="text-black text-sm font-weight-bolder">gas</span>
                                 </h5>
                             </div>
@@ -242,32 +242,9 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir Tersedia</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Diproses</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ $kurir_tersedia }}
-                                    <span class="text-black text-sm font-weight-bolder">kurir</span>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fa fa-solid fa-truck opacity-10" style="color: #ffffff;"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-            <div class="card">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Masuk</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{-- {{ $total_admin }} --}}
-                                    5
+                                    {{ $pesanan_diproses }}
                                     <span class="text-black text-sm font-weight-bolder">pesanan</span>
                                 </h5>
                             </div>
@@ -287,10 +264,40 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Dikirim</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    {{ $pesanan_dikirim }}
+                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <svg class="mt-3" xmlns="http://www.w3.org/2000/svg" height="1em" 
+                                    viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <style>
+                                        svg {
+                                            fill: #ffffff
+                                        }
+                                    </style>
+                                    <path
+                                        d="M112 0C85.5 0 64 21.5 64 48V96H16c-8.8 0-16 7.2-16 16s7.2 16 16 16H64 272c8.8 0 16 7.2 16 16s-7.2 16-16 16H64 48c-8.8 0-16 7.2-16 16s7.2 16 16 16H64 240c8.8 0 16 7.2 16 16s-7.2 16-16 16H64 16c-8.8 0-16 7.2-16 16s7.2 16 16 16H64 208c8.8 0 16 7.2 16 16s-7.2 16-16 16H64V416c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H112zM544 237.3V256H416V160h50.7L544 237.3zM160 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96zm272 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Selesai</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{-- {{ $total_agen }} --}}
-                                    100
+                                    {{ $pesanan_selesai }}
                                     <span class="text-black text-sm font-weight-bolder">pesanan</span>
                                 </h5>
                             </div>
@@ -448,7 +455,7 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Items</p>
+                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Gas Terjual</p>
                                 </div>
                                 <h4 class="font-weight-bolder">43</h4>
                                 <div class="progress w-75">
@@ -479,24 +486,31 @@
         </div>
     </div>
 
+    {{-- Table transaksi --}}
     <div class="row my-4">
         <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col d-flex">
-                            <h4 class="card-tittle">Pesanan Selesai</h4>
+                            <h4 class="card-tittle ms-3">Semua Pesanan</h4>
                         </div>
-                        <div class="col-md-2 col-sm-6 ml-auto">
+                        <div class="col-md-3 col-sm-6 ml-auto">
                             <div class="input-group mb-3">
-                                <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                                <input type="text" class="form-control" id="searchInput_pesananSelesai" placeholder="Cari Pesanan ...">
+                                <span class="input-group-text text-body"><i class="fas fa-search"
+                                        aria-hidden="true"></i></span>
+                                <input type="text" class="form-control " id="searchInput_transaksi"
+                                    placeholder="Cari Pesanan ...">
                             </div>
                         </div>
                     </div>
-                <div class="card-body px-0 pb-2">
-                    <div class="table-responsive">
-                        <table id="table_pesananSelesai" class="table align-items-center mb-0">
+                </div>
+                <div class="card-body px-0 pb-5" style="min-height: 100px;">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <div class="text-center" id="noResultsMessage" style="display: none;">
+                            Pesanan tidak ditemukan.
+                        </div>
+                        <table id="table_transaksi" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th
@@ -516,22 +530,52 @@
                                         Alamat Pesanan</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                        Kurir</th>
+                                        Status</th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                        Truck</th>
+                                        Informasi</th>
                                 </tr>
                             </thead>
-                            @foreach ($diterima as $transaksi)
+                            @foreach ($transaksis as $transaksi)
                                 <tbody id="pesananSelesai_{{ $transaksi->id_transaksi }}">
                                     <tr class="text-dark">
                                         <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}</td>
-                                        <td class="align-middle text-sm text-center"style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->name }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }} Gas</td>
-                                        <td class="align-middle text-sm "style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->pengiriman->kurir->name }}</td>
-                                        <td class="align-middle text-sm text-center"> {{ $transaksi->pengiriman->truck->plat_truck }}</td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}
+                                        </td>
+                                        <td
+                                            class="align-middle text-sm text-center"style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">
+                                            {{ $transaksi->agen->name }}</td>
+                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }}
+                                            Gas</td>
+                                        <td
+                                            class="align-middle text-sm "style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">
+                                            {{ $transaksi->agen->alamat }}</td>
+                                        <td class="align-middle text-sm text-center">
+                                            @if ($transaksi->status_pengiriman === 'Belum Dikirim')
+                                                @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
+                                                    <span class="badge badge-sm bg-gradient-danger mb-3">Belum Bayar</span>
+                                                @elseif($transaksi->pembayaran->status_pembayaran === 'Proses')
+                                                    <span class="badge badge-sm bg-gradient-warning mb-3">Proses
+                                                        Bayar</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-warning mb-3">Belum
+                                                        Dikirim</span>
+                                                @endif
+                                            @elseif($transaksi->status_pengiriman === 'Dikirim')
+                                                <span class="badge badge-sm bg-gradient-info mb-3"
+                                                    style="width: 100px;">Dikirim</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-success mb-3"
+                                                    style="width: 100px;">Diterima</span>
+                                            @endif
+                                        </td>
+                                        <td class="align-middle text-sm  text-center ">
+                                            <a href="#" type="button" data-id="{{ $transaksi->id_transaksi }}"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#more-info{{ $transaksi->id_transaksi }}">
+                                                <p style="text-decoration: underline;">More Info</p>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             @endforeach
@@ -541,21 +585,99 @@
             </div>
         </div>
     </div>
+
+    {{-- Modal Pesanan --}}
+    @foreach ($transaksis as $transaksi)
+        <div class="row">
+            <div class="col-md-4">
+                <div class="modal fade" id="more-info{{ $transaksi->id_transaksi }}" tabindex="-1" role="dialog"
+                    aria-labelledby="modal-default{{ $transaksi->id_transaksi }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title text-uppercase" id="modal-title-default">Rincian Pesanan</h6>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style="max-height:350px; overflow-y: auto;">
+                                <ul class="mb-3 text-dark" class="tracking-list" type="circle">
+                                    <h5 class="pb-1">Resi Pesanan : {{ $transaksi->resi_transaksi }}</h5>
+                                    <li class="ms-3 text-dark" class="tracking-list">
+                                        <p class="mb-2 pb-0 text-bold">Pembeli : {{ $transaksi->agen->name }}</p>
+                                    </li>
+                                    <li class="ms-3 text-dark" class="tracking-list">
+                                        <p class="mb-1 pb-0 text-bold">Jenis : {{ $transaksi->gas->jenis_gas }}</p>
+                                        <p class="mb-1 pb-0">Total : {{ $transaksi->jumlah_transaksi }} </p>
+                                        <p class="mb-2 pb-0">Harga : Rp.
+                                            {{ number_format($transaksi->total_transaksi, 0, ',', ',') }}</p>
+                                    </li>
+                                    @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
+                                        <li class="ms-3 text-dark" class="tracking-list">
+                                            <p class="mb-2 pb-0 text-bold">Pembayaran : Belum Bayar</p>
+                                        </li>
+                                    @elseif($transaksi->pembayaran->status_pembayaran === 'Proses')
+                                        <li class="ms-3 text-dark" class="tracking-list">
+                                            <p class="mb-2 pb-0 text-bold">Pembayaran :
+                                                {{ $transaksi->pembayaran->status_pembayaran }}</p>
+                                            <p class="mb-2 pb-0">Tanggal Bayar :
+                                                {{ $transaksi->pembayaran->tanggal_pembayaran }}</p>
+                                            <p class="mb-2 pb-0">Bukti Bayar :
+                                                {{ $transaksi->pembayaran->bukti_pembayaran }}</p>
+                                        </li>
+                                    @else
+                                        <li class="ms-3 text-dark" class="tracking-list">
+                                            <p class="mb-2 pb-0 text-bold">Pembayaran :
+                                                {{ $transaksi->pembayaran->status_pembayaran }}</p>
+                                            <p class="mb-2 pb-0">Tanggal Bayar :
+                                                {{ $transaksi->pembayaran->tanggal_pembayaran }}</p>
+                                            <p class="mb-2 pb-0">Bukti Bayar :
+                                                {{ $transaksi->pembayaran->bukti_pembayaran }}</p>
+                                        </li>
+                                    @endif
+
+                                    @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
+                                        <li class="ms-3 text-dark" class="tracking-list">
+                                            <p class="mb-1 pb-0 text-bold">Pengiriman :
+                                                {{ $transaksi->pengiriman->resi_pengiriman }}</p>
+                                            <p class="mb-1 pb-0">Kurir : {{ $transaksi->pengiriman->kurir->name }}</p>
+                                            <p class="mb-2 pb-0">Truck : {{ $transaksi->pengiriman->truck->plat_truck }}
+                                            </p>
+                                            <p class="mb-2 pb-0">Status Pengiriman : {{ $transaksi->status_pengiriman }}
+                                            </p>
+                                        </li>
+                                    @else
+                                        <li class="ms-3 text-dark" class="tracking-list">
+                                            <p class="mb-1 pb-0 text-bold">Pengiriman : Belum Dikirim</p>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link ml-auto"
+                                    data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 
 @section('js')
-    
     {{-- Script search --}}
     <script>
         $(document).ready(function() {
-            $("#searchInput_pesananSelesai").on("keyup", function() {
+            $("#searchInput_transaksi").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
-                $("#table_pesananSelesai tr").filter(function() {
+                $("#table_transaksi tr").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
                 });
 
-                var noResultsMessage = $("#noResultsMessage_pesananSelesai");
-                if ($("#table_pesananSelesai tr:visible").length === 0) {
+                var noResultsMessage = $("#noResultsMessage");
+                if ($("#table_transaksi tr:visible").length === 0) {
                     noResultsMessage.show();
                 } else {
                     noResultsMessage.hide();
@@ -566,19 +688,32 @@
 
     <!--   Core JS Files   -->
     <script>
+        <?php
+        use Carbon\Carbon;
+        use App\Models\Transaksi;
+        // Mendapatkan data transaksi yang sudah diurutkan berdasarkan tanggal
+        $dataTransaksi = Transaksi::selectRaw('SUM(jumlah_transaksi) as total_transaksi, DATE_FORMAT(created_at, "%b %Y") as bulan')
+            ->groupBy('bulan')
+            ->orderBy('created_at', 'ASC') // Mengurutkan berdasarkan tanggal
+            ->get();
+        // Data untuk labels dan data chart
+        $labels = $dataTransaksi->pluck('bulan');
+        $dataChart = $dataTransaksi->pluck('total_transaksi');
+        ?>
+
         var ctx = document.getElementById("chart-bars").getContext("2d");
         new Chart(ctx, {
             type: "bar",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: <?php echo json_encode($labels); ?>, // Gunakan json_encode untuk mengonversi PHP array ke dalam JavaScript array
                 datasets: [{
-                    label: "Sales",
+                    label: "Gas Terjual",
                     tension: 0.4,
                     borderWidth: 0,
                     borderRadius: 4,
                     borderSkipped: false,
                     backgroundColor: "#fff",
-                    data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+                    data: <?php echo json_encode($dataChart); ?>, // Gunakan json_encode untuk mengonversi PHP array ke dalam JavaScript array
                     maxBarThickness: 6
                 }, ],
             },
