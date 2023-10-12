@@ -87,6 +87,7 @@ class DashboardController extends Controller
             $PeningkatanPenjualan = (($totalPemasukanBulanSekarang - $totalPemasukanBulanSebelumnya) / $totalPemasukanBulanSebelumnya) * 100;
         }
 
+        
         return view('auth.dashboard.dashboard',[
             'total_gas' => $total_gas,
             'pesanan_diproses' => $pesanan_diproses,

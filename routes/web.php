@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Controller dashboard
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('home');
+    
 
     // Controller proses
     Route::get('admin/proses', [ProsesController::class, 'index'])->name('admin_proses');

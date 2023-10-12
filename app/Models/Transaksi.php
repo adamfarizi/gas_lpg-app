@@ -44,6 +44,6 @@ class Transaksi extends Model
 
     public function admin()
     {
-        return $this->belongsTo(Admin::class, 'id_admin');
+        return $this->belongsTo(User::class, 'id_admin');
     }
 }

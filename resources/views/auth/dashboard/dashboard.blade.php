@@ -425,7 +425,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body px-0 pb-5" style="min-height: 100px;">
+                <div class="card-body px-4 pb-5" style="min-height: 100px;">
                     <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
                         <div class="text-center" id="noResultsMessage" style="display: none;">
                             Pesanan tidak ditemukan.
@@ -509,7 +509,7 @@
             <div class="col-md-4">
                 <div class="modal fade" id="more-info{{ $transaksi->id_transaksi }}" tabindex="-1" role="dialog"
                     aria-labelledby="modal-default{{ $transaksi->id_transaksi }}" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h6 class="modal-title text-uppercase" id="modal-title-default">Rincian Pesanan</h6>
@@ -518,58 +518,105 @@
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div class="modal-body" style="max-height:350px; overflow-y: auto;">
-                                <ul class="mb-3 text-dark" class="tracking-list" type="circle">
-                                    <h5 class="pb-1">Resi Pesanan : {{ $transaksi->resi_transaksi }}</h5>
-                                    <li class="ms-3 text-dark" class="tracking-list">
-                                        <p class="mb-2 pb-0 text-bold">Pembeli : {{ $transaksi->agen->name }}</p>
-                                    </li>
-                                    <li class="ms-3 text-dark" class="tracking-list">
-                                        <p class="mb-1 pb-0 text-bold">Jenis : {{ $transaksi->gas->jenis_gas }}</p>
-                                        <p class="mb-1 pb-0">Total : {{ $transaksi->jumlah_transaksi }} </p>
-                                        <p class="mb-2 pb-0">Harga : Rp.
-                                            {{ number_format($transaksi->total_transaksi, 0, ',', ',') }}</p>
-                                    </li>
-                                    @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
-                                        <li class="ms-3 text-dark" class="tracking-list">
-                                            <p class="mb-2 pb-0 text-bold">Pembayaran : Belum Bayar</p>
-                                        </li>
-                                    @elseif($transaksi->pembayaran->status_pembayaran === 'Proses')
-                                        <li class="ms-3 text-dark" class="tracking-list">
-                                            <p class="mb-2 pb-0 text-bold">Pembayaran :
-                                                {{ $transaksi->pembayaran->status_pembayaran }}</p>
-                                            <p class="mb-2 pb-0">Tanggal Bayar :
-                                                {{ $transaksi->pembayaran->tanggal_pembayaran }}</p>
-                                            <p class="mb-2 pb-0">Bukti Bayar :
-                                                {{ $transaksi->pembayaran->bukti_pembayaran }}</p>
-                                        </li>
-                                    @else
-                                        <li class="ms-3 text-dark" class="tracking-list">
-                                            <p class="mb-2 pb-0 text-bold">Pembayaran :
-                                                {{ $transaksi->pembayaran->status_pembayaran }}</p>
-                                            <p class="mb-2 pb-0">Tanggal Bayar :
-                                                {{ $transaksi->pembayaran->tanggal_pembayaran }}</p>
-                                            <p class="mb-2 pb-0">Bukti Bayar :
-                                                {{ $transaksi->pembayaran->bukti_pembayaran }}</p>
-                                        </li>
-                                    @endif
-
-                                    @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
-                                        <li class="ms-3 text-dark" class="tracking-list">
-                                            <p class="mb-1 pb-0 text-bold">Pengiriman :
-                                                {{ $transaksi->pengiriman->resi_pengiriman }}</p>
-                                            <p class="mb-1 pb-0">Kurir : {{ $transaksi->pengiriman->kurir->name }}</p>
-                                            <p class="mb-2 pb-0">Truck : {{ $transaksi->pengiriman->truck->plat_truck }}
-                                            </p>
-                                            <p class="mb-2 pb-0">Status Pengiriman : {{ $transaksi->status_pengiriman }}
-                                            </p>
-                                        </li>
-                                    @else
-                                        <li class="ms-3 text-dark" class="tracking-list">
-                                            <p class="mb-1 pb-0 text-bold">Pengiriman : Belum Dikirim</p>
-                                        </li>
-                                    @endif
-                                </ul>
+                            <div class="modal-body p-2" style="max-height:500px; overflow-y: auto;">
+                                <div class="border border-2 py-3 px-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img class="ms-2" src="{{ asset('assets/img/local/logo5.png') }}" height="30" alt="main_logo">
+                                        </div>
+                                        <div class="col text-end mt-1 me-2">
+                                            {{ $transaksi->tanggal_transaksi }}
+                                        </div>
+                                    </div>
+                                    <hr class="border border-dark" style="width: 100%">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="pb-0 ms-2 mb-4">RESI : {{ $transaksi->resi_transaksi }}</p>
+                                        </div>
+                                        <div class="col">
+                                            @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
+                                                <p class="pb-0 me-2 mb-4 text-end">{{ $transaksi->pengiriman->resi_pengiriman }}</p>
+                                            @else
+                                                <p class="pb-0 me-2 mb-4 text-end">Belum Dikirim</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row ms-1" >
+                                        <div class="col-1">
+                                            @if ($transaksi->status_pengiriman == 'Belum Dikirim')
+                                            <img src="{{ asset('assets/img/local/insurance.png') }}" class="ms-1" height="45" alt="belum_dikirim">
+                                            @elseif($transaksi->status_pengiriman == 'Dikirim')
+                                            <img src="{{ asset('assets/img/local/fast-delivery.png') }}" class="pt-2" width="50" alt="dikirim">
+                                            @else
+                                            <img src="{{ asset('assets/img/local/delivered.png') }}" class="pt-1 ms-1" height="45" alt="diterima">
+                                            @endif
+                                        </div>   
+                                        <div class="col-4 ms-4">
+                                                <div class="d-flex flex-column">
+                                                    <div>Status</div>
+                                                    <div><p><strong>{{ $transaksi->status_pengiriman }}</strong></p></div>
+                                                </div>
+                                        </div>
+                                        <div class="col-3 d-flex flex-column" >
+                                            <div>Kurir</div>
+                                            <div>
+                                                @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
+                                                    <div><p><strong>{{ $transaksi->pengiriman->kurir->name }}</strong></p></div>
+                                                @else
+                                                    <div><p><strong>None</strong></p></div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-3 d-flex flex-column" >
+                                            <div>Truck</div>
+                                            <div>
+                                                @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
+                                                    <div><p><strong>{{ $transaksi->pengiriman->truck->plat_truck }}</strong></p></div>
+                                                @else
+                                                    <div><p><strong>None</strong></p></div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ms-1">
+                                        <div class="col-5 d-flex flex-column">
+                                            <div>Kepada : </div>
+                                            <div><strong>{{ $transaksi->agen->name }}</strong></div>
+                                            <div>{{ $transaksi->agen->alamat }}</div>
+                                            <div><em>{{ $transaksi->agen->no_hp }}</em></div>
+                                        </div>
+                                        <div class="col ms-4 d-flex flex-column">
+                                            <div>Terakhir diedit oleh :</div>
+                                            <div><strong>{{ $transaksi->admin->name }}</strong></div>
+                                            <div>{{ $transaksi->updated_at }}</div>
+                                        </div>
+                                    </div>
+                                    <hr style="border: 2px dashed #8392ab;"/>
+                                    <div class="row ms-1">
+                                        <div class="col-4 d-flex flex-column">
+                                            <div><strong>Produk</strong></div>
+                                            <div>{{ $transaksi->gas->jenis_gas }}</div>
+                                        </div>
+                                        <div class="col-2 d-flex flex-column text-center">
+                                            <div><strong>Jumlah</strong></div>
+                                            <div >{{ $transaksi->jumlah_transaksi }} Gas</div>
+                                        </div>
+                                        <div class="col-3 d-flex flex-column text-center">
+                                            <div><strong>Pembayaran</strong></div>
+                                            <div>RP. {{ number_format($transaksi->total_transaksi, 0, ',', '.') }}</div>
+                                        </div>
+                                        <div class="col-3 d-flex flex-column text-end pe-4">
+                                            <div><strong>Status</strong></div>
+                                            @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
+                                                <div><span class="badge badge-pill badge-lg bg-gradient-danger">Belum Bayar</span></div>
+                                            @elseif($transaksi->pembayaran->status_pembayaran === 'Proses')
+                                                <div><span class="badge badge-pill badge-lg bg-gradient-info">Konfirmasi</span></div>
+                                            @else
+                                                <div><span class="badge badge-pill badge-lg bg-gradient-success">Sudah Bayar</span></div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-link ml-auto"
