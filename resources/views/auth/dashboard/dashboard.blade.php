@@ -541,8 +541,8 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="row ms-1" >
-                                        <div class="col-1">
+                                    <div class="row ms-2" >
+                                        <div class="col-1 me-3">
                                             @if ($transaksi->status_pengiriman == 'Belum Dikirim')
                                             <img src="{{ asset('assets/img/local/insurance.png') }}" class="ms-1" height="45" alt="belum_dikirim">
                                             @elseif($transaksi->status_pengiriman == 'Dikirim')
@@ -567,7 +567,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-3 d-flex flex-column" >
+                                        <div class="col-12 col-md-3 d-flex flex-column" >
                                             <div>Truck</div>
                                             <div>
                                                 @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
@@ -578,14 +578,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row ms-1">
-                                        <div class="col-5 d-flex flex-column">
+                                    <div class="row ms-1 my-3">
+                                        <div class="col-12 col-md-6 mb-3 d-flex flex-column">
                                             <div>Kepada : </div>
                                             <div><strong>{{ $transaksi->agen->name }}</strong></div>
                                             <div>{{ $transaksi->agen->alamat }}</div>
                                             <div><em>{{ $transaksi->agen->no_hp }}</em></div>
                                         </div>
-                                        <div class="col ms-4 d-flex flex-column">
+                                        <div class="col-12 col-md-5 mb-2 d-flex flex-column">
                                             <div>Terakhir diedit oleh :</div>
                                             <div><strong>{{ $transaksi->admin->name }}</strong></div>
                                             <div>{{ $transaksi->updated_at }}</div>
@@ -593,19 +593,19 @@
                                     </div>
                                     <hr style="border: 2px dashed #8392ab;"/>
                                     <div class="row ms-1">
-                                        <div class="col-4 d-flex flex-column">
+                                        <div class="col-12 col-md-6 col-lg-3 mb-2 d-flex flex-column">
                                             <div><strong>Produk</strong></div>
                                             <div>{{ $transaksi->gas->jenis_gas }}</div>
                                         </div>
-                                        <div class="col-2 d-flex flex-column text-center">
+                                        <div class="col-12 col-md-6 col-lg-3 mb-2 d-flex flex-column ">
                                             <div><strong>Jumlah</strong></div>
                                             <div >{{ $transaksi->jumlah_transaksi }} Gas</div>
                                         </div>
-                                        <div class="col-3 d-flex flex-column text-center">
+                                        <div class="col-12 col-md-6 col-lg-3 mb-2 d-flex flex-column ">
                                             <div><strong>Pembayaran</strong></div>
                                             <div>RP. {{ number_format($transaksi->total_transaksi, 0, ',', '.') }}</div>
                                         </div>
-                                        <div class="col-3 d-flex flex-column text-end pe-4">
+                                        <div class="col-12 col-md-6 col-lg-3 mb-2 d-flex flex-column ">
                                             <div><strong>Status</strong></div>
                                             @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
                                                 <div><span class="badge badge-pill badge-lg bg-gradient-danger">Belum Bayar</span></div>
