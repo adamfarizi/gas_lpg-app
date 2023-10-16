@@ -77,6 +77,7 @@ class ApiAgenController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'alamat' => 'required|string|max:255',
+            'koordinat' => 'required|string|max:255',
             'no_hp' => 'required|string|max:15',
         ]);
     
@@ -92,6 +93,7 @@ class ApiAgenController extends Controller
         $agen->email = $request->input('email');
         $agen->no_hp = $request->input('no_hp');        
         $agen->alamat = $request->input('alamat');
+        $agen->koordinat = $request->input('koordinat');
         $agen->save();
 
         return response()->json([

@@ -16,6 +16,7 @@ class Agen extends Model
         'role',
         'password',
         'alamat',
+        'koordinat',
         'no_hp',
     ];
     
