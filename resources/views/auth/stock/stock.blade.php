@@ -213,15 +213,15 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas Isi Ulang</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ $total_gas }}
+                                    {{ $total_gas_isi }}
                                     <span class="text-black text-sm font-weight-bolder">gas</span>
                                 </h5>
                             </div>
@@ -235,7 +235,29 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas Baru</p>
+                                <h5 class="font-weight-bolder mb-0">
+                                    {{ $total_gas_baru }}
+                                    <span class="text-black text-sm font-weight-bolder">gas</span>
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fa fa-solid fa-fire opacity-10" style="color: #ffffff;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
             <div class="card">
                 <div class="card-body p-3">
                     <div class="row">
@@ -258,10 +280,10 @@
             </div>
         </div>
     </div>
-    {{-- Tabel gas --}}
     <div class="mt-3">
         <div class="row">
-            <div class="col-12 col-md-6 mb-3">
+            {{-- Tabel gas --}}
+            <div class="col-12 col-md-7 mb-3">
                 <div class="card text-truncate">
                     <div class="card-header pb-2 d-flex justify-content-between">
                         <h6>Gas Table</h6>
@@ -271,18 +293,21 @@
                             Add Gas
                         </a>
                     </div>
-                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 320px;" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 350px;" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 320px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Jenis Gas</th>
+                                            Nama Gas</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4">
                                             Stock Gas</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4">
+                                            Jenis Gas</th>
+                                        <th
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4">
                                             Harga Gas</th>
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
@@ -291,22 +316,30 @@
                                 @foreach ($gasItems as $gas)
                                     <tbody>
                                         <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
+                                            <td class="align-middle">
+                                                <div class="d-flex px-2">
                                                     <div>
                                                         <img src="../assets/img/local/gas1.png"
                                                             class="avatar avatar-sm me-3" alt="user1">
                                                     </div>
                                                     <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">{{ $gas->jenis_gas }}</h6>
+                                                        <h6 class="mb-0 text-sm">{{ $gas->name_gas }}</h6>
+                                                        <p class="text-sm">- {{ $gas->berat_gas }} kg</p>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0 me-6">{{ $gas->stock_gas }}</p>
+                                            <td class="align-middle text-center">
+                                                <p class="text-sm mb-0 me-3">{{ $gas->stock_gas }}</p>
                                             </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0">Rp.
+                                            <td class="align-middle text-center text-sm">
+                                                @if ($gas->jenis_gas == 'Isi Ulang')
+                                                <span class="badge badge-sm bg-gradient-success">{{ $gas->jenis_gas }}</span>
+                                                @else
+                                                <span class="badge badge-sm bg-gradient-info">{{ $gas->jenis_gas }}</span>
+                                                @endif
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="text-sm mb-0">Rp.
                                                     {{ number_format($gas->harga_gas, 0, ',', ',') }}</p>
                                             </td>
                                             <td class="align-middle">
@@ -336,7 +369,7 @@
                 </div>
             </div>
             {{-- Tabel truck --}}
-            <div class="col-12 col-md-6 mb-3">
+            <div class="col-12 col-md-5 mb-3">
                 <div class="card text-truncate">
                     <div class="card-header pb-2 d-flex justify-content-between">
                         <h6>Truck Table</h6>
@@ -346,8 +379,8 @@
                             Add Truck
                         </a>
                     </div>
-                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 320px;" style="min-height: 320px;">
-                        <div class="table-responsive p-0" style="max-height: 300px; overflow-y: auto;">
+                    <div class="card-body px-3 pt-0 pb-2" style="min-height: 350px;" style="min-height: 320px;">
+                        <div class="table-responsive p-0" style="max-height: 320px; overflow-y: auto;">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
@@ -356,7 +389,7 @@
                                             Plat Kendaraan</th>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
-                                            Maksimal Beban</th>
+                                            Beban Maksimal</th>
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
@@ -374,7 +407,7 @@
                                                     <h6 class="mb-0 text-sm">{{ $truck->plat_truck }}</h6>
                                                 </div>
                                                 <td class="text-center">
-                                                    <p class="text-xs font-weight-bold mb-0 me-7">
+                                                    <p class="text-sm mb-0 me-4">
                                                         {{ $truck->maksimal_beban_truck }} Gas</p>
                                                 </td>
                                             </div>

@@ -12,14 +12,32 @@ class GasSeeder extends Seeder
         // Data contoh untuk model Gas
         $gasData = [
             [
-                'jenis_gas' => 'Gas A',
+                'name_gas' => 'Gas Melon',
+                'berat_gas' => 3,
                 'stock_gas' => 100,
-                'harga_gas' => 30000,
+                'harga_gas' => 20000,
+                'jenis_gas' => 'Isi Ulang',
             ],
             [
-                'jenis_gas' => 'Gas B',
+                'name_gas' => 'Gas Melon',
+                'berat_gas' => 3,
                 'stock_gas' => 150,
-                'harga_gas' => 45000,
+                'harga_gas' => 150000,
+                'jenis_gas' => 'Gas Baru',
+            ],
+            [
+                'name_gas' => 'Gas Bright',
+                'berat_gas' => 5.5,
+                'stock_gas' => 100,
+                'harga_gas' => 103000,
+                'jenis_gas' => 'Isi Ulang',
+            ],
+            [
+                'name_gas' => 'Gas Bright',
+                'berat_gas' => 5.5,
+                'stock_gas' => 150,
+                'harga_gas' => 206000,
+                'jenis_gas' => 'Gas Baru',
             ],
             // Tambahkan data lainnya sesuai kebutuhan
         ];
