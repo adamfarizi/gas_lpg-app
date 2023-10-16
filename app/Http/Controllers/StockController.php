@@ -13,14 +13,16 @@ class StockController extends Controller
         $data['title'] = 'Stock';
 
         $gasItems = Gas::all();
-        $total_gas = Gas::sum('stock_gas');
+        $total_gas_isi = Gas::where('jenis_gas', 'Isi Ulang')->sum('stock_gas');
+        $total_gas_baru = Gas::where('jenis_gas', 'Gas Baru')->sum('stock_gas');
 
         $trucks = Truck::all();
         $total_truck = Truck::count();
 
         return view('auth.stock.stock', [
         'gasItems' => $gasItems,
-        'total_gas' => $total_gas,
+        'total_gas_isi' => $total_gas_isi,
+        'total_gas_baru' => $total_gas_baru,
         'trucks' => $trucks,
         'total_truck' => $total_truck,
         ], $data);
