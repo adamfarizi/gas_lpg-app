@@ -92,7 +92,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('admin/stock') }}">
+                    <a class="nav-link active" href="{{ url('admin/stock') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
@@ -240,22 +240,27 @@
             @method('PUT')
             <label>Nama Gas</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Enter your gas" aria-label="Gas"
-                    aria-describedby="name-addon" id="jenis_gas" name="jenis_gas" value="{{ $gas->name_gas }}">
+                <input type="text" class="form-control" placeholder="Enter name gas" aria-label="Gas"
+                    aria-describedby="name-addon" id="name_gas" name="name_gas" value="{{ $gas->name_gas }}">
+            </div>
+            <label>Berat Gas</label>
+            <div class="input-group mb-3">
+                <input type="int" class="form-control" placeholder="Enter weight gas" aria-label="Stock"
+                    aria-describedby="name-addon" id="berat_gas" name="berat_gas" value="{{ $gas->berat_gas }}">
             </div>
             <label>Stock Gas</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Enter your stock" aria-label="Stock"
+                <input type="int" class="form-control" placeholder="Enter gas stock" aria-label="Stock"
                     aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ $gas->stock_gas }}">
             </div>
-            <label>Jenis Gas <span class="text-danger">*</span></label>
-                    <select class="mb-3 form-control" id="jenis_gas" name="jenis_gas" value="{{ $gas->jenis_gas }}">
-                        <option value="isi ulang">Isi Ulang</option>
-                        <option value="gas baru">Gas Baru</option>
-                    </select>
+            <label for="jenis_gas">Jenis Gas <span class="text-danger">*</span></label>
+            <select class="mb-3 form-control" id="jenis_gas" name="jenis_gas">
+                <option value="isi ulang" @if ($gas->jenis_gas == 'Isi Ulang') selected @endif>Isi Ulang</option>
+                <option value="gas baru" @if ($gas->jenis_gas == 'Gas Baru') selected @endif>Gas Baru</option>
+            </select>            
             <label>Harga Gas</label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="Enter your price" aria-label="Harga"
+                <input type="number" class="form-control" placeholder="Enter gas price" aria-label="Harga"
                     aria-describedby="name-addon" id="harga_gas" name="harga_gas" value="{{ $gas->harga_gas }}">
             </div>
             <div class="text-center">
