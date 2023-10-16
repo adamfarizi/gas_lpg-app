@@ -537,7 +537,7 @@
                                                     {{ $pengiriman->resi_pengiriman }}</td>
                                                 <td class="align-middle text-sm text-center pt-4">
                                                     <ul style="list-style: none;">
-                                                        @foreach ($transaksi_proses as $transaksi)
+                                                        @foreach ($transaksis as $transaksi)
                                                             @if ($transaksi->id_pengiriman === $pengiriman->id_pengiriman)
                                                                 <li class="me-4">
                                                                     {{ $transaksi->resi_transaksi }}
@@ -562,7 +562,7 @@
                                                         </option>
                                                         @foreach ($kurirs as $kurir)
                                                             <option value="{{ $kurir }}"
-                                                                {{ $transaksi->pengiriman->id_kurir == $kurir ? 'selected' : '' }}>
+                                                                {{ $pengiriman->id_kurir == $kurir ? 'selected' : '' }}>
                                                                 {{ $kurir }}
                                                             </option>
                                                         @endforeach
@@ -576,7 +576,7 @@
                                                         </option>
                                                         @foreach ($trucks as $truck)
                                                             <option value="{{ $truck }}"
-                                                                {{ $transaksi->pengiriman->id_truck == $truck ? 'selected' : '' }}>
+                                                                {{ $pengiriman->id_truck == $truck ? 'selected' : '' }}>
                                                                 {{ $truck }}
                                                             </option>
                                                         @endforeach
@@ -790,7 +790,7 @@
             $totalHargaTransaksi = 0;
         @endphp
 
-        @foreach ($transaksi_proses as $transaksi)
+        @foreach ($transaksis as $transaksi)
             @if ($pengiriman->id_pengiriman == $transaksi->id_pengiriman)
                 @php
                     $totalJumlahTransaksi += $transaksi->jumlah_transaksi;
@@ -830,7 +830,7 @@
                                     </li>
                                     <li class="ms-3 mb-3 text-dark" class="tracking-list">
                                         <h6>Rincian :</h6>
-                                        @foreach ($transaksi_proses as $transaksi)
+                                        @foreach ($transaksis as $transaksi)
                                             @if ($pengiriman->id_pengiriman == $transaksi->id_pengiriman)
                                                 <ul>
                                                     <li class="mb-2">
