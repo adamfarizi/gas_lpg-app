@@ -10,19 +10,32 @@
                     </button>                   
                 </div>
                 <div class="modal-body">
-                    <label>Jenis Gas<span class="text-danger">*</span></label>
+                    <label>Name Gas<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Enter your gas" aria-label="Gas" aria-describedby="name-addon" id="jenis_gas" name="jenis_gas" value="{{ old('jenis_gas') }}">
+                        <input type="text" class="form-control" placeholder="Enter gas name" aria-label="Gas" aria-describedby="name-addon" id="name_gas" name="name_gas" value="{{ old('name_gas') }}">
+                    </div>
+
+                    <label>Berat Gas<span class="text-danger">*</span></label>
+                    <div class="mb-3">
+                        <input type="number" class="form-control" placeholder="Enter gas weight" aria-label="Berat" aria-describedby="name-addon" id="berat_gas" name="berat_gas" value="{{ old('berat_gas') }}">
                     </div>
 
                     <label>Stock Gas<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="number" class="form-control" placeholder="Enter your stock" aria-label="Stock" aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ old('stock_gas') }}">
+                        <input type="number" class="form-control" placeholder="Enter gas stock" aria-label="Stock" aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ old('stock_gas') }}">
+                    </div>
+
+                    <label>Jenis Gas<span class="text-danger">*</span></label>
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Jenis Gas" name="jenis_gas">
+                            <option value="Isi Ulang"{{ old('jenis_gas') === 'Isi Ulang' ? 'selected' : '' }}>Isi Ulang</option>
+                            <option value="Gas Baru"{{ old('jenis_gas') === 'Gas Baru' ? 'selected' : '' }}>Gas Baru</option>
+                        </select>
                     </div>
 
                     <label>Harga Gas<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="number" class="form-control" placeholder="Enter your price" aria-label="Harga" aria-describedby="name-addon" id="harga_gas" name="harga_gas" value="{{ old('harga_gas') }}">
+                        <input type="number" class="form-control" placeholder="Enter gas price" aria-label="Harga" aria-describedby="name-addon" id="harga_gas" name="harga_gas" value="{{ old('harga_gas') }}">
                     </div>
 
                     <div class="text-center">
