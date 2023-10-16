@@ -253,11 +253,6 @@
                 <input name="no_hp" type="number" class="form-control" placeholder="Input your name"
                     aria-label="name" value="{{ $agens->no_hp }}">
             </div>
-            <label>Alamat</label>
-            <div class="input-group mb-3">
-                <input name="alamat" type="text" class="form-control" placeholder="Input your name"
-                    aria-label="name" value="{{ $agens->alamat }}">
-            </div>
             <div class="text-center">
                 <button type="submit" name="submit" class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0"
                     values="Update">Update</button>

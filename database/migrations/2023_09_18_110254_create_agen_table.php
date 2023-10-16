@@ -14,6 +14,7 @@ class CreateAgenTable extends Migration
             $table->string('role')->default('agen');
             $table->string('password');
             $table->string('alamat')->nullable();
+            $table->string('koordinat')->nullable();
             $table->string('no_hp')->nullable();
             $table->timestamps();
         });
