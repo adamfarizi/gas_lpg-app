@@ -238,16 +238,21 @@
         <form role="form text-left" action="{{ url('admin/stock/gas/' . $gas->id_gas) }}" method="POST">
             @csrf
             @method('PUT')
-            <label>Jenis Gas</label>
+            <label>Nama Gas</label>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Enter your gas" aria-label="Gas"
-                    aria-describedby="name-addon" id="jenis_gas" name="jenis_gas" value="{{ $gas->jenis_gas }}">
+                    aria-describedby="name-addon" id="jenis_gas" name="jenis_gas" value="{{ $gas->name_gas }}">
             </div>
             <label>Stock Gas</label>
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Enter your stock" aria-label="Stock"
                     aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ $gas->stock_gas }}">
             </div>
+            <label>Jenis Gas <span class="text-danger">*</span></label>
+                    <select class="mb-3 form-control" id="jenis_gas" name="jenis_gas" value="{{ $gas->jenis_gas }}">
+                        <option value="isi ulang">Isi Ulang</option>
+                        <option value="gas baru">Gas Baru</option>
+                    </select>
             <label>Harga Gas</label>
             <div class="input-group mb-3">
                 <input type="number" class="form-control" placeholder="Enter your price" aria-label="Harga"

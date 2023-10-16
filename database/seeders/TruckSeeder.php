@@ -19,6 +19,18 @@ class TruckSeeder extends Seeder
                 'plat_truck' => 'XY 5678 ZW',
                 'maksimal_beban_truck' => 7500,
             ],
+            [
+                'plat_truck' => 'YY 5678 ZW',
+                'maksimal_beban_truck' => 7500,
+            ],
+            [
+                'plat_truck' => 'B 5678 RT',
+                'maksimal_beban_truck' => 7500,
+            ],
+            [
+                'plat_truck' => 'AA 5678 RW',
+                'maksimal_beban_truck' => 5000,
+            ]
             // Tambahkan data lainnya sesuai kebutuhan
         ];
 
