@@ -373,7 +373,7 @@
                                     </div>
                                     <p class="text-xs mt-1 mb-0 font-weight-bold">Sales</p>
                                 </div>
-                                <h4 class="font-weight-bolder">Rp. {{ number_format($jumlahTransaksiDiterima, 0, ',', '.') }}</h4>
+                                <h4 class="font-weight-bolder">Rp {{ number_format($jumlahTransaksiDiterima, 0, ',', '.') }}</h4>
                             </div>
                         </div>
                     </div>

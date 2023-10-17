@@ -333,9 +333,9 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 @if ($gas->jenis_gas == 'Isi Ulang')
-                                                <span class="badge badge-sm bg-gradient-success">{{ $gas->jenis_gas }}</span>
+                                                <span class="badge badge-sm bg-gradient-success me-4">{{ $gas->jenis_gas }}</span>
                                                 @else
-                                                <span class="badge badge-sm bg-gradient-info">{{ $gas->jenis_gas }}</span>
+                                                <span class="badge badge-sm bg-gradient-info me-4">{{ $gas->jenis_gas }}</span>
                                                 @endif
                                             </td>
                                             <td class="align-middle text-center">
