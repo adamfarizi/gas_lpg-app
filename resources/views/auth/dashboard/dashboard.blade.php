@@ -389,7 +389,7 @@
                         @if ($PeningkatanPenjualan > 0)
                             <span class="font-weight-bolder text-success"><i class="fa fa-arrow-up text-success"></i>
                                 {{ number_format($PeningkatanPenjualan, 2) }}%</span> than last month
-                        @elseif ($PeningkatanPembelian < 0)
+                        @elseif ($PeningkatanPenjualan < 0)
                             <span class="font-weight-bolder text-danger"><i class="fa fa-arrow-down text-danger"></i>
                                 {{ number_format($PeningkatanPenjualan, 2) }}%</span> than last month
                         @else
