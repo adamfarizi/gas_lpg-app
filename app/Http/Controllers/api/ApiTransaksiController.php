@@ -32,10 +32,10 @@ class ApiTransaksiController extends Controller
         $id_pembayaran_new = Pembayaran::max('id_pembayaran') + 1;
 
         // Penghitungan total transaksi
-        $jumlah_transaksi = $request->input('jumlah_transaksi');
-        $id_gas = $request->input('id_gas');
-        $harga_gas = Gas::where('id_gas', $id_gas)->pluck('harga_gas');
-        $total_transaksi = $jumlah_transaksi * $harga_gas;
+        $jumlah_transaksi = intval($request->input('jumlah_transaksi'));
+        $id_gas = intval($request->input('id_gas'));
+        $harga_gas = Gas::where('id_gas', $id_gas)->pluck('harga_gas')->first(); // Menggunakan first() untuk mengambil nilai pertama
+        $total_transaksi = $jumlah_transaksi * (float)$harga_gas; // Konversi $harga_gas ke float jika diperlukan
 
         // Tambahkan data ke tabel pembayaran
         Pembayaran::create([
@@ -50,9 +50,9 @@ class ApiTransaksiController extends Controller
             'resi_transaksi' => $resi_transaksi,
             'jumlah_transaksi' => $jumlah_transaksi,
             'total_transaksi' => $total_transaksi,
-            'id_agen' => $request->id_agen,
+            'id_agen' => intval($request->id_agen),
             'id_admin' => 1,
-            'id_gas' => $request->id_gas,
+            'id_gas' => $id_gas,
             'id_pembayaran' => $id_pembayaran_new,
             'id_pengiriman' => null,
         ]);
