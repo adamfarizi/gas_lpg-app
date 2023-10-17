@@ -38,6 +38,31 @@ class DashboardController extends Controller
         })->sum('total_transaksi');
 
     //Peningkatan pembelian
+        $tanggalSekarang = date('Y-m-d'); // Tanggal sekarang
+        $tanggalSebelumnya = date('Y-m-d', strtotime('-1 day', strtotime($tanggalSekarang))); // Tanggal sehari sebelumnya
+        
+        // Query untuk menghitung total pembelian pada hari ini dengan status pembayaran "proses" atau "sudah bayar"
+        $totalPembelianHariIni = Transaksi::whereDate('tanggal_transaksi', $tanggalSekarang)
+            ->whereHas('pembayaran', function ($query) {
+                $query->whereIn('status_pembayaran', ['proses', 'sudah bayar']);
+            })
+            ->sum('jumlah_transaksi');
+        
+        // Query untuk menghitung total pembelian pada hari sebelumnya dengan status pembayaran "proses" atau "sudah bayar"
+        $totalPembelianHariKemarin = Transaksi::whereDate('tanggal_transaksi', $tanggalSebelumnya)
+            ->whereHas('pembayaran', function ($query) {
+                $query->whereIn('status_pembayaran', ['proses', 'sudah bayar']);
+            })
+            ->sum('jumlah_transaksi');
+        
+        $PeningkatanPembelian = 0;
+        
+        if ($totalPembelianHariKemarin > 0) {
+            $PeningkatanPembelian = (($totalPembelianHariIni - $totalPembelianHariKemarin) / $totalPembelianHariKemarin) * 100;
+        }
+    
+
+    // Peningkatan Pemasukkan
         $bulanSekarang = date('n');
         $tahunSekarang = date('Y');
         // Dapatkan bulan dan tahun sebulan sebelumnya
@@ -48,26 +73,6 @@ class DashboardController extends Controller
             $bulanSebelumnya = 12;
             $tahunSebelumnya -= 1;
         }
-        // Query untuk menghitung total pembelian pada bulan ini dengan status pembayaran "proses" atau "sudah bayar"
-        $totalPembelianBulanSekarang = Transaksi::whereMonth('tanggal_transaksi', $bulanSekarang)
-        ->whereYear('tanggal_transaksi', $tahunSekarang)
-        ->whereHas('pembayaran', function ($query) {
-            $query->whereIn('status_pembayaran', ['proses', 'sudah bayar']);
-        })
-        ->sum('jumlah_transaksi');
-        // Query untuk menghitung total pembelian pada bulan sebelumnya dengan status pembayaran "proses" atau "sudah bayar"
-        $totalPembelianBulanSebelumnya = Transaksi::whereMonth('tanggal_transaksi', $bulanSebelumnya)
-        ->whereYear('tanggal_transaksi', $tahunSebelumnya)
-        ->whereHas('pembayaran', function ($query) {
-            $query->whereIn('status_pembayaran', ['proses', 'sudah bayar']);
-        })
-        ->sum('jumlah_transaksi');
-        $PeningkatanPembelian = 0;
-        if ($totalPembelianBulanSebelumnya > 0) {
-            $PeningkatanPembelian = (($totalPembelianBulanSekarang - $totalPembelianBulanSebelumnya) / $totalPembelianBulanSebelumnya) * 100;
-        }
-
-    // Peningkatan Pemasukkan
         // Query untuk menghitung total pembelian pada bulan ini dengan status pembayaran "proses" atau "sudah bayar"
         $totalPemasukanBulanSekarang = Transaksi::whereMonth('tanggal_transaksi', $bulanSekarang)
         ->whereYear('tanggal_transaksi', $tahunSekarang)
