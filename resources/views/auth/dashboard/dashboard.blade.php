@@ -655,14 +655,17 @@
         <?php
         use Carbon\Carbon;
         use App\Models\Transaksi;
+
         // Mendapatkan data transaksi yang sudah diurutkan berdasarkan tanggal
-        $dataTransaksi = Transaksi::selectRaw('SUM(CASE WHEN pembayaran.status_pembayaran IN ("Proses", "Sudah Bayar") THEN jumlah_transaksi ELSE 0 END) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%b %Y") as bulan')
-        ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
-        ->groupBy('bulan')
-        ->orderBy('tanggal_transaksi', 'ASC')
-        ->get();
+        $dataTransaksi = Transaksi::selectRaw('SUM(CASE WHEN pembayaran.status_pembayaran IN ("Proses", "Sudah Bayar") THEN jumlah_transaksi ELSE 0 END) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%d %b") as hari')
+            ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
+            ->groupBy('hari')
+            ->orderBy('tanggal_transaksi', 'DESC') // Urutkan secara menurun
+            ->take(7) // Ambil 7 hari terbaru
+            ->get();
+
         // Data untuk labels dan data chart
-        $labels = $dataTransaksi->pluck('bulan');
+        $labels = $dataTransaksi->pluck('hari');
         $dataChart = $dataTransaksi->pluck('total_transaksi');
         ?>
 
@@ -717,6 +720,7 @@
                         },
                     },
                     x: {
+                        reverse: true,
                         grid: {
                             drawBorder: false,
                             display: false,
@@ -747,7 +751,8 @@
             ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
             ->whereIn('pembayaran.status_pembayaran', ['Proses', 'Sudah Bayar'])
             ->groupBy('bulan')
-            ->orderBy('tanggal_transaksi', 'ASC') // Mengurutkan berdasarkan bulan secara ascending
+            ->orderBy('tanggal_transaksi', 'DESC') // Mengurutkan berdasarkan bulan secara ascending
+            ->take(10)
             ->get();
 
         // Data untuk labels dan data chart
