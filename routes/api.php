@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApiAgenController;
 use App\Http\Controllers\Api\ApiKurirController;
+use App\Http\Controllers\Api\ApiTransaksiController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ Route::apiResource('/data/kurir', App\Http\Controllers\Api\ApiKurirController::c
 Route::post('/agen/login', [ApiAgenController::class, 'login_action']);
 Route::get('/agen/{id}',[ApiAgenController::class, 'edit_index']);
 Route::put('/agen/update/{id}',[ApiAgenController::class, 'edit_action']);
+Route::post('/agen/transaksi/create', [ApiTransaksiController::class, 'create_transaksi']);
 
 // Kurir
 Route::post('/kurir/login', [ApiKurirController::class, 'login_action']);
