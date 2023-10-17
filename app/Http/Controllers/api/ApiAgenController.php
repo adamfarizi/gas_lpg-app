@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Agen;
 use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 
 class ApiAgenController extends Controller
@@ -71,15 +74,24 @@ class ApiAgenController extends Controller
         }
     }
     
-
     public function edit_action(string $id, Request $request){
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'alamat' => 'required|string|max:255',
-            'koordinat' => 'required|string|max:255',
-            'no_hp' => 'required|string|max:15',
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'alamat' => 'required|string|max:255',
+                'koordinat' => 'required|string|max:255',
+                'no_hp' => 'required|string|max:15',
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
     
         $agen = Agen::find($id);
         if (empty($agen)) {
@@ -103,4 +115,186 @@ class ApiAgenController extends Controller
         ], 200);    
     }
 
+    public function edit_name(string $id, Request $request){
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+    
+        $agen = Agen::find($id);
+        if (empty($agen)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan!',
+            ], 422);
+        }
+
+        $agen->name = $request->input('name');
+        $agen->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'datauser' => $agen,
+        ], 200);   
+    }
+
+    public function edit_email(string $id, Request $request){
+        try {
+            $request->validate([
+                'email' => 'required|email|max:255',
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+    
+        $agen = Agen::find($id);
+        if (empty($agen)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan!',
+            ], 422);
+        }
+
+        $agen->email = $request->input('email');
+        $agen->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'datauser' => $agen,
+        ], 200);   
+    }
+
+    public function edit_no_hp(string $id, Request $request){
+        try {
+            $request->validate([
+                'no_hp' => 'required|string|max:15',
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+    
+        $agen = Agen::find($id);
+        if (empty($agen)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan!',
+            ], 422);
+        }
+
+        $agen->no_hp = $request->input('no_hp');
+        $agen->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'datauser' => $agen,
+        ], 200);   
+    }
+
+    public function edit_alamat(string $id, Request $request){
+        try {
+            $request->validate([
+                'alamat' => 'required|string|max:255',
+                'koordinat' => 'required|string|max:255',
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+    
+        $agen = Agen::find($id);
+        if (empty($agen)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan!',
+            ], 422);
+        }
+
+        $agen->alamat = $request->input('alamat');
+        $agen->koordinat = $request->input('koordinat');
+        $agen->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'datauser' => $agen,
+        ], 200);   
+    }
+
+    public function edit_password(string $id, Request $request){
+        try {
+            $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required',        
+                'new_password_confirmation' => 'required',        
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+
+        $old_password = $request->input('old_password');
+        $passwordInDatabase = Agen::where('id_agen', $id)->pluck('password')->first();
+
+        if (Hash::check($old_password, $passwordInDatabase)) {
+            $new_password = $request->input('new_password');
+            $new_password_confirmation = $request->input('new_password_confirmation');
+
+            if ($new_password == $new_password_confirmation) {
+                $agen = Agen::find($id);
+                $agen->password = Hash::make($new_password); // Menghash password baru
+                $agen->save();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Password berhasil diubah!',
+                    'datauser' => $agen,
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Konfirmasi password tidak cocok!',
+                ], 422);
+            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Password lama tidak cocok!',
+            ], 422);
+        }
+        
+    }
 }

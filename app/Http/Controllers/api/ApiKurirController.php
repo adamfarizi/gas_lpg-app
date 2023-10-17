@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Models\Kurir;
+use Illuminate\Validation\ValidationException;
+
 
 class ApiKurirController extends Controller
 {
@@ -70,14 +72,23 @@ class ApiKurirController extends Controller
         }
     }
 
-
     public function edit_action(string $id, Request $request){
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'no_hp' => 'required|string|max:15',
-        ]);
-    
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'no_hp' => 'required|string|max:15',
+            ]);    
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+
         $kurir = Kurir::find($id);
         if (empty($kurir)) {
             return response()->json([

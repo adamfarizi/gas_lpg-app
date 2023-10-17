@@ -72,4 +72,89 @@ class ApiTransaksiController extends Controller
             'datauser' => $transaksi,
         ], 200); 
     }
+
+    public function transaksi_belum_bayar(){
+        $belum_bayar = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->where('status_pembayaran', 'Belum Bayar');
+        })->get();
+
+        if ($belum_bayar->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+            ], 200); 
+        }
+        else{
+            return response()->json([
+                'success' => true,
+                'message' => 'Data ditemukan',
+                'datauser' => $belum_bayar,
+            ], 200); 
+        }
+    }
+    public function transaksi_proses(){
+        $proses = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->where('status_pembayaran', 'Proses')
+            ->orWhere('status_pembayaran', 'Sudah Bayar');
+        })
+        ->where('status_pengiriman', 'Belum Dikirim')
+        ->get();
+        
+
+        if ($proses->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+            ], 200); 
+        }
+        else{
+            return response()->json([
+                'success' => true,
+                'message' => 'Data ditemukan',
+                'datauser' => $proses,
+            ], 200); 
+        }
+
+    }
+
+    public function transaksi_dikirim(){
+        $dikirim = Transaksi::where('status_pengiriman', 'Dikirim')
+        ->get();
+        
+
+        if ($dikirim->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+            ], 200); 
+        }
+        else{
+            return response()->json([
+                'success' => true,
+                'message' => 'Data ditemukan',
+                'datauser' => $dikirim,
+            ], 200); 
+        }
+
+    }
+    
+    public function transaksi_diterima(){
+        $dikirim = Transaksi::where('status_pengiriman', 'Diterima')
+        ->get();
+
+        if ($dikirim->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+            ], 200); 
+        }
+        else{
+            return response()->json([
+                'success' => true,
+                'message' => 'Data ditemukan',
+                'datauser' => $dikirim,
+            ], 200); 
+        }
+
+    }
 }
