@@ -68,7 +68,7 @@ class ApiTransaksiController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Data berhasil diubah',
+            'message' => 'Data berhasil ditambah',
             'datauser' => $transaksi,
         ], 200); 
     }
