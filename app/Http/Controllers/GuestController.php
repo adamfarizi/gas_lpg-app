@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Agen;
-use App\Models\Kurir;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -52,11 +50,11 @@ class GuestController extends Controller
 
         if (Auth::attempt($infologin)) {
             if(Auth::user()->role=='admin'){
+                $request->session()->regenerate();
+                
                 return redirect('admin/dashboard');
-            }elseif (Auth::user()->role=='agen') {
-                return redirect('agen/dashboard');
             }else {
-                return redirect('kurir');
+                return redirect('login')->with('danger', 'Anda bukan admin!');
             }
         }else{
             return redirect('login')->withErrors('The email and password entered do not match!')->withInput();
