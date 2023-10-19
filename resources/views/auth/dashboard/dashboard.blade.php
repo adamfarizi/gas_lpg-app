@@ -327,12 +327,12 @@
                     <p class="text-sm ms-2">
                         @if ($PeningkatanPembelian > 0)
                             <span class="font-weight-bolder text-success"><i class="fa fa-arrow-up text-success"></i>
-                                {{ number_format($PeningkatanPembelian, 2) }}%</span> than last month
+                                {{ number_format($PeningkatanPembelian, 2) }}%</span> than last day
                         @elseif ($PeningkatanPembelian < 0)
                             <span class="font-weight-bolder text-danger"><i class="fa fa-arrow-down text-danger"></i>
-                                {{ number_format($PeningkatanPembelian, 2) }}%</span> than last month
+                                {{ number_format($PeningkatanPembelian, 2) }}%</span> than last day
                         @else
-                            Same than last month
+                            Same than last day
                         @endif
                     </p>
                     <div class="container border-radius-lg">

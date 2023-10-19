@@ -12,7 +12,7 @@ use App\Models\Kurir;
 class UserController extends Controller
 {
     public function index_user(){
-        $data['title'] = 'Admin';
+        $data['title'] = 'User';
 
         $total_admin = User::count(); // Menghitung jumlah admin
         $admins = User::where('role', 'admin')
