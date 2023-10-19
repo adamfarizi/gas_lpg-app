@@ -36,7 +36,6 @@ class ApiAgenController extends Controller
         $password = $request->input('password');
 
         $agen = Agen::where('email', $email)->first();
-        $token = $agen->createToken('myappToken')->plainTextToken;
 
         if (!$agen) {
             return response()->json([
@@ -45,6 +44,7 @@ class ApiAgenController extends Controller
             ], 422);
         }
 
+        $token = $agen->createToken('myappToken')->plainTextToken;
         // Verifikasi password
         if (password_verify($password, $agen->password)) {
             return response()->json([
