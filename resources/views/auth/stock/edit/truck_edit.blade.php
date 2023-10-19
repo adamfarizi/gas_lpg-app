@@ -213,8 +213,8 @@
 
 @section('content')
     <div class="card-header pb-0 text-left">
-        <h3 class="font-weight-bolder text-primary text-gradient">Edit Data Truck</h3>
-        <p class="mb-0">Silahkan lengkapi data Truck</p>
+        <h3 class="font-weight-bolder text-primary text-gradient">Edit Data Truk</h3>
+        <p class="mb-0">Silahkan lengkapi data Truk</p>
     </div>
     <div class="card-body">
         @if (session('success'))
