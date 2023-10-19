@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Models\Agen;
 use App\Http\Resources\PostResource;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -25,6 +23,27 @@ class ApiAgenController extends Controller
 
     }
 
+    public function register_action(Request $request){
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|unique:admin',
+            'password' => 'required',
+            'password_confirmation' => 'required|same:password',
+        ]);
+        $admin = new Agen([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'role' => 'agen',
+            'password' => Hash::make($request->input('password')), 
+        ]);
+        $admin->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Akun berhasil didaftarkan!',
+            'datauser' => $admin,
+        ], 200);
+    }
 
     public function login_action(Request $request){
         $request->validate([

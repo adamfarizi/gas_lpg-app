@@ -11,6 +11,7 @@ class CreateLokasiTable extends Migration
             $table->id('id_lokasi');
             $table->string('koordinat_lokasi');
             $table->string('alamat_lokasi_tujuan');
+            $table->string('keterangan')->nullable();
             $table->unsignedBigInteger('id_transaksi');
             $table->timestamps();
 

@@ -427,7 +427,10 @@
                                                     @if ($transaksi->pembayaran->tanggal_pembayaran === null)
                                                         Belum Bayar
                                                     @else
-                                                        {{ $transaksi->pembayaran->tanggal_pembayaran }}
+                                                        <span>Tanggal :
+                                                            {{ Carbon\Carbon::parse($transaksi->pembayaran->tanggal_pembayaran)->format('d-m-Y') }}</span>
+                                                        <br><span>Pukul :
+                                                            {{ Carbon\Carbon::parse($transaksi->pembayaran->tanggal_pembayaran)->format('H:i') }}</span>                                                                                                      
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-sm text-center">

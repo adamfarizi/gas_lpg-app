@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\PostResource;
 use App\Models\Kurir;
+use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 
@@ -54,6 +55,19 @@ class ApiKurirController extends Controller
                 'message' => 'Password Salah',
             ], 422);
         }
+    }
+
+    public function logout_action(Request $request)
+    {
+        $user = $request->user();
+
+        // Membuang token pengguna saat ini
+        $user->tokens()->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Anda telah berhasil logout.',
+        ], 200);
     }
 
     public function edit_index(string $id){
@@ -109,5 +123,153 @@ class ApiKurirController extends Controller
             'message' => 'Data berhasil diubah',
             'datauser' => $kurir,
         ], 200);    
+    }
+
+    public function edit_name(string $id, Request $request){
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+    
+        $kurir = Kurir::find($id);
+        if (empty($kurir)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan!',
+            ], 422);
+        }
+
+        $kurir->name = $request->input('name');
+        $kurir->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'datauser' => $kurir,
+        ], 200);   
+    }
+
+    public function edit_email(string $id, Request $request){
+        try {
+            $request->validate([
+                'email' => 'required|email|max:255',
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+    
+        $kurir = Kurir::find($id);
+        if (empty($kurir)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan!',
+            ], 422);
+        }
+
+        $kurir->email = $request->input('email');
+        $kurir->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'datauser' => $kurir,
+        ], 200);   
+    }
+
+    public function edit_no_hp(string $id, Request $request){
+        try {
+            $request->validate([
+                'no_hp' => 'required|string|max:15',
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+    
+        $kurir = Kurir::find($id);
+        if (empty($kurir)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan!',
+            ], 422);
+        }
+
+        $kurir->no_hp = $request->input('no_hp');
+        $kurir->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'datauser' => $kurir,
+        ], 200);   
+    }
+
+    public function edit_password(string $id, Request $request){
+        try {
+            $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required',        
+                'new_password_confirmation' => 'required',        
+            ]);
+        
+            // Lanjutkan dengan operasi lain jika validasi berhasil
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->validator->errors()->all(),
+            ], 422);
+        }
+
+        $old_password = $request->input('old_password');
+        $passwordInDatabase = Kurir::where('id_kurir', $id)->pluck('password')->first();
+
+        if (Hash::check($old_password, $passwordInDatabase)) {
+            $new_password = $request->input('new_password');
+            $new_password_confirmation = $request->input('new_password_confirmation');
+
+            if ($new_password == $new_password_confirmation) {
+                $kurir = Kurir::find($id);
+                $kurir->password = Hash::make($new_password); // Menghash password baru
+                $kurir->save();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Password berhasil diubah!',
+                    'datauser' => $kurir,
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Konfirmasi password tidak cocok!',
+                ], 422);
+            }
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Password lama tidak cocok!',
+            ], 422);
+        }
+        
     }
 }

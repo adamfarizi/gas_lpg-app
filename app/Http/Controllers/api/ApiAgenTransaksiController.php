@@ -8,9 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\Pembayaran;
 use App\Models\Lokasi;
 use App\Models\Transaksi;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 
-class ApiTransaksiController extends Controller
+class ApiAgenTransaksiController extends Controller
 {
     public function create_transaksi(Request $request){
         $validator = Validator::make($request->all(), [
@@ -92,6 +93,34 @@ class ApiTransaksiController extends Controller
             ], 200); 
         }
     }
+
+    public function update_pembayaran($id, Request $request) {
+        $request->validate([
+            'bukti_pembayaran' => 'required',
+        ]);
+    
+        $dikirim = Pembayaran::where('id_pembayaran', $id)->first();
+    
+        if (!$dikirim) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan!',
+            ], 422);
+        }
+    
+        $dikirim->tanggal_pembayaran = Carbon::now();
+        $dikirim->bukti_pembayaran = $request->input('bukti_pembayaran');
+        $dikirim->status_pembayaran = 'Proses';
+        $dikirim->save();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diubah',
+            'datauser' => $dikirim,
+        ], 200);
+    }
+    
+
     public function transaksi_proses(){
         $proses = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Proses')
