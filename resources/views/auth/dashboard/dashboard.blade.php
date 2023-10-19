@@ -751,7 +751,7 @@
             ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
             ->whereIn('pembayaran.status_pembayaran', ['Proses', 'Sudah Bayar'])
             ->groupBy('bulan')
-            ->orderBy('tanggal_transaksi', 'DESC') // Mengurutkan berdasarkan bulan secara ascending
+            ->orderBy('tanggal_transaksi', 'ASC') // Mengurutkan berdasarkan bulan secara ascending
             ->take(10)
             ->get();
 
