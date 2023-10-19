@@ -36,7 +36,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1">Beranda</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -88,7 +88,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">User</span>
+                        <span class="nav-link-text ms-1">Pengguna</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -117,11 +117,11 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Stock</span>
+                        <span class="nav-link-text ms-1">Stok</span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman Akun</h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="{{ url('admin/profile') }}">
@@ -150,13 +150,13 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1">Profil</span>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="sidenav-footer mx-3">
-            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Log out</a>
+            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Keluar</a>
         </div>
     </aside>
     <!-- End Side Bar -->
@@ -166,14 +166,14 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
         navbar-scroll="true">
-        <div class="container-fluid py-1 px-3">
+        <div class="container-fluid py-1">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
                             href="{{ url('admin/dashboard') }}">Admin</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Beranda</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+                <h6 class="font-weight-bolder mb-0">Beranda</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -371,7 +371,7 @@
                                             </g>
                                         </svg>
                                     </div>
-                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Sales</p>
+                                    <p class="text-xs mt-1 mb-0 font-weight-bold">Penjualan</p>
                                 </div>
                                 <h4 class="font-weight-bolder">Rp {{ number_format($jumlahTransaksiDiterima, 0, ',', '.') }}</h4>
                             </div>
@@ -490,7 +490,7 @@
                                             <a href="#" type="button" data-id="{{ $transaksi->id_transaksi }}"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#more-info{{ $transaksi->id_transaksi }}">
-                                                <p style="text-decoration: underline;">More Info</p>
+                                                <p style="text-decoration: underline;">Selengkapnya</p>
                                             </a>
                                         </td>
                                     </tr>

@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{ __('Create New User') }}</h4>
+                    <h4 class="modal-title">{{ __('Tambah Pengguna Baru') }}</h4>
                     <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>                   
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0" href="{{ route('create.action') }}">Create</button>
+                        <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0" href="{{ route('create.action') }}">Tambah</button>
                     </div>
                 </div>
             </div>

@@ -36,7 +36,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1">Beranda</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('admin/user') }}">
+                    <a class="nav-link " href="{{ url('admin/user') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -88,7 +88,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">User</span>
+                        <span class="nav-link-text ms-1">Pengguna</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -118,11 +118,11 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Stock</span>
+                        <span class="nav-link-text ms-1">Stok</span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman Akun</h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="{{ url('admin/profile') }}">
@@ -151,13 +151,13 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1">Profil</span>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="sidenav-footer mx-3">
-            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Log out</a>
+            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Keluar</a>
         </div>
     </aside>
     <!-- End Side Bar -->
@@ -167,7 +167,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
         navbar-scroll="true">
-        <div class="container-fluid py-1 px-3">
+        <div class="container-fluid py-1">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"

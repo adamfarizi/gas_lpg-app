@@ -36,7 +36,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1">Beranda</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -88,7 +88,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">User</span>
+                        <span class="nav-link-text ms-1">Pengguna</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -118,11 +118,11 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Stock</span>
+                        <span class="nav-link-text ms-1">Stok</span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman Akun</h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin_profile') }}">
@@ -151,13 +151,13 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1">Profil</span>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="sidenav-footer mx-3">
-            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Log out</a>
+            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Keluar</a>
         </div>
     </aside>
     <!-- End Side Bar -->
@@ -167,14 +167,14 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
         navbar-scroll="true">
-        <div class="container-fluid py-1 px-3">
+        <div class="container-fluid py-1">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark"
                             href="{{ url('admin/dashboard') }}">Admin</a></li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Stock</li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Stok</li>
                 </ol>
-                <h6 class="font-weight-bolder mb-0">Stock</h6>
+                <h6 class="font-weight-bolder mb-0">Stok</h6>
             </nav>
             <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -263,10 +263,10 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Truck</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Truk</p>
                                 <h5 class="font-weight-bolder mb-0">
                                     {{ $total_truck }}
-                                    <span class="text-black text-sm font-weight-bolder">Truck</span>
+                                    <span class="text-black text-sm font-weight-bolder">Truk</span>
                                 </h5>
                             </div>
                         </div>
@@ -286,11 +286,11 @@
             <div class="col-12 col-md-7 mb-3">
                 <div class="card text-truncate">
                     <div class="card-header pb-2 d-flex justify-content-between">
-                        <h6>Gas Table</h6>
+                        <h6>Gas</h6>
                         <a type="button" class="btn bg-gradient-primary border-end" data-bs-toggle="modal"
                             data-bs-target="#addStockModal">
                             <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                            Add Gas
+                            Tambah Gas
                         </a>
                     </div>
                     <div class="card-body px-3 pt-0 pb-2" style="min-height: 350px;" style="min-height: 320px;">
@@ -331,15 +331,15 @@
                                             <td class="align-middle text-center">
                                                 <p class="text-sm mb-0 me-3">{{ $gas->stock_gas }}</p>
                                             </td>
-                                            <td class="align-middle text-center text-sm">
+                                            <td class="align-middle text-sm">
                                                 @if ($gas->jenis_gas == 'Isi Ulang')
-                                                <span class="badge badge-sm bg-gradient-success me-4">{{ $gas->jenis_gas }}</span>
+                                                <span class="badge badge-sm bg-gradient-success ms-1">{{ $gas->jenis_gas }}</span>
                                                 @else
-                                                <span class="badge badge-sm bg-gradient-info me-4">{{ $gas->jenis_gas }}</span>
+                                                <span class="badge badge-sm bg-gradient-info ms-1">{{ $gas->jenis_gas }}</span>
                                                 @endif
                                             </td>
-                                            <td class="align-middle text-center">
-                                                <p class="text-sm mb-0">Rp.
+                                            <td class="align-middle">
+                                                <p class="text-sm mb-0 ms-3">Rp
                                                     {{ number_format($gas->harga_gas, 0, ',', ',') }}</p>
                                             </td>
                                             <td class="align-middle">
@@ -372,11 +372,11 @@
             <div class="col-12 col-md-5 mb-3">
                 <div class="card text-truncate">
                     <div class="card-header pb-2 d-flex justify-content-between">
-                        <h6>Truck Table</h6>
+                        <h6>Truk</h6>
                         <a type="button" class="btn bg-gradient-primary border-end" data-bs-toggle="modal"
                             data-bs-target="#addTrcukModal">
                             <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                            Add Truck
+                            Tambah Truk
                         </a>
                     </div>
                     <div class="card-body px-3 pt-0 pb-2" style="min-height: 350px;" style="min-height: 320px;">
@@ -406,8 +406,8 @@
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $truck->plat_truck }}</h6>
                                                 </div>
-                                                <td class="text-center">
-                                                    <p class="text-sm mb-0 me-4">
+                                                <td class="ms-1">
+                                                    <p class="text-sm mb-0 ms-4">
                                                         {{ $truck->maksimal_beban_truck }} Gas</p>
                                                 </td>
                                             </div>

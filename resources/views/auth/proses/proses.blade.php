@@ -36,7 +36,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1">Beranda</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -88,7 +88,7 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">User</span>
+                        <span class="nav-link-text ms-1">Pengguna</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -117,11 +117,11 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Stock</span>
+                        <span class="nav-link-text ms-1">Stok</span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman akun</h6>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="{{ url('admin/profile') }}">
@@ -150,13 +150,13 @@
                                 </g>
                             </svg>
                         </div>
-                        <span class="nav-link-text ms-1">Profile</span>
+                        <span class="nav-link-text ms-1">Profil</span>
                     </a>
                 </li>
             </ul>
         </div>
         <div class="sidenav-footer mx-3">
-            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Log out</a>
+            <a class="btn bg-gradient-primary mt-5 w-100" href="{{ route('logout') }}">Keluar</a>
         </div>
     </aside>
     <!-- End Side Bar -->
@@ -463,7 +463,7 @@
                         <div class="col text-end">
                             <button type="submit" class="btn bg-gradient-success btn-icon mt-1 me-3" id="btnKirimSemua"
                                 disabled>
-                                <span><i class="fa fa-solid fa-paper-plane me-3" style="color: #ffffff;"></i></span>
+                                <span><i class="fa fa-solid fa-paper-plane" style="color: #ffffff;"></i></span>
                                 Proses Pesanan
                             </button>
                         </div>
@@ -480,7 +480,7 @@
                         <div class="col d-flex">
                             <h4 class="card-title">Pesanan Diproses</h4>
                             <span class="mt-1 ms-3">
-                                <a class="me-3">( {{ $pesanan_diproses }} )</a>
+                                <a class="me-2">( {{ $pesanan_diproses }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananDiproses"
                                     class="fa fa-solid fa-angle-down" style="color: #252f40;"
                                     onclick="toggleAllTables('pesananDiproses')"></i>
@@ -550,7 +550,7 @@
                                                     <a href="#" type="button"
                                                         data-id="{{ $pengiriman->id_pengiriman }}" data-bs-toggle="modal"
                                                         data-bs-target="#more-info{{ $pengiriman->id_pengiriman }}">
-                                                        <p class="pt-3" style="text-decoration: underline;">More Info
+                                                        <p class="pt-3" style="text-decoration: underline;">Selengkapnya
                                                         </p>
                                                     </a>
                                                 </td>
@@ -608,7 +608,7 @@
                         <div class="col d-flex">
                             <h4 class="card-title">Pesanan Dikirim</h4>
                             <span class="mt-1 ms-3">
-                                <a class="me-3">( {{ $pesanan_dikirim }} )</a>
+                                <a class="me-2">( {{ $pesanan_dikirim }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananDikirim"
                                     class="fa fa-solid fa-angle-down" style="color: #252f40;"
                                     onclick="toggleAllTables('pesananDikirim')"></i>
@@ -698,7 +698,7 @@
                         <div class="col d-flex">
                             <h4 class="card-tittle">Pesanan Selesai</h4>
                             <span class="mt-1 ms-3">
-                                <a class="me-3">( {{ $pesanan_selesai }} )</a>
+                                <a class="me-2">( {{ $pesanan_selesai }} )</a>
                                 <i type="button" id="icon_toggleAllTables_pesananSelesai"
                                     class="fa fa-solid fa-angle-down" style="color: #252f40;"
                                     onclick="toggleAllTables('pesananSelesai')"></i>

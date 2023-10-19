@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{ __('Add New Truck') }}</h4>
+                    <h4 class="modal-title">{{ __('Tambah Truk Baru') }}</h4>
                     <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>                   
@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0" href="{{ route('create.truck.action') }}">Create</button>
+                        <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0" href="{{ route('create.truck.action') }}">Tambah</button>
                     </div>
                 </div>
             </div>
