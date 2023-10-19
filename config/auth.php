@@ -51,6 +51,11 @@ return [
             'driver' => 'session', // Sesuaikan sesuai kebutuhan
             'provider' => 'agens', // Sesuaikan sesuai kebutuhan
         ],
+
+        'kurir' => [
+            'driver' => 'session', // Sesuaikan sesuai kebutuhan
+            'provider' => 'kurirs', // Sesuaikan sesuai kebutuhan
+        ],
     ],
     
 
@@ -80,6 +85,11 @@ return [
         'agens' => [
             'driver' => 'eloquent',
             'model' => App\Models\Agen::class,
+        ],
+
+        'kurirs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Kurir::class,
         ],
     ],
     

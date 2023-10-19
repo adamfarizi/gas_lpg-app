@@ -49,8 +49,8 @@ class ApiAgenController extends Controller
         if (password_verify($password, $agen->password)) {
             return response()->json([
                 'success' => true,
-                'datauser' => $agen,
                 'token' => $token,
+                'datauser' => $agen,
             ], 200);
         } else {
             return response()->json([

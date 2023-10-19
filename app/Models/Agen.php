@@ -28,4 +28,10 @@ class Agen extends Model implements Authenticatable
     {
         return $this->hasMany(Transaksi::class, 'id_agen');
     }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
+    }
+
 }

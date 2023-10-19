@@ -31,9 +31,10 @@ class ApiKurirController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $agen = Kurir::where('email', $email)->first();
+        $kurir = Kurir::where('email', $email)->first();
+        $token = $kurir->createToken('myappToken')->plainTextToken;
 
-        if (!$agen) {
+        if (!$kurir) {
             return response()->json([
                 'success' => false,
                 'message' => 'Akun Tidak terdaftar',
@@ -41,10 +42,11 @@ class ApiKurirController extends Controller
         }
 
         // Verifikasi password
-        if (password_verify($password, $agen->password)) {
+        if (password_verify($password, $kurir->password)) {
             return response()->json([
                 'success' => true,
-                'datauser' => $agen,
+                'token' => $token,
+                'datauser' => $kurir,
             ], 200);
         } else {
             return response()->json([
