@@ -519,7 +519,7 @@
                                             Kurir</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                            Truck</th>
+                                            Truk</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                             Status</th>
