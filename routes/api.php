@@ -22,7 +22,7 @@ Route::post('/kurir/login', [ApiKurirController::class, 'login_action']);
 
 // Protected Route Agen
 Route::middleware(['auth:sanctum', 'check.agen'])->group(function () {
-    Route::apiResource('/data/agen', App\Http\Controllers\Api\ApiAgenController::class);
+    Route::apiResource('/agen/data', App\Http\Controllers\Api\ApiAgenController::class);
     Route::post('/agen/logout', [ApiAgenController::class, 'logout_action']);
     Route::post('/agen/transaksi/create', [ApiTransaksiController::class, 'create_transaksi']);
     Route::get('/agen/transaksi/belum_bayar', [ApiTransaksiController::class, 'transaksi_belum_bayar']);
@@ -41,7 +41,7 @@ Route::middleware(['auth:sanctum', 'check.agen'])->group(function () {
 
 // Protected Route Kurir
 Route::middleware(['auth:sanctum', 'check.kurir'])->group(function () {
-    Route::apiResource('/data/kurir', App\Http\Controllers\Api\ApiKurirController::class);
+    Route::apiResource('/kurir/data', App\Http\Controllers\Api\ApiKurirController::class);
     Route::get('/kurir/{id}',[ApiKurirController::class, 'edit_index']);
     Route::put('/kurir/update/{id}',[ApiKurirController::class, 'edit_action']);
 
