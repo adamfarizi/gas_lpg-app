@@ -3,10 +3,14 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\HasApiTokens;
 
-class Agen extends Model
+class Agen extends Model implements Authenticatable
 {
+    use AuthenticableTrait, HasApiTokens;
     protected $table = 'agen';
     protected $primaryKey = 'id_agen';
     

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Agen;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +18,13 @@ class ApiAgenController extends Controller
         $dateupdate = Agen::all();
 
         if($dateupdate){
-            return new PostResource(true, 'Data Update', $dateupdate);
+            return new PostResource(true, 'Get Berhasil', $dateupdate);
         }else{
             return response()->json("Not Found 404");
         }
 
     }
+
 
     public function login_action(Request $request){
         $request->validate([
@@ -34,6 +36,7 @@ class ApiAgenController extends Controller
         $password = $request->input('password');
 
         $agen = Agen::where('email', $email)->first();
+        $token = $agen->createToken('myappToken')->plainTextToken;
 
         if (!$agen) {
             return response()->json([
@@ -47,6 +50,7 @@ class ApiAgenController extends Controller
             return response()->json([
                 'success' => true,
                 'datauser' => $agen,
+                'token' => $token,
             ], 200);
         } else {
             return response()->json([
@@ -54,6 +58,19 @@ class ApiAgenController extends Controller
                 'message' => 'Password salah!',
             ], 422);
         }
+    }
+
+    public function logout_action(Request $request)
+    {
+        $user = $request->user();
+
+        // Membuang token pengguna saat ini
+        $user->tokens()->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Anda telah berhasil logout.',
+        ], 200);
     }
 
     public function edit_index(string $id){

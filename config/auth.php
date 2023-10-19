@@ -40,7 +40,19 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+    
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+    
+        'agen' => [
+            'driver' => 'session', // Sesuaikan sesuai kebutuhan
+            'provider' => 'agens', // Sesuaikan sesuai kebutuhan
+        ],
     ],
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -64,12 +76,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+    
+        'agens' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Agen::class,
+        ],
     ],
+    
 
     /*
     |--------------------------------------------------------------------------

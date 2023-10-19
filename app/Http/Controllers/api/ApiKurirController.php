@@ -15,7 +15,7 @@ class ApiKurirController extends Controller
         $dateupdate = Kurir::all();
 
         if($dateupdate){
-            return new PostResource(true, 'Data Update', $dateupdate);
+            return new PostResource(true, 'Get Berhasil', $dateupdate);
         }else{
             return response()->json("Not Found 404");
         }
