@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ApiAgenController;
 use App\Http\Controllers\Api\ApiKurirController;
 use App\Http\Controllers\Api\ApiAgenTransaksiController;
 use App\Http\Controllers\api\ApiKurirTransaksiController;
+use App\Http\Controllers\Api\ApiStokGasController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -56,4 +57,7 @@ Route::middleware(['auth:sanctum', 'check.kurir'])->group(function () {
 
 });
 
+//Protected Route Stok Gas
+    Route::apiResource('/data/gas', App\Http\Controllers\Api\ApiStokGasController::class);
+    Route::get('/gas/{id}', [ApiStokGasController::class, 'index']);
 

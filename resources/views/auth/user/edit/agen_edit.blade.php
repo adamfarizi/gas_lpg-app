@@ -240,18 +240,24 @@
             @method('PUT')
             <label>Name</label>
             <div class="input-group mb-3">
-                <input name="name" type="text" class="form-control" placeholder="Input your name"
+                <input name="name" type="text" class="form-control" placeholder="Ubah nama agen"
                     aria-label="name" value="{{ $agens->name }}">
             </div>
             <label>Email</label>
             <div class="input-group mb-3">
-                <input name="email" type="text" class="form-control" placeholder="Input your email"
+                <input name="email" type="text" class="form-control" placeholder="Ubah email agen"
                     aria-label="email" value="{{ $agens->email }}">
             </div>
             <label>No Hp</label>
             <div class="input-group mb-3">
-                <input name="no_hp" type="number" class="form-control" placeholder="Input your name"
-                    aria-label="name" value="{{ $agens->no_hp }}">
+                <input name="no_hp" type="text" class="form-control" placeholder="Ubah no Hp agen"
+                    aria-label="no_hp" value="{{ $agens->no_hp }}" oninput="validateInput(this)">
+                <div id="error-message" style="color: red;"></div>
+            </div>
+            <label>Alamat</label>
+            <div class="input-group mb-3">
+                <input name="alamat" type="text" class="form-control" placeholder="Ubah alamat agen"
+                    aria-label="alamat" value="{{ $agens->alamat }}">
             </div>
             <div class="text-center">
                 <button type="submit" name="submit" class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0"
@@ -260,3 +266,15 @@
         </form>
     </div>
 @endsection
+
+<script>
+    function validateInput(inputElement) {
+        var inputValue = inputElement.value;
+    
+        if (!/^\d+$/.test(inputValue)) {
+            inputElement.setCustomValidity("Hanya boleh memasukkan angka.");
+        } else {
+            inputElement.setCustomValidity("");
+        }
+    }
+</script>

@@ -29,7 +29,8 @@
 
                     <label>Password <span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="password-addon" id="password" name="password" value="{{ old('password') }}">
+                        <input type="password" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="password-addon" id="password" name="password" value="{{ old('password') }}" oninput="checkPasswordComplexity(this)">
+                        <div id="password-addon" style="color: red;"></div>
                     </div>
 
                     <label>Confirm Password <span class="text-danger">*</span></label>
@@ -45,3 +46,16 @@
         </div>
     </div>
 </form>
+
+<script>
+    function checkPasswordComplexity(inputElement) {
+        var password = inputElement.value;
+        var complexityMessage = document.getElementById("password-addon");
+    
+        if (password.length < 8) {
+            inputElement.setCustomValidity("Password harus memiliki setidaknya 8 karakter.");
+        } else {
+            inputElement.setCustomValidity("");
+        }
+    }
+    </script>

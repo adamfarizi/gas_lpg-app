@@ -277,12 +277,12 @@
                             @method('PUT')
                             <label>Name</label>
                             <div class="input-group mb-3">
-                                <input name="name" type="text" class="form-control" placeholder="Input your name"
+                                <input name="name" type="text" class="form-control" placeholder="Masukkan nama anda"
                                     aria-label="name" value="{{ $admins->name }}">
                             </div>
                             <label>Email</label>
                             <div class="input-group mb-3">
-                                <input name="email" type="text" class="form-control" placeholder="Input your email"
+                                <input name="email" type="text" class="form-control" placeholder="Masukkan email anda"
                                     aria-label="email" value="{{ $admins->email }}">
                             </div>
                             <div class="text-center">

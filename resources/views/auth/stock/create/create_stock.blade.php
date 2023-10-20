@@ -12,17 +12,17 @@
                 <div class="modal-body">
                     <label>Name Gas<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Enter gas name" aria-label="Gas" aria-describedby="name-addon" id="name_gas" name="name_gas" value="{{ old('name_gas') }}">
+                        <input type="text" class="form-control" placeholder="Masukkan nama gas" aria-label="Gas" aria-describedby="name-addon" id="name_gas" name="name_gas" value="{{ old('name_gas') }}">
                     </div>
 
                     <label>Berat Gas<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="number" class="form-control" placeholder="Enter gas weight" aria-label="Berat" aria-describedby="name-addon" id="berat_gas" name="berat_gas" value="{{ old('berat_gas') }}">
+                        <input type="number" class="form-control" placeholder="Masukkan berat gas" aria-label="Berat" aria-describedby="name-addon" id="berat_gas" name="berat_gas" value="{{ old('berat_gas') }}">
                     </div>
 
                     <label>Stock Gas<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="number" class="form-control" placeholder="Enter gas stock" aria-label="Stock" aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ old('stock_gas') }}">
+                        <input type="number" class="form-control" placeholder="Masukkan jumlah gas" aria-label="Stock" aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ old('stock_gas') }}">
                     </div>
 
                     <label>Jenis Gas<span class="text-danger">*</span></label>
@@ -35,7 +35,7 @@
 
                     <label>Harga Gas<span class="text-danger">*</span></label>
                     <div class="mb-3">
-                        <input type="number" class="form-control" placeholder="Enter gas price" aria-label="Harga" aria-describedby="name-addon" id="harga_gas" name="harga_gas" value="{{ old('harga_gas') }}">
+                        <input type="number" class="form-control" placeholder="Masukkan harga gas" aria-label="Harga" aria-describedby="name-addon" id="harga_gas" name="harga_gas" value="{{ old('harga_gas') }}">
                     </div>
 
                     <div class="text-center">

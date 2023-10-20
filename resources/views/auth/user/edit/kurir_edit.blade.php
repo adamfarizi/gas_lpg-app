@@ -240,18 +240,19 @@
             @method('PUT')
             <label>Name</label>
             <div class="input-group mb-3">
-                <input name="name" type="text" class="form-control" placeholder="Input your name"
+                <input name="name" type="text" class="form-control" placeholder="Ubah nama kurir"
                     aria-label="name" value="{{ $kurirs->name }}">
             </div>
             <label>Email</label>
             <div class="input-group mb-3">
-                <input name="email" type="text" class="form-control" placeholder="Input your email"
+                <input name="email" type="text" class="form-control" placeholder="Ubah email kurir"
                     aria-label="email" value="{{ $kurirs->email }}">
             </div>
             <label>No Hp</label>
             <div class="input-group mb-3">
-                <input name="no_hp" type="number" class="form-control" placeholder="Input your name"
-                    aria-label="name" value="{{ $kurirs->no_hp }}">
+                <input name="no_hp" type="text" class="form-control" placeholder="Ubah No hp kurir"
+                    aria-label="name" value="{{ $kurirs->no_hp }}" oninput="validateInput(this)">
+                    <div id="error-message" style="color: red;"></div>
             </div>
             <div class="text-center">
                 <button type="submit" name="submit" class="btn btn-round bg-gradient-primary btn-lg w-100 mt-4 mb-0"
@@ -260,3 +261,15 @@
         </form>
     </div>
 @endsection
+
+<script>
+    function validateInput(inputElement) {
+        var inputValue = inputElement.value;
+    
+        if (!/^\d+$/.test(inputValue)) {
+            inputElement.setCustomValidity("Hanya boleh memasukkan angka.");
+        } else {
+            inputElement.setCustomValidity("");
+        }
+    }
+</script>

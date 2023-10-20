@@ -240,17 +240,17 @@
             @method('PUT')
             <label>Nama Gas</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Enter name gas" aria-label="Gas"
+                <input type="text" class="form-control" placeholder="Masukkan nama gas" aria-label="Gas"
                     aria-describedby="name-addon" id="name_gas" name="name_gas" value="{{ $gas->name_gas }}">
             </div>
             <label>Berat Gas</label>
             <div class="input-group mb-3">
-                <input type="int" class="form-control" placeholder="Enter weight gas" aria-label="Stock"
+                <input type="int" class="form-control" placeholder="Masukkan berat gas" aria-label="Stock"
                     aria-describedby="name-addon" id="berat_gas" name="berat_gas" value="{{ $gas->berat_gas }}">
             </div>
             <label>Stock Gas</label>
             <div class="input-group mb-3">
-                <input type="int" class="form-control" placeholder="Enter gas stock" aria-label="Stock"
+                <input type="int" class="form-control" placeholder="masukkan jumlah gas" aria-label="Stock"
                     aria-describedby="name-addon" id="stock_gas" name="stock_gas" value="{{ $gas->stock_gas }}">
             </div>
             <label for="jenis_gas">Jenis Gas <span class="text-danger">*</span></label>
@@ -260,7 +260,7 @@
             </select>            
             <label>Harga Gas</label>
             <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="Enter gas price" aria-label="Harga"
+                <input type="number" class="form-control" placeholder="Masukkan harga gas" aria-label="Harga"
                     aria-describedby="name-addon" id="harga_gas" name="harga_gas" value="{{ $gas->harga_gas }}">
             </div>
             <div class="text-center">

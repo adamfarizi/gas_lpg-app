@@ -240,12 +240,12 @@
             @method('PUT')
             <label>Plat Kendaraan</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Enter your Plat" aria-label="Stock"
+                <input type="text" class="form-control" placeholder="Masukkan no plat truk" aria-label="Stock"
                     aria-describedby="name-addon" id="plat_truck" name="plat_truck" value="{{ $truck->plat_truck }}">
             </div>
             <label>Maksimal Beban</label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Enter your max load" aria-label="Stock"
+                <input type="text" class="form-control" placeholder="Masukkan beban maksimal truk" aria-label="Stock"
                     aria-describedby="name-addon" id="maksimal_beban_truck" name="maksimal_beban_truck"
                     value="{{ $truck->maksimal_beban_truck }}">
             </div>
