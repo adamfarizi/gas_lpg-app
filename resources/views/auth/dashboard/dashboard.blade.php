@@ -241,7 +241,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Diproses</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Masuk</p>
                                 <div class="d-flex font-weight-bolder mb-0">
                                     <h5 class="font-weight-bolder mb-0" id="pesanan-diproses"></h5>
                                     <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">pesanan</span>

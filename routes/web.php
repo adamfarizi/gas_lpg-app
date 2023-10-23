@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Controller proses
     Route::get('admin/proses', [ProsesController::class, 'index'])->name('admin_proses');
+    Route::get('admin/proses/realtimeData', [ProsesController::class, 'realtimeData']);
     Route::put('admin/proses/update_pembayaran',[ProsesController::class, 'update_pembayaran'])->name('update_pembayaran');
     Route::put('admin/proses/update_dikirim/{id}',[ProsesController::class, 'update_dikirim'])->name('update_dikirim');
 

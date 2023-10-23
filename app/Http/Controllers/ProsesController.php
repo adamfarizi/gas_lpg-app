@@ -83,6 +83,22 @@ class ProsesController extends Controller
         ], $data);
     }
 
+    public function realTimeData(){
+        // Nav data
+        $total_gas = Gas::sum('stock_gas');
+        $kurir_tersedia = Kurir::where('status', 'tersedia')->count();
+        $pesanan_diproses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
+        $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
+
+        return response()->json([
+            'total_gas' => $total_gas,
+            'kurir_tersedia' => $kurir_tersedia,
+            'pesanan_diproses' => $pesanan_diproses,
+            'pesanan_selesai' => $pesanan_selesai,
+        ]);
+
+    }
+    
     public function update_pembayaran(Request $request){ 
         $selectedIds = $request->input('id_transaksi');
         // Cari transaksi berdasarkan ID
