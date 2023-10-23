@@ -34,11 +34,16 @@ Route::middleware(['guest'])->group(function () {
     Route::post('register', [GuestController::class, 'register_action'])->name('register.action');
 });
 
-Route::middleware(['auth'])->group(function () {
+
+
+Route::middleware(['auth'])->group(function () {    
     Route::get('logout', [GuestController::class, 'logout'])->name('logout');
 
     // Controller dashboard
     Route::get('admin/dashboard', [DashboardController::class, 'index'])->name('home');
+    Route::get('admin/dashboard/realtimeData', [DashboardController::class, 'realtimeData']);
+    Route::get('admin/dashboard/realtimeChart1', [DashboardController::class, 'realTimeChart1']);
+    Route::get('admin/dashboard/realtimeChart2', [DashboardController::class, 'realTimeChart2']);
 
     // Controller proses
     Route::get('admin/proses', [ProsesController::class, 'index'])->name('admin_proses');

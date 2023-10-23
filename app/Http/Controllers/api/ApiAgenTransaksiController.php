@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\chart1Event;
+use App\Events\chart2Event;
+use App\Events\gastrackEvent;
+use App\Events\newTranEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Gas;
 use Illuminate\Http\Request;
@@ -68,10 +72,15 @@ class ApiAgenTransaksiController extends Controller
 
         $transaksi = Transaksi::all();
 
+        $transaksi_new = Transaksi::where('id_transaksi', $id_transaksi_new)->first();
+        $agen_new = $transaksi_new->agen->name;
+        broadcast(new newTranEvent($agen_new));
+
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil ditambah',
-            'datauser' => $transaksi,
+            'datauser' => $transaksi_new,
+            'databroadcast' => $agen_new,
         ], 200); 
     }
 
@@ -127,11 +136,29 @@ class ApiAgenTransaksiController extends Controller
         $dikirim->bukti_pembayaran = $request->input('bukti_pembayaran');
         $dikirim->status_pembayaran = 'Proses';
         $dikirim->save();
-    
+
+        $transaksi_new = Transaksi::whereHas('pembayaran', function ($query) use ($id) {
+            $query->where('id_pembayaran', $id);
+        })->first();
+        
+        $tanggal_transaksi = Carbon::parse($transaksi_new->tanggal_transaksi)->format('d M');
+        $bulan_transaksi = Carbon::parse($transaksi_new->tanggal_transaksi)->format('M Y');
+        $jumlah_transaksi = $transaksi_new->jumlah_transaksi;
+        $total_transaksi = $transaksi_new->total_transaksi;
+        $dataToBroadcast = [
+            'tanggal_transaksi' => $tanggal_transaksi,
+            'jumlah_transaksi' => $jumlah_transaksi,
+            'total_transaksi' => $total_transaksi,
+        ];
+        
+        broadcast(new chart1Event($tanggal_transaksi, $jumlah_transaksi));
+        broadcast(new chart2Event($bulan_transaksi, $total_transaksi));
+        
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil diubah',
             'datauser' => $dikirim,
+            'databroadcast' => $dataToBroadcast,
         ], 200);
     }
     

@@ -12,7 +12,7 @@
         <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
         <!-- Font Awesome Icons -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.2/css/all.css">
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
         <!-- CSS Files -->
@@ -20,12 +20,29 @@
         <!-- Nepcha Analytics (nepcha.com) -->
         <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
         <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        @vite('resources/css/app.css')
     </head>
 
     <body class="g-sidenav-show  bg-gray-100">
         @yield('sidebar')
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+            @if (Auth::check()) <!-- Memeriksa apakah pengguna sudah login -->
+                <div class="position-absolute top-2 end-2" style="z-index: 1; display: none;" id="toast">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="min-width: 300px;">
+                        <span class="alert-icon me-3">
+                            <i class="fa fa-solid fa-check-to-slot" style="color: #ffffff;"></i>
+                        </span>
+                        <span class="alert-text text-white">Pesanan masuk dari </span>
+                        <span class="alert-text text-white" id="agen_name"></span>
+                        <button type="button" class="btn-close pt-3" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            @endif         
             @yield('navbar')
             <div class="container-fluid py-4">
                 @yield('content')
@@ -105,18 +122,30 @@
         <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
         <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
+        @vite('resources/js/app.js')
+        <script>
+            document.addEventListener("DOMContentLoaded", function(event) { 
+                Echo.channel(`newtran-channel`)
+                .listen('newTranEvent', (e) => {
+                    console.log(e);
+                    // Ambil elemen pesan dan elemen agen name
+                    const toast = document.getElementById('toast');
+                    const agen_name = document.getElementById('agen_name');
+
+                    // Ubah teks pesan dengan data yang diterima dari event
+                    agen_name.textContent = e.agen_new;
+
+                    // Tampilkan elemen pesan
+                    toast.style.display = 'block';
+
+                    // Sembunyikan pesan setelah beberapa detik (misalnya, 5 detik)
+                    setTimeout(function() {
+                        toast.style.display = 'none';
+                    }, 5000); // 5000 milidetik = 5 detik
+                });
+            });
+        </script>
         @yield('js')
-        {{-- <script>
-            var win = navigator.platform.indexOf('Win') > -1;
-            if (win && document.querySelector('#sidenav-scrollbar')) {
-                var options = {
-                    damping: '0.5'
-                }
-                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-            }
-            
-            $('#successNotification').fadeIn().delay(3000).fadeOut(); 
-        </script> --}}
         <!-- Github buttons -->
         <script async defer src="https://buttons.github.io/buttons.js"></script>
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
