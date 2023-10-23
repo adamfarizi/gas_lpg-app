@@ -96,10 +96,10 @@ class ApiAgenTransaksiController extends Controller
                 'transaksi.tanggal_transaksi',
                 'transaksi.status_pengiriman',
                 'transaksi.resi_transaksi',
+                'gas.name_gas AS nama_gas',
+                'gas.jenis_gas',
                 'transaksi.jumlah_transaksi',
-                'transaksi.total_transaksi',
-                'gas.name AS name_gas',
-                'gas.jenis_gas'
+                'transaksi.total_transaksi'
             ])->get();
 
         if ($belum_bayar->isEmpty()) {
@@ -115,8 +115,6 @@ class ApiAgenTransaksiController extends Controller
             ], 200);
         }
     }
-
-
 
     public function update_pembayaran($id, Request $request) {
         $request->validate([
@@ -165,11 +163,20 @@ class ApiAgenTransaksiController extends Controller
 
     public function transaksi_proses(){
         $proses = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->where('status_pembayaran', 'Proses')
-            ->orWhere('status_pembayaran', 'Sudah Bayar');
-        })
-        ->where('status_pengiriman', 'Belum Dikirim')
-        ->get();
+            $query->where('status_pembayaran', 'Belum Bayar');
+            })->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+            ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
+            ->select([
+                'transaksi.id_transaksi',
+                'agen.name AS nama_agen',
+                'transaksi.tanggal_transaksi',
+                'transaksi.status_pengiriman',
+                'transaksi.resi_transaksi',
+                'gas.name_gas AS nama_gas',
+                'gas.jenis_gas',
+                'transaksi.jumlah_transaksi',
+                'transaksi.total_transaksi'
+            ])->get();
         
 
         if ($proses->isEmpty()) {
@@ -188,30 +195,52 @@ class ApiAgenTransaksiController extends Controller
 
     }
 
-    public function transaksi_dikirim(){
+    public function transaksi_dikirim()
+    {
         $dikirim = Transaksi::where('status_pengiriman', 'Dikirim')
-        ->get();
-        
+            ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+            ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
+            ->select([
+                'transaksi.id_transaksi',
+                'agen.name AS nama_agen',
+                'transaksi.tanggal_transaksi',
+                'transaksi.status_pengiriman',
+                'transaksi.resi_transaksi',
+                'gas.name_gas AS nama_gas',
+                'gas.jenis_gas',
+                'transaksi.jumlah_transaksi',
+                'transaksi.total_transaksi'
+            ])->get();
 
         if ($dikirim->isEmpty()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Data tidak ditemukan',
-            ], 200); 
-        }
-        else{
+            ], 200);
+        } else {
             return response()->json([
                 'success' => true,
                 'message' => 'Data ditemukan',
                 'datauser' => $dikirim,
-            ], 200); 
+            ], 200);
         }
-
     }
     
     public function transaksi_diterima(){
         $dikirim = Transaksi::where('status_pengiriman', 'Diterima')
-        ->get();
+        ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+        ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
+        ->select([
+            'transaksi.id_transaksi',
+            'agen.name AS nama_agen',
+            'transaksi.tanggal_transaksi',
+            'transaksi.status_pengiriman',
+            'transaksi.resi_transaksi',
+            'gas.name_gas AS nama_gas',
+            'gas.jenis_gas',
+            'transaksi.jumlah_transaksi',
+            'transaksi.total_transaksi'
+        ])->get();
 
         if ($dikirim->isEmpty()) {
             return response()->json([
