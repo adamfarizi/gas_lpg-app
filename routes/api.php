@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum', 'check.agen'])->group(function () {
     Route::post('/agen/transaksi/create', [ApiAgenTransaksiController::class, 'create_transaksi']);
     Route::put('/agen/update/pembayaran/{id}',[ApiAgenTransaksiController::class, 'update_pembayaran']);
     Route::get('/agen/transaksi/belum_bayar', [ApiAgenTransaksiController::class, 'transaksi_belum_bayar']);
+    Route::delete('/agen/transaksi/belum_bayar/{id}', [ApiAgenTransaksiController::class, 'delete_transaksi_belum_bayar']);
     Route::get('/agen/transaksi/proses', [ApiAgenTransaksiController::class, 'transaksi_proses']);
     Route::get('/agen/transaksi/dikirim', [ApiAgenTransaksiController::class, 'transaksi_dikirim']);
     Route::get('/agen/transaksi/diterima', [ApiAgenTransaksiController::class, 'transaksi_diterima']);
@@ -41,6 +42,9 @@ Route::middleware(['auth:sanctum', 'check.agen'])->group(function () {
     Route::put('/agen/update/alamat/{id}',[ApiAgenController::class, 'edit_alamat']);
     Route::put('/agen/update/password/{id}',[ApiAgenController::class, 'edit_password']);
 
+    //Route Data Gas
+    Route::apiResource('/data/gas', App\Http\Controllers\Api\ApiStokGasController::class);
+    Route::get('/gas/{id}', [ApiStokGasController::class, 'index']);
 });
 
 // Protected Route Kurir
@@ -56,8 +60,3 @@ Route::middleware(['auth:sanctum', 'check.kurir'])->group(function () {
     Route::put('/kurir/update/password/{id}',[ApiKurirController::class, 'edit_password']);
 
 });
-
-//Protected Route Stok Gas
-    Route::apiResource('/data/gas', App\Http\Controllers\Api\ApiStokGasController::class);
-    Route::get('/gas/{id}', [ApiStokGasController::class, 'index']);
-

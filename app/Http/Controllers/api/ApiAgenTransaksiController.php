@@ -10,6 +10,7 @@ use App\Models\Lokasi;
 use App\Models\Transaksi;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ApiAgenTransaksiController extends Controller
 {
@@ -74,25 +75,39 @@ class ApiAgenTransaksiController extends Controller
         ], 200); 
     }
 
-    public function transaksi_belum_bayar(){
+    public function transaksi_belum_bayar()
+    {
         $belum_bayar = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Belum Bayar');
-        })->get();
+            })->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+            ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
+            ->select([
+                'transaksi.id_transaksi',
+                'agen.name AS nama_agen',
+                'transaksi.tanggal_transaksi',
+                'transaksi.status_pengiriman',
+                'transaksi.resi_transaksi',
+                'transaksi.jumlah_transaksi',
+                'transaksi.total_transaksi',
+                'gas.name AS name_gas',
+                'gas.jenis_gas'
+            ])->get();
 
         if ($belum_bayar->isEmpty()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Data tidak ditemukan',
-            ], 200); 
-        }
-        else{
+            ], 200);
+        } else {
             return response()->json([
                 'success' => true,
                 'message' => 'Data ditemukan',
                 'datauser' => $belum_bayar,
-            ], 200); 
+            ], 200);
         }
     }
+
+
 
     public function update_pembayaran($id, Request $request) {
         $request->validate([
@@ -185,5 +200,33 @@ class ApiAgenTransaksiController extends Controller
             ], 200); 
         }
 
+    }
+
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+
+    public function delete_transaksi_belum_bayar($id)
+    {
+        $transaksi = Transaksi::with('lokasi')->find($id);
+
+        if (!$transaksi) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Transaksi tidak ditemukan',
+            ], 404);
+        }
+
+        // Hapus data terkait di tabel `lokasi`
+        foreach ($transaksi->lokasi as $lokasi) {
+            $lokasi->delete();
+        }
+
+        // Hapus transaksi
+        $transaksi->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Transaksi berhasil dihapus',
+        ], 200);
     }
 }

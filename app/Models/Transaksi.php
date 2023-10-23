@@ -4,6 +4,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Transaksi extends Model
 {
@@ -45,5 +46,10 @@ class Transaksi extends Model
     public function admin()
     {
         return $this->belongsTo(User::class, 'id_admin');
+    }
+
+    public function lokasi(): HasMany
+    {
+        return $this->hasMany(Lokasi::class, 'id_transaksi', 'id_transaksi');
     }
 }
