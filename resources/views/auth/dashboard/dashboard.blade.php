@@ -220,10 +220,10 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $total_gas }}
-                                    <span class="text-black text-sm font-weight-bolder">gas</span>
-                                </h5>
+                                <div class="d-flex font-weight-bolder mb-0">
+                                    <h5 class="font-weight-bolder mb-0" id="total-gas"></h5>
+                                    <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">gas</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -242,10 +242,10 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Diproses</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $pesanan_diproses }}
-                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                </h5>
+                                <div class="d-flex font-weight-bolder mb-0">
+                                    <h5 class="font-weight-bolder mb-0" id="pesanan-diproses"></h5>
+                                    <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">pesanan</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -264,10 +264,10 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Dikirim</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $pesanan_dikirim }}
-                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                </h5>
+                                <div class="d-flex font-weight-bolder mb-0">
+                                    <h5 class="font-weight-bolder mb-0" id="pesanan-dikirim"></h5>
+                                    <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">pesanan</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -295,10 +295,10 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Selesai</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $pesanan_selesai }}
-                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                </h5>
+                                <div class="d-flex font-weight-bolder mb-0">
+                                    <h5 class="font-weight-bolder mb-0" id="pesanan-selesai"></h5>
+                                    <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">pesanan</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -345,7 +345,10 @@
                                     </div>
                                     <p class="text-xs mt-1 mb-0 font-weight-bold">Gas Terjual</p>
                                 </div>
-                                <h4 h4 class="font-weight-bolder">{{ $totalGasTerjual }} Gas</h4>
+                                <div class="d-flex">
+                                    <h4 h4 class="font-weight-bolder" id="gas-terjual"></h4>
+                                    <h4 h4 class="ms-2 font-weight-bolder">Gas</h4>
+                                </div>
                             </div>
                             <div class="col-6 py-3 ps-0">
                                 <div class="d-flex mb-2">
@@ -373,7 +376,8 @@
                                     </div>
                                     <p class="text-xs mt-1 mb-0 font-weight-bold">Penjualan</p>
                                 </div>
-                                <h4 class="font-weight-bolder">Rp {{ number_format($jumlahTransaksiDiterima, 0, ',', '.') }}</h4>
+                                <h4 h4 class="font-weight-bolder" id="jumlah-transaksi"></h4>
+                                {{-- <h4 class="font-weight-bolder">Rp {{ number_format($jumlahTransaksiDiterima, 0, ',', '.') }}</h4> --}}
                             </div>
                         </div>
                     </div>
@@ -650,189 +654,329 @@
         });
     </script>
 
-    <!--   Core JS Files   -->
+    {{-- Data  --}}
     <script>
-        <?php
-        use Carbon\Carbon;
-        use App\Models\Transaksi;
+        function updateData() {
+            $.ajax({
+                url: '/admin/dashboard/realtimeData',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    const totalGasElement = document.getElementById('total-gas');
+                    totalGasElement.textContent = data.total_gas;
+                    
+                    const pesananDiprosesElement = document.getElementById('pesanan-diproses');
+                    pesananDiprosesElement.textContent = data.pesanan_diproses;
+                    
+                    const pesananDikirimElement = document.getElementById('pesanan-dikirim');
+                    pesananDikirimElement.textContent = data.pesanan_dikirim;
+                    
+                    const pesananSelesaiElement = document.getElementById('pesanan-selesai');
+                    pesananSelesaiElement.textContent = data.pesanan_selesai;
 
-        // Mendapatkan data transaksi yang sudah diurutkan berdasarkan tanggal
-        $dataTransaksi = Transaksi::selectRaw('SUM(CASE WHEN pembayaran.status_pembayaran IN ("Proses", "Sudah Bayar") THEN jumlah_transaksi ELSE 0 END) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%d %b") as hari')
-            ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
-            ->groupBy('hari')
-            ->orderBy('tanggal_transaksi', 'DESC') // Urutkan secara menurun
-            ->take(7) // Ambil 7 hari terbaru
-            ->get();
+                    const totalGasTerjualElement = document.getElementById('gas-terjual');
+                    totalGasTerjualElement.textContent = data.totalGasTerjual;
 
-        // Data untuk labels dan data chart
-        $labels = $dataTransaksi->pluck('hari');
-        $dataChart = $dataTransaksi->pluck('total_transaksi');
-        ?>
+                    const jumlahTransaksiElement = document.getElementById('jumlah-transaksi');
+                    const jumlahTransaksi = parseFloat(data.jumlahTransaksiDiterima);
+                    if (!isNaN(jumlahTransaksi)) {
+                        const formattedNumber = new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR'
+                        }).format(jumlahTransaksi);
 
-        var ctx = document.getElementById("chart-bars").getContext("2d");
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: <?php echo json_encode($labels); ?>, // Gunakan json_encode untuk mengonversi PHP array ke dalam JavaScript array
-                datasets: [{
-                    label: "Gas Terjual",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    borderRadius: 4,
-                    borderSkipped: false,
-                    backgroundColor: "#fff",
-                    data: <?php echo json_encode($dataChart); ?>, // Gunakan json_encode untuk mengonversi PHP array ke dalam JavaScript array
-                    maxBarThickness: 6
-                }, ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
+                        jumlahTransaksiElement.textContent = formattedNumber;
+                    } else {
+                        jumlahTransaksiElement.textContent = 'Rp 0';
                     }
+
                 },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        // Set interval dan simpan ID interval
+        setInterval(function() {
+            updateData();
+        }, 1000);
+
+    </script>
+
+    <!--   Chart 1   -->
+    <script>
+        let chart;
+        let data;
+        let labels;
+    
+        function getDataChart1() {
+            $.ajax({
+                url: '/admin/dashboard/realtimeChart1',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    const ctx = document.getElementById('chart-bars').getContext('2d');
+
+                    if (chart) {
+                        chart.destroy();
+                    }
+                    
+                    const data_hari = data.data1;
+                    const label_jumlah = data.labels1;
+
+                    chart1 = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: label_jumlah,
+                            datasets: [{
+                                label: 'Gas Terjual',
+                                tension: 0.4,
+                                borderWidth: 0,
+                                borderRadius: 4,
+                                borderSkipped: false,
+                                backgroundColor: '#fff',
+                                data: data_hari,
+                                maxBarThickness: 6,
+                            }],
                         },
-                        ticks: {
-                            suggestedMin: 0,
-                            suggestedMax: 500,
-                            beginAtZero: true,
-                            padding: 15,
-                            font: {
-                                size: 14,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
                             },
-                            color: "#fff"
+                            interaction: {
+                                intersect: false,
+                                mode: 'index',
+                            },
+                            scales: {
+                                y: {
+                                    grid: {
+                                        drawBorder: false,
+                                        display: false,
+                                        drawOnChartArea: false,
+                                        drawTicks: false,
+                                    },
+                                    ticks: {
+                                        suggestedMin: 0,
+                                        suggestedMax: 500,
+                                        beginAtZero: true,
+                                        padding: 15,
+                                        font: {
+                                            size: 14,
+                                            family: 'Open Sans',
+                                            style: 'normal',
+                                            lineHeight: 2,
+                                        },
+                                        color: '#fff',
+                                    },
+                                },
+                                x: {
+                                    reverse: true,
+                                    grid: {
+                                        drawBorder: false,
+                                        display: false,
+                                        drawOnChartArea: false,
+                                        drawTicks: false,
+                                    },
+                                    ticks: {
+                                        display: false,
+                                    },
+                                },
+                            },
                         },
-                    },
-                    x: {
-                        reverse: true,
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false
-                        },
-                        ticks: {
-                            display: false
-                        },
-                    },
+                    });
                 },
-            },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
+        }
+    
+        $(function () {
+            getDataChart1();
         });
 
+        let dataChart1 = {
+            labels: [],
+            data: [],
+        };
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            Echo.channel(`chart1-channel`)
+            .listen('chart1Event', (e) => {
+                console.log(e);
+
+                if (chart1) {
+                    const labelIndex = chart1.data.labels.indexOf(e.tanggal_transaksi);
+
+                    if (labelIndex !== -1) {
+                        // Jika label sudah ada, tambahkan nilai jumlah_transaksi ke dataset yang sesuai
+                        chart1.data.datasets[0].data[labelIndex] = parseInt(chart1.data.datasets[0].data[labelIndex]);
+                        chart1.data.datasets[0].data[labelIndex] += parseInt(e.jumlah_transaksi);
+                    } else {
+                        // Jika label belum ada, tambahkan label baru dan nilai jumlah_transaksi ke data chart
+                        chart1.data.labels.push(e.tanggal_transaksi);
+                        chart1.data.datasets[0].data.push(e.jumlah_transaksi);
+                    }
+
+                    // Optional: Batasi jumlah data di chart
+                    if (chart1.data.labels.length > 7) {
+                        chart1.data.labels.shift();
+                        chart1.data.datasets[0].data.shift();
+                    }
+
+                    chart1.update();
+                }
+
+            });
+        });
+    </script>
+    
+    <!--   Chart 2   -->
+    <script>
         var ctx2 = document.getElementById("chart-line").getContext("2d");
         var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
         gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
         gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+        gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); // Purple colors
         var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
         gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
         gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-        <?php
-        // Mendapatkan data transaksi yang sudah diurutkan berdasarkan tanggal
-        $dataTransaksi = Transaksi::selectRaw('SUM(total_transaksi) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%b %Y") as bulan')
-            ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
-            ->whereIn('pembayaran.status_pembayaran', ['Proses', 'Sudah Bayar'])
-            ->groupBy('bulan')
-            ->orderBy('tanggal_transaksi', 'ASC') // Mengurutkan berdasarkan bulan secara ascending
-            ->take(10)
-            ->get();
-
-        // Data untuk labels dan data chart
-        $labels = $dataTransaksi->pluck('bulan');
-        $dataChart = $dataTransaksi->pluck('total_transaksi'); 
-        ?>
-        new Chart(ctx2, {
-            type: "line",
-            data: {
-                labels: <?php echo json_encode($labels); ?>,
-                datasets: [{
-                        label: "Sales",
-                        tension: 0.4,
-                        borderWidth: 0,
-                        pointRadius: 0,
-                        borderColor: "#cb0c9f",
-                        borderWidth: 3,
-                        backgroundColor: gradientStroke1,
-                        fill: true,
-                        data: <?php echo json_encode($dataChart); ?>,
-                        maxBarThickness: 6
-
+        gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); // Purple colors
+    
+        var chart2; // Deklarasikan variabel chart2
+    
+        function getDataChart2() {
+            $.ajax({
+                url: '/admin/dashboard/realtimeChart2',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    // Hancurkan chart2 jika sudah ada
+                    if (chart2) {
+                        chart2.destroy();
                     }
-                ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
+
+                    const data_bulan = data.data2;
+                    const label_total = data.labels2;
+                    // Buat chart2 baru
+                    chart2 = new Chart(ctx2, {
+                        type: "line",
+                        data: {
+                            labels: label_total,
+                            datasets: [{
+                                label: "Sales",
+                                tension: 0.4,
+                                borderWidth: 0,
+                                pointRadius: 0,
+                                borderColor: "#cb0c9f",
+                                borderWidth: 3,
+                                backgroundColor: gradientStroke1,
+                                fill: true,
+                                data: data_bulan,
+                                maxBarThickness: 6
+                            }],
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                            },
+                            interaction: {
+                                intersect: false,
+                                mode: 'index',
+                            },
+                            scales: {
+                                y: {
+                                    grid: {
+                                        drawBorder: false,
+                                        display: true,
+                                        drawOnChartArea: true,
+                                        drawTicks: false,
+                                        borderDash: [5, 5],
+                                    },
+                                    ticks: {
+                                        display: true,
+                                        padding: 10,
+                                        color: '#b2b9bf',
+                                        font: {
+                                            size: 11,
+                                            family: "Open Sans",
+                                            style: 'normal',
+                                            lineHeight: 2,
+                                        },
+                                    },
+                                },
+                                x: {
+                                    grid: {
+                                        drawBorder: false,
+                                        display: false,
+                                        drawOnChartArea: false,
+                                        drawTicks: false,
+                                        borderDash: [5, 5],
+                                    },
+                                    ticks: {
+                                        display: true,
+                                        color: '#b2b9bf',
+                                        padding: 20,
+                                        font: {
+                                            size: 11,
+                                            family: "Open Sans",
+                                            style: 'normal',
+                                            lineHeight: 2,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    });
+                },
+                error: function (error) {
+                    console.log(error);
+                },
+            });
+        }
+        $(function () {
+            getDataChart2();
+        });
+
+        let dataChart2 = {
+            labels: [],
+            data: [],
+        };
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            Echo.channel(`chart2-channel`)
+            .listen('chart2Event', (e) => {
+                console.log(e);
+                if (chart2) {
+                    const labelIndex = chart2.data.labels.indexOf(e.bulan_transaksi);
+
+                    if (labelIndex !== -1) {
+                        // Jika label sudah ada, tambahkan nilai jumlah_transaksi ke dataset yang sesuai
+                        chart2.data.datasets[0].data[labelIndex] = parseInt(chart2.data.datasets[0].data[labelIndex]);
+                        chart2.data.datasets[0].data[labelIndex] += parseInt(e.total_transaksi);
+                    } else {
+                        // Jika label belum ada, tambahkan label baru dan nilai jumlah_transaksi ke data chart
+                        chart2.data.labels.push(e.bulan_transaksi);
+                        chart2.data.datasets[0].data.push(e.total_transaksi);
                     }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#b2b9bf',
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#b2b9bf',
-                            padding: 20,
-                            font: {
-                                size: 11,
-                                family: "Open Sans",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
+
+                    // Optional: Batasi jumlah data di chart
+                    if (chart2.data.labels.length > 7) {
+                        chart2.data.labels.shift();
+                        chart2.data.datasets[0].data.shift();
+                    }
+
+                    chart2.update();
+                }
+
+            });
         });
     </script>
 

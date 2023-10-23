@@ -2,25 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use App\Models\Agen;
 use App\Models\Gas;
-use App\Models\Kurir;
-use App\Models\Lokasi;
 use App\Models\Transaksi;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index() {
         $data['title'] = 'Dashboard';
-        
-        $pesanan_diproses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
-        $pesanan_dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->count();
-        $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
         
         $transaksis = Transaksi::all();
         
@@ -29,13 +17,6 @@ class DashboardController extends Controller
         ->orderBy('bulan')
         ->get();
         
-        $total_gas = Gas::sum('stock_gas');
-        $totalGasTerjual = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->whereIn('status_pembayaran', ['Proses', 'Sudah Bayar']);
-        })->sum('jumlah_transaksi');
-        $jumlahTransaksiDiterima = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->whereIn('status_pembayaran', ['Proses', 'Sudah Bayar']);
-        })->sum('total_transaksi');
 
     //Peningkatan pembelian
         $tanggalSekarang = date('Y-m-d'); // Tanggal sekarang
@@ -94,17 +75,74 @@ class DashboardController extends Controller
 
         
         return view('auth.dashboard.dashboard',[
-            'total_gas' => $total_gas,
-            'pesanan_diproses' => $pesanan_diproses,
-            'pesanan_dikirim' => $pesanan_dikirim,
-            'pesanan_selesai' => $pesanan_selesai,
             'transaksis' => $transaksis,
             'dataTransaksi' => $dataTransaksi,
             'PeningkatanPembelian' => $PeningkatanPembelian,
             'PeningkatanPenjualan' => $PeningkatanPenjualan,
+        ], $data);
+        
+    }
+
+    public function realTimeData(){
+        // Nav data
+        $total_gas = Gas::sum('stock_gas');
+        $pesanan_diproses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
+        $pesanan_dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->count();
+        $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
+
+        // Chart 1 data
+        $totalGasTerjual = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->whereIn('status_pembayaran', ['Proses', 'Sudah Bayar']);
+        })->sum('jumlah_transaksi');
+        $jumlahTransaksiDiterima = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->whereIn('status_pembayaran', ['Proses', 'Sudah Bayar']);
+        })->sum('total_transaksi');
+
+        return response()->json([
+            'total_gas' => $total_gas,
+            'pesanan_diproses' => $pesanan_diproses,
+            'pesanan_dikirim' => $pesanan_dikirim,
+            'pesanan_selesai' => $pesanan_selesai,
             'totalGasTerjual' => $totalGasTerjual,
             'jumlahTransaksiDiterima' => $jumlahTransaksiDiterima,
-            
-        ], $data);
+        ]);
+
     }
+
+    public function realTimeChart1(){
+        $dataTransaksi = Transaksi::selectRaw('SUM(CASE WHEN pembayaran.status_pembayaran IN ("Proses", "Sudah Bayar") THEN jumlah_transaksi ELSE 0 END) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%d %b") as hari')
+            ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
+            ->groupBy('hari')
+            ->orderBy('tanggal_transaksi', 'DESC')
+            ->take(7)
+            ->get();
+    
+        $labels = $dataTransaksi->pluck('hari'); // Reverse the order to show the latest data first.
+        $dataChart = $dataTransaksi->pluck('total_transaksi');
+        
+        return response()->json([
+            'labels1' => $labels->toArray(),
+            'data1' => $dataChart->toArray(),
+        ]);
+    }    
+
+    public function realTimeChart2(){
+        $dataTransaksi = Transaksi::selectRaw('SUM(total_transaksi) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%b %Y") as bulan')
+        ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
+        ->whereIn('pembayaran.status_pembayaran', ['Proses', 'Sudah Bayar'])
+        ->groupBy('bulan')
+        ->orderBy('tanggal_transaksi', 'ASC') // Mengurutkan berdasarkan bulan secara ascending
+        ->take(10)
+        ->get();
+
+        // Data untuk labels dan data chart
+        $labels = $dataTransaksi->pluck('bulan');
+        $dataChart = $dataTransaksi->pluck('total_transaksi'); 
+        
+        return response()->json([
+            'labels2' => $labels->toArray(),
+            'data2' => $dataChart->toArray(),
+        ]);
+    }    
+    
 }
