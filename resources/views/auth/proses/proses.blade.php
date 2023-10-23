@@ -219,10 +219,10 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Gas</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $total_gas }}
-                                    <span class="text-black text-sm font-weight-bolder">gas</span>
-                                </h5>
+                                <div class="d-flex font-weight-bolder mb-0">
+                                    <h5 class="font-weight-bolder mb-0" id="total-gas"></h5>
+                                    <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">gas</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -241,10 +241,10 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Kurir Tersedia</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $kurir_tersedia }}
-                                    <span class="text-black text-sm font-weight-bolder">kurir</span>
-                                </h5>
+                                <div class="d-flex font-weight-bolder mb-0">
+                                    <h5 class="font-weight-bolder mb-0" id="kurir-tersedia"></h5>
+                                    <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">kurir</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -272,10 +272,10 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Masuk</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $pesanan_masuk }}
-                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                </h5>
+                                <div class="d-flex font-weight-bolder mb-0">
+                                    <h5 class="font-weight-bolder mb-0" id="pesanan-diproses"></h5>
+                                    <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">pesanan</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -294,10 +294,10 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Pesanan Selesai</p>
-                                <h5 class="font-weight-bolder mb-0">
-                                    {{ $pesanan_selesai }}
-                                    <span class="text-black text-sm font-weight-bolder">pesanan</span>
-                                </h5>
+                                <div class="d-flex font-weight-bolder mb-0">
+                                    <h5 class="font-weight-bolder mb-0" id="pesanan-selesai"></h5>
+                                    <span class="ms-2 mt-1 text-black text-sm font-weight-bolder">pesanan</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -308,24 +308,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    {{-- Create Button --}}
-    <div class="row mt-3 pb-0">
-        <div class="col-auto">
-            <form action="{{ route('buy') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn bg-gradient-primary">
-                    <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                    Transaksi
-                </button>
-            </form>
-        </div>
-        <div class="col-auto">
-            <button type="button" class="btn bg-gradient-info" data-bs-toggle="modal" data-bs-target="#make-lokasi">
-                <span> <i class="fa fa-solid fa-plus me-2" style="color: #ffffff;"></i></span>
-                Lokasi
-            </button>
         </div>
     </div>
     <div class="row">
@@ -986,6 +968,39 @@
 @endsection
 
 @section('js')
+    {{-- Data  --}}
+    <script>
+        function updateData() {
+            $.ajax({
+                url: '/admin/proses/realtimeData',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    const totalGasElement = document.getElementById('total-gas');
+                    totalGasElement.textContent = data.total_gas;
+                                        
+                    const kuriTersediaElement = document.getElementById('kurir-tersedia');
+                    kuriTersediaElement.textContent = data.kurir_tersedia;
+
+                    const pesananDiprosesElement = document.getElementById('pesanan-diproses');
+                    pesananDiprosesElement.textContent = data.pesanan_diproses;
+                    
+                    const pesananSelesaiElement = document.getElementById('pesanan-selesai');
+                    pesananSelesaiElement.textContent = data.pesanan_selesai;
+
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        // Set interval dan simpan ID interval
+        setInterval(function() {
+            updateData();
+        }, 1000);
+
+    </script>
     {{-- Script update pembayaran --}}
     <script>
         $(document).ready(function() {
