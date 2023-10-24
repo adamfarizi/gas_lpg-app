@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agen;
 use App\Models\Gas;
 use App\Models\Transaksi;
 
@@ -89,7 +90,7 @@ class DashboardController extends Controller
         $pesanan_diproses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
         $pesanan_dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->count();
         $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
-
+    
         // Chart 1 data
         $totalGasTerjual = Transaksi::whereHas('pembayaran', function ($query) {
             $query->whereIn('status_pembayaran', ['Proses', 'Sudah Bayar']);
@@ -97,7 +98,7 @@ class DashboardController extends Controller
         $jumlahTransaksiDiterima = Transaksi::whereHas('pembayaran', function ($query) {
             $query->whereIn('status_pembayaran', ['Proses', 'Sudah Bayar']);
         })->sum('total_transaksi');
-
+    
         return response()->json([
             'total_gas' => $total_gas,
             'pesanan_diproses' => $pesanan_diproses,
@@ -106,8 +107,8 @@ class DashboardController extends Controller
             'totalGasTerjual' => $totalGasTerjual,
             'jumlahTransaksiDiterima' => $jumlahTransaksiDiterima,
         ]);
-
     }
+    
 
     public function realTimeChart1(){
         $dataTransaksi = Transaksi::selectRaw('SUM(CASE WHEN pembayaran.status_pembayaran IN ("Proses", "Sudah Bayar") THEN jumlah_transaksi ELSE 0 END) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%d %b") as hari')

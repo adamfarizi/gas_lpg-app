@@ -7,6 +7,7 @@ use App\Events\chart2Event;
 use App\Events\NewTransactionEvent;
 use App\Events\gastrackEvent;
 use App\Events\newTranEvent;
+use App\Events\updateTranEvent;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
@@ -198,9 +199,11 @@ class ApiAgenTransaksiController extends Controller
         
         $tanggal_transaksi = Carbon::parse($transaksi_new->tanggal_transaksi)->format('d M');
         $bulan_transaksi = Carbon::parse($transaksi_new->tanggal_transaksi)->format('M Y');
+        $agen_name = $transaksi_new->agen->name;
         $jumlah_transaksi = $transaksi_new->jumlah_transaksi;
         $total_transaksi = $transaksi_new->total_transaksi;
         $dataToBroadcast = [
+            'agen_name'=> $agen_name,
             'tanggal_transaksi' => $tanggal_transaksi,
             'jumlah_transaksi' => $jumlah_transaksi,
             'total_transaksi' => $total_transaksi,
@@ -208,6 +211,7 @@ class ApiAgenTransaksiController extends Controller
         
         broadcast(new chart1Event($tanggal_transaksi, $jumlah_transaksi));
         broadcast(new chart2Event($bulan_transaksi, $total_transaksi));
+        broadcast(new updateTranEvent($agen_name));
         
         return response()->json([
             'success' => true,

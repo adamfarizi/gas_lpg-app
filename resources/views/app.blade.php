@@ -30,13 +30,23 @@
         @yield('sidebar')
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
             @if (Auth::check()) <!-- Memeriksa apakah pengguna sudah login -->
-                <div class="position-absolute top-2 end-2" style="z-index: 1; display: none;" id="toast">
-                    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="min-width: 300px;">
+                <div class="position-absolute top-2 end-2 d-flex flex-column" style="z-index: 1;">
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="min-width: 300px;  display: none;" id="toast_transaksi">
                         <span class="alert-icon me-3">
                             <i class="fa fa-solid fa-check-to-slot" style="color: #ffffff;"></i>
                         </span>
                         <span class="alert-text text-white">Pesanan masuk dari </span>
-                        <span class="alert-text text-white" id="agen_name"></span>
+                        <span class="alert-text text-white fw-bold" id="agen_name"></span>
+                        <button type="button" class="btn-close pt-3" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-info alert-dismissible fade show" role="alert" style="min-width: 300px; display: none;" id="toast_pembayaran">
+                        <span class="alert-icon me-3">
+                            <i class="fa fa-solid fa-money-bill-transfer" style="color: #ffffff;"></i>
+                        </span>
+                        <span class="alert-text text-white fw-bold" id="agen_name2"></span>
+                        <span class="alert-text text-white"> telah membayar !</span>
                         <button type="button" class="btn-close pt-3" data-bs-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -129,18 +139,38 @@
                 .listen('newTranEvent', (e) => {
                     console.log(e);
                     // Ambil elemen pesan dan elemen agen name
-                    const toast = document.getElementById('toast');
+                    const toast_transaksi = document.getElementById('toast_transaksi');
                     const agen_name = document.getElementById('agen_name');
 
                     // Ubah teks pesan dengan data yang diterima dari event
                     agen_name.textContent = e.agen_new;
 
                     // Tampilkan elemen pesan
-                    toast.style.display = 'block';
+                    toast_transaksi.style.display = 'block';
 
                     // Sembunyikan pesan setelah beberapa detik (misalnya, 5 detik)
                     setTimeout(function() {
-                        toast.style.display = 'none';
+                        toast_transaksi.style.display = 'none';
+                    }, 5000); // 5000 milidetik = 5 detik
+                });
+            });
+            document.addEventListener("DOMContentLoaded", function(event) { 
+                Echo.channel(`updateTran-channel`)
+                .listen('updateTranEvent', (e) => {
+                    console.log(e);
+                    // Ambil elemen pesan dan elemen agen name
+                    const toast_pembayaran = document.getElementById('toast_pembayaran');
+                    const agen_name2 = document.getElementById('agen_name2');
+
+                    // Ubah teks pesan dengan data yang diterima dari event
+                    agen_name2.textContent = e.agen_name;
+
+                    // Tampilkan elemen pesan
+                    toast_pembayaran.style.display = 'block';
+
+                    // Sembunyikan pesan setelah beberapa detik (misalnya, 5 detik)
+                    setTimeout(function() {
+                        toast_pembayaran.style.display = 'none';
                     }, 5000); // 5000 milidetik = 5 detik
                 });
             });
