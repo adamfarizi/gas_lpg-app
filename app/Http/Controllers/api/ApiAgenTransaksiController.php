@@ -59,8 +59,6 @@ class ApiAgenTransaksiController extends Controller
             }
         }
 
-   
-
     public function create_transaksi(Request $request) {
         // Validasi permintaan
         $validator = Validator::make($request->all(), [
@@ -135,6 +133,7 @@ class ApiAgenTransaksiController extends Controller
         ->select([
             'transaksi.id_transaksi',
             'agen.name AS nama_agen',
+            'agen.koordinat AS koordinat',
             'transaksi.tanggal_transaksi',
             'transaksi.status_pengiriman',
             'transaksi.resi_transaksi',
@@ -172,15 +171,17 @@ class ApiAgenTransaksiController extends Controller
                 'message' => 'Data tidak ditemukan!',
             ], 422);
         }
+        
     
         if ($request->hasFile('bukti_pembayaran')) {
-            // Menyimpan file gambar ke direktori yang ditentukan
-            $path = $request->file('bukti_pembayaran')->store('public/uploads');
+            $file = $request->file('bukti_pembayaran');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $fileName);
     
             // Menyimpan informasi bukti pembayaran dalam basis data
             $dikirim->update([
                 'tanggal_pembayaran' => now(),
-                'bukti_pembayaran' => $path,
+                'bukti_pembayaran' => $fileName,
                 'status_pembayaran' => 'Proses',
             ]);
         }
@@ -228,6 +229,7 @@ class ApiAgenTransaksiController extends Controller
         ->select([
             'transaksi.id_transaksi',
             'agen.name AS nama_agen',
+            'agen.koordinat AS koordinat',
             'transaksi.tanggal_transaksi',
             'transaksi.status_pengiriman',
             'transaksi.resi_transaksi',
@@ -267,6 +269,7 @@ class ApiAgenTransaksiController extends Controller
             ->select([
                 'transaksi.id_transaksi',
                 'agen.name AS nama_agen',
+                'agen.koordinat AS koordinat',
                 'transaksi.tanggal_transaksi',
                 'transaksi.status_pengiriman',
                 'transaksi.resi_transaksi',
@@ -306,6 +309,7 @@ class ApiAgenTransaksiController extends Controller
             ->select([
                 'transaksi.id_transaksi',
                 'agen.name AS nama_agen',
+                'agen.koordinat AS koordinat',
                 'transaksi.tanggal_transaksi',
                 'transaksi.status_pengiriman',
                 'transaksi.resi_transaksi',

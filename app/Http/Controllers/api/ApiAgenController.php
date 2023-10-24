@@ -195,13 +195,45 @@ class ApiAgenController extends Controller
         ], 200);   
     }
 
-    public function edit_email(string $id, Request $request){
+    public function edit_email(string $id, Request $request) {
         try {
             $request->validate([
                 'email' => 'required|email|max:255',
             ]);
-        
-            // Lanjutkan dengan operasi lain jika validasi berhasil
+    
+            // Check if the new email already exists
+            $existingEmail = Agen::where('email', $request->input('email'))->first();
+            if ($existingEmail) {
+                if ($existingEmail['id_agen']== $id) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Anda tidak melakukan perubahan email.',
+                    ], 422);
+                }
+                else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Email sudah terdaftar.',
+                ], 422);
+            }
+            }
+    
+            $agen = Agen::find($id);
+            if (empty($agen)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ditemukan!',
+                ], 422);
+            }
+    
+            $agen->email = $request->input('email');
+            $agen->save();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Data berhasil diubah',
+                'datauser' => $agen,
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
@@ -209,24 +241,8 @@ class ApiAgenController extends Controller
                 'errors' => $e->validator->errors()->all(),
             ], 422);
         }
-    
-        $agen = Agen::find($id);
-        if (empty($agen)) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Data tidak ditemukan!',
-            ], 422);
-        }
-
-        $agen->email = $request->input('email');
-        $agen->save();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Data berhasil diubah',
-            'datauser' => $agen,
-        ], 200);   
     }
+    
 
     public function edit_no_hp(string $id, Request $request){
         try {

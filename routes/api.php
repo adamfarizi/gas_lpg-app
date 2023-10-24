@@ -29,7 +29,7 @@ Route::middleware(['auth:sanctum', 'check.agen'])->group(function () {
     Route::post('/agen/logout', [ApiAgenController::class, 'logout_action']);
     Route::get('/agen/transaksi/{id}', [ApiAgenTransaksiController::class, 'index_transaksi']);
     Route::post('/agen/transaksi/create', [ApiAgenTransaksiController::class, 'create_transaksi']);
-    Route::put('/agen/update/pembayaran/{id}',[ApiAgenTransaksiController::class, 'update_pembayaran']);
+    Route::post('/agen/update/pembayaran/{id}',[ApiAgenTransaksiController::class, 'update_pembayaran']);
     Route::get('/agen/transaksi/belum_bayar/{id}', [ApiAgenTransaksiController::class, 'transaksi_belum_bayar']);
     Route::delete('/agen/transaksi/belum_bayar/{id}', [ApiAgenTransaksiController::class, 'delete_transaksi_belum_bayar']);
     Route::get('/agen/transaksi/proses/{id}', [ApiAgenTransaksiController::class, 'transaksi_proses']);
