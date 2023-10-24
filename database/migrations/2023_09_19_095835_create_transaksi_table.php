@@ -12,7 +12,7 @@ class CreateTransaksiTable extends Migration
             $table->date('tanggal_transaksi');
             $table->string('resi_transaksi');
             $table->integer('jumlah_transaksi');
-            $table->decimal('total_transaksi', 50, 2);
+            $table->decimal('total_transaksi', 50, 0);
             $table->enum('status_pengiriman',['Belum Dikirim','Dikirim', 'Diterima']);
             $table->unsignedBigInteger('id_agen');
             $table->unsignedBigInteger('id_gas');

@@ -23,27 +23,38 @@ class ApiAgenController extends Controller
 
     }
 
-    public function register_action(Request $request){
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|unique:admin',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
-        ]);
-        $admin = new Agen([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            'role' => 'agen',
-            'password' => Hash::make($request->input('password')), 
-        ]);
-        $admin->save();
+    public function register_action(Request $request) {
+            $request->validate([
+                'name' => 'required|string',
+                'email' => 'required',
+                'password' => 'required',
+                'password_confirmation' => 'required|same:password',
+            ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Akun berhasil didaftarkan!',
-            'datauser' => $admin,
-        ], 200);
+            $existingEmail = Agen::where('email', $request->input('email'))->first();
+            if ($existingEmail) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Email sudah terdaftar.',
+                ], 422);
+            }
+            else{
+            $admin = new Agen([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'role' => 'agen',
+                'password' => Hash::make($request->input('password')), 
+            ]);
+            $admin->save();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Akun berhasil didaftarkan!',
+                'datauser' => $admin,
+            ], 200);
+        }
     }
+    
 
     public function login_action(Request $request){
         $request->validate([

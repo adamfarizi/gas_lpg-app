@@ -4,103 +4,145 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\chart1Event;
 use App\Events\chart2Event;
+use App\Events\NewTransactionEvent;
 use App\Events\gastrackEvent;
 use App\Events\newTranEvent;
+use App\Http\Resources\PostResource;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Gas;
 use Illuminate\Http\Request;
 use App\Models\Pembayaran;
-use App\Models\Lokasi;
+use App\Models\Agen;
 use App\Models\Transaksi;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class ApiAgenTransaksiController extends Controller
 {
-    public function create_transaksi(Request $request){
-        $validator = Validator::make($request->all(), [
-            'id_agen' => 'required',
-            'id_gas' => 'required',
-            'jumlah_transaksi' => 'required',
-        ]);
+    public function index_transaksi($id_transaksi = null)
+        {
+            $query = Transaksi::join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+                ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
 
+            // Menambahkan kondisi berdasarkan id_transaksi jika disediakan
+            if ($id_transaksi !== null) {
+                $query->where('transaksi.id_transaksi', $id_transaksi);
+            }
+
+            $transaksi = $query
+                ->select([
+                    'transaksi.id_transaksi',
+                    'agen.name AS nama_agen',
+                    'transaksi.tanggal_transaksi',
+                    'transaksi.status_pengiriman',
+                    'transaksi.resi_transaksi',
+                    'gas.name_gas AS nama_gas',
+                    'gas.jenis_gas',
+                    'transaksi.jumlah_transaksi',
+                    'transaksi.total_transaksi'
+                ])->get();
+
+            if ($transaksi->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data tidak ditemukan',
+                ], 200);
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Data ditemukan',
+                    'datauser' => $transaksi,
+                ], 200);
+            }
+        }
+
+   
+
+    public function create_transaksi(Request $request) {
+        // Validasi permintaan
+        $validator = Validator::make($request->all(), [
+            'id_agen' => 'required|exists:agen,id_agen',
+            'id_gas' => 'required|exists:gas,id_gas',
+            'jumlah_transaksi' => 'required|integer|min:1',
+        ]);
+    
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 400);
         }
-
-        // Pembuatan resi
+        
         $id_transaksi_new = Transaksi::max('id_transaksi') + 1;
-        $format_resi = str_pad($id_transaksi_new, 6, '0', STR_PAD_LEFT);
-        $resi_transaksi = 'GTK-' . $format_resi;
 
-        // Pembuatan id pembayaran
-        $id_pembayaran_new = Pembayaran::max('id_pembayaran') + 1;
-
+        // Pembuatan resi dengan UUID
+        $resi_transaksi = 'GTK-' . now()->format('YmdHis') . Str::random(4);
+    
         // Penghitungan total transaksi
         $jumlah_transaksi = intval($request->input('jumlah_transaksi'));
         $id_gas = intval($request->input('id_gas'));
-        $harga_gas = Gas::where('id_gas', $id_gas)->pluck('harga_gas')->first(); // Menggunakan first() untuk mengambil nilai pertama
-        $total_transaksi = $jumlah_transaksi * (float)$harga_gas; // Konversi $harga_gas ke float jika diperlukan
-
+        $harga_gas = Gas::where('id_gas', $id_gas)->value('harga_gas');
+        $total_transaksi = $jumlah_transaksi * (float)$harga_gas;
+    
         // Tambahkan data ke tabel pembayaran
-        Pembayaran::create([
+        $id_pembayaran_new = Pembayaran::create([
             'status_pembayaran' => 'Belum Bayar',
             'tanggal_pembayaran' => null,
             'bukti_pembayaran' => null,
-        ]);
-
+        ])->id_pembayaran;
+    
         // Tambahkan data ke tabel transaksi
-        Transaksi::create([
+        $transaksi_new = Transaksi::create([
             'tanggal_transaksi' => now(),
             'resi_transaksi' => $resi_transaksi,
             'jumlah_transaksi' => $jumlah_transaksi,
             'total_transaksi' => $total_transaksi,
-            'id_agen' => intval($request->id_agen),
+            'id_agen' => $request->input('id_agen'),
             'id_admin' => 1,
             'id_gas' => $id_gas,
             'id_pembayaran' => $id_pembayaran_new,
             'id_pengiriman' => null,
         ]);
-        
-        // Tambahkan data ke tabel lokasi
-        Lokasi::create([
-            'koordinat_lokasi' => '123.456,789.012',
-            'alamat_lokasi_tujuan' => 'Jl. Contoh 123, Kota Contoh',
-            'id_transaksi' => $id_transaksi_new,
-        ]);
-
-        $transaksi = Transaksi::all();
-
+    
+        // Ambil nama agen
+        $agen_new = Agen::where('id_agen', $transaksi_new->id_agen)->value('name');
         $transaksi_new = Transaksi::where('id_transaksi', $id_transaksi_new)->first();
         $agen_new = $transaksi_new->agen->name;
         broadcast(new newTranEvent($agen_new));
-
+    
         return response()->json([
             'success' => true,
             'message' => 'Data berhasil ditambah',
             'datauser' => $transaksi_new,
             'databroadcast' => $agen_new,
-        ], 200); 
+        ], 200);
     }
 
-    public function transaksi_belum_bayar()
+    public function transaksi_belum_bayar($id_agen = null)
     {
-        $belum_bayar = Transaksi::whereHas('pembayaran', function ($query) {
+        $query = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Belum Bayar');
-            })->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
-            ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
-            ->select([
-                'transaksi.id_transaksi',
-                'agen.name AS nama_agen',
-                'transaksi.tanggal_transaksi',
-                'transaksi.status_pengiriman',
-                'transaksi.resi_transaksi',
-                'gas.name_gas AS nama_gas',
-                'gas.jenis_gas',
-                'transaksi.jumlah_transaksi',
-                'transaksi.total_transaksi'
-            ])->get();
+        })
+        ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+        ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
+
+        // Menambahkan kondisi berdasarkan id_agen jika disediakan
+        if ($id_agen !== null) {
+            $query->where('agen.id_agen', $id_agen);
+        }
+
+        $belum_bayar = $query
+        ->select([
+            'transaksi.id_transaksi',
+            'agen.name AS nama_agen',
+            'transaksi.tanggal_transaksi',
+            'transaksi.status_pengiriman',
+            'transaksi.resi_transaksi',
+            'gas.name_gas AS nama_gas',
+            'gas.jenis_gas',
+            'transaksi.jumlah_transaksi',
+            'transaksi.total_transaksi'
+        ])->get();
 
         if ($belum_bayar->isEmpty()) {
             return response()->json([
@@ -116,9 +158,10 @@ class ApiAgenTransaksiController extends Controller
         }
     }
 
+
     public function update_pembayaran($id, Request $request) {
         $request->validate([
-            'bukti_pembayaran' => 'required',
+            'bukti_pembayaran' => 'required|image|mimes:jpeg,png|max:2048',
         ]);
     
         $dikirim = Pembayaran::where('id_pembayaran', $id)->first();
@@ -130,10 +173,17 @@ class ApiAgenTransaksiController extends Controller
             ], 422);
         }
     
-        $dikirim->tanggal_pembayaran = Carbon::now();
-        $dikirim->bukti_pembayaran = $request->input('bukti_pembayaran');
-        $dikirim->status_pembayaran = 'Proses';
-        $dikirim->save();
+        if ($request->hasFile('bukti_pembayaran')) {
+            // Menyimpan file gambar ke direktori yang ditentukan
+            $path = $request->file('bukti_pembayaran')->store('public/uploads');
+    
+            // Menyimpan informasi bukti pembayaran dalam basis data
+            $dikirim->update([
+                'tanggal_pembayaran' => now(),
+                'bukti_pembayaran' => $path,
+                'status_pembayaran' => 'Proses',
+            ]);
+        }
 
         $transaksi_new = Transaksi::whereHas('pembayaran', function ($query) use ($id) {
             $query->where('id_pembayaran', $id);
@@ -161,45 +211,59 @@ class ApiAgenTransaksiController extends Controller
     }
     
 
-    public function transaksi_proses(){
-        $proses = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->where('status_pembayaran', 'Belum Bayar');
-            })->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
-            ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
-            ->select([
-                'transaksi.id_transaksi',
-                'agen.name AS nama_agen',
-                'transaksi.tanggal_transaksi',
-                'transaksi.status_pengiriman',
-                'transaksi.resi_transaksi',
-                'gas.name_gas AS nama_gas',
-                'gas.jenis_gas',
-                'transaksi.jumlah_transaksi',
-                'transaksi.total_transaksi'
-            ])->get();
-        
+    public function transaksi_proses($id_agen = null)
+    {
+        $query = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->where('status_pembayaran', 'Sudah Bayar');
+        })
+        ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+        ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
+
+        // Menambahkan kondisi berdasarkan id_agen jika disediakan
+        if ($id_agen !== null) {
+            $query->where('agen.id_agen', $id_agen);
+        }
+
+        $proses = $query
+        ->select([
+            'transaksi.id_transaksi',
+            'agen.name AS nama_agen',
+            'transaksi.tanggal_transaksi',
+            'transaksi.status_pengiriman',
+            'transaksi.resi_transaksi',
+            'gas.name_gas AS nama_gas',
+            'gas.jenis_gas',
+            'transaksi.jumlah_transaksi',
+            'transaksi.total_transaksi'
+        ])->get();
 
         if ($proses->isEmpty()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Data tidak ditemukan',
-            ], 200); 
-        }
-        else{
+            ], 200);
+        } else {
             return response()->json([
                 'success' => true,
                 'message' => 'Data ditemukan',
                 'datauser' => $proses,
-            ], 200); 
+            ], 200);
         }
-
     }
 
-    public function transaksi_dikirim()
+    public function transaksi_dikirim($id_agen = null)
     {
-        $dikirim = Transaksi::where('status_pengiriman', 'Dikirim')
-            ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
-            ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
+        $query = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->where('status_pengiriman', 'Dikirim');
+        })
+        ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+        ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
+
+        // Menambahkan kondisi berdasarkan id_agen jika disediakan
+        if ($id_agen !== null) {
+            $query->where('agen.id_agen', $id_agen);
+        }
+        $dikirim = $query
             ->select([
                 'transaksi.id_transaksi',
                 'agen.name AS nama_agen',
@@ -226,23 +290,32 @@ class ApiAgenTransaksiController extends Controller
         }
     }
     
-    public function transaksi_diterima(){
-        $dikirim = Transaksi::where('status_pengiriman', 'Diterima')
+    public function transaksi_diterima($id_agen = null)
+    {
+        $query = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->where('status_pengiriman', 'Diterima');
+        })
         ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
-        ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
-        ->select([
-            'transaksi.id_transaksi',
-            'agen.name AS nama_agen',
-            'transaksi.tanggal_transaksi',
-            'transaksi.status_pengiriman',
-            'transaksi.resi_transaksi',
-            'gas.name_gas AS nama_gas',
-            'gas.jenis_gas',
-            'transaksi.jumlah_transaksi',
-            'transaksi.total_transaksi'
-        ])->get();
+        ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
 
-        if ($dikirim->isEmpty()) {
+        // Menambahkan kondisi berdasarkan id_agen jika disediakan
+        if ($id_agen !== null) {
+            $query->where('agen.id_agen', $id_agen);
+        }
+        $diterima = $query
+            ->select([
+                'transaksi.id_transaksi',
+                'agen.name AS nama_agen',
+                'transaksi.tanggal_transaksi',
+                'transaksi.status_pengiriman',
+                'transaksi.resi_transaksi',
+                'gas.name_gas AS nama_gas',
+                'gas.jenis_gas',
+                'transaksi.jumlah_transaksi',
+                'transaksi.total_transaksi'
+            ])->get();
+
+        if ($diterima->isEmpty()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Data tidak ditemukan',
@@ -252,7 +325,7 @@ class ApiAgenTransaksiController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Data ditemukan',
-                'datauser' => $dikirim,
+                'datauser' => $diterima,
             ], 200); 
         }
 
