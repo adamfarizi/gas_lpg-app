@@ -25,6 +25,7 @@ class ApiAgenTransaksiController extends Controller
     public function index_transaksi($id_transaksi = null)
         {
             $query = Transaksi::join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+                ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
                 ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
 
             // Menambahkan kondisi berdasarkan id_transaksi jika disediakan
@@ -36,11 +37,13 @@ class ApiAgenTransaksiController extends Controller
                 ->select([
                     'transaksi.id_transaksi',
                     'agen.name AS nama_agen',
+                    'agen.koordinat AS koordinat',
                     'transaksi.tanggal_transaksi',
                     'transaksi.status_pengiriman',
                     'transaksi.resi_transaksi',
                     'gas.name_gas AS nama_gas',
                     'gas.jenis_gas',
+                    'pembayaran.status_pembayaran',
                     'transaksi.jumlah_transaksi',
                     'transaksi.total_transaksi'
                 ])->get();
@@ -117,19 +120,20 @@ class ApiAgenTransaksiController extends Controller
     }
 
     public function transaksi_belum_bayar($id_agen = null)
-    {
-        $query = Transaksi::whereHas('pembayaran', function ($query) {
-            $query->where('status_pembayaran', 'Belum Bayar');
-        })
-        ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
-        ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
-
-        // Menambahkan kondisi berdasarkan id_agen jika disediakan
-        if ($id_agen !== null) {
-            $query->where('agen.id_agen', $id_agen);
-        }
-
-        $belum_bayar = $query
+{
+    $query = Transaksi::whereHas('pembayaran', function ($query) {
+        $query->where('status_pembayaran', 'Belum Bayar');
+    })
+    ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+    ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
+    ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
+    
+    // Menambahkan kondisi berdasarkan id_agen jika disediakan
+    if ($id_agen !== null) {
+        $query->where('agen.id_agen', $id_agen);
+    }
+    
+    $belum_bayar = $query
         ->select([
             'transaksi.id_transaksi',
             'agen.name AS nama_agen',
@@ -139,23 +143,25 @@ class ApiAgenTransaksiController extends Controller
             'transaksi.resi_transaksi',
             'gas.name_gas AS nama_gas',
             'gas.jenis_gas',
+            'pembayaran.status_pembayaran',
             'transaksi.jumlah_transaksi',
             'transaksi.total_transaksi'
-        ])->get();
+        ])->get();        
 
-        if ($belum_bayar->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Data tidak ditemukan',
-            ], 200);
-        } else {
-            return response()->json([
-                'success' => true,
-                'message' => 'Data ditemukan',
-                'datauser' => $belum_bayar,
-            ], 200);
-        }
+    if ($belum_bayar->isEmpty()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Data tidak ditemukan',
+        ], 200);
+    } else {
+        return response()->json([
+            'success' => true,
+            'message' => 'Data ditemukan',
+            'datauser' => $belum_bayar,
+        ], 200);
     }
+}
+
 
 
     public function update_pembayaran($id, Request $request) {
@@ -218,6 +224,7 @@ class ApiAgenTransaksiController extends Controller
             $query->where('status_pembayaran', 'Sudah Bayar');
         })
         ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+        ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
         ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
 
         // Menambahkan kondisi berdasarkan id_agen jika disediakan
@@ -229,12 +236,12 @@ class ApiAgenTransaksiController extends Controller
         ->select([
             'transaksi.id_transaksi',
             'agen.name AS nama_agen',
-            'agen.koordinat AS koordinat',
             'transaksi.tanggal_transaksi',
             'transaksi.status_pengiriman',
             'transaksi.resi_transaksi',
             'gas.name_gas AS nama_gas',
             'gas.jenis_gas',
+            'pembayaran.status_pembayaran',
             'transaksi.jumlah_transaksi',
             'transaksi.total_transaksi'
         ])->get();
@@ -259,6 +266,7 @@ class ApiAgenTransaksiController extends Controller
             $query->where('status_pengiriman', 'Dikirim');
         })
         ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+        ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
         ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
 
         // Menambahkan kondisi berdasarkan id_agen jika disediakan
@@ -269,12 +277,12 @@ class ApiAgenTransaksiController extends Controller
             ->select([
                 'transaksi.id_transaksi',
                 'agen.name AS nama_agen',
-                'agen.koordinat AS koordinat',
                 'transaksi.tanggal_transaksi',
                 'transaksi.status_pengiriman',
                 'transaksi.resi_transaksi',
                 'gas.name_gas AS nama_gas',
                 'gas.jenis_gas',
+                'pembayaran.status_pembayaran',
                 'transaksi.jumlah_transaksi',
                 'transaksi.total_transaksi'
             ])->get();
@@ -299,6 +307,7 @@ class ApiAgenTransaksiController extends Controller
             $query->where('status_pengiriman', 'Diterima');
         })
         ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
+        ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
         ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
 
         // Menambahkan kondisi berdasarkan id_agen jika disediakan
@@ -309,12 +318,12 @@ class ApiAgenTransaksiController extends Controller
             ->select([
                 'transaksi.id_transaksi',
                 'agen.name AS nama_agen',
-                'agen.koordinat AS koordinat',
                 'transaksi.tanggal_transaksi',
                 'transaksi.status_pengiriman',
                 'transaksi.resi_transaksi',
                 'gas.name_gas AS nama_gas',
                 'gas.jenis_gas',
+                'pembayaran.status_pembayaran',
                 'transaksi.jumlah_transaksi',
                 'transaksi.total_transaksi'
             ])->get();

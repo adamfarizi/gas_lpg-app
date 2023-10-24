@@ -419,7 +419,7 @@
                                                     @if ($transaksi->pembayaran->bukti_pembayaran === null)
                                                         Belum Bayar
                                                     @else
-                                                        {{ $transaksi->pembayaran->bukti_pembayaran }}
+                                                        <img src="{{ asset('public/uploads' . $transaksi->pembayaran->bukti_pembayaran) }}" alt="Bukti Pembayaran">
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-sm text-center">
