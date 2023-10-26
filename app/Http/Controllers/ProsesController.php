@@ -30,7 +30,7 @@ class ProsesController extends Controller
         $pembayaran = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Belum Bayar')
             ->orWhere('status_pembayaran', 'Proses');        
-        })->get();
+        })->orderBy('created_at', 'desc')->get();
         
         // Tabel pesanan di proses
         $pengirimans = Pengiriman::all();
@@ -38,13 +38,13 @@ class ProsesController extends Controller
             foreach ($pengirimans as $pengiriman) {
                 $id_pengiriman = $pengiriman->id_pengiriman;
                 $transaksi_proses = Transaksi::where('id_pengiriman', $id_pengiriman)->get();            
-                $proses = Pengiriman::whereNull('id_kurir')->whereNull('id_truck')->get();
+                $proses = Pengiriman::whereNull('id_kurir')->whereNull('id_truck')->orderBy('created_at', 'desc')->get();
             }
         }
         else{
             $proses = Transaksi::whereHas('pembayaran', function ($query) {
                 $query->where('status_pembayaran', 'Sudah Bayar');
-            })->get();
+            })->orderBy('created_at', 'desc')->get();
             $transaksi_proses = null;
         }
         $kurirs = Kurir::where('status', 'tersedia')->pluck('name');
@@ -52,10 +52,10 @@ class ProsesController extends Controller
 
         
         // Tabel pesanan dikirim
-        $dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->get();
+        $dikirim = Transaksi::where('status_pengiriman', 'Dikirim')->orderBy('created_at', 'desc')->get();
 
         // Tabel pesanan diterima
-        $diterima = Transaksi::where('status_pengiriman', 'Diterima')->get();
+        $diterima = Transaksi::where('status_pengiriman', 'Diterima')->orderBy('created_at', 'desc')->get();
         $lokasis = Lokasi::all();
 
         return view('auth.proses.proses',[

@@ -860,10 +860,8 @@
                                                             {{ $transaksi->jumlah_transaksi }}</span>
                                                         <br><span class="text-secondary text-xs">Alamat :
                                                             {{ $transaksi->agen->alamat }}</span>
-                                                    </li>
-                                                    <li>
-                                                        <p>Bukti Pembayaran:</p>
-                                                        <img src="{{ asset('img/BuktiPembayaran/' .$transaksi->pembayaran->bukti_pembayaran) }}" class="w-50" alt="Bukti Pembayaran">
+                                                        <br><span class="text-secondary text-xs">Bukti Pembayaran:</span>
+                                                        <br><img src="{{ asset('img/BuktiPembayaran/' .$transaksi->pembayaran->bukti_pembayaran) }}" class="w-50" alt="Bukti Pembayaran">
                                                     </li>
                                                 </ul>
                                             @endif

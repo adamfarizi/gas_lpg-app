@@ -100,7 +100,7 @@ class DashboardController extends Controller
             $query->whereIn('status_pembayaran', ['Proses', 'Sudah Bayar']);
         })->sum('total_transaksi');
 
-        $transaksis = Transaksi::all();
+        $transaksis = Transaksi::orderBy('created_at', 'desc')->get();
         foreach ($transaksis as $transaksi) {
             // Ambil data agen berdasarkan id_agen
             $agen = Agen::find($transaksi->id_agen);
