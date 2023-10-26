@@ -35,6 +35,7 @@ Route::middleware(['auth:sanctum', 'check.agen'])->group(function () {
     Route::get('/agen/transaksi/proses/{id}', [ApiAgenTransaksiController::class, 'transaksi_proses']);
     Route::get('/agen/transaksi/dikirim/{id}', [ApiAgenTransaksiController::class, 'transaksi_dikirim']);
     Route::get('/agen/transaksi/diterima/{id}', [ApiAgenTransaksiController::class, 'transaksi_diterima']);
+    Route::get('/agen/transaksi/cek_lokasi/{id}', [ApiAgenTransaksiController::class, 'cek_lokasi']);
     Route::get('/agen/{id}',[ApiAgenController::class, 'edit_index']);
     Route::put('/agen/update/{id}',[ApiAgenController::class, 'edit_action']);
     Route::put('/agen/update/name/{id}',[ApiAgenController::class, 'edit_name']);
@@ -52,6 +53,8 @@ Route::middleware(['auth:sanctum', 'check.kurir'])->group(function () {
     Route::apiResource('/data/kurir', App\Http\Controllers\Api\ApiKurirController::class);
     Route::post('/kurir/logout', [ApiKurirController::class, 'logout_action']);
     Route::get('/kurir/{id}',[ApiKurirController::class, 'edit_index']);
+    Route::post('/kurir/lokasi',[ApiKurirController::class, 'update_lokasi']);
+    Route::post('/kurir/addlokasi',[ApiKurirController::class, 'createLocation']);
     Route::get('/kurir/pesanan/{id}',[ApiKurirTransaksiController::class, 'pesanan_dikirim']);
     Route::put('/kurir/update/{id}',[ApiKurirController::class, 'edit_action']);
     Route::put('/kurir/update/name/{id}',[ApiKurirController::class, 'edit_name']);

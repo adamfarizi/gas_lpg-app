@@ -419,7 +419,12 @@
                                                     @if ($transaksi->pembayaran->bukti_pembayaran === null)
                                                         Belum Bayar
                                                     @else
-                                                        <img src="{{ asset('public/uploads' . $transaksi->pembayaran->bukti_pembayaran) }}" alt="Bukti Pembayaran">
+                                                    <img src="{{ asset('img/BuktiPembayaran/' . $transaksi->pembayaran->bukti_pembayaran) }}"
+                                                    class="w-25 bukti-pembayaran-img"
+                                                    alt="Bukti Pembayaran"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalBuktiPembayaran"
+                                                    data-image-src="{{ asset('img/BuktiPembayaran/' . $transaksi->pembayaran->bukti_pembayaran) }}">            
                                                     @endif
                                                 </td>
                                                 <td class="align-middle text-sm text-center">
@@ -767,6 +772,37 @@
     </div>
     </div>
 
+    <!-- Modal Bukti Pembayaran -->
+    <div class="modal fade" id="modalBuktiPembayaran" tabindex="-1" role="dialog" aria-labelledby="modal-title-default" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title text-uppercase" id="modal-title-default">Rincian Bukti Pembayaran</h6>
+                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="max-height:500px; overflow-y: auto;">
+                    <div class="modal-image-container">
+                        <img src="" id="buktiPembayaranImage" class="w-100" alt="Bukti Pembayaran">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Ketika elemen img di dalam class .bukti-pembayaran-img diklik
+            $('.bukti-pembayaran-img').click(function () {
+                var imgSrc = $(this).data('image-src');
+                $('#buktiPembayaranImage').attr('src', imgSrc);
+            });
+        });
+    </script>
 
     <!--Modal More Info-->
     @foreach ($proses as $pengiriman)
@@ -824,6 +860,10 @@
                                                             {{ $transaksi->jumlah_transaksi }}</span>
                                                         <br><span class="text-secondary text-xs">Alamat :
                                                             {{ $transaksi->agen->alamat }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <p>Bukti Pembayaran:</p>
+                                                        <img src="{{ asset('img/BuktiPembayaran/' .$transaksi->pembayaran->bukti_pembayaran) }}" class="w-50" alt="Bukti Pembayaran">
                                                     </li>
                                                 </ul>
                                             @endif
