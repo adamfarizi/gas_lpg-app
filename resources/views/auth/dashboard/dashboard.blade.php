@@ -478,6 +478,7 @@
                     aria-labelledby="modal-default{{ $transaksi->id_transaksi }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
+                            <img class="ms-2 position-absolute top-50 start-50 translate-middle d-sm-block" src="{{ asset('assets/img/local/logo7.png') }}" height="150" alt="main_logo" style="z-index: 0; opacity: 0.3; display:none;">
                             <div class="modal-header">
                                 <h6 class="modal-title text-uppercase" id="modal-title-default">Rincian Pesanan</h6>
                                 <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
