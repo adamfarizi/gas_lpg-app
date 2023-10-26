@@ -460,46 +460,9 @@
                                         Informasi</th>
                                 </tr>
                             </thead>
-                            @foreach ($transaksis as $transaksi)
-                                <tbody id="pesananSelesai_{{ $transaksi->id_transaksi }}">
-                                    <tr class="text-dark">
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->resi_transaksi }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->tanggal_transaksi }}
-                                        </td>
-                                        <td class="align-middle text-sm text-center">
-                                            {{ $transaksi->agen->name }}</td>
-                                        <td class="align-middle text-sm text-center">{{ $transaksi->jumlah_transaksi }}
-                                            Gas</td>
-                                        <td class="align-middle text-sm "style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">{{ $transaksi->agen->alamat }}</td>
-                                        <td class="align-middle text-sm text-center">
-                                            @if ($transaksi->status_pengiriman === 'Belum Dikirim')
-                                                @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
-                                                    <span class="badge badge-sm bg-gradient-danger mb-3">Belum Bayar</span>
-                                                @elseif($transaksi->pembayaran->status_pembayaran === 'Proses')
-                                                    <span class="badge badge-sm bg-gradient-warning mb-3">Proses
-                                                        Bayar</span>
-                                                @else
-                                                    <span class="badge badge-sm bg-gradient-warning mb-3">Belum
-                                                        Dikirim</span>
-                                                @endif
-                                            @elseif($transaksi->status_pengiriman === 'Dikirim')
-                                                <span class="badge badge-sm bg-gradient-info mb-3"
-                                                    style="width: 100px;">Dikirim</span>
-                                            @else
-                                                <span class="badge badge-sm bg-gradient-success mb-3"
-                                                    style="width: 100px;">Diterima</span>
-                                            @endif
-                                        </td>
-                                        <td class="align-middle text-sm  text-center ">
-                                            <a href="#" type="button" data-id="{{ $transaksi->id_transaksi }}"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#more-info{{ $transaksi->id_transaksi }}">
-                                                <p style="text-decoration: underline;">Selengkapnya</p>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            @endforeach
+                            <tbody id="table-body">
+
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -653,6 +616,78 @@
             });
         });
     </script>
+
+    {{-- Data Table --}}
+    <script>    
+        document.addEventListener("DOMContentLoaded", function (event) {
+            Echo.channel('newtran-channel')
+                .listen('newTranEvent', (event) => {
+                    fetchRealTimeData();
+                });
+        });
+
+        function updateTable(transaksis) {    
+            var tableBody = $('#table-body');
+            tableBody.empty();
+    
+            transaksis.forEach(function(transaksi) {
+                var statusBadge = getStatusBadge(transaksi);
+    
+                var row = `<tr class="text-dark">
+                    <td class="align-middle text-sm text-center">${transaksi.resi_transaksi}</td>
+                    <td class="align-middle text-sm text-center">${transaksi.tanggal_transaksi}</td>
+                    <td class="align-middle text-sm text-center">${transaksi.agen_name}</td>
+                    <td class="align-middle text-sm text-center">${transaksi.jumlah_transaksi} Gas</td>
+                    <td class="align-middle text-sm" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">${transaksi.agen_alamat}</td>
+                    <td class="align-middle text-sm text-center">${statusBadge}</td>
+                    <td class="align-middle text-sm text-center">
+                        <a href="#" type="button" data-id="${transaksi.id_transaksi}" data-bs-toggle="modal" data-bs-target="#more-info${transaksi.id_transaksi}">
+                            <p style="text-decoration: underline;">Selengkapnya</p>
+                        </a>
+                    </td>
+                </tr>`;
+                tableBody.append(row);
+            });
+        }
+    
+        function getStatusBadge(transaksi) {
+            if (transaksi.status_pengiriman === 'Belum Dikirim') {
+                if (transaksi.status_pembayaran === 'Belum Bayar') {
+                    return '<span class="badge badge-sm bg-gradient-danger mb-3">Belum Bayar</span>';
+                } else if (transaksi.status_pembayaran === 'Proses') {
+                    return '<span class="badge badge-sm bg-gradient-warning mb-3">Proses Bayar</span>';
+                } else {
+                    return '<span class="badge badge-sm bg-gradient-warning mb-3">Belum Dikirim</span>';
+                }
+            } else if (transaksi.status_pengiriman === 'Dikirim') {
+                return '<span class="badge badge-sm bg-gradient-info mb-3" style="width: 100px;">Dikirim</span>';
+            } else {
+                return '<span class="badge badge-sm bg-gradient-success mb-3" style="width: 100px;">Diterima</span>';
+            }
+        }
+    
+        function fetchRealTimeData() {
+            $.ajax({
+                url: '/admin/dashboard/realtimeData', // Sesuaikan dengan rute yang Anda definisikan
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    // Tangani data yang diterima di sini
+                    var transaksis = response.transaksis;
+                    updateTable(transaksis); // Panggil fungsi untuk memperbarui tabel
+                },
+                error: function (error) {
+                    console.error('Gagal mengambil data:', error);
+                }
+            });
+        }
+    
+        // Panggil fungsi fetchRealTimeData untuk memuat data saat halaman dimuat
+        $(document).ready(function () {
+            fetchRealTimeData();
+        });
+
+    </script>    
 
     {{-- Data  --}}
     <script>

@@ -144,7 +144,7 @@ class ApiAgenTransaksiController extends Controller
             'id_pembayaran' => $id_pembayaran_new,
             'id_pengiriman' => null,
         ]);
-
+        
         // Ambil nama agen
         $agen_new = Agen::where('id_agen', $transaksi_new->id_agen)->value('name');
         $transaksi_new = Transaksi::where('id_transaksi', $id_transaksi_new)->first();

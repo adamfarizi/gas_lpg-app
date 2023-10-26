@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Agen;
 use App\Models\Gas;
+use App\Models\Pembayaran;
 use App\Models\Transaksi;
 
 class DashboardController extends Controller
@@ -98,8 +99,22 @@ class DashboardController extends Controller
         $jumlahTransaksiDiterima = Transaksi::whereHas('pembayaran', function ($query) {
             $query->whereIn('status_pembayaran', ['Proses', 'Sudah Bayar']);
         })->sum('total_transaksi');
-    
+
+        $transaksis = Transaksi::all();
+        foreach ($transaksis as $transaksi) {
+            // Ambil data agen berdasarkan id_agen
+            $agen = Agen::find($transaksi->id_agen);
+            $transaksi->agen_name = $agen->name; 
+
+            $alamat = Agen::find($transaksi->id_agen);
+            $transaksi->agen_alamat = $alamat->alamat; 
+
+            $pembayaran = Pembayaran::find($transaksi->id_pembayaran);
+            $transaksi->status_pembayaran = $pembayaran->status_pembayaran; 
+        }
+        
         return response()->json([
+            'transaksis' => $transaksis,
             'total_gas' => $total_gas,
             'pesanan_diproses' => $pesanan_diproses,
             'pesanan_dikirim' => $pesanan_dikirim,

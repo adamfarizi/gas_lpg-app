@@ -1041,6 +1041,7 @@
         }, 1000);
 
     </script>
+    
     {{-- Script update pembayaran --}}
     <script>
         $(document).ready(function() {
@@ -1112,6 +1113,14 @@
                     toggleAllTables(tableType);
                 }
             }
+        });
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            Echo.channel('newtran-channel')
+                .listen('newTranEvent', (event) => {
+
+                    fetchRealTimeData();
+                });
         });
     </script>
 

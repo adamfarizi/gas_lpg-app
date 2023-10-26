@@ -90,7 +90,13 @@ class ProsesController extends Controller
         $pesanan_diproses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
         $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
 
+        $pembayaran = Transaksi::whereHas('pembayaran', function ($query) {
+            $query->where('status_pembayaran', 'Belum Bayar')
+            ->orWhere('status_pembayaran', 'Proses');        
+        })->get();
+
         return response()->json([
+            'pembayaran' => $pembayaran,
             'total_gas' => $total_gas,
             'kurir_tersedia' => $kurir_tersedia,
             'pesanan_diproses' => $pesanan_diproses,

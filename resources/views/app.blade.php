@@ -30,7 +30,7 @@
         @yield('sidebar')
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
             @if (Auth::check()) <!-- Memeriksa apakah pengguna sudah login -->
-                <div class="position-absolute top-2 end-2 d-flex flex-column" style="z-index: 1;">
+                <div class="position-fixed top-2 end-2 d-flex flex-column" style="z-index: 100;">
                     <div class="alert alert-primary alert-dismissible fade show" role="alert" style="min-width: 300px;  display: none;" id="toast_transaksi">
                         <span class="alert-icon me-3">
                             <i class="fa fa-solid fa-check-to-slot" style="color: #ffffff;"></i>
@@ -137,7 +137,6 @@
             document.addEventListener("DOMContentLoaded", function(event) { 
                 Echo.channel(`newtran-channel`)
                 .listen('newTranEvent', (e) => {
-                    console.log(e);
                     // Ambil elemen pesan dan elemen agen name
                     const toast_transaksi = document.getElementById('toast_transaksi');
                     const agen_name = document.getElementById('agen_name');
@@ -157,7 +156,6 @@
             document.addEventListener("DOMContentLoaded", function(event) { 
                 Echo.channel(`updateTran-channel`)
                 .listen('updateTranEvent', (e) => {
-                    console.log(e);
                     // Ambil elemen pesan dan elemen agen name
                     const toast_pembayaran = document.getElementById('toast_pembayaran');
                     const agen_name2 = document.getElementById('agen_name2');
