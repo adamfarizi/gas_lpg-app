@@ -969,11 +969,9 @@
                 }
             });
         }
-
-        // Set interval dan simpan ID interval
-        setInterval(function() {
-            updateData();
-        }, 1000);
+        $(document).ready(function () {
+            updateData() ;
+        });
 
     </script>
 
@@ -1218,6 +1216,7 @@
                         location.reload();                    
                     }
                     fetchRealTimeData();
+                    updateData() 
                 });
         });
 
@@ -1229,6 +1228,7 @@
                         location.reload();                    
                     }
                     fetchRealTimeData();
+                    updateData() 
                 });
         });
     </script>

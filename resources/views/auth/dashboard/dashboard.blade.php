@@ -624,6 +624,15 @@
             Echo.channel('newtran-channel')
                 .listen('newTranEvent', (event) => {
                     fetchRealTimeData();
+                    updateData() 
+                });
+        });
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            Echo.channel('updateTran-channel')
+                .listen('updateTranEvent', (event) => {
+                    fetchRealTimeData();
+                    updateData() 
                 });
         });
 
@@ -734,11 +743,9 @@
             });
         }
 
-        // Set interval dan simpan ID interval
-        setInterval(function() {
-            updateData();
-        }, 1000);
-
+        $(document).ready(function () {
+            updateData() ;
+        });
     </script>
 
     <!--   Chart 1   -->
@@ -844,8 +851,7 @@
         document.addEventListener("DOMContentLoaded", function(event) { 
             Echo.channel(`chart1-channel`)
             .listen('chart1Event', (e) => {
-                console.log(e);
-
+                updateData();
                 if (chart1) {
                     const labelIndex = chart1.data.labels.indexOf(e.tanggal_transaksi);
 
@@ -990,7 +996,7 @@
         document.addEventListener("DOMContentLoaded", function(event) { 
             Echo.channel(`chart2-channel`)
             .listen('chart2Event', (e) => {
-                console.log(e);
+                updateData();
                 if (chart2) {
                     const labelIndex = chart2.data.labels.indexOf(e.bulan_transaksi);
 
