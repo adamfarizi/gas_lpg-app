@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Transaksi;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class TransaksiSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class TransaksiSeeder extends Seeder
         // Data contoh untuk model Transaksi
         $data = [
             'tanggal_transaksi' => Carbon::now(),
-            'resi_transaksi' => 'GTK-000001', // Nomor resi transaksi sesuai kebutuhan Anda
+            'resi_transaksi' => 'GTK-' . now()->format('YmdHis') . Str::random(2), // Nomor resi transaksi sesuai kebutuhan Anda
             'jumlah_transaksi' => 5, // Jumlah gas yang dibeli sesuai kebutuhan Anda
             'total_transaksi' => 150000, // Total harga transaksi sesuai kebutuhan Anda
             'status_pengiriman' => 'Belum Dikirim',

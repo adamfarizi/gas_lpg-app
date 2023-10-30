@@ -311,7 +311,8 @@
         </div>
     </div>
     <div class="row">
-        {{-- Tabel konfirmasi pembayaran --}}
+        {{-- Tabe
+            l konfirmasi pembayaran --}}
         <div class="container mt-5">
             <div class="card bg-white">
                 <div class="card-header pb-0">
@@ -369,76 +370,22 @@
                                     </tr>
                                 </thead>
                                 @foreach ($pembayaran as $transaksi)
-                                    <form action="{{ route('update_pembayaran', $transaksi->id_transaksi) }}"
-                                        method="POST" id="formUpdatePembayaran_{{ $transaksi->id_transaksi }}">
+                                    <form action="{{ route('update_pembayaran') }}" method="POST"">
                                         @csrf
-                                        @method('PUT')
+                                        <input type="hidden" name="id_transaksi[]" value="{{ $transaksi->id_transaksi }}">
                                         <tbody id="konfirmasiPembayaran_{{ $transaksi->id_transaksi }}"
                                             style="display: none;">
-                                            <tr class="text-dark">
-                                                <td class="align-middle text-sm text-center">
-                                                    @if ($transaksi->pembayaran->status_pembayaran === 'Proses')
-                                                        <div class="d-flex ps-3">
-                                                            <div class="form-check pe-2">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="id_transaksi[]"
-                                                                    value="{{ $transaksi->id_transaksi }}"
-                                                                    id="checkbox_{{ $transaksi->id_transaksi }}"
-                                                                    data-jumlah-gas="{{ $transaksi->jumlah_transaksi }}">
-                                                            </div>
-                                                            <div style="height: 100%; line-height: 25px;">
-                                                                {{ $transaksi->resi_transaksi }}
-                                                            </div>
-                                                        </div>
-                                                    @else
-                                                        <div class="d-flex ps-3">
-                                                            <div style="height: 100%; line-height: 25px;">
-                                                                {{ $transaksi->resi_transaksi }}
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                </td>
-                                                <td class="align-middle text-sm text-center">
-                                                    {{ $transaksi->tanggal_transaksi }}</td>
-                                                <td class="align-middle text-sm text-center">
-                                                    {{ $transaksi->agen->name }}</td>
-                                                <td class="align-middle text-sm text-center"
-                                                    data-jumlah-gas="{{ $transaksi->jumlah_transaksi }}">
-                                                    {{ $transaksi->jumlah_transaksi }} Gas</td>
-                                                <td class="align-middle text-sm text-center">
-                                                    @if ($transaksi->pembayaran->tanggal_pembayaran === null)
-                                                        Belum Bayar
-                                                    @else
-                                                        <span>Tanggal :
-                                                            {{ Carbon\Carbon::parse($transaksi->pembayaran->tanggal_pembayaran)->format('d-m-Y') }}</span>
-                                                        <br><span>Pukul :
-                                                            {{ Carbon\Carbon::parse($transaksi->pembayaran->tanggal_pembayaran)->format('H:i') }}</span>                                                                                                      
-                                                    @endif
-                                                </td>
-                                                <td class="align-middle text-sm text-center">
-                                                    @if ($transaksi->pembayaran->bukti_pembayaran === null)
-                                                        Belum Bayar
-                                                    @else
-                                                    <img src="{{ asset('img/BuktiPembayaran/' . $transaksi->pembayaran->bukti_pembayaran) }}"
-                                                    class="w-25 bukti-pembayaran-img"
-                                                    alt="Bukti Pembayaran"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modalBuktiPembayaran"
-                                                    data-image-src="{{ asset('img/BuktiPembayaran/' . $transaksi->pembayaran->bukti_pembayaran) }}">            
-                                                    @endif
-                                                </td>
-                                                <td class="align-middle text-sm text-center">
-                                                    @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
-                                                        <span class="badge badge-sm bg-gradient-danger">Belum
-                                                            Dibayar</span>
-                                                    @elseif ($transaksi->pembayaran->status_pembayaran === 'Proses')
-                                                        <span class="badge badge-sm bg-gradient-info">Konfirmasi</span>
-                                                    @else
-                                                        <span class="badge badge-sm bg-gradient-success">Dibayar</span>
-                                                    @endif
-                                                </td>
+                                            <tr style="display: none">
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                             </tr>
                                         </tbody>
+                                    </form>
                                 @endforeach
                             </table>
                         </div>
@@ -794,16 +741,6 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            // Ketika elemen img di dalam class .bukti-pembayaran-img diklik
-            $('.bukti-pembayaran-img').click(function () {
-                var imgSrc = $(this).data('image-src');
-                $('#buktiPembayaranImage').attr('src', imgSrc);
-            });
-        });
-    </script>
-
     <!--Modal More Info-->
     @foreach ($proses as $pengiriman)
         @php
@@ -1039,25 +976,185 @@
         }, 1000);
 
     </script>
-    
-    {{-- Script update pembayaran --}}
+
+    {{-- Data table konfirmasi pembayaran --}}
     <script>
-        $(document).ready(function() {
-            // Mengaktifkan/menonaktifkan tombol "Kirim" berdasarkan status checkbox
-            $('input[type="checkbox"]').change(function() {
+        // Fungsi untuk mengubah data ke dalam tabel
+        function updateTable(pembayarans) {
+            var tableBody = $('#konfirmasiPembayaran_{{ $transaksi->id_transaksi }}');
+            if (tableBody.children().length > 0) {
+                tableBody.empty();
+            }
+            pembayarans.forEach(function(pembayaran) {
+                    var statusBadge = getStatusBadge(pembayaran);
+
+                    var row = '<tr class="text-dark">' +
+                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + generatePaymentCheckbox(pembayaran) + '</td>' +
+                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + pembayaran.tanggal_transaksi + '</td>' +
+                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + pembayaran.agen_name + '</td>' +
+                        '<td class="align-middle text-sm text-center" data-jumlah-gas="${pembayaran.jumlah_transaksi}" style="border-bottom: none;">' + pembayaran.jumlah_transaksi + ' Gas</td>' +
+                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + formatDateTime(pembayaran.tanggal_pembayaran) + '</td>' +
+                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' +
+                            ((pembayaran.bukti_pembayaran === null) ?
+                            'Belum Bayar' :
+                            `<img src="${generateImageUrl(pembayaran.bukti_pembayaran)}" ` +
+                                `class="w-25 bukti-pembayaran-img"`+
+                                `alt="Bukti Pembayaran"`+
+                                `data-bs-toggle="modal"`+
+                                `data-bs-target="#modalBuktiPembayaran"`+
+                                `data-image-src="${generateImageUrl(pembayaran.bukti_pembayaran)}">`) + 
+                        '</td>' +
+                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + statusBadge + '</td>' +
+                    '</tr>';
+
+
+                tableBody.append(row);
+            });
+        }
+        
+        function generatePaymentCheckbox(pembayaran) {
+            if (pembayaran.status_pembayaran === 'Proses') {
+                return `<div class="d-flex ps-3">
+                    <div class="form-check pe-2">
+                        <input class="form-check-input" type="checkbox"
+                            name="id_transaksi[]"
+                            value="${pembayaran.id_transaksi}"
+                            id="checkbox_${pembayaran.id_transaksi}"
+                            data-id-transaksi="${pembayaran.id_transaksi}"
+                            data-jumlah-gas="${pembayaran.jumlah_transaksi}"
+                            ">
+                    </div>
+                    <div style="height: 100%; line-height: 25px;">
+                        ${pembayaran.resi_transaksi}
+                    </div>
+                </div>`;
+            } else {
+                return `<div class="d-flex ps-3">
+                    <div style="height: 100%; line-height: 25px;">
+                        ${pembayaran.resi_transaksi}
+                    </div>
+                </div>`;
+            }
+        }
+
+        function getStatusBadge(pembayaran) {
+            if (pembayaran.status_pembayaran === 'Belum Bayar') {
+                return '<span class="badge badge-sm bg-gradient-danger">Belum Dibayar</span>';
+            } else if (pembayaran.status_pembayaran === 'Proses') {
+                return '<span class="badge badge-sm bg-gradient-info">Konfirmasi</span>';
+            } else {
+                return '<span class="badge badge-sm bg-gradient-success">Dibayar</span>';
+            }
+        }
+
+        function formatDateTime(dateTime) {
+            if (dateTime === null) {
+                return 'Belum Bayar';
+            } else {
+                var formattedDate = moment(dateTime).format('DD-MM-YYYY');
+                var formattedTime = moment(dateTime).format('HH:mm');
+                return 'Tanggal: ' + formattedDate + '<br>' + 'Pukul: ' + formattedTime;
+            }
+        }
+
+        function generateImageUrl(imageName) {
+            return '/img/BuktiPembayaran/' + imageName;
+        }
+
+        function generatePaymentImage(pembayaran) {
+            if (pembayaran.bukti_pembayaran === null) {
+                return 'Belum Bayar';
+            } else {
+                return `<img src="${asset('img/BuktiPembayaran/' + pembayaran.bukti_pembayaran)}" 
+                    class="w-25 bukti-pembayaran-img"
+                    alt="Bukti Pembayaran"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalBuktiPembayaran"
+                    data-image-src="${asset('img/BuktiPembayaran/' + pembayaran.bukti_pembayaran)}">`;
+            }
+        }
+
+        function fetchRealTimeData() {
+            $.ajax({
+                url: '/admin/proses/realtimeData', // Sesuaikan dengan URL Anda
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    updateTable(data.pembayarans); // Panggil fungsi updateTable dengan data pembayaran
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            fetchRealTimeData();
+
+            $(document).on('change', 'input[type="checkbox"]', function() {
                 var adaCheckboxDicentang = $('input[type="checkbox"]:checked').length > 0;
+                idCheckboxDicentang = [];
+                
+                // Loop melalui checkbox yang dicentang dan tambahkan ID mereka ke dalam array
+                $('input[type="checkbox"]:checked').each(function() {
+                    idCheckboxDicentang.push($(this).data("id-transaksi"));
+                });
+                
+                // Menampilkan ID yang dicentang di konsol
+                console.log("ID yang dicentang: " + idCheckboxDicentang);
                 $('#btnKirimSemua').prop('disabled', !adaCheckboxDicentang);
+
+                // Ambil ID transaksi dari kotak centang yang dicentang
+                var id_transaksi = $(this).data("id-transaksi");
+                // Isi input tersembunyi dengan ID transaksi yang sesuai
+                $('#formUpdatePembayaran_' + id_transaksi + ' input[name="id_transaksi"]').val(id_transaksi);
             });
 
-            // Menangani pengiriman formulir ketika tombol "Kirim" ditekan
-            $('#btnKirimSemua').click(function() {
-                // Menggunakan $.each untuk mengirim formulir dengan ID yang sesuai
-                $.each($('input[type="checkbox"]:checked'), function() {
-                    var id_transaksi = $(this).val();
-                    $('#formUpdatePembayaran_' + id_transaksi).submit();
+            var selectedIds = [];
+            $(document).on('click', '#btnKirimSemua', function() {
+                var checkboxes = $('input[type="checkbox"]:checked');
+                checkboxes.each(function() {
+                    var id_transaksi = $(this).data("id-transaksi");
+                    selectedIds.push(id_transaksi); // Tambahkan ID ke dalam array
+                });
+                console.log("ID yang dikirim: " + selectedIds);
+                $.ajax({
+                    type: 'POST',
+                    url: '/admin/proses/update_pembayaran', // Ganti dengan URL yang sesuai
+                    data: {
+                        id_transaksi: selectedIds, // Mengirim array ID
+                        _token: $('meta[name="csrf-token"]').attr('content') // Token CSRF
+                    },
+                    success: function(response) {
+                        // Proses respons dari server jika diperlukan
+                        location.reload();                    
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
                 });
             });
         });
+
+    </script>
+
+    {{-- Modal Image --}}
+    <script>
+        // Menambahkan event click pada gambar bukti pembayaran
+        $(document).on("click", ".bukti-pembayaran-img", function () {
+            var imageUrl = $(this).data("image-src");
+            $("#buktiPembayaranImage").attr("src", imageUrl);
+        });
+
+        // Menutup modal dan menghapus gambar saat modal ditutup
+        $('#modalBuktiPembayaran').on('hidden.bs.modal', function () {
+            $("#buktiPembayaranImage").attr("src", "");
+        });
+    </script>
+    
+    {{-- Script update pembayaran --}}
+    <script>
+
     </script>
 
     {{-- Script show hide table --}}
@@ -1116,7 +1213,21 @@
         document.addEventListener("DOMContentLoaded", function (event) {
             Echo.channel('newtran-channel')
                 .listen('newTranEvent', (event) => {
+                    var tableBody = $('#konfirmasiPembayaran_{{ $transaksi->id_transaksi }}');
+                    if (tableBody.children().length == 0) {
+                        location.reload();                    
+                    }
+                    fetchRealTimeData();
+                });
+        });
 
+        document.addEventListener("DOMContentLoaded", function (event) {
+            Echo.channel('updateTran-channel')
+                .listen('updateTranEvent', (event) => {
+                    var tableBody = $('#konfirmasiPembayaran_{{ $transaksi->id_transaksi }}');
+                    if (tableBody.children().length == 0) {
+                        location.reload();                    
+                    }
                     fetchRealTimeData();
                 });
         });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Gas;
@@ -12,6 +13,7 @@ use App\Models\Lokasi;
 use App\Models\Pengiriman;
 use App\Models\Truck;
 use App\Models\User;
+use Illuminate\Support\Str;
 
 class ProsesController extends Controller
 {
@@ -90,13 +92,26 @@ class ProsesController extends Controller
         $pesanan_diproses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
         $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
 
-        $pembayaran = Transaksi::whereHas('pembayaran', function ($query) {
+        $pembayarans = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Belum Bayar')
             ->orWhere('status_pembayaran', 'Proses');        
-        })->get();
+        })->orderBy('created_at', 'desc')->get();
+        foreach ($pembayarans as $pembayaran) {
+            // Ambil data agen berdasarkan id_agen
+            $agen = Agen::find($pembayaran->id_agen);
+            $pembayaran->agen_name = $agen->name; 
+
+            $alamat = Agen::find($pembayaran->id_agen);
+            $pembayaran->agen_alamat = $alamat->alamat; 
+
+            $pembayaran_new = Pembayaran::find($pembayaran->id_pembayaran);
+            $pembayaran->status_pembayaran = $pembayaran_new->status_pembayaran; 
+            $pembayaran->tanggal_pembayaran = $pembayaran_new->tanggal_pembayaran; 
+            $pembayaran->bukti_pembayaran = $pembayaran_new->bukti_pembayaran; 
+        }
 
         return response()->json([
-            'pembayaran' => $pembayaran,
+            'pembayarans' => $pembayarans,
             'total_gas' => $total_gas,
             'kurir_tersedia' => $kurir_tersedia,
             'pesanan_diproses' => $pesanan_diproses,
@@ -111,7 +126,7 @@ class ProsesController extends Controller
         $transaksis = Transaksi::find($selectedIds);
         // Tambahkan data ke tabel pengiriman
         $id_pengiriman_new = Pengiriman::max('id_pengiriman') + 1;
-        $format_resi = str_pad($id_pengiriman_new, 6, '0', STR_PAD_LEFT);
+        $format_resi = now()->format('YmdHis') . Str::random(2);
         $resi_pengiriman = 'SHIP(GTK)-' . $format_resi;
         Pengiriman::create([
             'id_pengiriman' => $id_pengiriman_new,
@@ -123,7 +138,7 @@ class ProsesController extends Controller
         foreach ($transaksis as $transaksi) {
             // Periksa apakah transaksi ditemukan
             if (!$transaksi) {
-                return redirect()->route('home')->with('error', 'Transaksi tidak ditemukan.');
+                return redirect()->back()->with('error', 'Transaksi tidak ditemukan.');
             }
 
             // Periksa apakah pembayaran ada sebelum mengaksesnya
@@ -144,7 +159,7 @@ class ProsesController extends Controller
                 $gas->stock_gas -= $gas_dibeli;
                 $gas->save();
             } else {
-                return redirect()->back()->with('error', 'Pembayaran tidak ditemukan.');
+                return redirect()->back()->with('error','Pembayaran tidak ditemukan');
             }
             // Cek apakah nilai id_pengiriman_new valid
             if ($id_pengiriman_new) {
@@ -152,7 +167,7 @@ class ProsesController extends Controller
                 $transaksi->save();
             } 
         }
-        return redirect()->back()->with('success', 'Status pembayaran berhasil diubah.');
+        return redirect()->back()->with('success', 'Status pembayaran berhasil diubah');  
     }
 
     public function update_dikirim(Request $request, $id_pengiriman,){
