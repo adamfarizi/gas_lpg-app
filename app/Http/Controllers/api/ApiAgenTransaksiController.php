@@ -186,7 +186,9 @@ class ApiAgenTransaksiController extends Controller
                 'pembayaran.status_pembayaran',
                 'transaksi.jumlah_transaksi',
                 'transaksi.total_transaksi'
-            ])->get();
+            ])
+            ->orderBy('transaksi.tanggal_transaksi', 'desc')
+            ->get();
 
         if ($belum_bayar->isEmpty()) {
             return response()->json([
@@ -291,7 +293,9 @@ class ApiAgenTransaksiController extends Controller
                 'gas.jenis_gas',
                 'transaksi.jumlah_transaksi',
                 'transaksi.total_transaksi'
-            ])->get();
+            ])
+            ->orderBy('transaksi.tanggal_transaksi', 'desc')
+            ->get();
 
         if ($proses->isEmpty()) {
             return response()->json([
@@ -314,6 +318,7 @@ class ApiAgenTransaksiController extends Controller
         })
             ->join('agen', 'transaksi.id_agen', '=', 'agen.id_agen')
             ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
+            ->join('pengiriman', 'transaksi.id_pengiriman', '=', 'pengiriman.id_pengiriman')
             ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas');
 
         // Menambahkan kondisi berdasarkan id_agen jika disediakan
@@ -323,6 +328,7 @@ class ApiAgenTransaksiController extends Controller
         $dikirim = $query
             ->select([
                 'transaksi.id_transaksi',
+                'pengiriman.id_kurir',
                 'agen.name AS nama_agen',
                 'transaksi.tanggal_transaksi',
                 'transaksi.status_pengiriman',
@@ -332,7 +338,9 @@ class ApiAgenTransaksiController extends Controller
                 'pembayaran.status_pembayaran',
                 'transaksi.jumlah_transaksi',
                 'transaksi.total_transaksi'
-            ])->get();
+            ])
+            ->orderBy('transaksi.tanggal_transaksi', 'desc')
+            ->get();
 
         if ($dikirim->isEmpty()) {
             return response()->json([
@@ -373,7 +381,9 @@ class ApiAgenTransaksiController extends Controller
                 'pembayaran.status_pembayaran',
                 'transaksi.jumlah_transaksi',
                 'transaksi.total_transaksi'
-            ])->get();
+            ])
+            ->orderBy('transaksi.tanggal_transaksi', 'desc')
+            ->get();
 
         if ($diterima->isEmpty()) {
             return response()->json([

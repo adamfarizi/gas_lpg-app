@@ -67,8 +67,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'role' => $request->role ?? 'kurir',
-                'password' => Hash::make($request->password), 
-                'no_hp' => 'none', 
+                'password' => Hash::make($request->password)
             ]);
         } else {
             // Handle jika role tidak valid
@@ -80,6 +79,4 @@ class UserController extends Controller
         return redirect('admin/user')->with('success', 'Account has been created!');
         
     }
-    
-
 }
