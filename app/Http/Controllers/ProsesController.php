@@ -91,7 +91,10 @@ class ProsesController extends Controller
         $kurir_tersedia = Kurir::where('status', 'tersedia')->count();
         $pesanan_diproses = Transaksi::where('status_pengiriman', 'Belum Dikirim')->count();
         $pesanan_selesai = Transaksi::where('status_pengiriman', 'Diterima')->count();
+        $pesanan_masuk = Transaksi::where('id_pengiriman', null)->count();
+        $transaksis = Transaksi::all();
 
+        // Table konfirmasi pembayaran
         $pembayarans = Transaksi::whereHas('pembayaran', function ($query) {
             $query->where('status_pembayaran', 'Belum Bayar')
             ->orWhere('status_pembayaran', 'Proses');        
@@ -110,12 +113,38 @@ class ProsesController extends Controller
             $pembayaran->bukti_pembayaran = $pembayaran_new->bukti_pembayaran; 
         }
 
+        // Tabel pesanan di proses
+        $pengirimans = Pengiriman::all();
+        if ($pengirimans->isNotEmpty()) {
+            foreach ($pengirimans as $pengiriman) {
+                $id_pengiriman = $pengiriman->id_pengiriman;
+                $transaksi_proses = Transaksi::where('id_pengiriman', $id_pengiriman)->get();            
+                $proses = Pengiriman::whereNull('id_kurir')->whereNull('id_truck')->orderBy('created_at', 'desc')->get();
+            }
+        }
+        else{
+            $proses = Transaksi::whereHas('pembayaran', function ($query) {
+                $query->where('status_pembayaran', 'Sudah Bayar');
+            })->orderBy('created_at', 'desc')->get();
+            $transaksi_proses = null;
+        }
+        $kurirs = Kurir::where('status', 'tersedia')->pluck('name');
+        $trucks = Truck::where('status', 'tersedia')->pluck('plat_truck');
+
         return response()->json([
-            'pembayarans' => $pembayarans,
             'total_gas' => $total_gas,
             'kurir_tersedia' => $kurir_tersedia,
             'pesanan_diproses' => $pesanan_diproses,
             'pesanan_selesai' => $pesanan_selesai,
+            'pesanan_masuk' => $pesanan_masuk,
+            'transaksis' => $transaksis,
+
+            'pembayarans' => $pembayarans,
+
+            'proses' => $proses,
+            'transaksi_proses' => $transaksi_proses,
+            'kurirs' => $kurirs,
+            'trucks' => $trucks,
         ]);
 
     }
@@ -205,6 +234,4 @@ class ProsesController extends Controller
 
         return redirect()->back()->with('success', 'Pesanan telah dikirim');
     }
-    
-    
 }
