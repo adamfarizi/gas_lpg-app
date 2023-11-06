@@ -391,7 +391,13 @@
                                             <span class="badge badge-sm bg-gradient-success">Tersedia</span>
                                             @endif
                                         @if ($user->status === 'tidak tersedia')
-                                            <span class="badge badge-sm bg-gradient-danger">Tdk Tersedia</span>    
+                                            <form action="{{ url('admin/user/kurir/status', $user->id_kurir) }}" method="POST">
+                                            @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="border-0 bg-transparent">
+                                                    <span class="badge badge-sm bg-gradient-danger">Tdk Tersedia</span>
+                                                </button>
+                                            </form>
                                         @endif
                                     </td>
                                     <td class="align-middle">

@@ -412,7 +412,7 @@
 
     {{-- Table transaksi --}}
     <div class="row my-4">
-        <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
+        <div class="col-lg-12 col-smd-6 mb-md-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
                     <div class="row">
@@ -631,6 +631,14 @@
         document.addEventListener("DOMContentLoaded", function (event) {
             Echo.channel('updateTran-channel')
                 .listen('updateTranEvent', (event) => {
+                    fetchRealTimeData();
+                    updateData() 
+                });
+        });
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            Echo.channel('finishTran-channel')
+                .listen('finishTranEvent', (event) => {
                     fetchRealTimeData();
                     updateData() 
                 });

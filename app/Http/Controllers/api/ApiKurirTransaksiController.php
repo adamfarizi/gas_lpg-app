@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Events\finishTranEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Transaksi;
 use App\Models\Agen;
@@ -88,10 +89,13 @@ class ApiKurirTransaksiController extends Controller
         $transaksi->status_pengiriman = 'Diterima';
         $transaksi->save();
 
+        $agen_name = $transaksi->agen->name;
+        broadcast(new finishTranEvent($agen_name));
+
         return response()->json([
             'success' => true,
             'message' => 'Pesanan sudah diterima',
-            'data' => $transaksi,
+            'data' => $agen_name,
         ]);
     }
 }

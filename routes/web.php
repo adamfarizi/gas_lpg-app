@@ -74,6 +74,7 @@ Route::middleware(['auth'])->group(function () {
     // Controller kurir
     Route::get('admin/user/kurir/{id}/edit', [KurirController::class, 'edit_kurir_user']);
     Route::put('admin/user/kurir/{id}',[KurirController::class, 'edit_kurir_user_action']);
+    Route::put('admin/user/kurir/status/{id}',[KurirController::class, 'update_status_kurir']);
     Route::delete('admin/user/kurir/{id}', [KurirController::class, 'destroy_kurir_user']);
 
     //Controller stock
