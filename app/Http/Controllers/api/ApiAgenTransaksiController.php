@@ -202,8 +202,6 @@ class ApiAgenTransaksiController extends Controller
         }
     }
 
-
-
     public function update_pembayaran($id, Request $request)
     {
         $request->validate([
@@ -443,4 +441,5 @@ class ApiAgenTransaksiController extends Controller
             'message' => 'Transaksi berhasil dihapus',
         ], 200);
     }
+
 }

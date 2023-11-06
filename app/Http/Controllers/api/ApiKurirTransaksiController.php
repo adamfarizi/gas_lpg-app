@@ -36,4 +36,56 @@ class ApiKurirTransaksiController extends Controller
             ], 200); 
         }
     }
+
+    public function detail_pesanan_agen(string $id){
+        $data = Transaksi::where('id_agen', $id)
+        ->join('pengiriman', 'transaksi.id_pengiriman', '=', 'pengiriman.id_pengiriman')
+            ->get();
+
+
+        if ($data->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+            ], 200); 
+        }
+        else{
+            return response()->json([
+                'success' => true,
+                'message' => 'Data ditemukan',
+                'datauser' => $data,
+            ], 200); 
+        }
+    }
+
+    public function pesanan_selesai($id){
+
+        $transaksi = Transaksi::find($id);
+    
+        if (!$transaksi) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Transaksi tidak ditemukan',
+            ], 404);
+        }
+    
+        // Periksa apakah transaksi sudah diterima sebelumnya
+        if ($transaksi->status_pengiriman === 'Diterima') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Transaksi sudah diterima sebelumnya',
+            ], 400);
+        }
+    
+        // Perbarui status pengiriman menjadi 'Diterima'
+        $transaksi->status_pengiriman = 'Diterima';
+        $transaksi->save();
+    
+        return response()->json([
+            'success' => true,
+            'message' => 'Pesanan sudah diterima',
+            'data' => $transaksi,
+        ]);
+    }
+    
 }

@@ -586,14 +586,12 @@
                                             <td class="align-middle text-sm text-center">
                                                 {{ $transaksi->pengiriman->resi_pengiriman }}</td>
                                             <td class="align-middle text-center ">
-                                                <button type="button"
-                                                    class="btn bg-gradient-warning btn-icon btn-sm ps-3"
+                                                <button type="button" class="btn bg-gradient-warning btn-icon btn-sm ps-3"
                                                     data-id="{{ $transaksi->id_transaksi }}" data-bs-toggle="modal"
-                                                    data-bs-target="#cek-status{{ $transaksi->id_transaksi }}"
-                                                    id="modalButton">
-                                                    <span><i class="fa fa-solid fa-info me-3"
+                                                    data-bs-target="#cek-riwayat{{ $transaksi->id_transaksi }}">
+                                                    <span> <i class="fa fa-solid fa-info me-3"
                                                             style="color: #ffffff;"></i></span>
-                                                    Cek Status
+                                                    Selengkapnya
                                                 </button>
                                             </td>
                                         </tr>
@@ -683,7 +681,7 @@
                                                 data-bs-target="#cek-riwayat{{ $transaksi->id_transaksi }}">
                                                 <span> <i class="fa fa-solid fa-info me-3"
                                                         style="color: #ffffff;"></i></span>
-                                                Cek Riwayat
+                                                Selengkapnya
                                             </button>
                                         </td>
                                     </tr>
@@ -795,47 +793,6 @@
         </div>
     @endforeach
 
-    <!--Modal Status-->
-    @foreach ($lokasis as $lokasi_all)
-        <div class="row">
-            <div class="col-md-4">
-                <div class="modal fade" id="cek-riwayat{{ $lokasi_all->id_transaksi }}" tabindex="-1" role="dialog"
-                    aria-labelledby="modal-default{{ $lokasi_all->id_transaksi }}" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h6 class="modal-title text-uppercase" id="modal-title-default">Riwayat Lokasi</h6>
-                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
-                                    aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body" style="max-height:350px; overflow-y: auto;">
-                                <ul class="mb-3 text-dark" class="tracking-list">
-                                    @foreach ($lokasis as $lokasi)
-                                        @if ($lokasi_all->id_transaksi == $lokasi->id_transaksi)
-                                            <li class="mb-3">
-                                                {{ $lokasi->alamat_lokasi_tujuan }}
-                                                <br><span class="text-secondary text-xs">Tanggal :
-                                                    {{ $lokasi->created_at->format('d-m-Y') }}</span>
-                                                <br><span class="text-secondary text-xs">Pukul :
-                                                    {{ $lokasi->created_at->format('H:i') }}</span>
-                                            </li>
-                                        @endif
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-link ml-auto"
-                                    data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endforeach
-
     <!--Modal Riwayat-->
     @foreach ($lokasis as $lokasi_all)
         <div class="row">
@@ -876,48 +833,133 @@
             </div>
         </div>
     @endforeach
-
-    <!--Modal Lokasi-->
-    <form action="{{ route('lokasi') }}" method="POST">
-        @csrf
+    
+    {{-- Modal Pesanan --}}
+    @foreach ($transaksis as $transaksi)
         <div class="row">
             <div class="col-md-4">
-                <div class="modal fade" id="make-lokasi" tabindex="-1" role="dialog" aria-labelledby="modal-default"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                <div class="modal fade" id="cek-riwayat{{ $transaksi->id_transaksi }}" tabindex="-1" role="dialog"
+                    aria-labelledby="modal-default{{ $transaksi->id_transaksi }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                         <div class="modal-content">
+                            <img class="ms-2 position-absolute top-50 start-50 translate-middle d-sm-block" src="{{ asset('assets/img/local/logo7.png') }}" height="150" alt="main_logo" style="z-index: 0; opacity: 0.3; display:none;">
                             <div class="modal-header">
-                                <h6 class="modal-title text-uppercase" id="modal-title-default">Tambah Lokasi</h6>
+                                <h6 class="modal-title text-uppercase" id="modal-title-default">Rincian Pesanan</h6>
                                 <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
                                     aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <label>Lokasi <span class="text-danger">*</span></label>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" placeholder="Enter your Lokasi"
-                                        aria-label="Lokasi" aria-describedby="lokasi-addon" id="alamat_lokasi_tujuan"
-                                        name="alamat_lokasi_tujuan" value="{{ old('alamat_lokasi_tujuan') }}">
-                                </div>
-                                <label>ID Transaksi <span class="text-danger">*</span></label>
-                                <select class="mb-3 form-control" id="id_transaksi" name="id_transaksi">
-                                    @foreach ($dikirim as $transaksi)
-                                        <option value="{{ $transaksi->id_transaksi }}">{{ $transaksi->id_transaksi }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <div class="text-center">
-                                    <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0">Create</button>
+                            <div class="modal-body p-2" style="max-height:500px; overflow-y: auto;">
+                                <div class="border border-2 py-3 px-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <img class="ms-2" src="{{ asset('assets/img/local/logo5.png') }}" height="30" alt="main_logo">
+                                        </div>
+                                        <div class="col text-end mt-1 me-2">
+                                            {{ $transaksi->tanggal_transaksi }}
+                                        </div>
+                                    </div>
+                                    <hr class="border border-dark" style="width: 100%">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="pb-0 ms-2 mb-4">RESI : {{ $transaksi->resi_transaksi }}</p>
+                                        </div>
+                                        <div class="col">
+                                            @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
+                                                <p class="pb-0 me-2 mb-4 text-end">{{ $transaksi->pengiriman->resi_pengiriman }}</p>
+                                            @else
+                                                <p class="pb-0 me-2 mb-4 text-end">Belum Dikirim</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row ms-2" >
+                                        <div class="col-1 me-3">
+                                            @if ($transaksi->status_pengiriman == 'Belum Dikirim')
+                                            <img src="{{ asset('assets/img/local/insurance.png') }}" class="ms-1" height="45" alt="belum_dikirim">
+                                            @elseif($transaksi->status_pengiriman == 'Dikirim')
+                                            <img src="{{ asset('assets/img/local/fast-delivery.png') }}" class="pt-2" width="50" alt="dikirim">
+                                            @else
+                                            <img src="{{ asset('assets/img/local/delivered.png') }}" class="pt-1 ms-1" height="45" alt="diterima">
+                                            @endif
+                                        </div>   
+                                        <div class="col-4 ms-4">
+                                                <div class="d-flex flex-column">
+                                                    <div>Status</div>
+                                                    <div><p><strong>{{ $transaksi->status_pengiriman }}</strong></p></div>
+                                                </div>
+                                        </div>
+                                        <div class="col-3 d-flex flex-column" >
+                                            <div>Kurir</div>
+                                            <div>
+                                                @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
+                                                    <div><p><strong>{{ $transaksi->pengiriman->kurir->name }}</strong></p></div>
+                                                @else
+                                                    <div><p><strong>None</strong></p></div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-3 d-flex flex-column" >
+                                            <div>Truck</div>
+                                            <div>
+                                                @if (isset($transaksi->pengiriman->kurir) && isset($transaksi->pengiriman->truck))
+                                                    <div><p><strong>{{ $transaksi->pengiriman->truck->plat_truck }}</strong></p></div>
+                                                @else
+                                                    <div><p><strong>None</strong></p></div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ms-1 my-3">
+                                        <div class="col-12 col-md-6 mb-3 d-flex flex-column">
+                                            <div>Kepada : </div>
+                                            <div><strong>{{ $transaksi->agen->name }}</strong></div>
+                                            <div>{{ $transaksi->agen->alamat }}</div>
+                                            <div><em>{{ $transaksi->agen->no_hp }}</em></div>
+                                        </div>
+                                        <div class="col-12 col-md-5 mb-2 d-flex flex-column">
+                                            <div>Terakhir diedit oleh :</div>
+                                            <div><strong>{{ $transaksi->admin->name }}</strong></div>
+                                            <div>{{ $transaksi->updated_at }}</div>
+                                        </div>
+                                    </div>
+                                    <hr style="border: 2px dashed #8392ab;"/>
+                                    <div class="row ms-1">
+                                        <div class="col-12 col-md-6 col-lg-3 mb-2 d-flex flex-column">
+                                            <div><strong>Produk</strong></div>
+                                            <div>{{ $transaksi->gas->jenis_gas }}</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3 mb-2 d-flex flex-column ">
+                                            <div><strong>Jumlah</strong></div>
+                                            <div >{{ $transaksi->jumlah_transaksi }} Gas</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3 mb-2 d-flex flex-column ">
+                                            <div><strong>Pembayaran</strong></div>
+                                            <div>RP. {{ number_format($transaksi->total_transaksi, 0, ',', '.') }}</div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3 mb-2 d-flex flex-column ">
+                                            <div><strong>Status</strong></div>
+                                            @if ($transaksi->pembayaran->status_pembayaran === 'Belum Bayar')
+                                                <div><span class="badge badge-pill badge-lg bg-gradient-danger">Belum Bayar</span></div>
+                                            @elseif($transaksi->pembayaran->status_pembayaran === 'Proses')
+                                                <div><span class="badge badge-pill badge-lg bg-gradient-info">Konfirmasi</span></div>
+                                            @else
+                                                <div><span class="badge badge-pill badge-lg bg-gradient-success">Sudah Bayar</span></div>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-link ml-auto" data-bs-dismiss="modal">Close</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link ml-auto"
+                                    data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    @endforeach
 @endsection
 
 @section('js')
