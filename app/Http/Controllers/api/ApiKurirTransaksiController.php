@@ -18,6 +18,7 @@ class ApiKurirTransaksiController extends Controller
             'agen.name',
             'agen.koordinat',
             'agen.alamat',
+            'agen.no_hp',
             Transaksi::raw('(SELECT COUNT(*) FROM transaksi WHERE transaksi.id_agen = agen.id_agen AND transaksi.status_pengiriman = "dikirim") as jumlah_pesanan')
         )
             ->join('transaksi', 'transaksi.id_agen', '=', 'agen.id_agen')
@@ -48,6 +49,7 @@ class ApiKurirTransaksiController extends Controller
         $data = Transaksi::where('id_agen', $id)
             ->join('pengiriman', 'transaksi.id_pengiriman', '=', 'pengiriman.id_pengiriman')
             ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
+            ->where('status_pengiriman', 'dikirim')
             ->get();
 
 
@@ -97,5 +99,29 @@ class ApiKurirTransaksiController extends Controller
             'message' => 'Pesanan sudah diterima',
             'data' => $agen_name,
         ]);
+    }
+
+    public function get_transaksiByIdKurir($id)
+    {
+
+        $data = Transaksi::select('id_transaksi')
+            ->join('pengiriman', 'transaksi.id_pengiriman', '=', 'pengiriman.id_pengiriman')
+            ->where('pengiriman.id_kurir', $id)
+            ->where('status_pengiriman', 'dikirim')
+            ->get();
+
+   
+        if ($data->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Data ditemukan',
+                'datauser' => $data,
+            ], 200);
+        }
     }
 }

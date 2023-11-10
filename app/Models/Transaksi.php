@@ -50,6 +50,6 @@ class Transaksi extends Model
 
     public function lokasi(): HasMany
     {
-        return $this->hasMany(Lokasi::class, 'id_transaksi', 'id_transaksi');
+        return $this->hasMany(Lokasi::class, 'id_lokasi');
     }
 }
