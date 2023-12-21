@@ -19,6 +19,7 @@ class ApiKurirTransaksiController extends Controller
             'agen.name',
             'agen.koordinat',
             'agen.alamat',
+            'agen.no_hp',
             Transaksi::raw('(SELECT COUNT(*) FROM transaksi WHERE transaksi.id_agen = agen.id_agen AND transaksi.status_pengiriman = "dikirim") as jumlah_pesanan')
         )
             ->join('transaksi', 'transaksi.id_agen', '=', 'agen.id_agen')
@@ -49,6 +50,7 @@ class ApiKurirTransaksiController extends Controller
         $data = Transaksi::where('id_agen', $id)
             ->join('pengiriman', 'transaksi.id_pengiriman', '=', 'pengiriman.id_pengiriman')
             ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
+            ->where('status_pengiriman', 'dikirim')
             ->get();
 
 
