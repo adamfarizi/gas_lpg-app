@@ -386,10 +386,10 @@
                                     <tr>
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4">
-                                            Plat Kendaraan</th>
+                                            Info Kendaraan</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
-                                            Beban Maksimal</th>
+                                            class="text-uppercase text-secondary text-xxs text-center font-weight-bolder opacity-7">
+                                            Status</th>
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
@@ -397,20 +397,23 @@
                                 @foreach ($trucks as $truck)
                                     <tbody>
                                         <tr>
-                                        <td>
-                                            <div class="d-flex px-2 py-1">
+                                        <td class="align-middle">
+                                            <div class="d-flex px-2">
                                                 <div>
                                                     <img src="../assets/img/local/truck1.png"
                                                         class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $truck->plat_truck }}</h6>
-                                                </div>
-                                                <td class="ms-1">
-                                                    <p class="text-sm mb-0 ms-4">
-                                                        {{ $truck->maksimal_beban_truck }} Gas</p>
-                                                </td>
+                                                    <p class="text-sm fw-light">{{ $truck->maksimal_beban_truck }} Gas</p>                                                    </div>
                                             </div>
+                                        </td>
+                                        <td class="text-center text-sm">
+                                            @if ($truck->status == 'tersedia')
+                                            <span class="badge badge-sm bg-gradient-success ms-1">Tersedia</span>
+                                            @else
+                                            <span class="badge badge-sm bg-gradient-danger ms-1">Tdk Tersedia</span>
+                                            @endif
                                         </td>
                                         <td class="align-middle">
                                             <a href="{{ url('admin/stock/truck/' . $truck->id_truck . '/edit') }}"

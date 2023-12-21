@@ -65,3 +65,4 @@ Route::middleware(['auth:sanctum', 'check.kurir'])->group(function () {
     Route::put('/kurir/update/password/{id}',[ApiKurirController::class, 'edit_password']);
 
 });
+    

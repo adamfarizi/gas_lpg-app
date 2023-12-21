@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Events\finishTranEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Pengiriman;
 use App\Models\Transaksi;
 use App\Models\Agen;
 use Illuminate\Http\Request;
@@ -67,16 +68,15 @@ class ApiKurirTransaksiController extends Controller
 
     public function pesanan_selesai($id)
     {
-
         $transaksi = Transaksi::find($id);
-
+    
         if (!$transaksi) {
             return response()->json([
                 'success' => false,
                 'message' => 'Transaksi tidak ditemukan',
             ], 404);
         }
-
+    
         // Periksa apakah transaksi sudah diterima sebelumnya
         if ($transaksi->status_pengiriman === 'Diterima') {
             return response()->json([
@@ -84,18 +84,35 @@ class ApiKurirTransaksiController extends Controller
                 'message' => 'Transaksi sudah diterima sebelumnya',
             ], 400);
         }
-
+    
         // Perbarui status pengiriman menjadi 'Diterima'
         $transaksi->status_pengiriman = 'Diterima';
         $transaksi->save();
-
+    
+        $pengiriman = Pengiriman::where('id_pengiriman', $transaksi->id_transaksi)->first();
+    
+        // Perbarui status truck
+        if ($pengiriman->truck) {
+            $pengiriman->truck->status = 'tersedia';
+            $pengiriman->truck->save();
+        }
+    
+        // Perbarui status kurir
+        if ($pengiriman->kurir) {
+            $pengiriman->kurir->status = 'tersedia';
+            $pengiriman->kurir->save();
+        }
+    
+        $pengiriman->save();
+    
         $agen_name = $transaksi->agen->name;
         broadcast(new finishTranEvent($agen_name));
-
+    
         return response()->json([
             'success' => true,
             'message' => 'Pesanan sudah diterima',
             'data' => $agen_name,
         ]);
     }
+    
 }

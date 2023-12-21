@@ -66,11 +66,7 @@
                     <div class="mb-3">
                       <input type="password" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="password-addon" id="password" name="password" value="{{ old('password') }}">
                     </div>
-
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                      <label class="form-check-label" for="rememberMe">Remember me</label>
-                    </div>
+                    
                     <div class="text-center">
                       <button type="submit" class="btn bg-gradient-primary w-100 mt-4 mb-0" href="{{ route('login.action') }}">Sign in</button>
                     </div>
