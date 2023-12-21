@@ -350,15 +350,9 @@
                                                 </a>
                                             </td>
                                             <td class="align-middle">
-                                                <form action="{{ url('admin/stock/gas/' . $gas->id_gas) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" name="Delete"
-                                                        class="text-dark font-weight-bold border-0 bg-transparent">
-                                                        <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                                    </button>
-                                                </form>
+                                                <a href="#modalDeleteGas{{ $gas->id_gas }}" class="text-dark font-weight-bold" data-toggle="modal">
+                                                    <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -422,14 +416,9 @@
                                             </a>
                                         </td>
                                         <td class="align-middle">
-                                            <form action="{{ url('admin/stock/truck/' . $truck->id_truck) }}" method="POST">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit" name="Delete"
-                                                    class="text-dark font-weight-bold border-0 bg-transparent">
-                                                    <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                                </button>
-                                            </form>
+                                            <a href="#modalDeleteTruck{{ $truck->id_truck }}" class="text-dark font-weight-bold" data-toggle="modal">
+                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -444,4 +433,81 @@
     </div>
     @include('auth.stock.create.create_stock')
     @include('auth.stock.create.create_truck')
+    {{-- Delete Gas --}}
+    @foreach ($gasItems as $gas)
+        <div class="modal fade" id="modalDeleteGas{{ $gas->id_gas }}" tabindex="-1" role="dialog" 
+            aria-labelledby="exampleModalLabel{{ $gas->id_gas }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24"
+                        style="fill: rgba(255, 62, 29, 1);transform: ;msFilter:;">
+                        <path
+                            d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                        </path>
+                        <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                    </svg>
+                    <h5 class="mt-3">Apakah anda ingin menghapus gas {{ $gas->name_gas }} ?</h5>
+                </div>
+                <div class="modal-footer">
+                    <div class="col">
+                        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal" aria-label="Close">
+                            Cancel
+                        </button>    
+                    </div>
+                    <div class="col">
+                        <form action="{{ url('admin/stock/gas/' . $gas->id_gas) }}"
+                            method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger w-100" href="">
+                                <i class="bx bx-trash me-1"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    @endforeach
+    {{-- Delete Truck --}}
+    @foreach ($trucks as $truck)
+        <div class="modal fade" id="modalDeleteTruck{{ $truck->id_truck }}" tabindex="-1" role="dialog" 
+            aria-labelledby="exampleModalLabel{{ $truck->id_truck }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24"
+                        style="fill: rgba(255, 62, 29, 1);transform: ;msFilter:;">
+                        <path
+                            d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
+                        </path>
+                        <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
+                    </svg>
+                    <h5 class="mt-3">Apakah anda ingin menghapus truck {{ $truck->plat_truck }} ?</h5>
+                </div>
+                <div class="modal-footer">
+                    <div class="col">
+                        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal" aria-label="Close">
+                            Cancel
+                        </button>    
+                    </div>
+                    <div class="col">
+                        <form action="{{ url('admin/stock/truck/' . $truck->id_truck) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger w-100" href="">
+                                <i class="bx bx-trash me-1"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
