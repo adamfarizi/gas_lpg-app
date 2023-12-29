@@ -114,49 +114,67 @@ class ApiAgenTransaksiController extends Controller
             return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        $id_transaksi_new = Transaksi::max('id_transaksi') + 1;
+        $gas = Gas::where('id_gas', $request['id_gas'])->first();
 
-        // Pembuatan resi dengan UUID
-        $resi_transaksi = 'GTK-' . now()->format('YmdHis') . Str::random(2);
+            if ($gas) {
+                if ($gas['stock_gas'] < $request['jumlah_transaksi']) {
+                    return response()->json([
+                    'success' => true,
+                    'message' => 'Stock gas tidak cukup' ,
+                    ], 422);
+                }else{
+                    $id_transaksi_new = Transaksi::max('id_transaksi') + 1;
 
-        // Penghitungan total transaksi
-        $jumlah_transaksi = intval($request->input('jumlah_transaksi'));
-        $id_gas = intval($request->input('id_gas'));
-        $harga_gas = Gas::where('id_gas', $id_gas)->value('harga_gas');
-        $total_transaksi = $jumlah_transaksi * (float)$harga_gas;
+                    // Pembuatan resi dengan UUID
+                    $resi_transaksi = 'GTK-' . now()->format('YmdHis') . Str::random(2);
+            
+                    // Penghitungan total transaksi
+                    $jumlah_transaksi = intval($request->input('jumlah_transaksi'));
+                    $id_gas = intval($request->input('id_gas'));
+                    $harga_gas = Gas::where('id_gas', $id_gas)->value('harga_gas');
+                    $total_transaksi = $jumlah_transaksi * (float)$harga_gas;
+            
+                    // Tambahkan data ke tabel pembayaran
+                    $id_pembayaran_new = Pembayaran::create([
+                        'status_pembayaran' => 'Belum Bayar',
+                        'tanggal_pembayaran' => null,
+                        'bukti_pembayaran' => null,
+                    ])->id_pembayaran;
+            
+                    // Tambahkan data ke tabel transaksi
+                    $transaksi_new = Transaksi::create([
+                        'tanggal_transaksi' => now(),
+                        'resi_transaksi' => $resi_transaksi,
+                        'jumlah_transaksi' => $jumlah_transaksi,
+                        'total_transaksi' => $total_transaksi,
+                        'id_agen' => $request->input('id_agen'),
+                        'id_admin' => 1,
+                        'id_gas' => $id_gas,
+                        'id_pembayaran' => $id_pembayaran_new,
+                        'id_pengiriman' => null,
+                    ]);
+                    
+                    // Ambil nama agen
+                    $agen_new = Agen::where('id_agen', $transaksi_new->id_agen)->value('name');
+                    $transaksi_new = Transaksi::where('id_transaksi', $id_transaksi_new)->first();
+                    $agen_new = $transaksi_new->agen->name;
+                    broadcast(new newTranEvent($agen_new));
 
-        // Tambahkan data ke tabel pembayaran
-        $id_pembayaran_new = Pembayaran::create([
-            'status_pembayaran' => 'Belum Bayar',
-            'tanggal_pembayaran' => null,
-            'bukti_pembayaran' => null,
-        ])->id_pembayaran;
-
-        // Tambahkan data ke tabel transaksi
-        $transaksi_new = Transaksi::create([
-            'tanggal_transaksi' => now(),
-            'resi_transaksi' => $resi_transaksi,
-            'jumlah_transaksi' => $jumlah_transaksi,
-            'total_transaksi' => $total_transaksi,
-            'id_agen' => $request->input('id_agen'),
-            'id_admin' => 1,
-            'id_gas' => $id_gas,
-            'id_pembayaran' => $id_pembayaran_new,
-            'id_pengiriman' => null,
-        ]);
-        
-        // Ambil nama agen
-        $agen_new = Agen::where('id_agen', $transaksi_new->id_agen)->value('name');
-        $transaksi_new = Transaksi::where('id_transaksi', $id_transaksi_new)->first();
-        $agen_new = $transaksi_new->agen->name;
-        broadcast(new newTranEvent($agen_new));
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Data berhasil ditambah',
-            'datauser' => $transaksi_new,
-            'databroadcast' => $agen_new,
-        ], 200);
+                    if ($transaksi_new) {
+                        $update_stok = $gas['stock_gas'] - $request['jumlah_transaksi'];
+                        $gas->stock_gas = $update_stok;
+                        $gas->save();
+                        
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Data berhasil ditambah',
+                            'datauser' => $transaksi_new,
+                            'databroadcast' => $agen_new,
+                        ], 200);
+                    }
+            
+                }
+            }
     }
 
     public function transaksi_belum_bayar($id_agen = null)

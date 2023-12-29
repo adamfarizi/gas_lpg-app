@@ -48,6 +48,7 @@ class ApiKurirTransaksiController extends Controller
         $data = Transaksi::where('id_agen', $id)
             ->join('pengiriman', 'transaksi.id_pengiriman', '=', 'pengiriman.id_pengiriman')
             ->join('gas', 'transaksi.id_gas', '=', 'gas.id_gas')
+            ->where('status_pengiriman', 'dikirim')
             ->get();
 
 
