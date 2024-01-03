@@ -52,6 +52,16 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="min-width: 300px; display: none;" id="toast_selesai">
+                        <span class="alert-icon me-3">
+                            <i class="fa fa-solid fa-hand-holding-heart" style="color: #ffffff;"></i>
+                        </span>
+                        <span class="alert-text text-white fw-bold" id="agen_name3"></span>
+                        <span class="alert-text text-white"> telah menerima pesanan !</span>
+                        <button type="button" class="btn-close pt-3" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
             @endif         
             @yield('navbar')
@@ -171,6 +181,25 @@
                     // Sembunyikan pesan setelah beberapa detik (misalnya, 5 detik)
                     setTimeout(function() {
                         toast_pembayaran.style.display = 'none';
+                    }, 5000); // 5000 milidetik = 5 detik
+                });
+            });
+            document.addEventListener("DOMContentLoaded", function(event) { 
+                Echo.channel(`finishTran-channel`)
+                .listen('finishTranEvent', (e) => {
+                    // Ambil elemen pesan dan elemen agen name
+                    const toast_selesai = document.getElementById('toast_selesai');
+                    const agen_name3 = document.getElementById('agen_name3');
+
+                    // Ubah teks pesan dengan data yang diterima dari event
+                    agen_name3.textContent = e.agen_name;
+
+                    // Tampilkan elemen pesan
+                    toast_selesai.style.display = 'block';
+
+                    // Sembunyikan pesan setelah beberapa detik (misalnya, 5 detik)
+                    setTimeout(function() {
+                        toast_selesai.style.display = 'none';
                     }, 5000); // 5000 milidetik = 5 detik
                 });
             });

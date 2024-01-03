@@ -34,6 +34,19 @@ class KurirController extends Controller
         return redirect()->back()->with('success', 'Change successfuly !');
     }
 
+    public function update_status_kurir($id){
+        $kurir = Kurir::find($id);
+
+        if(!$kurir){
+            return redirect()->back()->with('error','Kurir tidak ditemukan!');
+        }
+
+        $kurir->status = 'tersedia';
+        $kurir->save();
+
+        return redirect()->back()->with('success','Status kurir diubah!');
+    }
+
     public function destroy_kurir_user($kurir_id){
         $data['title'] = 'Kurir';
 
