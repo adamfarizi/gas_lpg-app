@@ -199,49 +199,39 @@ class ProsesController extends Controller
         return redirect()->back()->with('success', 'Status pembayaran berhasil diubah');  
     }
 
-    public function update_dikirim(Request $request, $id_pengiriman)
-    {
-        $transaksi_dikirim = Transaksi::where('id_pengiriman', $id_pengiriman)->get();
+    public function update_dikirim(Request $request, $id_pengiriman,){
+        $transaksi = Transaksi::find($id_pengiriman);
 
+        $transaksi_dikirim = Transaksi::where('id_pengiriman', $id_pengiriman)->get();
         foreach ($transaksi_dikirim as $transaksi) {
             $transaksi->id_admin = Auth::user()->id_admin;
             $transaksi->status_pengiriman = 'Dikirim';
             $transaksi->save();
-
-            $request->validate([
-                'name_kurir' => 'required|string',
-                'plat_truck' => 'required|string',
-            ]);
-
-            $name_kurir = $request->input('name_kurir');
-            $kurir = Kurir::where('name', $name_kurir)->first();
-            $kurir->status = 'tidak tersedia';
-            $kurir->save();
-            $id_kurir = $kurir->id_kurir;
-
-            $plat_truck = $request->input('plat_truck');
-            $truck = Truck::where('plat_truck', $plat_truck)->first();
-            $truck->status = 'tidak tersedia';
-            $truck->save();
-            $id_truck = $truck->id_truck;
-
-            $pengiriman = $transaksi->pengiriman;
-            $pengiriman->id_kurir = $id_kurir;
-            $pengiriman->id_truck = $id_truck;
-            $pengiriman->save();
-
-            // Tambahkan lokasi dengan data yang sesuai untuk setiap id_transaksi
-            foreach ($transaksi_dikirim as $transaksi) {
-                Lokasi::create([
-                    'alamat_lokasi_tujuan' => 'Jl. Gedong No.53, Banjarejo, Kec. Taman, Kota Madiun, Jawa Timur 63137',
-                    'id_transaksi' => $transaksi->id_transaksi,
-                    'keterangan' => 'Gas sedang diantar dari kantor',
-                    'koordinat_lokasi' => '-7.657165314366832, 111.53005857020617'
-                ]);
-            }
         }
+        
+        $request->validate([
+            'name_kurir' => 'required|string',
+            'plat_truck' => 'required|string',
+        ]);
+
+        $name_kurir = $request->input('name_kurir');
+        $kurir = Kurir::where('name', $name_kurir)->first();
+        $kurir->status = 'tidak tersedia';
+        $kurir->save();
+        $id_kurir = $kurir->id_kurir;
+    
+        $plat_truck = $request->input('plat_truck');
+        $truck = Truck::where('plat_truck', $plat_truck)->first();
+        $truck->status = 'tidak tersedia';
+        $truck->save();
+        $id_truck = $truck->id_truck;
+    
+        $pengiriman = $transaksi->pengiriman;
+        
+        $pengiriman->id_kurir = $id_kurir;
+        $pengiriman->id_truck = $id_truck;
+        $pengiriman->save();
 
         return redirect()->back()->with('success', 'Pesanan telah dikirim');
     }
-
 }

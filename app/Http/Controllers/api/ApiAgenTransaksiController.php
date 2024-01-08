@@ -123,7 +123,7 @@ class ApiAgenTransaksiController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Stok gas habis, tidak dapat melakukan transaksi.',
-            ], 400);
+            ], 422);
         } 
         else{
             $jumlah_transaksi = intval($request->input('jumlah_transaksi'));
@@ -131,7 +131,7 @@ class ApiAgenTransaksiController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Stok gas tidak cukup, tidak dapat melakukan transaksi.',
-                ], 400);
+                ], 422);
             }
             else {
                 // Pembuatan resi dengan UUID

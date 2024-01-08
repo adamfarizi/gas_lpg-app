@@ -24,10 +24,10 @@ class DatabaseSeeder extends Seeder
             KurirSeeder::class,
             GasSeeder::class,
             TruckSeeder::class,
-            // PembayaranSeeder::class,
+            PembayaranSeeder::class,
             // PengirimanSeeder::class,
-            // TransaksiSeeder::class,
-            // LokasiSeeder::class,
+            TransaksiSeeder::class,
+            LokasiSeeder::class,
         ]);
     }
 }

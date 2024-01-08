@@ -647,33 +647,26 @@
         function updateTable(transaksis) {    
             var tableBody = $('#table-body');
             tableBody.empty();
-            if (!transaksis || transaksis.length === 0) {
-                var row =
+    
+            transaksis.forEach(function(transaksi) {
+                var statusBadge = getStatusBadge(transaksi);
+    
+                var row = 
                 '<tr class="text-dark">' +
-                    '<td colspan="7" class="text-center fw-light text-secondary text-sm pt-4">Tidak ada pesanan</td>' +
+                    '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + transaksi.resi_transaksi + '</td>' +
+                    '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + transaksi.tanggal_transaksi + '</td>' +
+                    '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + transaksi.agen_name + '</td>' +
+                    '<td class="align-middle text-sm text-center" style="border-bottom: none;" data-jumlah-gas="' + transaksi.jumlah_transaksi + '">' + transaksi.jumlah_transaksi + ' Gas</td>' +
+                    '<td class="align-middle text-sm text-center" style="border-bottom: none; white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">' + transaksi.agen_alamat + '</td>' +
+                    '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + statusBadge + '</td>' +
+                    '<td class="align-middle text-sm text-center" style="border-bottom: none;">' +
+                    '<a href="#" type="button" data-id="' + transaksi.id_transaksi + '" data-bs-toggle="modal" data-bs-target="#more-info' + transaksi.id_transaksi + '">' +
+                    '<p style="text-decoration: underline;">Selengkapnya</p>' +
+                    '</a>' +
+                    '</td>' +
                 '</tr>';
-                            
                 tableBody.append(row);
-            } else {
-                transaksis.forEach(function(transaksi) {
-                    var statusBadge = getStatusBadge(transaksi);
-                    var row = 
-                    '<tr class="text-dark">' +
-                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + transaksi.resi_transaksi + '</td>' +
-                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + transaksi.tanggal_transaksi + '</td>' +
-                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + transaksi.agen_name + '</td>' +
-                        '<td class="align-middle text-sm text-center" style="border-bottom: none;" data-jumlah-gas="' + transaksi.jumlah_transaksi + '">' + transaksi.jumlah_transaksi + ' Gas</td>' +
-                        '<td class="align-middle text-sm text-center" style="border-bottom: none; white-space: pre-wrap; word-wrap: break-word; max-width: 100px;">' + transaksi.agen_alamat + '</td>' +
-                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' + statusBadge + '</td>' +
-                        '<td class="align-middle text-sm text-center" style="border-bottom: none;">' +
-                        '<a href="#" type="button" data-id="' + transaksi.id_transaksi + '" data-bs-toggle="modal" data-bs-target="#more-info' + transaksi.id_transaksi + '">' +
-                        '<p style="text-decoration: underline;">Selengkapnya</p>' +
-                        '</a>' +
-                        '</td>' +
-                    '</tr>';
-                    tableBody.append(row);
-                });
-            }
+            });
         }
     
         function getStatusBadge(transaksi) {

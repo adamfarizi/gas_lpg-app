@@ -46,7 +46,7 @@ class AdminController extends Controller
     public function edit_admin_profile()
     {
         $data['title'] = 'Profile';
-        $admin = User::where('id_admin',Auth::id())->first();
+        $admin = User::find(Auth::id());
         return view('auth.profile.profile', ['admins'=>$admin], $data);   
     }
 

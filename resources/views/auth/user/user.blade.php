@@ -335,10 +335,14 @@
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="#modalDeleteAdmin{{ $user->id_admin }}" class="text-dark font-weight-bold" data-toggle="modal">
-                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                        </a>
-                                    </td>                                    
+                                        <form action="{{ url('admin/user/admin/'. $user->id_admin ) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                            </button>                                        
+                                        </form>
+                                    </td>
                                 </tr>
                             </tbody>
                             @endforeach
@@ -402,9 +406,13 @@
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="#modalDeleteKurir{{ $user->id_kurir }}" class="text-dark font-weight-bold" data-toggle="modal">
-                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                        </a>
+                                        <form action="{{ url('admin/user/kurir/'. $user->id_kurir ) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                            </button>                                         
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -462,9 +470,13 @@
                                         </a>
                                     </td>
                                     <td class="align-middle">
-                                        <a href="#modalDeleteAgen{{ $user->id_agen }}" class="text-dark font-weight-bold" data-toggle="modal">
-                                            <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
-                                        </a>
+                                        <form action="{{ url('admin/user/agen/'. $user->id_agen ) }}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" name="Delete" class="text-dark font-weight-bold border-0 bg-transparent">
+                                                <i class="fa fa-solid fa-trash" style="color: #ea0606;"></i>
+                                            </button>                                         
+                                        </form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -477,117 +489,4 @@
         </div>
     </div>
     @include('auth.user.create.create')
-    {{-- Delete Admin --}}
-    @foreach ($admins as $user)
-        <div class="modal fade" id="modalDeleteAdmin{{ $user->id_admin }}" tabindex="-1" role="dialog" 
-            aria-labelledby="exampleModalLabel{{ $user->id_admin }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                </div>
-                <div class="modal-body text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24"
-                        style="fill: rgba(255, 62, 29, 1);transform: ;msFilter:;">
-                        <path
-                            d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
-                        </path>
-                        <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
-                    </svg>
-                    <h5 class="mt-3">Apakah anda ingin menghapus akun {{ $user->name }} ?</h5>
-                </div>
-                <div class="modal-footer">
-                    <div class="col">
-                        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal" aria-label="Close">
-                            Cancel
-                        </button>    
-                    </div>
-                    <div class="col">
-                        <form action="{{ url('/admin/user/admin/' . $user->id_admin) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger w-100" href="">
-                                <i class="bx bx-trash me-1"></i> Delete
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    @endforeach
-    {{-- Delete Kurir --}}
-    @foreach ($kurirs as $user)
-        <div class="modal fade" id="modalDeleteKurir{{ $user->id_kurir }}" tabindex="-1" role="dialog" 
-            aria-labelledby="exampleModalLabel{{ $user->id_kurir }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                </div>
-                <div class="modal-body text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24"
-                        style="fill: rgba(255, 62, 29, 1);transform: ;msFilter:;">
-                        <path
-                            d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
-                        </path>
-                        <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
-                    </svg>
-                    <h5 class="mt-3">Apakah anda ingin menghapus akun {{ $user->name }} ?</h5>
-                </div>
-                <div class="modal-footer">
-                    <div class="col">
-                        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal" aria-label="Close">
-                            Cancel
-                        </button>    
-                    </div>
-                    <div class="col">
-                        <form action="{{ url('/admin/user/kurir/' . $user->id_kurir) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger w-100" href="">
-                                <i class="bx bx-trash me-1"></i> Delete
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    @endforeach
-    {{-- Delete Kurir --}}
-    @foreach ($agens as $user)
-        <div class="modal fade" id="modalDeleteAgen{{ $user->id_agen }}" tabindex="-1" role="dialog" 
-            aria-labelledby="exampleModalLabel{{ $user->id_agen }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                </div>
-                <div class="modal-body text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24"
-                        style="fill: rgba(255, 62, 29, 1);transform: ;msFilter:;">
-                        <path
-                            d="M11.953 2C6.465 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.493 2 11.953 2zM12 20c-4.411 0-8-3.589-8-8s3.567-8 7.953-8C16.391 4 20 7.589 20 12s-3.589 8-8 8z">
-                        </path>
-                        <path d="M11 7h2v7h-2zm0 8h2v2h-2z"></path>
-                    </svg>
-                    <h5 class="mt-3">Apakah anda ingin menghapus akun {{ $user->name }} ?</h5>
-                </div>
-                <div class="modal-footer">
-                    <div class="col">
-                        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal"
-                            aria-label="Close">Cancel</button>
-                    </div>
-                    <div class="col">
-                        <form action="{{ url('/admin/user/agen/' . $user->id_agen) }}" method="POST">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-danger w-100" href="">
-                                <i class="bx bx-trash me-1"></i> Delete
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-    @endforeach
 @endsection

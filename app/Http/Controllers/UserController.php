@@ -59,14 +59,16 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'role' => $request->role ?? 'agen',
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($request->password), 
+                'alamat' => 'none', 
             ]);
         } elseif ($request->role === 'kurir') {
             $userModel = new Kurir([
                 'name' => $request->name,
                 'email' => $request->email,
                 'role' => $request->role ?? 'kurir',
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($request->password), 
+                'no_hp' => 'none', 
             ]);
         } else {
             // Handle jika role tidak valid

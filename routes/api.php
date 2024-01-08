@@ -58,7 +58,6 @@ Route::middleware(['auth:sanctum', 'check.kurir'])->group(function () {
     Route::get('/kurir/pesanan/{id}',[ApiKurirTransaksiController::class, 'pesanan_dikirim']);
     Route::get('/kurir/pesanan/detail/{id}',[ApiKurirTransaksiController::class, 'detail_pesanan_agen']);
     Route::put('/kurir/pesanan/selesai/{id}',[ApiKurirTransaksiController::class, 'pesanan_selesai']);
-    Route::get('/kurir/pesanan/ByIdKurir/{id}',[ApiKurirTransaksiController::class, 'get_transaksiByIdKurir']);
     Route::put('/kurir/update/{id}',[ApiKurirController::class, 'edit_action']);
     Route::put('/kurir/update/name/{id}',[ApiKurirController::class, 'edit_name']);
     Route::put('/kurir/update/email/{id}',[ApiKurirController::class, 'edit_email']);
@@ -66,4 +65,3 @@ Route::middleware(['auth:sanctum', 'check.kurir'])->group(function () {
     Route::put('/kurir/update/password/{id}',[ApiKurirController::class, 'edit_password']);
 
 });
-    

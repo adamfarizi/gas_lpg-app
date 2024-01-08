@@ -27,7 +27,7 @@ use App\Http\Controllers\CreateLokasiController;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [GuestController::class, 'login']);
-    Route::get('/home', [GuestController::class, 'login']);
+    Route::get('/home', function () {return redirect('login');});
     Route::get('login', [GuestController::class, 'login'])->name('login');
     Route::post('login', [GuestController::class, 'login_action'])->name('login.action');
     Route::get('register', [GuestController::class, 'register'])->name('register');
