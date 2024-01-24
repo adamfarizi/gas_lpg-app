@@ -139,4 +139,17 @@ class StockController extends Controller
         $truckItems->delete();
         return back(); 
     }
+    
+    public function update_status_truck($id){
+        $truck = Truck::find($id);
+
+        if(!$truck){
+            return redirect()->back()->with('error','Truck tidak ditemukan!');
+        }
+
+        $truck->status = 'tersedia';
+        $truck->save();
+
+        return redirect()->back()->with('success','Status truck diubah!');
+    }
 }

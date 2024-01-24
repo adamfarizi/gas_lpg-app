@@ -388,8 +388,8 @@
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4">
                                             Plat Kendaraan</th>
                                         <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-3">
-                                            Beban Maksimal</th>
+                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">
+                                            Status Truk</th>
                                         <th class="text-secondary opacity-7"></th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
@@ -405,12 +405,24 @@
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $truck->plat_truck }}</h6>
+                                                        <p class="text-xs mb-0">
+                                                            {{ $truck->maksimal_beban_truck }} Gas</p>
                                                 </div>
-                                                <td class="ms-1">
-                                                    <p class="text-sm mb-0 ms-4">
-                                                        {{ $truck->maksimal_beban_truck }} Gas</p>
-                                                </td>
                                             </div>
+                                        </td>
+                                        <td class="align-middle text-center text-sm">
+                                            @if ($truck->status === 'tersedia')
+                                                <span class="badge badge-sm bg-gradient-success">Tersedia</span>
+                                                @endif
+                                            @if ($truck->status === 'tidak tersedia')
+                                                <form action="{{ url('admin/user/truck/status', $truck->id_truck) }}" method="POST">
+                                                @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="border-0 bg-transparent">
+                                                        <span class="badge badge-sm bg-gradient-danger">Tdk Tersedia</span>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </td>
                                         <td class="align-middle">
                                             <a href="{{ url('admin/stock/truck/' . $truck->id_truck . '/edit') }}"

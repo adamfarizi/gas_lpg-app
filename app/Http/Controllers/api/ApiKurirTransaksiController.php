@@ -6,6 +6,7 @@ use App\Events\finishTranEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Transaksi;
 use App\Models\Agen;
+use App\Models\Pengiriman;
 use Illuminate\Http\Request;
 
 class ApiKurirTransaksiController extends Controller
@@ -65,6 +66,25 @@ class ApiKurirTransaksiController extends Controller
             ], 200);
         }
     }
+
+    public function detail_pesanan_kurir(string $id){
+        $pengiriman = Pengiriman::where('id_kurir', $id)->pluck('id_pengiriman');
+        $data = Transaksi::where('id_pengiriman', $pengiriman)->get();
+
+        if ($data->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data tidak ditemukan',
+            ], 200);
+        } else {
+            return response()->json([
+                'success' => true,
+                'message' => 'Data ditemukan',
+                'data' => $data,
+            ], 200);
+        }
+    }
+
 
     public function pesanan_selesai($id)
     {

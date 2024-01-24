@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
     // Controller proses
     Route::get('admin/proses', [ProsesController::class, 'index'])->name('admin_proses');
     Route::get('admin/proses/realtimeData', [ProsesController::class, 'realtimeData']);
-    Route::put('admin/proses/update_pembayaran',[ProsesController::class, 'update_pembayaran'])->name('update_pembayaran');
+    Route::post('admin/proses/update_pembayaran',[ProsesController::class, 'update_pembayaran'])->name('update_pembayaran');
     Route::put('admin/proses/update_dikirim/{id}',[ProsesController::class, 'update_dikirim'])->name('update_dikirim');
 
     Route::post('admin/proses/buy', [CreateBuyController::class, 'createData'])->name('buy');
@@ -76,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('admin/user/kurir/{id}',[KurirController::class, 'edit_kurir_user_action']);
     Route::put('admin/user/kurir/status/{id}',[KurirController::class, 'update_status_kurir']);
     Route::delete('admin/user/kurir/{id}', [KurirController::class, 'destroy_kurir_user']);
-
+    
     //Controller stock
     Route::get('admin/stock', [StockController::class, 'index_stock']);
     Route::post('admin/stock/gas/create', [StockController::class, 'create_gas_action'])->name('create.gas.action');
@@ -87,5 +87,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/stock/truck/{id}/edit',[StockController::class, 'edit_stock_truck']);
     Route::put('admin/stock/truck/{id}',[StockController::class, 'edit_stock_truck_action']);
     Route::delete('admin/stock/truck/{id}', [StockController::class, 'destroy_stock_truck']);
+    Route::put('admin/user/truck/status/{id}',[StockController::class, 'update_status_truck']);
 
 });
