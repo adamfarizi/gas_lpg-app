@@ -181,6 +181,7 @@
 @endsection
 
 @section('content')
+    {{-- Bagian atas --}}
     <div class="container-fluid">
         <div class="page-header min-height-300 border-radius-xl"
             style="background-image: url('../assets/img/local/bg_login2.png'); background-position-y: 50%;">
@@ -242,6 +243,7 @@
             </div>
         </div>
     </div>
+    {{-- Bagian bawah --}}
     <div class="container-fluid py-4">
         <div class="row d-flex justify-content-center">
             <div class="col-12">
@@ -250,6 +252,7 @@
                         <div class="col-md-8 d-flex align-items-center">
                             <h5 class="font-weight-bolder text-primary text-gradient">Edit Profil</h5>
                         </div>
+                        {{-- Notif --}}
                         @if (session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <span class="alert-text text-white"><strong>Success!</strong>
@@ -270,6 +273,7 @@
                             @endforeach
                         @endif
                     </div>
+                    {{-- Field --}}
                     <div class="card-body p-3">
                         <form role="form text-left" action="{{ url('admin/profile', $admins->id_admin) }}"
                             method="POST">
@@ -298,6 +302,7 @@
                 </div>
             </div>
         </div>
+        {{-- Pop Up --}}
         <div class="col-md-4">
             <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
