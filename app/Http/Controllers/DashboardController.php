@@ -125,40 +125,42 @@ class DashboardController extends Controller
     }
     
 
-    public function realTimeChart1(){
+    public function realTimeChart1()
+    {
         $dataTransaksi = Transaksi::selectRaw('SUM(CASE WHEN pembayaran.status_pembayaran IN ("Proses", "Sudah Bayar") THEN jumlah_transaksi ELSE 0 END) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%d %b") as hari')
             ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
             ->groupBy('hari')
-            ->orderBy('tanggal_transaksi', 'DESC')
+            ->orderByRaw('MAX(tanggal_transaksi) DESC') // Gunakan MAX untuk kolom tanggal_transaksi
             ->take(7)
             ->get();
-    
+
         $labels = $dataTransaksi->pluck('hari'); // Reverse the order to show the latest data first.
         $dataChart = $dataTransaksi->pluck('total_transaksi');
-        
+
         return response()->json([
             'labels1' => $labels->toArray(),
             'data1' => $dataChart->toArray(),
         ]);
-    }    
+    }
 
-    public function realTimeChart2(){
+    public function realTimeChart2()
+    {
         $dataTransaksi = Transaksi::selectRaw('SUM(total_transaksi) as total_transaksi, DATE_FORMAT(tanggal_transaksi, "%b %Y") as bulan')
-        ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
-        ->whereIn('pembayaran.status_pembayaran', ['Proses', 'Sudah Bayar'])
-        ->groupBy('bulan')
-        ->orderBy('tanggal_transaksi', 'ASC') // Mengurutkan berdasarkan bulan secara ascending
-        ->take(10)
-        ->get();
+            ->join('pembayaran', 'transaksi.id_pembayaran', '=', 'pembayaran.id_pembayaran')
+            ->whereIn('pembayaran.status_pembayaran', ['Proses', 'Sudah Bayar'])
+            ->groupBy('bulan')
+            ->orderByRaw('MAX(tanggal_transaksi) ASC') // Menggunakan MAX untuk tanggal_transaksi
+            ->take(10)
+            ->get();
 
         // Data untuk labels dan data chart
         $labels = $dataTransaksi->pluck('bulan');
-        $dataChart = $dataTransaksi->pluck('total_transaksi'); 
-        
+        $dataChart = $dataTransaksi->pluck('total_transaksi');
+
         return response()->json([
             'labels2' => $labels->toArray(),
             'data2' => $dataChart->toArray(),
         ]);
-    }    
+    }  
     
 }
